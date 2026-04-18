@@ -1,0 +1,186 @@
+export type Result<T> = {
+    success: boolean;
+    data?: T;
+    error?: string;
+    code?: string;
+};
+
+export const ErrorCodes = {
+    VALIDATION_ERROR: 'VALIDATION_ERROR',
+    NOT_FOUND: 'NOT_FOUND',
+    UNAUTHORIZED: 'UNAUTHORIZED',
+    FORBIDDEN: 'FORBIDDEN',
+    NETWORK_ERROR: 'NETWORK_ERROR',
+    SERVER_ERROR: 'SERVER_ERROR',
+    DB_ERROR: 'DB_ERROR',
+    UNKNOWN_ERROR: 'UNKNOWN_ERROR',
+    USER_EXISTS: 'USER_EXISTS',
+    EMAIL_NOT_VERIFIED: 'EMAIL_NOT_VERIFIED',
+};
+
+export function success<T>(data: T): Result<T> {
+    return { success: true, data };
+}
+
+export function failure<T = any>(error: string, code = ErrorCodes.UNKNOWN_ERROR): Result<T> {
+    return { success: false, error, code };
+}
+
+// Auth DTOs
+export interface LoginDTO {
+    email: string;
+    password?: string;
+    b_address?: string;
+}
+
+export interface CreateUserDTO {
+    email: string;
+    password: string;
+    full_name?: string;
+    role?: Role;
+}
+
+export interface UpdateUserDTO {
+    full_name?: string;
+    role?: Role;
+    password?: string;
+}
+
+export type Role = string;
+export type Permission = string;
+
+export interface UserDTO {
+    id: string;
+    email: string;
+    full_name?: string;
+    avatar_url?: string;
+    role?: Role;
+}
+
+
+export interface SessionDTO {
+    access_token: string;
+    user: UserDTO;
+}
+
+// CMS Types
+export type ContentType = 'product' | 'event' | 'news' | 'project';
+
+export interface Category {
+    id: string;
+    name: string;
+    slug: string;
+    type: ContentType;
+    description?: string;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface Product {
+    id: string;
+    name: string;
+    slug: string;
+    description?: string;
+    category_id?: string;
+    category?: Category;
+    price?: number | null;
+    is_new: boolean;
+    is_bestseller: boolean;
+    image_url?: string;
+    features?: string[];
+    specifications?: Record<string, string>;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface Event {
+    id: string;
+    title: string;
+    slug: string;
+    summary?: string;
+    content?: string;
+    image_url?: string;
+    start_date?: string;
+    end_date?: string;
+    location?: string;
+    organizer?: string;
+    status: 'upcoming' | 'ongoing' | 'past';
+    category_id?: string;
+    category?: Category;
+    participants_count: number;
+    tags?: string[];
+    created_at: string;
+    updated_at: string;
+}
+
+export interface Project {
+    id: string;
+    name: string;
+    slug: string;
+    description?: string;
+    content?: string;
+    image_url?: string;
+    client?: string;
+    completion_date?: string;
+    category_id?: string;
+    category?: Category;
+    is_featured: boolean;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface News {
+    id: string;
+    title: string;
+    slug: string;
+    summary?: string;
+    content?: string;
+    image_url?: string;
+    publish_date?: string;
+    author?: string;
+    category_id?: string;
+    category?: Category;
+    tags?: string[];
+    views: number;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface NavigationItem {
+    id: string;
+    label: string;
+    path: string;
+    parent_id?: string;
+    order_index: number;
+    is_active: boolean;
+    position?: 'header' | 'footer';
+    children?: NavigationItem[];
+    type?: 'internal' | 'external' | 'custom';
+    created_at?: string; // Made optional as it might not be present in temp objects
+}
+
+export interface SiteSetting {
+    key: string;
+    value: string;
+    description?: string;
+    updated_at: string;
+}
+
+export interface TeamMember {
+    id: string;
+    name: string;
+    role: string;
+    bio?: string;
+    image_url?: string;
+    social_links?: {
+        linkedin?: string;
+        twitter?: string;
+        facebook?: string;
+        instagram?: string;
+        email?: string;
+        [key: string]: string | undefined;
+    };
+    display_order: number;
+    created_at: string;
+    updated_at: string;
+}
