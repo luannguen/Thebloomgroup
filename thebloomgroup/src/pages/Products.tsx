@@ -1,5 +1,8 @@
 import { useState, useEffect, useMemo } from "react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { VisualEditorProvider, useVisualEditor } from "@/context/VisualEditorContext";
+import { HeroBlock } from "@/components/sections/HeroBlock";
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -15,8 +18,9 @@ import { motion, AnimatePresence } from "framer-motion"; // Add animation librar
 // If frame-motion isn't installed, standard CSS transitions will be used, but let's assume standard React for now to avoid dependency errors if not present.
 // I will use standard CSS classes for animations to be safe.
 
-const Products = () => {
-  const { t } = useTranslation();
+const ProductsContent = () => {
+    const { t } = useTranslation();
+    const { contentData } = useVisualEditor();
   const [activeCategory, setActiveCategory] = useState<string>("all");
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [products, setProducts] = useState<Product[]>([]);
@@ -87,33 +91,40 @@ const Products = () => {
 
   return (
     <main className="flex-grow min-h-screen bg-gray-50/50">
-      {/* Modern Gradient Banner with Framer Motion */}
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="relative bg-gradient-to-br from-primary via-primary/90 to-blue-600 py-16 md:py-24 text-white overflow-hidden"
-      >
-        {/* Optional pattern removed */}
-        <div className="container mx-auto px-4 relative z-10 text-center">
-          <motion.h1
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 tracking-tight text-white"
-          >
-            {t('product_cat_title')}
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.4 }}
-            className="mt-4 text-lg md:text-xl text-blue-100 max-w-2xl mx-auto font-light"
-          >
-            {t('product_cat_desc')}
-          </motion.p>
-        </div>
-      </motion.div>
+      {/* Dynamic Banner from CMS */}
+      {contentData?.sections && contentData.sections.length > 0 && contentData.sections[0].type === 'hero' ? (
+        <HeroBlock 
+            sectionId={contentData.sections[0].id} 
+            {...contentData.sections[0].props} 
+        />
+      ) : (
+        /* Original Fallback Banner */
+        <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="relative bg-gradient-to-br from-primary via-primary/90 to-blue-600 py-16 md:py-24 text-white overflow-hidden"
+        >
+            <div className="container mx-auto px-4 relative z-10 text-center">
+            <motion.h1
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.2 }}
+                className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 tracking-tight text-white"
+            >
+                {t('product_cat_title')}
+            </motion.h1>
+            <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.4 }}
+                className="mt-4 text-lg md:text-xl text-blue-100 max-w-2xl mx-auto font-light"
+            >
+                {t('product_cat_desc')}
+            </motion.p>
+            </div>
+        </motion.div>
+      )}
 
       {/* Search & Filter Section */}
       <div className="container mx-auto px-4 -mt-8 relative z-20">
@@ -373,6 +384,14 @@ const Products = () => {
       <FAQSection category="product" />
     </main>
   );
+};
+
+const Products = () => {
+    return (
+        <VisualEditorProvider slug="products">
+            <ProductsContent />
+        </VisualEditorProvider>
+    );
 };
 
 export default Products;

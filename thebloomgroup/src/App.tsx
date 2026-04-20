@@ -31,6 +31,7 @@ const PageLoader = () => {
 const Index = lazy(() => import("./pages/Index"));
 const StaticPage = lazy(() => import("./pages/StaticPage"));
 const About = lazy(() => import("./pages/About"));
+const AboutUsV2 = lazy(() => import("./pages/AboutUsV2"));
 const Products = lazy(() => import("./pages/Products"));
 const Projects = lazy(() => import("./pages/Projects"));
 const Services = lazy(() => import("./pages/Services"));
@@ -100,6 +101,7 @@ const App = () => (
               <Route path="about" element={<Navigate to="/about-us" replace />} />
               <Route path="gioi-thieu" element={<Navigate to="/about-us" replace />} />
               <Route path="about-us" element={<About />} />
+              <Route path="about-us-v2" element={<AboutUsV2 />} />
               <Route path="about-vvc" element={<Navigate to="/about-us" replace />} />
               <Route path="intro" element={<StaticPage slug="intro" />} />
               <Route path="page/:slug" element={<StaticPage />} />

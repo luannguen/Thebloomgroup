@@ -25,9 +25,10 @@ const languageOptions: LanguageOption[] = [
 interface LanguageSwitcherProps {
   isMobile?: boolean;
   onItemClick?: () => void;
+  isScrolled?: boolean;
 }
 
-const LanguageSwitcher = ({ isMobile = false, onItemClick }: LanguageSwitcherProps) => {
+const LanguageSwitcher = ({ isMobile = false, onItemClick, isScrolled = false }: LanguageSwitcherProps) => {
   const { i18n, t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   
@@ -101,7 +102,9 @@ const LanguageSwitcher = ({ isMobile = false, onItemClick }: LanguageSwitcherPro
 
   return (
     <div className="relative group">
-      <button className="navbar-link flex items-center uppercase py-1">
+      <button className={`navbar-link flex items-center uppercase py-1 transition-colors ${
+        isScrolled ? 'text-slate-900' : 'text-white hover:text-white/80'
+      }`}>
         <img
           src={getActiveLanguageDetails().flagIcon}
           alt={getActiveLanguageDetails().name}

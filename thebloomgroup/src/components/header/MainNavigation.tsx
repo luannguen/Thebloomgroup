@@ -9,9 +9,10 @@ import { normalizePath } from '@/utils/urlUtils';
 interface MainNavigationProps {
   isMobile?: boolean;
   onItemClick?: () => void;
+  isScrolled?: boolean;
 }
 
-const MainNavigation = ({ isMobile = false, onItemClick }: MainNavigationProps) => {
+const MainNavigation = ({ isMobile = false, onItemClick, isScrolled = false }: MainNavigationProps) => {
   const [navItems, setNavItems] = useState<NavigationItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const { t, i18n } = useTranslation();
@@ -191,10 +192,10 @@ const MainNavigation = ({ isMobile = false, onItemClick }: MainNavigationProps) 
             <Link
               to={normalizePath(item.path)}
               onClick={onItemClick}
-              className={`navbar-link text-lg block py-1 transition-colors ${
+              className={`navbar-link text-lg block py-1 transition-all ${
                 isActive(item) 
                   ? 'text-secondary font-bold border-b-2 border-secondary' 
-                  : 'text-gray-900 font-medium'
+                  : (isScrolled ? 'text-slate-900 font-medium' : 'text-white font-medium')
               }`}
             >
               {getTranslatedLabel(item)}
@@ -230,14 +231,16 @@ const MainNavigation = ({ isMobile = false, onItemClick }: MainNavigationProps) 
           {item.children && item.children.length > 0 ? (
             <>
               <button
-                className={`navbar-link text-base font-medium flex items-center relative pb-1 ${
-                  isActive(item) ? 'text-secondary' : ''
+                className={`navbar-link text-base font-medium flex items-center relative pb-1 transition-colors ${
+                  isActive(item) 
+                    ? 'text-secondary' 
+                    : (isScrolled ? 'text-slate-900' : 'text-white hover:text-white/80')
                 }`}
               >
                 <span>{getTranslatedLabel(item)}</span>
                 <ChevronDown size={16} className="ml-1" />
                 {isActive(item) && (
-                  <span className="absolute bottom-0 left-0 w-full h-[2px] bg-secondary rounded-full" />
+                  <span className="absolute bottom-0 left-0 w-full h-[2px] bg-secondary rounded-none" />
                 )}
               </button>
               <div className="absolute hidden group-hover:block bg-white/95 backdrop-blur-sm shadow-lg p-4 rounded min-w-48 right-0 top-full z-50 animate-in fade-in slide-in-from-top-2">
@@ -259,13 +262,15 @@ const MainNavigation = ({ isMobile = false, onItemClick }: MainNavigationProps) 
           ) : (
             <Link
               to={normalizePath(item.path)}
-              className={`navbar-link text-base font-medium relative pb-1 ${
-                isActive(item) ? 'text-secondary' : ''
+              className={`navbar-link text-base font-medium relative pb-1 transition-colors ${
+                isActive(item) 
+                  ? 'text-secondary' 
+                  : (isScrolled ? 'text-slate-900' : 'text-white')
               }`}
             >
               {getTranslatedLabel(item)}
               {isActive(item) && (
-                <span className="absolute bottom-0 left-0 w-full h-[2px] bg-secondary rounded-full" />
+                <span className="absolute bottom-0 left-0 w-full h-[2px] bg-secondary rounded-none" />
               )}
             </Link>
           )}

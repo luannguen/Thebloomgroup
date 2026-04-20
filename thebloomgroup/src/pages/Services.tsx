@@ -1,13 +1,17 @@
 import { VisualEditorProvider, useVisualEditor } from "@/context/VisualEditorContext";
 import { VisualPageRenderer } from "@/components/admin/builder/VisualPageRenderer";
+import { HeroBlock } from "@/components/sections/HeroBlock";
+import { useTranslation } from "react-i18next";
+import { motion } from "framer-motion";
 
 const DEFAULT_SERVICES_SECTIONS = [
   { 
     id: "hero", 
-    type: "service_hero", 
+    type: "hero", 
     props: {
       title: "Dịch vụ chuyên nghiệp",
-      description: "Cung cấp đầy đủ các giải pháp dịch vụ kỹ thuật điện lạnh chất lượng cao từ tư vấn, lắp đặt đến bảo trì và sửa chữa."
+      description: "Cung cấp đầy đủ các giải pháp dịch vụ kỹ thuật điện lạnh chất lượng cao từ tư vấn, lắp đặt đến bảo trì và sửa chữa.",
+      backgroundImage: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&q=80&w=2000"
     } 
   },
   { 
@@ -41,30 +45,42 @@ const DEFAULT_SERVICES_SECTIONS = [
 ];
 
 const ServicesContent = () => {
-  const { contentData } = useVisualEditor();
-  
-  // Smart merge logic: If the persistent database record is missing the grid or CTA 
-  // (which used to be hardcoded but are now blocks), we re-inject them.
-  if (contentData?.sections && contentData.sections.length > 0) {
-    const hasGrid = contentData.sections.some((s: any) => s.type === "service_grid");
-    const hasCTA = contentData.sections.some((s: any) => s.type === "cta_section");
-    
-    // Create a new merged array
-    let displaySections = [...contentData.sections];
-    
-    // Inject missing essential sections if they don't exist in DB
-    if (!hasGrid) {
-      displaySections.push(DEFAULT_SERVICES_SECTIONS.find(s => s.id === "grid")!);
-    }
-    if (!hasCTA) {
-      displaySections.push(DEFAULT_SERVICES_SECTIONS.find(s => s.id === "cta")!);
-    }
-    
-    return <VisualPageRenderer customSections={displaySections} />;
-  }
+    const { contentData } = useVisualEditor();
+    const { t } = useTranslation();
 
-  // Fallback of last resort
-  return <VisualPageRenderer customSections={DEFAULT_SERVICES_SECTIONS} />;
+    const sections = contentData?.sections || [];
+    const heroSection = sections.find((s: any) => s.type === 'hero');
+    const otherSections = sections.filter((s: any) => s.type !== 'hero');
+
+    return (
+        <main className="flex-grow">
+            {/* Dynamic Banner */}
+            {heroSection ? (
+                <HeroBlock 
+                    sectionId={heroSection.id} 
+                    {...heroSection.props} 
+                />
+            ) : (
+                /* Fallback Banner */
+                <div className="bg-primary py-20 text-white text-center">
+                    <div className="container-custom">
+                        <h1 className="text-4xl md:text-5xl font-bold mb-4">{t('services', 'Dịch vụ')}</h1>
+                        <p className="text-xl text-blue-100 max-w-2xl mx-auto">
+                            {t('services_desc', 'Giải pháp kỹ thuật lạnh toàn diện')}
+                        </p>
+                    </div>
+                </div>
+            )}
+
+            {/* Render other sections using the standard renderer */}
+            {otherSections.length > 0 ? (
+                <VisualPageRenderer customSections={otherSections} />
+            ) : (
+                /* Fallback content if DB only has hero or is empty */
+                <VisualPageRenderer customSections={DEFAULT_SERVICES_SECTIONS.filter(s => s.type !== 'hero')} />
+            )}
+        </main>
+    );
 };
 
 const Services = () => {

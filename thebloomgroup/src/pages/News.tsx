@@ -5,8 +5,12 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useNews } from "@/hooks/useNews";
 import { useTranslation } from "react-i18next";
+import { VisualEditorProvider, useVisualEditor } from "@/context/VisualEditorContext";
+import { HeroBlock } from "@/components/sections/HeroBlock";
+import { AppLink } from "@/components/common/AppLink";
 
-const News = () => {
+const NewsContent = () => {
+    const { contentData } = useVisualEditor();
   const {
     filteredNews: allFilteredNews,
     featuredNews: unusedFeatured,
@@ -66,15 +70,23 @@ const News = () => {
 
   return (
     <main className="flex-grow">
-      {/* Tiêu đề trang */}
-      <div className="bg-gradient-to-b from-primary/10 to-transparent py-8 md:py-12">
-        <div className="container-custom">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary">{t('news_events')}</h1>
-          <p className="mt-4 text-lg text-muted-foreground max-w-3xl">
-            {t('news_events_desc')}
-          </p>
+      {/* Dynamic Banner from CMS */}
+      {contentData?.sections && contentData.sections.length > 0 && contentData.sections[0].type === 'hero' ? (
+        <HeroBlock 
+          sectionId={contentData.sections[0].id} 
+          {...contentData.sections[0].props} 
+        />
+      ) : (
+        /* Tiêu đề trang Fallback */
+        <div className="bg-gradient-to-b from-primary/10 to-transparent py-8 md:py-12">
+          <div className="container-custom">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary">{t('news_events')}</h1>
+            <p className="mt-4 text-lg text-muted-foreground max-w-3xl">
+              {t('news_events_desc')}
+            </p>
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Nội dung chính */}
       <div className="container-custom py-8">
@@ -295,6 +307,14 @@ const News = () => {
         </div>
       </div>
     </main>
+  );
+};
+
+const News = () => {
+  return (
+    <VisualEditorProvider slug="news">
+      <NewsContent />
+    </VisualEditorProvider>
   );
 };
 

@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 import { CheckCircle } from "lucide-react";
 import { EditableElement } from "../admin/EditableElement";
 
@@ -60,7 +60,7 @@ export const MediaSectionBlock = ({
               fieldKey="image"
               sectionId={sectionId}
               defaultContent={image}
-              className="rounded-2xl shadow-xl overflow-hidden w-full h-full min-h-[300px]"
+              className="shadow-xl overflow-hidden w-full h-full min-h-[300px]"
             >
               <img src={image} className="w-full h-full object-cover" alt={title} />
             </EditableElement>
@@ -90,7 +90,7 @@ export const MediaSectionBlock = ({
             {features && Array.isArray(features) && features.length > 0 && (
               <ul className="grid sm:grid-cols-2 gap-4 mt-8">
                 {features.map((feature, idx) => (
-                  <li key={idx} className="flex items-start bg-gray-50/50 p-3 rounded-lg border border-transparent hover:border-primary/10 transition-colors text-left">
+                  <li key={idx} className="flex items-start bg-gray-50/50 p-3 border border-transparent hover:border-primary/10 transition-colors text-left">
                     <CheckCircle size={20} className="text-primary mr-3 mt-0.5 flex-shrink-0" />
                     <span className="text-sm font-medium text-foreground/80">{feature}</span>
                   </li>

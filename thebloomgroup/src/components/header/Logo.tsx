@@ -1,12 +1,15 @@
 import { Link } from 'react-router-dom';
 import { useSettings } from '@/hooks/useSettings';
 import { useTranslation } from 'react-i18next';
+import logoSrc from '@/assets/images/logo-ttt.svg';
 
 interface LogoProps {
   isScrolled?: boolean;
+  className?: string;
+  variant?: 'header' | 'footer';
 }
 
-const Logo = ({ isScrolled = false }: LogoProps) => {
+const Logo = ({ isScrolled = false, className = "", variant = 'header' }: LogoProps) => {
   const { settings, loading } = useSettings();
   const { t } = useTranslation();
   
@@ -19,26 +22,20 @@ const Logo = ({ isScrolled = false }: LogoProps) => {
     );
   }
 
-  const logoSrc = settings['site_logo'];
-  
-  // If no logo in settings, and not loading, we can show a text logo or the default
-  if (!logoSrc) {
-    return (
-      <Link to="/" className="flex items-center gap-2 flex-shrink-0 relative z-10 transition-transform active:scale-95">
-        <span className="text-xl md:text-2xl font-bold text-primary">VIET VINH</span>
-      </Link>
-    );
-  }
+  const displayLogo = settings?.logo_url || logoSrc;
+  const siteName = settings?.site_name || t('logo_alt_text');
 
   return (
-    <Link to="/" className="flex items-center gap-2 flex-shrink-0 relative z-10 transition-transform active:scale-95">
+    <Link to="/" className={`flex items-center gap-2 flex-shrink-0 relative z-10 transition-transform active:scale-95 ${className}`}>
       <img
-        src={logoSrc}
-        alt={t('logo_alt_text')}
+        src={displayLogo}
+        alt={siteName}
         className={`object-contain transition-all duration-500 ease-in-out ${
-          isScrolled 
-            ? 'h-[40px] md:h-[60px]' 
-            : 'h-[50px] md:h-[100px]'
+          variant === 'footer'
+            ? 'h-14 lg:h-16 brightness-0 invert'
+            : isScrolled 
+              ? 'h-[40px] md:h-[60px]' 
+              : 'h-[50px] md:h-[100px] brightness-0 invert'
         }`}
       />
     </Link>

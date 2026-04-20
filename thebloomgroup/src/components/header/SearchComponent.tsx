@@ -11,6 +11,7 @@ import { useAntiSpam } from '@/hooks/useAntiSpam';
 
 interface SearchComponentProps {
   isMobile?: boolean;
+  isScrolled?: boolean;
 }
 
 interface SuggestionGroup {
@@ -20,7 +21,7 @@ interface SuggestionGroup {
   items: { id: string; name: string; slug: string; image_url?: string | null }[];
 }
 
-const SearchComponent = ({ isMobile = false }: SearchComponentProps) => {
+const SearchComponent = ({ isMobile = false, isScrolled = false }: SearchComponentProps) => {
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -204,7 +205,11 @@ const SearchComponent = ({ isMobile = false }: SearchComponentProps) => {
   return (
     <div className="relative" ref={searchContainerRef}>
       <button
-        className={`navbar-link ${isOpen ? 'text-accent' : ''} relative z-50`}
+        className={`navbar-link relative z-50 transition-colors ${
+          isOpen 
+            ? 'text-accent' 
+            : (isScrolled ? 'text-slate-900' : 'text-white hover:text-white/80')
+        }`}
         onClick={toggleSearch}
         aria-label={t('search_button')}
       >

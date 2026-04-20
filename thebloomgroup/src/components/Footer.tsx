@@ -6,6 +6,7 @@ import { NavigationItem } from '@/components/data/types';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { normalizePath, isExternalLink } from '@/utils/urlUtils';
+import Logo from './header/Logo';
 
 const Footer = () => {
   const { t, i18n } = useTranslation();
@@ -114,7 +115,6 @@ const Footer = () => {
   const contactAddress = getLocalizedSetting('contact_address') || t('contact_address_fallback');
   const contactHotline = settings['contact_hotline'] || '+84 981 789 248';
   const siteDescription = getLocalizedSetting('site_description') || t('site_description_fallback');
-  const siteLogo = settings['footer_logo'] || settings['site_logo'] || '/lovable-uploads/0bd3c048-8e37-4775-a6bc-0b54ec07edbe.png';
 
   // Parser for the multi-office contact string
   // Parser for the multi-branch structured data
@@ -163,9 +163,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12">
           {/* Brand Column */}
           <div className="lg:col-span-4 space-y-6">
-            <Link to="/" className="inline-block transition-opacity hover:opacity-90">
-                <img src={siteLogo} alt="Viet Vinh Logo" className="h-14 lg:h-16 w-auto object-contain bg-white/5 p-2 rounded-lg backdrop-blur-sm" />
-            </Link>
+            <Logo variant="footer" className="bg-white/5 p-2 backdrop-blur-sm inline-block" />
             <p className="text-gray-400 text-sm leading-relaxed max-w-sm">
               {siteDescription}
             </p>
@@ -177,7 +175,7 @@ const Footer = () => {
                 { icon: Youtube, url: settings['social_youtube'], label: 'YouTube' }
               ].map((social, idx) => social.url && (
                 <a key={idx} href={social.url} target="_blank" rel="noopener noreferrer" 
-                    className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:bg-accent hover:text-white transition-all duration-300"
+                    className="w-10 h-10 bg-white/5 flex items-center justify-center text-gray-400 hover:bg-accent hover:text-white transition-all duration-300"
                     aria-label={social.label}>
                   <social.icon size={18} />
                 </a>
@@ -257,7 +255,7 @@ const Footer = () => {
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                     {offices.map((office, idx) => (
-                        <div key={idx} className="bg-white/5 rounded-xl p-6 border border-white/5 hover:border-accent/30 transition-all duration-300 group flex flex-col h-full">
+                        <div key={idx} className="bg-white/5 p-6 border border-white/5 hover:border-accent/30 transition-all duration-300 group flex flex-col h-full">
                             <h5 className="text-white font-bold text-sm mb-4 flex items-center gap-2">
                                 <span className="w-1.5 h-1.5 rounded-full bg-accent group-hover:scale-125 transition-transform"></span>
                                 {t(office.title, { defaultValue: office.title })}

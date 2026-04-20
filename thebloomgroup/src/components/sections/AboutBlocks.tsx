@@ -83,11 +83,11 @@ export const HistoryBlock = ({
               fieldKey="image"
               sectionId={sectionId}
               defaultContent={image}
-              className="rounded-lg shadow-lg"
+              className="w-full h-auto"
             >
               <img alt={title || defaultTitle} src={image} className="w-full h-auto" />
             </EditableElement>
-            <div className="absolute -bottom-6 -left-6 bg-secondary p-4 rounded-lg shadow-lg">
+            <div className="absolute -bottom-6 -left-6 bg-secondary p-4 shadow-lg">
               <EditableElement tagName="p" fieldKey="expYears" sectionId={sectionId} defaultContent={expYears} className="text-xl font-bold" />
               <EditableElement tagName="p" fieldKey="expText" sectionId={sectionId} defaultContent={expText || defaultExpText} className="text-sm" />
             </div>
@@ -121,7 +121,7 @@ export const VisionMissionBlock = ({
     <section className="py-12 md:py-16 bg-muted">
       <div className="container-custom">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-          <div className="bg-white p-8 rounded-lg shadow">
+          <div className="bg-white p-8 shadow">
             <h2 className="text-2xl font-bold text-primary mb-4 flex items-center">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
               <EditableElement fieldKey="visionTitle" sectionId={sectionId} defaultContent={visionTitle || defaultVisionTitle} />
@@ -129,7 +129,7 @@ export const VisionMissionBlock = ({
             <EditableElement tagName="p" fieldKey="visionDesc1" sectionId={sectionId} defaultContent={visionDesc1 || defaultVisionDesc1} className="mb-4" />
             <EditableElement tagName="p" fieldKey="visionDesc2" sectionId={sectionId} defaultContent={visionDesc2 || defaultVisionDesc2} />
           </div>
-          <div className="bg-white p-8 rounded-lg shadow">
+          <div className="bg-white p-8 shadow">
             <h2 className="text-2xl font-bold text-primary mb-4 flex items-center">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2"><path d="m12 14 4-4"></path><path d="M3.34 19a10 10 0 1 1 17.32 0"></path></svg>
               <EditableElement fieldKey="missionTitle" sectionId={sectionId} defaultContent={missionTitle || defaultMissionTitle} />
@@ -165,7 +165,7 @@ export const CoreValuesBlock = ({ title, sectionId, ...props }: any) => {
         />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {values.map(val => (
-            <div key={val.key} className="bg-white p-6 rounded-lg shadow-md border-t-4 border-primary">
+            <div key={val.key} className="bg-white p-6 shadow-md border-t-4 border-primary">
               <div className="mb-4 text-primary">
                 <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d={val.icon}></path></svg>
               </div>
@@ -209,7 +209,7 @@ export const LeadershipBlock = ({ title, sectionId, ...props }: any) => {
         />
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           {leaders.map((leader) => (
-            <div key={leader.keyPrefix} className="bg-white rounded-lg overflow-hidden shadow-md">
+            <div key={leader.keyPrefix} className="bg-white overflow-hidden shadow-md">
               <EditableElement
                 type="image"
                 fieldKey={`${leader.keyPrefix}_image`}
@@ -245,7 +245,7 @@ export const AchievementsBlock = ({ title, sectionId }: { title?: string; sectio
           defaultContent={title || defaultTitle} 
           className="text-2xl md:text-3xl font-bold text-primary mb-10 text-center" 
         />
-        <div className="bg-primary/5 p-8 rounded-2xl text-center">
+        <div className="bg-primary/5 p-8 rounded-none text-center">
           <p className="text-lg text-primary font-medium italic">{t('achievements_quote', '"Chặng đường 20 năm khẳng định vị thế và niềm tin của khách hàng."')}</p>
         </div>
       </div>
@@ -292,11 +292,11 @@ export const ProductionFacilitiesBlock = ({
               fieldKey="image1"
               sectionId={sectionId}
               defaultContent={image1}
-              className="rounded-2xl shadow-xl overflow-hidden h-[300px] md:h-[350px]"
+              className="shadow-xl overflow-hidden h-[300px] md:h-[350px]"
             >
               <img alt="Facility 1" src={image1} className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
             </EditableElement>
-            <div className="bg-primary/5 p-8 rounded-2xl border border-primary/10 shadow-sm flex-grow">
+            <div className="bg-primary/5 p-8 border border-primary/10 shadow-sm flex-grow">
               <h3 className="font-bold text-xl mb-3 text-primary">{t('storage_capacity', 'Năng lực lưu kho')}</h3>
               <p className="text-muted-foreground leading-relaxed">{t('storage_desc', 'Hệ thống kho bảo quản gas lạnh và vật tư thiết bị đạt chuẩn quốc tế, đảm bảo nguồn cung liên tục cho các dự án lớn.')}</p>
             </div>
@@ -351,7 +351,7 @@ export const QualityPrinciplesBlock = ({
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {principles.map(p => (
             <div key={p.key} className="border-l-2 border-primary pl-6 py-2 hover:bg-white/5 transition-colors duration-300">
-              <EditableElement tagName="h3" fieldKey={`${p.key}_title`} sectionId={sectionId} defaultContent={p.title} className="text-xl font-bold mb-3 text-primary-light" />
+              <EditableElement tagName="h3" fieldKey={`${p.key}_title`} sectionId={sectionId} defaultContent={p.title} className="text-xl font-bold mb-3 text-secondary" />
               <EditableElement tagName="p" fieldKey={`${p.key}_desc`} sectionId={sectionId} defaultContent={p.desc} className="text-slate-400 text-sm leading-relaxed" />
             </div>
           ))}

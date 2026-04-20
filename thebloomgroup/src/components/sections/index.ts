@@ -16,6 +16,13 @@ import {
   QualityPrinciplesBlock,
   PartnersBlock
 } from './AboutBlocks';
+import { 
+  AboutV2HeroBlock,
+  AboutV2IntroBlock,
+  AboutV2AccordionBlock,
+  AboutV2TimelineBlock,
+  AboutV2LocationBlock
+} from './AboutV2Blocks';
 import { TeamHeroBlock, TeamGridBlock } from './TeamBlocks';
 import { 
   RefrigerationBlock, 
@@ -601,6 +608,65 @@ export const registerAllBlocks = () => {
     defaultProps: {},
     fields: []
   });
+
+  // --- About V2 Blocks ---
+  registerBlock({
+    type: 'about_v2_hero',
+    name: 'About V2: Hero',
+    component: AboutV2HeroBlock,
+    defaultProps: { backgroundImage: '/assets/about-v2/about-banner.jpg' },
+    fields: [
+      { id: 'title', label: 'Tiêu đề', type: 'text' },
+      { id: 'backgroundImage', label: 'Ảnh nền', type: 'image' }
+    ]
+  });
+
+  registerBlock({
+    type: 'about_v2_intro',
+    name: 'About V2: Giới thiệu',
+    component: AboutV2IntroBlock,
+    defaultProps: {},
+    fields: [
+      { id: 'title', label: 'Tiêu đề', type: 'text' },
+      { id: 'description', label: 'Mô tả', type: 'textarea' },
+      { id: 'image', label: 'Hình ảnh', type: 'image' }
+    ]
+  });
+
+  registerBlock({
+    type: 'about_v2_accordion',
+    name: 'About V2: Tầm nhìn/Sứ mệnh (Accordion)',
+    component: AboutV2AccordionBlock,
+    defaultProps: {},
+    fields: [
+      { id: 'vTitle', label: 'Tiêu đề Tầm nhìn', type: 'text' },
+      { id: 'vContent', label: 'Nội dung Tầm nhìn', type: 'textarea' },
+      { id: 'mTitle', label: 'Tiêu đề Sứ mệnh', type: 'text' },
+      { id: 'mContent', label: 'Nội dung Sứ mệnh', type: 'textarea' },
+      { id: 'cTitle', label: 'Tiêu đề Giá trị', type: 'text' },
+      { id: 'cContent', label: 'Nội dung Giá trị', type: 'textarea' }
+    ]
+  });
+
+  registerBlock({
+    type: 'about_v2_timeline',
+    name: 'About V2: Lịch sử (Timeline)',
+    component: AboutV2TimelineBlock,
+    defaultProps: {},
+    fields: [
+      { id: 'title', label: 'Tiêu đề', type: 'text' }
+    ]
+  });
+
+  registerBlock({
+    type: 'about_v2_location',
+    name: 'About V2: Địa điểm văn phòng',
+    component: AboutV2LocationBlock,
+    defaultProps: {},
+    fields: [
+      { id: 'title', label: 'Tiêu đề', type: 'text' }
+    ]
+  });
 };
 
 
@@ -634,5 +700,10 @@ export {
   ContactFormBlock, 
   HomeBannerSlider, 
   CapabilityProfileBlock,
-  JobsListBlock
+  JobsListBlock,
+  AboutV2HeroBlock,
+  AboutV2IntroBlock,
+  AboutV2AccordionBlock,
+  AboutV2TimelineBlock,
+  AboutV2LocationBlock
 };

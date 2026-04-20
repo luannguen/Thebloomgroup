@@ -23,15 +23,21 @@ const Header = () => {
 
   return (
     <>
-      {/* TopContact - hide when scrolled for more space */}
-      {!isScrolled && <TopContact />}
-
       {/* Main header */}
       <header
-        className={`bg-primary/10 backdrop-blur-sm sticky top-0 z-50 transition-all duration-300 ${
-          isScrolled ? 'shadow-md bg-white/95' : ''
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+          isScrolled 
+            ? 'bg-white/95 backdrop-blur-md shadow-md' 
+            : 'bg-transparent'
         }`}
       >
+        {/* TopContact - only show in transparent mode or integrate into scroll */}
+        <div className={`transition-all duration-300 overflow-hidden ${
+          isScrolled ? 'max-h-0 opacity-0' : 'max-h-10 opacity-100'
+        }`}>
+          <TopContact />
+        </div>
+
         <div className="container-custom">
           <div className={`flex justify-between items-center transition-all duration-300 ${
             isScrolled ? 'py-1' : 'py-1.5'
@@ -40,21 +46,21 @@ const Header = () => {
             <Logo isScrolled={isScrolled} />
 
             {/* Desktop Navigation */}
-            <MainNavigation />
+            <MainNavigation isScrolled={isScrolled} />
 
             {/* Desktop actions */}
             <div className="hidden md:flex items-center space-x-4">
-              <SearchComponent />
-              <LanguageSwitcher />
+              <SearchComponent isScrolled={isScrolled} />
+              <LanguageSwitcher isScrolled={isScrolled} />
             </div>
 
             {/* Mobile menu button */}
             <div className="md:hidden flex items-center space-x-4">
-              <SearchComponent isMobile={true} />
+              <SearchComponent isMobile={true} isScrolled={isScrolled} />
               <button 
                 onClick={toggleMenu} 
-                className={`p-1.5 rounded-md transition-colors ${
-                  isScrolled ? 'text-gray-900 hover:bg-gray-100' : 'text-gray-900 hover:bg-white/20'
+                className={`p-1.5 transition-colors ${
+                  isScrolled ? 'text-slate-900 hover:bg-gray-100' : 'text-white hover:bg-white/20'
                 }`}
                 aria-label="Toggle menu"
               >
