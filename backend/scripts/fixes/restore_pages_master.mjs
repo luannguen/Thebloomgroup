@@ -23,7 +23,9 @@ const IMAGES = {
   servicesHero: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&q=80",
   productsHero: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&q=80",
   newsHero: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80",
-  careerHero: "https://images.unsplash.com/photo-1521737706645-510300225112?auto=format&fit=crop&q=80",
+  careerHero: "https://images.unsplash.com/photo-1521737706645-510300225112?auto=format&fit=crop&q=80&w=2000",
+  teamHero: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=2000",
+  contactHero: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2000",
   logoLight: "/logo-vvc.png", // Verify this path
   logoDark: "/logo-vvc.png"
 };
@@ -244,6 +246,55 @@ const MASTER_DATA = [
           }
         },
         { id: 'news-list', type: 'news_events', props: { title: "Hoạt động doanh nghiệp" } }
+      ]
+    }
+  },
+  {
+    slug: 'team',
+    title: 'Đội ngũ chuyên gia',
+    content: {
+      sections: [
+        {
+          id: 'team-hero-img',
+          type: 'hero',
+          props: {
+            title: "ĐỘI NGŨ CHUYÊN GIA VVC",
+            description: "Hội tụ những tinh hoa trong ngành kỹ thuật lạnh, tâm huyết với từng giải pháp của khách hàng.",
+            backgroundImage: IMAGES.teamHero,
+            alignment: "center",
+            badge: "Expertise"
+          }
+        },
+        {
+          id: 'team-grid',
+          type: 'team_grid',
+          props: {
+            title: 'GẶP GỠ ĐỘI NGŨ CỦA CHÚNG TÔI',
+            description: 'Đội ngũ kỹ sư và chuyên viên dày dặn kinh nghiệm, luôn sẵn sàng đồng hành cùng dự án của bạn.'
+          }
+        }
+      ]
+    }
+  },
+  {
+    slug: 'contact',
+    title: 'Liên hệ với chúng tôi',
+    content: {
+      sections: [
+        {
+          id: 'contact-hero-img',
+          type: 'hero',
+          props: {
+            title: "KẾT NỐI VỚI CHÚNG TÔI",
+            description: "VietVinhCorp luôn sẵn sàng lắng nghe và giải đáp mọi thắc mắc của quý khách hàng.",
+            backgroundImage: IMAGES.contactHero,
+            alignment: "center",
+            badge: "Get in touch"
+          }
+        },
+        { id: 'contact-info-cards', type: 'contact_info', props: {} },
+        { id: 'contact-map', type: 'google_map', props: {} },
+        { id: 'contact-form-main', type: 'contact_form', props: { title: "Gửi tin nhắn cho chúng tôi" } }
       ]
     }
   }

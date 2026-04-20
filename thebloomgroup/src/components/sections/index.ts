@@ -6,6 +6,8 @@ import { CardBlock } from './CardBlock';
 import { FeatureListBlock } from './FeatureListBlock';
 import { ImageBlock } from './ImageBlock';
 import { MediaSectionBlock } from './MediaSectionBlock';
+import { ContactInfoBlock } from './ContactInfoBlock';
+import { GoogleMapBlock } from './GoogleMapBlock';
 import { 
   AboutHeroBlock, 
   HistoryBlock, 
@@ -194,6 +196,26 @@ export const registerAllBlocks = () => {
         { label: 'Muted', value: 'muted' },
         { label: 'Xanh nhạt', value: 'primary-light' }
       ]}
+    ]
+  });
+
+  registerBlock({
+    type: 'contact_info',
+    name: 'Contact Info',
+    component: ContactInfoBlock,
+    defaultProps: {},
+    fields: []
+  });
+
+  registerBlock({
+    type: 'google_map',
+    name: 'Google Map',
+    component: GoogleMapBlock,
+    defaultProps: {
+      address: 'Hà Nội, Việt Nam'
+    },
+    fields: [
+      { id: 'address', label: 'Địa chỉ', type: 'text' }
     ]
   });
 

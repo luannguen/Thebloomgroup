@@ -139,8 +139,8 @@ const App = () => (
               <Route path="publications/heat-recovery-solutions" element={<HeatRecoverySolutions />} />
               <Route path="publications/green-building-standards" element={<GreenBuildingStandards />} />
               <Route path="publications/energy-efficiency-report" element={<EnergyEfficiencyReport />} />
-              <Route path="contact" element={<Contact />} />
-              <Route path="team" element={<TeamPage />} />
+              <Route path="contact" element={<StaticPage slug="contact" />} />
+              <Route path="team" element={<StaticPage slug="team" />} />
               <Route path="recruitment/:slug" element={<JobDetail />} />
               <Route path="legal/privacy" element={<Privacy />} />
               <Route path="legal/terms" element={<Terms />} />
