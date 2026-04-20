@@ -81,12 +81,12 @@ async function seedV2Updates() {
         },
         {
             key: 'logo_url',
-            value: '/assets/about-v2/logo-vvc.svg',
+            value: '/assets/about-v2/logo-vvc.png',
             updated_at: new Date()
         },
         {
             key: 'footer_logo_url',
-            value: '/assets/footer/logo-footer.svg',
+            value: '/assets/footer/logo-solar.svg',
             updated_at: new Date()
         }
     ];
