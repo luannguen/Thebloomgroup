@@ -1,4 +1,4 @@
-import { supabase } from "@/services/supabase";
+import { supabase } from "@/supabase";
 
 export interface Resource {
     id: string;

@@ -1,4 +1,4 @@
-import { supabase } from "./supabase";
+import { supabase } from "@/supabase";
 import { SiteSetting, Result, success, failure } from "@/components/data/types";
 
 export const settingsService = {

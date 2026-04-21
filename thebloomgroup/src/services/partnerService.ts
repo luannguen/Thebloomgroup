@@ -1,4 +1,4 @@
-import { supabase } from '@/supabase';
+import { supabase } from '../supabase';
 import { Result, ErrorCodes, success, failure } from '@/components/data/types';
 
 export interface Partner {

@@ -1,4 +1,4 @@
-import { supabase } from "./supabase";
+import { supabase } from '@/supabase';
 import { Event, Category, Result, success, failure, ErrorCodes } from "@/components/data/types";
 
 // Helper to handle Supabase errors

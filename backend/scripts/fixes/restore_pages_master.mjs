@@ -26,6 +26,7 @@ const IMAGES = {
   careerHero: "https://images.unsplash.com/photo-1521737706645-510300225112?auto=format&fit=crop&q=80&w=2000",
   teamHero: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=2000",
   contactHero: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2000",
+  projectsHero: "https://images.unsplash.com/photo-1541888946425-d81bb19480c5?auto=format&fit=crop&q=80",
   logoLight: "/logo-vvc.png", // Verify this path
   logoDark: "/logo-vvc.png"
 };
@@ -297,6 +298,41 @@ const MASTER_DATA = [
         { id: 'contact-form-main', type: 'contact_form', props: { title: "Gửi tin nhắn cho chúng tôi" } }
       ]
     }
+  },
+  {
+    slug: 'projects',
+    title: 'Dự án tiêu biểu',
+    content: {
+      sections: [
+        {
+          id: 'projects-hero',
+          type: 'hero',
+          props: {
+            title: "CÔNG TRÌNH TIÊU BIỂU",
+            description: "Hàng trăm dự án thành công trên khắp cả nước khẳng định uy tín và năng lực kỹ thuật vượt trội của VietVinhCorp.",
+            backgroundImage: IMAGES.projectsHero,
+            alignment: "center",
+            badge: "Success Stories"
+          }
+        },
+        {
+          id: 'projects-overview',
+          type: 'project_overview',
+          props: {
+            title: "Năng lực & Kinh nghiệm thi công",
+            description: "Với hơn 20 năm kinh nghiệm, Việt Vinh Corporation đã thực hiện hàng trăm dự án lớn nhỏ trong lĩnh vực điện lạnh công nghiệp. Chúng tôi tự hào là đối tác tin cậy của nhiều tập đoàn và doanh nghiệp hàng đầu.",
+            item1: "Hơn 500 dự án lớn nhỏ đã hoàn thành",
+            item2: "Đối tác của các tập đoàn đa quốc gia",
+            item3: "Đội ngũ kỹ sư giàu kinh nghiệm thực tế",
+            item4: "Cam kết chất lượng và tiến độ khắt khe"
+          }
+        },
+        { id: 'projects-categories', type: 'project_categories', props: { title: "Lĩnh vực hoạt động" } },
+        { id: 'projects-featured', type: 'featured_projects', props: { title: "Dự án nổi bật" } },
+        { id: 'projects-achievements', type: 'achievements', props: { title: "Thành tựu chúng tôi đạt được" } },
+        { id: 'projects-cta', type: 'cta_section', props: { title: "Bạn có dự án cần tư vấn kỹ thuật?" } }
+      ]
+    }
   }
 ];
 
@@ -306,18 +342,19 @@ async function restorePages() {
   for (const pageData of MASTER_DATA) {
     console.log(`Processing: ${pageData.slug} (${pageData.title})...`);
     
-    // Attempt update
+    // Attempt upsert (Insert or Update if slug exists)
     const { error } = await supabase
       .from('static_pages')
-      .update({
+      .upsert({
+        slug: pageData.slug,
         title: pageData.title,
         content: pageData.content,
+        is_active: true,
         updated_at: new Date()
-      })
-      .eq('slug', pageData.slug);
+      }, { onConflict: 'slug' });
 
     if (error) {
-      console.error(`❌ FAILED to update ${pageData.slug}:`, error.message);
+      console.error(`❌ FAILED to restore ${pageData.slug}:`, error.message);
     } else {
       console.log(`✅ RESTORED ${pageData.slug} successfully.`);
     }

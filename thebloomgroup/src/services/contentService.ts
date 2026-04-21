@@ -1,4 +1,4 @@
-import { supabase } from './supabase';
+import { supabase } from '../supabase';
 import { Result } from '../components/data/types';
 
 export interface Achievement {

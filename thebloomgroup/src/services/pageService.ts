@@ -1,5 +1,5 @@
 
-import { supabase } from './supabase';
+import { supabase } from '../supabase';
 
 export interface StaticPage {
     id: string;
@@ -20,7 +20,7 @@ export const pageService = {
             .select('*')
             .eq('slug', slug)
             .eq('is_active', true)
-            .single();
+            .maybeSingle();
 
         if (error) throw error;
         return data as StaticPage;

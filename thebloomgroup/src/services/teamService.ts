@@ -1,4 +1,4 @@
-import { supabase } from '@/supabase';
+import { supabase } from '../supabase';
 import { TeamMember, Result, ErrorCodes, failure, success } from '@/components/data/types';
 
 export const teamService = {

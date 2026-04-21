@@ -1,4 +1,4 @@
-import { supabase } from './supabase';
+import { supabase } from '../supabase';
 import { Result, success, failure, ErrorCodes } from '../components/data/types';
 
 export interface ServiceCategory {

@@ -3,7 +3,7 @@ import { Result, success, failure, ErrorCodes } from "../types";
 import { NewsItem } from "../models/news";
 import { mockNewsItems } from "../mock/newsData";
 
-import { supabase } from "@/services/supabase"; // Ensure this client exists and is configured
+import { supabase } from "@/supabase"; // Ensure this client exists and is configured
 
 
 export const newsAPI = {

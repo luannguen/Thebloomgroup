@@ -261,7 +261,7 @@ export const VisualEditorProvider = ({ children, slug = '' }: VisualEditorProvid
           .from('static_pages')
           .select('content, is_active')
           .eq('slug', slug)
-          .single();
+          .maybeSingle();
 
         if (data) {
           setIsPageActive(data.is_active ?? true);

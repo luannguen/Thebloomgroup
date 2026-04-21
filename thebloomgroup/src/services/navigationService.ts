@@ -1,4 +1,4 @@
-import { supabase } from "./supabase";
+import { supabase } from '@/supabase';
 import { NavigationItem, Result, success, failure } from "@/components/data/types";
 
 export const navigationService = {

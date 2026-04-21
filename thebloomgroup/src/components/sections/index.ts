@@ -8,6 +8,8 @@ import { ImageBlock } from './ImageBlock';
 import { MediaSectionBlock } from './MediaSectionBlock';
 import { ContactInfoBlock } from './ContactInfoBlock';
 import { GoogleMapBlock } from './GoogleMapBlock';
+import { ProjectOverviewBlock } from './ProjectOverviewBlock';
+import { ProjectCategoriesBlock } from './ProjectCategoriesBlock';
 import { 
   AboutHeroBlock, 
   HistoryBlock, 
@@ -286,6 +288,14 @@ export const registerAllBlocks = () => {
   registerBlock({
     type: 'about_achievements',
     name: 'About: Thành tựu',
+    component: AchievementsBlock,
+    defaultProps: { title: 'Thành tựu nổi bật' },
+    fields: [{ id: 'title', label: 'Tiêu đề', type: 'text' }]
+  });
+
+  registerBlock({
+    type: 'achievements',
+    name: 'Chung: Thành tựu',
     component: AchievementsBlock,
     defaultProps: { title: 'Thành tựu nổi bật' },
     fields: [{ id: 'title', label: 'Tiêu đề', type: 'text' }]
@@ -687,6 +697,38 @@ export const registerAllBlocks = () => {
     defaultProps: {},
     fields: [
       { id: 'title', label: 'Tiêu đề', type: 'text' }
+    ]
+  });
+
+  registerBlock({
+    type: 'project_overview',
+    name: 'Projects: Overview',
+    component: ProjectOverviewBlock,
+    defaultProps: {
+      title: 'Năng lực & Kinh nghiệm',
+      description: 'Mô tả về năng lực thi công dự án của VVC.'
+    },
+    fields: [
+      { id: 'title', label: 'Tiêu đề', type: 'text' },
+      { id: 'description', label: 'Mô tả', type: 'textarea' },
+      { id: 'image', label: 'Hình ảnh', type: 'image' },
+      { id: 'item1', label: 'Điểm nhấn 1', type: 'text' },
+      { id: 'item2', label: 'Điểm nhấn 2', type: 'text' },
+      { id: 'item3', label: 'Điểm nhấn 3', type: 'text' },
+      { id: 'item4', label: 'Điểm nhấn 4', type: 'text' }
+    ]
+  });
+
+  registerBlock({
+    type: 'project_categories',
+    name: 'Projects: Categories',
+    component: ProjectCategoriesBlock,
+    defaultProps: {
+      title: 'Lĩnh vực hoạt động'
+    },
+    fields: [
+      { id: 'title', label: 'Tiêu đề', type: 'text' },
+      { id: 'subtitle', label: 'Mô tả phụ', type: 'textarea' }
     ]
   });
 };

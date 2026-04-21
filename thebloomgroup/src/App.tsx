@@ -111,7 +111,7 @@ const App = () => (
               <Route path="products/residential" element={<ResidentialProducts />} />
               <Route path="products/cold-storage" element={<ColdStorageProducts />} />
               <Route path="products/auxiliary" element={<AuxiliaryProducts />} />
-              <Route path="projects" element={<Projects />} />
+              <Route path="projects" element={<StaticPage slug="projects" />} />
               <Route path="projects/category/:slug" element={<ProjectCategory />} /> {/* Dynamic Category Route */}
               <Route path="projects/industrial" element={<IndustrialProjects />} />
               <Route path="projects/commercial" element={<CommercialProjects />} />
