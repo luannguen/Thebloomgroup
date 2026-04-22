@@ -1,5 +1,6 @@
 
 import { supabase } from '@/lib/supabase';
+import { mediaService } from './mediaService';
 
 export interface StaticPage {
     id: string;
@@ -77,5 +78,10 @@ export const pageService = {
 
         if (error) throw error;
         return true;
+    },
+
+    async uploadImage(file: File) {
+        const result = await mediaService.uploadImage(file, 'pages');
+        return result?.url || "";
     }
 };
