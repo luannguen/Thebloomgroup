@@ -153,6 +153,7 @@ export interface NavigationItem {
     parent_id?: string;
     order_index: number;
     is_active: boolean;
+    show_in_menu: boolean;
     position?: 'header' | 'footer';
     children?: NavigationItem[];
     type?: 'internal' | 'external' | 'custom';

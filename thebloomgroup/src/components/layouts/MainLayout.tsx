@@ -3,6 +3,7 @@ import Header from '../Header';
 import Footer from '../Footer';
 import FooterV2 from '../FooterV2';
 import BackToTop from '../BackToTop';
+import RouteGuard from '../common/RouteGuard';
 import { useSettings } from '@/hooks/useSettings';
 
 const MainLayout = () => {
@@ -14,7 +15,9 @@ const MainLayout = () => {
       <Header />
       
       <main className="flex-grow">
-        <Outlet />
+        <RouteGuard>
+          <Outlet />
+        </RouteGuard>
       </main>
 
       {footerVersion === 'v2' ? <FooterV2 /> : <Footer />}

@@ -45,6 +45,33 @@ export const navigationService = {
             console.error('Error fetching navigation:', error);
             return failure('Failed to fetch navigation items');
         }
+    },
+
+    async checkRouteStatus(path: string): Promise<{ isBlocked: boolean }> {
+        try {
+            // Normalize path for comparison
+            const normalizedPath = path.startsWith('/') ? path : '/' + path;
+
+            // Fetch ALL items for this path to check is_active
+            // We check both exact match and without leading slash
+            const { data, error } = await supabase
+                .from('navigation')
+                .select('is_active, path')
+                .or(`path.eq.${normalizedPath},path.eq.${normalizedPath.substring(1)}`)
+                .maybeSingle();
+
+            if (error) throw error;
+
+            // If entry exists and is_active is false, it's blocked
+            if (data && data.is_active === false) {
+                return { isBlocked: true };
+            }
+
+            return { isBlocked: false };
+        } catch (error) {
+            console.error('Error checking route status:', error);
+            return { isBlocked: false }; // Allow on error to avoid breaking site
+        }
     }
 };
 

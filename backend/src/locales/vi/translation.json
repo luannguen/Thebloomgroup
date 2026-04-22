@@ -130,6 +130,8 @@
     "add_link": "Thêm liên kết",
     "no_sub_items": "Không có mục con",
     "active": "Hoạt động",
+    "show_in_menu": "Hiển thị trên Menu",
+    "hidden": "Ẩn khỏi Menu",
     "item_updated": "Cập nhật mục thành công",
     "item_created": "Tạo mục thành công",
     "save_item_fail": "Lưu mục thất bại",

@@ -176,7 +176,7 @@ const MainNavigation = ({ isMobile = false, onItemClick, isScrolled = false }: M
   }
 
   return (
-    <nav className="hidden lg:flex items-center justify-end flex-1 gap-x-4 xl:gap-x-8 px-4">
+    <nav className="hidden lg:flex items-center justify-center flex-1 gap-x-4 xl:gap-x-8 px-4">
       {navItems.map((item) => (
         <div key={item.id} className="relative group">
           {item.children && item.children.length > 0 ? (

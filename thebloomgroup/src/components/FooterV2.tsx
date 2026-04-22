@@ -7,52 +7,12 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { normalizePath, isExternalLink } from '@/utils/urlUtils';
 import Logo from './header/Logo';
+import { useNavigation } from '@/hooks/useNavigation';
 
 const FooterV2 = () => {
   const { t, i18n } = useTranslation();
-  const [footerMenus, setFooterMenus] = useState<NavigationItem[]>([]);
-  const { settings, loading } = useSettings();
-
-  useEffect(() => {
-    const fetchNav = async () => {
-      try {
-        const navResult = await navigationService.getNavigationItems();
-        if (navResult.success && navResult.data) {
-          const allFooterItems = navResult.data.filter(item => item.position === 'footer');
-          const itemMap: Record<string, NavigationItem> = {};
-          const roots: NavigationItem[] = [];
-
-          allFooterItems.forEach(item => {
-            itemMap[item.id] = { ...item, children: [] };
-          });
-
-          allFooterItems.forEach(item => {
-            const mappedItem = itemMap[item.id];
-            if (item.parent_id && itemMap[item.parent_id]) {
-              itemMap[item.parent_id].children?.push(mappedItem);
-            } else if (!item.parent_id) {
-              roots.push(mappedItem);
-            }
-          });
-
-          const sortItems = (items: NavigationItem[]) => {
-            items.sort((a, b) => (a.order_index || 0) - (b.order_index || 0));
-            items.forEach(item => {
-              if (item.children && item.children.length > 0) {
-                sortItems(item.children);
-              }
-            });
-          };
-
-          sortItems(roots);
-          setFooterMenus(roots);
-        }
-      } catch (error) {
-        console.error("Failed to load footer nav", error);
-      }
-    };
-    fetchNav();
-  }, []);
+  const { navItems: footerMenus, isLoading: navLoading } = useNavigation('footer');
+  const { settings, loading: settingsLoading } = useSettings();
 
   const getTranslatedLabel = (item: NavigationItem | { label: string, path?: string }) => {
     const currentLang = i18n.language || 'vi';
@@ -94,7 +54,7 @@ const FooterV2 = () => {
   const offices = parseOffices();
   const mainOffice = offices.find(o => o.is_main) || offices[0];
 
-  if (loading) return null;
+  if (settingsLoading || navLoading) return null;
 
   return (
     <footer 

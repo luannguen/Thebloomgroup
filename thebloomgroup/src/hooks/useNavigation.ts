@@ -4,6 +4,7 @@ import { NavigationItem } from '../components/data/types';
 
 export const useNavigation = (position: 'header' | 'footer' = 'header') => {
   const [navItems, setNavItems] = useState<NavigationItem[]>([]);
+  const [homeItem, setHomeItem] = useState<NavigationItem | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -46,7 +47,27 @@ export const useNavigation = (position: 'header' | 'footer' = 'header') => {
           };
 
           sortItems(roots);
-          setNavItems(roots);
+          
+          // Identify the home item from ALL active roots (regardless of menu visibility)
+          const primaryHome = roots.length > 0 ? roots[0] : null;
+          
+          // Filter items that should be visible in the menu
+          // Treat undefined/null as true (visible by default)
+          const visibleRoots = roots.filter(item => item.show_in_menu !== false);
+          
+          // Also filter children
+          const filterVisibleChildren = (items: NavigationItem[]) => {
+            items.forEach(item => {
+              if (item.children) {
+                item.children = item.children.filter(c => c.show_in_menu !== false);
+                filterVisibleChildren(item.children);
+              }
+            });
+          };
+          filterVisibleChildren(visibleRoots);
+
+          setNavItems(visibleRoots);
+          setHomeItem(primaryHome);
         } else {
           setError('Failed to load navigation');
         }
@@ -60,8 +81,6 @@ export const useNavigation = (position: 'header' | 'footer' = 'header') => {
 
     fetchNav();
   }, [position]);
-
-  const homeItem = navItems.length > 0 ? navItems[0] : null;
 
   return {
     navItems,

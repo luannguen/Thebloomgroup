@@ -83,6 +83,7 @@ export default function MenuManager() {
             label: '',
             path: '',
             is_active: true,
+            show_in_menu: true,
             order_index: items.length + 1,
             position: position,
             parent_id: undefined,
@@ -289,6 +290,7 @@ export default function MenuManager() {
                                             <h3 className="font-medium text-gray-900 dark:text-white flex items-center gap-2">
                                                 {item.label}
                                                 {!item.is_active && <span className="text-xs bg-red-100 text-red-800 px-2 py-0.5 rounded">{t('inactive')}</span>}
+                                                {item.show_in_menu === false && item.is_active && <span className="text-xs bg-gray-100 text-gray-800 px-2 py-0.5 rounded">{t('hidden')}</span>}
                                             </h3>
                                             <p className="text-sm text-gray-500">{item.path}</p>
                                         </div>
@@ -376,6 +378,7 @@ export default function MenuManager() {
                                                         label: '',
                                                         path: '',
                                                         is_active: true,
+                                                        show_in_menu: true,
                                                         order_index: currentChildren.length + 1,
                                                         position: position,
                                                         parent_id: editingItem.id, // Will be set by backend if new, but here for structure
@@ -433,7 +436,7 @@ export default function MenuManager() {
                                 </div>
                             </div>
 
-                            <div className="flex items-center gap-2">
+                            <div className="flex flex-col gap-3">
                                 <label className="flex items-center gap-2 cursor-pointer">
                                     <input
                                         type="checkbox"
@@ -442,6 +445,16 @@ export default function MenuManager() {
                                         className="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                                     />
                                     <span className="text-sm font-medium">{t('active')}</span>
+                                </label>
+
+                                <label className="flex items-center gap-2 cursor-pointer">
+                                    <input
+                                        type="checkbox"
+                                        checked={editingItem.show_in_menu ?? true}
+                                        onChange={e => setEditingItem({ ...editingItem, show_in_menu: e.target.checked })}
+                                        className="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                                    />
+                                    <span className="text-sm font-medium">{t('show_in_menu')}</span>
                                 </label>
                             </div>
                         </div>

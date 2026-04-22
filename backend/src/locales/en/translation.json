@@ -120,6 +120,8 @@
     "add_link": "Add Link",
     "no_sub_items": "No sub-items",
     "active": "Active",
+    "show_in_menu": "Show in Menu",
+    "hidden": "Hidden from Menu",
     "item_updated": "Item updated successfully",
     "item_created": "Item created successfully",
     "save_item_fail": "Save item failed",
