@@ -9,13 +9,13 @@ import {
     SelectTrigger, 
     SelectValue 
 } from "@/components/ui/select";
-import { Settings2, Zap, X, Info, ExternalLink, Plus, Trash2, GripVertical, ChevronDown, ChevronUp } from 'lucide-react';
+import { Settings2, Zap, X, Info, ExternalLink, Plus, Trash2, GripVertical } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { BLOCK_LIBRARY } from './BlockLibrary';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { useNavigate } from 'react-router-dom';
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Accordion } from "@/components/ui/accordion";
 
 interface PropertyInspectorProps {
     selectedSectionId: string | null;
