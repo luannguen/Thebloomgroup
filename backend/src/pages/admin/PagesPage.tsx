@@ -65,11 +65,15 @@ export default function PagesPage() {
             setLoading(true);
             const data = await pageService.getPages();
             
-            // Đảm bảo Trang chủ luôn có mặt trong danh sách để quản lý Visual Edit
+            // Đảm bảo Trang chủ và Home V2 luôn có mặt trong danh sách để quản lý Visual Edit
             const hasHome = data.some(p => p.slug === 'home');
+            const hasHomeV2 = data.some(p => p.slug === 'home_v2');
+            
+            let finalPages = [...data];
+
             if (!hasHome) {
                 const homePage: StaticPage = {
-                    id: 'home-virtual', // Virtual ID, sẽ được tạo thật khi lưu trong Visual Editor
+                    id: 'home-virtual',
                     slug: 'home',
                     title: 'Trang chủ (Mặc định)',
                     content: '{"sections":[]}',
@@ -79,16 +83,33 @@ export default function PagesPage() {
                     created_at: new Date().toISOString(),
                     updated_at: new Date().toISOString()
                 };
-                setPages([homePage, ...data]);
-            } else {
-                // Sắp xếp để Trang chủ luôn ở đầu danh sách
-                const sortedData = [...data].sort((a, b) => {
-                    if (a.slug === 'home') return -1;
-                    if (b.slug === 'home') return 1;
-                    return 0;
-                });
-                setPages(sortedData);
+                finalPages.push(homePage);
             }
+
+            if (!hasHomeV2) {
+                const homeV2Page: StaticPage = {
+                    id: 'home-v2-virtual',
+                    slug: 'home_v2',
+                    title: 'Trang chủ V2 (Hệ thống mới)',
+                    content: '{"sections":[]}',
+                    excerpt: 'Trang chủ phiên bản mới với cấu trúc công nghiệp',
+                    image_url: null,
+                    is_active: true,
+                    created_at: new Date().toISOString(),
+                    updated_at: new Date().toISOString()
+                };
+                finalPages.push(homeV2Page);
+            }
+
+            // Sắp xếp để các trang chủ luôn ở đầu danh sách
+            const sortedData = finalPages.sort((a, b) => {
+                if (a.slug === 'home') return -1;
+                if (b.slug === 'home') return 1;
+                if (a.slug === 'home_v2') return -1;
+                if (b.slug === 'home_v2') return 1;
+                return 0;
+            });
+            setPages(sortedData);
         } catch (error) {
             console.error(error);
             toast({

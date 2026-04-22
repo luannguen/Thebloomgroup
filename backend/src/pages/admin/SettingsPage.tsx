@@ -410,6 +410,30 @@ const SettingsPage: React.FC = () => {
                     </div>
                 </div>
 
+                {/* Homepage Configuration */}
+                <div className="bg-white dark:bg-gray-800 shadow overflow-hidden sm:rounded-lg lg:col-span-2">
+                    <div className="px-4 py-5 sm:p-6 space-y-6">
+                        <h3 className="text-lg leading-6 font-medium text-gray-900 dark:text-white">{t('homepage_config')}</h3>
+                        <div className="max-w-xl">
+                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                {t('primary_home_slug')}
+                            </label>
+                            <div className="mt-1 flex rounded-md shadow-sm">
+                                <input
+                                    type="text"
+                                    value={settings['primary_home_slug'] || 'home'}
+                                    onChange={(e) => handleChange('primary_home_slug', e.target.value)}
+                                    className="flex-1 min-w-0 block w-full px-3 py-2 rounded-md focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                    placeholder="home or home_v2"
+                                />
+                            </div>
+                            <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
+                                {t('primary_home_slug_hint')}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
                 {/* Contact Information */}
                 <div className="bg-white dark:bg-gray-800 shadow overflow-hidden sm:rounded-lg">
                     <div className="px-4 py-5 sm:p-6 space-y-6">

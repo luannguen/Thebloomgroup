@@ -93,13 +93,14 @@ export function useVisualEditor(iframeRef: React.RefObject<HTMLIFrameElement>) {
                 const page = pages.find(p => p.slug === urlSlug);
                 
                 if (!page) {
-                    if (urlSlug === 'home') {
-                        // Cho phép Trang chủ hoạt động ở chế độ khởi tạo nếu chưa có trong DB
-                        setSlug('home');
+                    if (urlSlug === 'home' || urlSlug === 'home_v2') {
+                        // Cho phép Trang chủ hoặc Home V2 hoạt động ở chế độ khởi tạo nếu chưa có trong DB
+                        const isV2 = urlSlug === 'home_v2';
+                        setSlug(urlSlug);
                         setPageMetadata({
-                            title: 'Trang chủ',
-                            slug: 'home',
-                            excerpt: 'Trang chủ mặc định của website',
+                            title: isV2 ? 'Trang chủ V2' : 'Trang chủ',
+                            slug: urlSlug,
+                            excerpt: isV2 ? 'Trang chủ phiên bản mới' : 'Trang chủ mặc định của website',
                             image_url: '',
                             is_active: true
                         });
@@ -249,11 +250,12 @@ export function useVisualEditor(iframeRef: React.RefObject<HTMLIFrameElement>) {
                 });
                 setHasPendingChanges(false);
                 toast.success('Đã lưu thay đổi');
-            } else if (pageMetadata.slug === 'home') {
-                // Khởi tạo Trang chủ trong DB nếu chưa tồn tại
+            } else if (pageMetadata.slug === 'home' || pageMetadata.slug === 'home_v2') {
+                // Khởi tạo Trang chủ hoặc Home V2 trong DB nếu chưa tồn tại
+                const isV2 = pageMetadata.slug === 'home_v2';
                 const newPage = await pageService.createPage({
-                    title: pageMetadata.title || 'Trang chủ',
-                    slug: 'home',
+                    title: pageMetadata.title || (isV2 ? 'Trang chủ V2' : 'Trang chủ'),
+                    slug: pageMetadata.slug,
                     excerpt: pageMetadata.excerpt || null,
                     image_url: pageMetadata.image_url || null,
                     is_active: pageMetadata.is_active ?? true,
@@ -261,7 +263,7 @@ export function useVisualEditor(iframeRef: React.RefObject<HTMLIFrameElement>) {
                 });
                 setPageId(newPage.id);
                 setHasPendingChanges(false);
-                toast.success('Đã khởi tạo và lưu Trang chủ thành công');
+                toast.success(`Đã khởi tạo và lưu ${isV2 ? 'Trang chủ V2' : 'Trang chủ'} thành công`);
             }
         } catch (err: any) {
             toast.error(err.message || 'Lỗi khi lưu trang');

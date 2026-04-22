@@ -299,5 +299,8 @@
         "delete_confirm_desc": "Hành động này không thể hoàn tác. Vai trò này sẽ bị xóa vĩnh viễn và người dùng có thể mất quyền truy cập.",
         "delete_button": "Xóa",
         "role_permissions": "Phân quyền Vai trò"
-    }
+    },
+    "homepage_config": "Cấu hình Trang chủ",
+    "primary_home_slug": "Trang chủ mặc định (Slug)",
+    "primary_home_slug_hint": "Slug của trang sẽ được hiển thị khi truy cập vào root (/). Mặc định là 'home'. Bạn có thể đổi qua 'home_v2' để kích hoạt trang chủ mới."
 }

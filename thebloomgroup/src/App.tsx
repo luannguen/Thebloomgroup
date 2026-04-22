@@ -27,7 +27,8 @@ const PageLoader = () => {
 };
 
 // Public pages - Lazy loaded
-const Index = lazy(() => import("./pages/Index"));
+const HomePage = lazy(() => import("./pages/HomePage"));
+const HomeV2 = lazy(() => import("./pages/HomeV2"));
 const StaticPage = lazy(() => import("./pages/StaticPage"));
 const About = lazy(() => import("./pages/About"));
 const AboutUsV2 = lazy(() => import("./pages/AboutUsV2"));
@@ -95,7 +96,10 @@ const App = () => (
           <Routes>
             {/* Public routes */}
             <Route path="/" element={<MainLayout />}>
-              <Route index element={<Index />} />
+              <Route index element={<HomePage />} />
+              <Route path="home" element={<HomePage />} />
+              <Route path="home-v2" element={<HomeV2 />} />
+              <Route path="home_v2" element={<HomeV2 />} />
               <Route path="about" element={<Navigate to="/about-us" replace />} />
               <Route path="gioi-thieu" element={<Navigate to="/about-us" replace />} />
               <Route path="about-us" element={<About />} />

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from 'react-router-dom';
 import { ChevronDown } from 'lucide-react';
-import { navigationService } from '@/services/navigationService';
+import { useNavigation } from '@/hooks/useNavigation';
 import { NavigationItem } from '@/components/data/types';
 import { normalizePath } from '@/utils/urlUtils';
 
@@ -13,58 +13,9 @@ interface MainNavigationProps {
 }
 
 const MainNavigation = ({ isMobile = false, onItemClick, isScrolled = false }: MainNavigationProps) => {
-  const [navItems, setNavItems] = useState<NavigationItem[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const { navItems, isLoading } = useNavigation('header');
   const { t, i18n } = useTranslation();
   const location = useLocation();
-
-  useEffect(() => {
-    const fetchNav = async () => {
-      setIsLoading(true);
-      const result = await navigationService.getNavigationItems();
-      if (result.success && result.data.length > 0) {
-        // 1. Filter for header items (including Home '/')
-        const allHeaderItems = result.data.filter(item => 
-          (item.position === 'header' || !item.position)
-        );
-
-        // 2. Build the tree
-        const itemMap: Record<string, NavigationItem> = {};
-        const roots: NavigationItem[] = [];
-
-        // First pass: Create a map of items with current data
-        allHeaderItems.forEach(item => {
-          itemMap[item.id] = { ...item, children: [] };
-        });
-
-        // Second pass: Assign children to parents or to root
-        allHeaderItems.forEach(item => {
-          const mappedItem = itemMap[item.id];
-          if (item.parent_id && itemMap[item.parent_id]) {
-            itemMap[item.parent_id].children?.push(mappedItem);
-          } else if (!item.parent_id) {
-            roots.push(mappedItem);
-          }
-        });
-
-        // 3. Sort roots and all children recursively
-        const sortItems = (items: NavigationItem[]) => {
-          items.sort((a, b) => (a.order_index || 0) - (b.order_index || 0));
-          items.forEach(item => {
-            if (item.children && item.children.length > 0) {
-              sortItems(item.children);
-            }
-          });
-        };
-
-        sortItems(roots);
-        setNavItems(roots);
-      }
-      setIsLoading(false);
-    };
-
-    fetchNav();
-  }, []);
 
   const getTranslatedLabel = (item: NavigationItem) => {
     const currentLang = i18n.language || 'vi';

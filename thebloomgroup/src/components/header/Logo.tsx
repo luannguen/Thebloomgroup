@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useSettings } from '@/hooks/useSettings';
+import { useNavigation } from '@/hooks/useNavigation';
 import { useTranslation } from 'react-i18next';
 import logoSrc from '@/assets/images/logo-ttt.svg';
 
@@ -10,9 +11,12 @@ interface LogoProps {
 }
 
 const Logo = ({ isScrolled = false, className = "", variant = 'header' }: LogoProps) => {
-  const { settings, loading } = useSettings();
+  const { settings, loading: settingsLoading } = useSettings();
+  const { homePath, isLoading: navLoading } = useNavigation('header');
   const { t } = useTranslation();
   
+  const loading = settingsLoading || navLoading;
+
   if (loading) {
     return (
       <div className={`flex items-center flex-shrink-0 animate-pulse bg-gray-100 rounded-md ${
@@ -29,8 +33,11 @@ const Logo = ({ isScrolled = false, className = "", variant = 'header' }: LogoPr
   const displayLogo = variant === 'footer' ? footerLogo : headerLogo;
   const siteName = settings?.company_name || settings?.site_name || t('logo_alt_text');
 
+  // Use the configured home path from navigation
+  const destination = homePath || '/';
+
   return (
-    <Link to="/" className={`flex items-center gap-2 flex-shrink-0 relative z-10 transition-transform active:scale-95 ${className}`}>
+    <Link to={destination} className={`flex items-center gap-2 flex-shrink-0 relative z-10 transition-transform active:scale-95 ${className}`}>
       <img
         src={displayLogo}
         alt={siteName}

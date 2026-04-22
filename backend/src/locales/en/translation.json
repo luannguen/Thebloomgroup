@@ -289,5 +289,8 @@
         "delete_confirm_desc": "This action cannot be undone. This role will be permanently deleted and users might lose access.",
         "delete_button": "Delete",
         "role_permissions": "Role Permissions"
-    }
+    },
+    "homepage_config": "Homepage Configuration",
+    "primary_home_slug": "Primary Homepage Slug",
+    "primary_home_slug_hint": "The slug of the page that will be displayed at the root URL (/). Default is 'home'. You can change this to 'home_v2' to enable the new homepage."
 }

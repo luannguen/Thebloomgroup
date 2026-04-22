@@ -46,6 +46,13 @@ import { ServiceHeroBlock } from './ServiceHeroBlock';
 import { ServiceGridBlock } from './ServiceGridBlock';
 import { CTASectionBlock } from './CTASectionBlock';
 import { JobsListBlock } from './JobsListBlock';
+import { 
+  HomeV2PartnershipBlock, 
+  HomeV2SectorsBlock, 
+  HomeV2SolutionsBlock, 
+  HomeV2StatsBlock 
+} from './HomeV2Blocks';
+
 
 
 // Function to register all blocks
@@ -756,6 +763,53 @@ export const registerAllBlocks = () => {
     fields: [
       { id: 'title', label: 'Tiêu đề', type: 'text' },
       { id: 'subtitle', label: 'Mô tả phụ', type: 'textarea' }
+    ]
+  });
+
+  // --- Home V2 Blocks ---
+  registerBlock({
+    type: 'home_v2_partnership',
+    name: 'Home V2: Partnership',
+    component: HomeV2PartnershipBlock,
+    defaultProps: {},
+    fields: [
+      { id: 'title', label: 'Tiêu đề', type: 'text' },
+      { id: 'subtitle', label: 'Tiêu đề phụ', type: 'text' },
+      { id: 'description', label: 'Mô tả', type: 'rich-text' },
+      { id: 'partnerLogo', label: 'Logo đối tác', type: 'image' },
+      { id: 'partnerImage', label: 'Ảnh minh họa', type: 'image' }
+    ]
+  });
+
+  registerBlock({
+    type: 'home_v2_sectors',
+    name: 'Home V2: Sectors',
+    component: HomeV2SectorsBlock,
+    defaultProps: {},
+    fields: [
+      { id: 'title', label: 'Tiêu đề', type: 'text' },
+      { id: 'subtitle', label: 'Mô tả phụ', type: 'textarea' }
+    ]
+  });
+
+  registerBlock({
+    type: 'home_v2_solutions',
+    name: 'Home V2: Solutions',
+    component: HomeV2SolutionsBlock,
+    defaultProps: {},
+    fields: [
+      { id: 'title', label: 'Tiêu đề', type: 'text' },
+      { id: 'subtitle', label: 'Mô tả phụ', type: 'textarea' }
+    ]
+  });
+
+  registerBlock({
+    type: 'home_v2_stats',
+    name: 'Home V2: Stats',
+    component: HomeV2StatsBlock,
+    defaultProps: {},
+    fields: [
+      { id: 'title', label: 'Tiêu đề', type: 'text' }
     ]
   });
 };
