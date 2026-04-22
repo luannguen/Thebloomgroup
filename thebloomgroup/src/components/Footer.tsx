@@ -57,7 +57,6 @@ const Footer = () => {
   const getTranslatedLabel = (item: NavigationItem | { label: string, path?: string }) => {
     const currentLang = i18n.language || 'vi';
     if (currentLang.startsWith('vi') && item.label) {
-      if (item.label.toLowerCase().trim() === 'về vvc') return 'Về Việt Vinh';
       return item.label;
     }
     if (item.label) {
@@ -109,12 +108,12 @@ const Footer = () => {
   };
 
   const rawLocalizedCopyright = isVi ? settings['copyright_text'] : (settings[`copyright_text_${currentLang}`] || t('copyright'));
-  const localizedCopyright = (rawLocalizedCopyright && rawLocalizedCopyright.includes('2024')) ? t('copyright') : rawLocalizedCopyright;
-  const copyrightText = localizedCopyright || settings['copyright_text'];
-  const contactEmail = settings['contact_email'] || 'contact@vietvinhcorp.com';
-  const contactAddress = getLocalizedSetting('contact_address') || t('contact_address_fallback');
-  const contactHotline = settings['contact_hotline'] || '+84 981 789 248';
-  const siteDescription = getLocalizedSetting('site_description') || t('site_description_fallback');
+  const localizedCopyright = rawLocalizedCopyright;
+  const copyrightText = localizedCopyright || settings['copyright_text'] || `© ${new Date().getFullYear()} ${settings['company_name'] || 'The Bloom Group'}. All rights reserved.`;
+  const contactEmail = settings['contact_email'] || '';
+  const contactAddress = getLocalizedSetting('contact_address') || '';
+  const contactHotline = settings['contact_hotline'] || settings['contact_phone'] || '';
+  const siteDescription = getLocalizedSetting('site_description') || '';
 
   // Parser for the multi-office contact string
   // Parser for the multi-branch structured data
@@ -163,7 +162,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12">
           {/* Brand Column */}
           <div className="lg:col-span-4 space-y-6">
-            <Logo variant="footer" className="bg-white/5 p-2 backdrop-blur-sm inline-block" />
+            <Logo variant="footer" className="inline-block" />
             <p className="text-gray-400 text-sm leading-relaxed max-w-sm">
               {siteDescription}
             </p>

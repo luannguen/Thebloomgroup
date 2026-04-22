@@ -4,7 +4,7 @@ import { useSettings } from '@/hooks/useSettings';
 const TopContact = () => {
   const { settings } = useSettings();
 
-  const phone = settings['contact_phone'] || '+84 (28) 1234 5678';
+  const phone = settings['contact_phone'] || '';
   const zaloUrl = settings['social_zalo'] || '#';
   const facebookUrl = settings['social_facebook'] || '#';
 

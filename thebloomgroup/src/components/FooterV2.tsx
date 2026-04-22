@@ -75,9 +75,9 @@ const FooterV2 = () => {
     return (localizedVal && localizedVal.trim() !== '') ? localizedVal : settings[baseKey];
   };
 
-  const copyrightText = getLocalizedSetting('copyright_text') || `© ${new Date().getFullYear()} Thuong Thien Technologies. All rights reserved.`;
-  const contactEmail = settings['contact_email'] || 'contact@thuongthien.vn';
-  const contactHotline = settings['contact_hotline'] || '+84 981 789 248';
+  const copyrightText = getLocalizedSetting('copyright_text') || `© ${new Date().getFullYear()} ${settings['company_name'] || 'The Bloom Group'}. All rights reserved.`;
+  const contactEmail = settings['contact_email'] || '';
+  const contactHotline = settings['contact_hotline'] || settings['contact_phone'] || '';
   const contactAddress = getLocalizedSetting('contact_address') || '';
 
   const parseOffices = () => {
@@ -209,7 +209,7 @@ const FooterV2 = () => {
         {/* Branding Divider */}
         <div className="mt-20 pt-10 border-t border-white/20 flex flex-col items-center">
            <div className="mb-8">
-             <Logo variant="footer" className="h-16 brightness-0 invert opacity-90" />
+             <Logo variant="footer" className="opacity-100" />
            </div>
            
            <div className="flex flex-col md:flex-row items-center justify-between w-full gap-6">

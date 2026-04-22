@@ -15,7 +15,7 @@ registerAllBlocks();
 
 // Loading component
 const PageLoader = () => {
-  const siteAcronym = "VIET VINH";
+  const siteAcronym = "THE BLOOM";
   return (
     <div className="flex flex-col items-center justify-center min-h-[60vh] animate-in fade-in duration-500">
       <div className="flex flex-col items-center gap-6">
