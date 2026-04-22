@@ -20,11 +20,11 @@ export default defineConfig(({ mode }) => {
     },
     server: {
       host: "::",
-      port: 8081, // Đổi sang port 8081 để phù hợp với cấu hình Cypress
+      port: 8081, // Đổi về port 8081 cho chuẩn frontend
       proxy: {
         // Cấu hình proxy cho các API request
         '/api': {
-          target: 'http://localhost:3001',
+          target: 'http://localhost:5173',
           changeOrigin: true,
           secure: false,
           rewrite: (p) => p.replace(/^\/api/, '')

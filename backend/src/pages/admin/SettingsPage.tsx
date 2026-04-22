@@ -8,6 +8,7 @@ import { toast } from 'react-hot-toast';
 interface Branch {
     id: string;
     title: string;
+    subtitle?: string;
     address: string;
     phone: string;
     email: string;
@@ -446,6 +447,7 @@ const SettingsPage: React.FC = () => {
                                             const newBranch: Branch = {
                                                 id: Date.now().toString(),
                                                 title: '',
+                                                subtitle: '',
                                                 address: '',
                                                 phone: '',
                                                 email: ''
@@ -474,14 +476,24 @@ const SettingsPage: React.FC = () => {
                                                         </button>
                                                         
                                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                                            <div className="md:col-span-2">
+                                                            <div className="md:col-span-1">
                                                                 <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1 block">Tên Chi nhánh / Văn phòng</label>
                                                                 <input
                                                                     type="text"
                                                                     value={branch.title}
                                                                     onChange={(e) => handleBranchChange(branch.id, 'title', e.target.value)}
                                                                     className="w-full bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 rounded-md text-sm p-2"
-                                                                    placeholder="e.g. Trụ sở chính, Chi nhánh Thủ Đức..."
+                                                                    placeholder="e.g. Trụ sở chính, Workshop..."
+                                                                />
+                                                            </div>
+                                                            <div className="md:col-span-1">
+                                                                <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1 block">Tiêu đề phụ (Vị trí)</label>
+                                                                <input
+                                                                    type="text"
+                                                                    value={branch.subtitle || ''}
+                                                                    onChange={(e) => handleBranchChange(branch.id, 'subtitle', e.target.value)}
+                                                                    className="w-full bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 rounded-md text-sm p-2"
+                                                                    placeholder="e.g. THUONG THIEN, VUNG TAU..."
                                                                 />
                                                             </div>
                                                             <div className="md:col-span-2">

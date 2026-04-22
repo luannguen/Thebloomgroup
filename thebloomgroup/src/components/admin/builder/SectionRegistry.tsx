@@ -17,10 +17,11 @@ export interface PageData {
 export interface SectionField {
   id: string;
   label: string;
-  type: 'text' | 'textarea' | 'number' | 'select' | 'image' | 'color' | 'rich-text';
+  type: 'text' | 'textarea' | 'number' | 'select' | 'image' | 'color' | 'rich-text' | 'list';
   options?: { label: string; value: any }[]; // For select types
   placeholder?: string;
   helperText?: string;
+  itemSchema?: SectionField[]; // For list types
 }
 
 export interface BlockDefinition {

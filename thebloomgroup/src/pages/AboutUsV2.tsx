@@ -5,30 +5,11 @@ import { useTranslation } from "react-i18next";
 
 const AboutUsV2Content = () => {
     const { contentData } = useVisualEditor();
-    const { t } = useTranslation();
-
     const sections = contentData?.sections || [];
-    const heroSection = sections.find((s: any) => s.type === 'about_v2_hero');
-    const otherSections = sections.filter((s: any) => s.type !== 'about_v2_hero');
 
     return (
         <main className="flex-grow">
-            {/* Dynamic Banner V2 */}
-            {heroSection ? (
-                <AboutV2HeroBlock 
-                    sectionId={heroSection.id} 
-                    {...heroSection.props} 
-                />
-            ) : (
-                /* Fallback Banner V2 */
-                <AboutV2HeroBlock 
-                  title={t('about_us')}
-                  backgroundImage="/assets/about-v2/about-banner.jpg"
-                />
-            )}
-
-            {/* Other v2 sections */}
-            <VisualPageRenderer customSections={otherSections} />
+            <VisualPageRenderer customSections={sections} />
         </main>
     );
 };

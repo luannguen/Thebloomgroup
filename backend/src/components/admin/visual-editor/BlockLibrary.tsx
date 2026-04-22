@@ -374,6 +374,112 @@ export const BLOCK_LIBRARY = [
         icon: '📧',
         category: 'General',
         fields: []
+    },
+    {
+        type: 'about_v2_hero',
+        name: 'About V2: Hero',
+        icon: '🖼️',
+        category: 'About Us V2',
+        defaultProps: { title: 'About Us', backgroundImage: '/assets/about-v2/banner.jpg' },
+        fields: [
+            { id: 'title', label: 'Tiêu đề', type: 'text' },
+            { id: 'backgroundImage', label: 'Ảnh banner', type: 'image' }
+        ]
+    },
+    {
+        type: 'about_v2_intro',
+        name: 'About V2: Giới thiệu',
+        icon: '📄',
+        category: 'About Us V2',
+        defaultProps: {
+            title: 'THUONG THIEN TECHNOLOGIES CO. LTD (TTT)',
+            description: 'TTT has been in collaboration with Solar Turbines...',
+            image: '/assets/about-v2/ttt-logo.svg',
+            backgroundImage: '/assets/about-v2/intro-bg.jpg'
+        },
+        fields: [
+            { id: 'title', label: 'Tiêu đề chính', type: 'text' },
+            { id: 'description', label: 'Mô tả', type: 'textarea' },
+            { id: 'image', label: 'Logo Mockup (phải)', type: 'image' },
+            { id: 'backgroundImage', label: 'Ảnh nền Industrial', type: 'image' },
+            { id: 'memberText', label: 'Text Thành viên (ví dụ: TTT is a member of)', type: 'text' },
+            { id: 'memberLogo', label: 'Logo Thành viên', type: 'image' }
+        ]
+    },
+    {
+        type: 'about_v2_accordion',
+        name: 'About V2: Tầm nhìn/Sứ mệnh',
+        icon: '🎯',
+        category: 'About Us V2',
+        defaultProps: {
+            vTitle: 'OUR VISION',
+            vContent: 'Become the most Valued Business Partner...',
+            mTitle: 'OUR MISSION',
+            mContent: 'Provide the highest standardized products...',
+            cTitle: 'CORE VALUES',
+            cContent: '<ul><li><strong>INTEGRITY</strong>...</li></ul>',
+            sideIcon: '/assets/about-v2/team-work-svg.svg'
+        },
+        fields: [
+            { id: 'vTitle', label: 'Tiêu đề Tầm nhìn', type: 'text' },
+            { id: 'vContent', label: 'Nội dung Tầm nhìn', type: 'textarea' },
+            { id: 'mTitle', label: 'Tiêu đề Sứ mệnh', type: 'text' },
+            { id: 'mContent', label: 'Nội dung Sứ mệnh', type: 'textarea' },
+            { id: 'cTitle', label: 'Tiêu đề Giá trị', type: 'text' },
+            { id: 'cContent', label: 'Nội dung Giá trị (HTML)', type: 'textarea' },
+            { id: 'sideIcon', label: 'Icon minh họa (trái)', type: 'image' }
+        ]
+    },
+    {
+        type: 'about_v2_timeline',
+        name: 'About V2: Timeline',
+        icon: '⏳',
+        category: 'About Us V2',
+        defaultProps: {
+            title: 'THE STORY OF SUCCESS',
+            milestones: [
+                { year: '2003', title: 'Established', desc: 'TTT was founded...', logo: '' }
+            ]
+        },
+        fields: [
+            { id: 'title', label: 'Tiêu đề chính', type: 'text' },
+            { 
+                id: 'milestones', 
+                label: 'Cột mốc thời gian', 
+                type: 'list',
+                itemSchema: [
+                    { id: 'year', label: 'Năm', type: 'text' },
+                    { id: 'title', label: 'Tiêu đề', type: 'text' },
+                    { id: 'desc', label: 'Mô tả', type: 'textarea' },
+                    { id: 'logo', label: 'Logo tùy chỉnh (để trống nếu dùng mặc định)', type: 'image' }
+                ]
+            }
+        ]
+    },
+    {
+        type: 'about_v2_location',
+        name: 'About V2: Địa điểm',
+        icon: '📍',
+        category: 'About Us V2',
+        defaultProps: {
+            title: 'Locations',
+            locations: []
+        },
+        fields: [
+            { id: 'title', label: 'Tiêu đề chính', type: 'text' },
+            { 
+                id: 'locations', 
+                label: 'Danh sách địa điểm', 
+                type: 'list',
+                itemSchema: [
+                    { id: 'subTitle', label: 'Nhãn (ví dụ: THUONG THIEN)', type: 'text' },
+                    { id: 'city', label: 'Tiêu đề (ví dụ: HEAD OFFICE)', type: 'text' },
+                    { id: 'address', label: 'Địa chỉ', type: 'text' },
+                    { id: 'phone', label: 'Số điện thoại', type: 'text' },
+                    { id: 'email', label: 'Email', type: 'text' }
+                ]
+            }
+        ]
     }
 ];
 
@@ -388,7 +494,7 @@ export const BlockLibrary: React.FC = () => {
     }, {} as Record<string, typeof BLOCK_LIBRARY>);
 
     // Order categories logically
-    const categoryOrder = ['Basic', 'About Us', 'Industry & Tech', 'Corporate', 'General'];
+    const categoryOrder = ['Basic', 'About Us V2', 'About Us', 'Industry & Tech', 'Corporate', 'General'];
     const sortedCategories = Object.keys(categories).sort((a, b) => {
         const idxA = categoryOrder.indexOf(a);
         const idxB = categoryOrder.indexOf(b);

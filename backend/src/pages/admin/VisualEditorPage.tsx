@@ -206,9 +206,10 @@ const VisualEditorPage: React.FC = () => {
                                 sections={sections}
                                 updateSection={updateSection}
                                 setSelectedSectionId={setSelectedSectionId}
-                                onPickImage={(fieldId) => setImagePicker({
+                                onPickImage={(fieldId, parentPath) => setImagePicker({
                                     isOpen: true,
                                     fieldId,
+                                    parentPath: parentPath || null,
                                     sectionId: selectedSectionId
                                 })}
                             />

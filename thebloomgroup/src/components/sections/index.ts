@@ -646,10 +646,13 @@ export const registerAllBlocks = () => {
     type: 'about_v2_hero',
     name: 'About V2: Hero',
     component: AboutV2HeroBlock,
-    defaultProps: { backgroundImage: '/assets/about-v2/about-banner.jpg' },
+    defaultProps: { 
+      title: 'About Us',
+      backgroundImage: '/assets/about-v2/banner.jpg' 
+    },
     fields: [
-      { id: 'title', label: 'Tiêu đề', type: 'text' },
-      { id: 'backgroundImage', label: 'Ảnh nền', type: 'image' }
+      { id: 'title', label: 'Tiêu đề chính', type: 'text' },
+      { id: 'backgroundImage', label: 'Ảnh nền banner', type: 'image' }
     ]
   });
 
@@ -657,11 +660,15 @@ export const registerAllBlocks = () => {
     type: 'about_v2_intro',
     name: 'About V2: Giới thiệu',
     component: AboutV2IntroBlock,
-    defaultProps: {},
+    defaultProps: {
+      title: 'Hơn 20 năm khẳng định vị thế',
+      description: 'Chúng tôi tự hào là đơn vị tiên phong mang đến những giải pháp kỹ thuật lạnh tối ưu cho doanh nghiệp.',
+      image: '/assets/about-v2/ttt-logo.svg'
+    },
     fields: [
       { id: 'title', label: 'Tiêu đề', type: 'text' },
-      { id: 'description', label: 'Mô tả', type: 'textarea' },
-      { id: 'image', label: 'Hình ảnh', type: 'image' }
+      { id: 'description', label: 'Nội dung giới thiệu', type: 'rich-text' },
+      { id: 'image', label: 'Hình ảnh/Logo đại diện', type: 'image' }
     ]
   });
 
@@ -669,7 +676,14 @@ export const registerAllBlocks = () => {
     type: 'about_v2_accordion',
     name: 'About V2: Tầm nhìn/Sứ mệnh (Accordion)',
     component: AboutV2AccordionBlock,
-    defaultProps: {},
+    defaultProps: {
+      vTitle: 'Tầm nhìn',
+      vContent: 'Trở thành biểu tượng uy tín hàng đầu trong ngành kỹ thuật lạnh.',
+      mTitle: 'Sứ mệnh',
+      mContent: 'Cung cấp hệ sinh thái giải pháp kỹ thuật lạnh bền vững và tiết kiệm năng lượng.',
+      cTitle: 'Giá trị cốt lõi',
+      cContent: 'Chất lượng - Uy tín - Tận tâm.'
+    },
     fields: [
       { id: 'vTitle', label: 'Tiêu đề Tầm nhìn', type: 'text' },
       { id: 'vContent', label: 'Nội dung Tầm nhìn', type: 'textarea' },
@@ -684,9 +698,11 @@ export const registerAllBlocks = () => {
     type: 'about_v2_timeline',
     name: 'About V2: Lịch sử (Timeline)',
     component: AboutV2TimelineBlock,
-    defaultProps: {},
+    defaultProps: {
+      title: 'Chặng đường lịch sử'
+    },
     fields: [
-      { id: 'title', label: 'Tiêu đề', type: 'text' }
+      { id: 'title', label: 'Tiêu đề section', type: 'text' }
     ]
   });
 
@@ -694,9 +710,11 @@ export const registerAllBlocks = () => {
     type: 'about_v2_location',
     name: 'About V2: Địa điểm văn phòng',
     component: AboutV2LocationBlock,
-    defaultProps: {},
+    defaultProps: {
+      title: 'Mạng lưới văn phòng'
+    },
     fields: [
-      { id: 'title', label: 'Tiêu đề', type: 'text' }
+      { id: 'title', label: 'Tiêu đề section', type: 'text' }
     ]
   });
 

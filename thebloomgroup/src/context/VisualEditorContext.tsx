@@ -3,6 +3,7 @@ import { supabase } from '../supabase';
 import { registerAllBlocks } from '../components/sections';
 import { getBlock } from '../components/admin/builder/SectionRegistry';
 import i18n from '../i18n';
+import { setNestedValue } from '../utils/objectUtils';
 
 interface VisualEditorContextType {
   editMode: boolean;
@@ -16,7 +17,7 @@ interface VisualEditorContextType {
   syncSections: (sections: any[]) => void;
   selectedSectionId: string | null;
   setSelectedSectionId: (id: string | null) => void;
-  requestImageChange: (fieldKey: string) => void;
+  requestImageChange: (fieldKey: string, sectionId?: string) => void;
   isLoading: boolean;
   isPageActive: boolean;
   slug: string;
@@ -59,8 +60,10 @@ export const VisualEditorProvider = ({ children, slug = '' }: VisualEditorProvid
     registerAllBlocks();
   }, []);
 
+  const isSyncingFromParent = React.useRef(false);
+
   const syncWithParent = React.useCallback((newData: any) => {
-    if (!editMode) return;
+    if (!editMode || isSyncingFromParent.current) return;
     
     window.parent.postMessage(
       {
@@ -73,12 +76,12 @@ export const VisualEditorProvider = ({ children, slug = '' }: VisualEditorProvid
   }, [slug, editMode]);
 
   // Handle updates from EditableElement (Legacy/Simple)
-  const updateField = React.useCallback((fieldKey: string, value: string) => {
+  const updateField = React.useCallback((fieldKey: string, value: string, skipSync = false) => {
     if (!editMode) return;
-    
+    console.log('[VisualEditorContext] updateField:', { fieldKey, value, skipSync });
     setContentData((prev: any) => {
-      const newData = { ...prev, [fieldKey]: value };
-      syncWithParent(newData);
+      const newData = setNestedValue(prev, fieldKey, value);
+      if (!skipSync) syncWithParent(newData);
       return newData;
     });
   }, [editMode, syncWithParent]);
@@ -155,33 +158,46 @@ export const VisualEditorProvider = ({ children, slug = '' }: VisualEditorProvid
           id: s.id || `sec_${Date.now()}_${idx}_${Math.random().toString(36).substr(2, 4)}`
         }));
         console.log('[VisualEditorContext] Hydrating context with sections:', sectionsWithIds.length);
-        return { ...prev, sections: sectionsWithIds };
+        const newData = { ...prev, sections: sectionsWithIds };
+        // We must sync back to parent so it knows the generated IDs
+        syncWithParent(newData);
+        return newData;
       }
       return prev;
     });
-  }, []);
+  }, [syncWithParent]);
 
-  const updateSectionProps = React.useCallback((id: string, newProps: any) => {
+  const updateSectionProps = React.useCallback((id: string, newProps: any, skipSync = false) => {
     if (!editMode) return;
     setContentData((prev: any) => {
       const currentSections = prev.sections || [];
-      const sections = currentSections.map((s: any) => 
-        s.id === id ? { ...s, props: { ...s.props, ...newProps } } : s
-      );
+      console.log('[VisualEditorContext] updateSectionProps:', { targetId: id, availableIds: currentSections.map((s: any) => s.id), skipSync });
+      const sections = currentSections.map((s: any) => {
+        if (s.id === id) {
+          console.log('[VisualEditorContext] Found section to update:', id);
+          let updatedProps = { ...s.props };
+          Object.entries(newProps).forEach(([key, value]) => {
+            updatedProps = setNestedValue(updatedProps, key, value);
+          });
+          return { ...s, props: updatedProps };
+        }
+        return s;
+      });
       const newData = { ...prev, sections };
-      syncWithParent(newData);
+      if (!skipSync) syncWithParent(newData);
       return newData;
     });
   }, [editMode, syncWithParent]);
 
   // Handle image pick requests
-  const requestImageChange = React.useCallback((fieldKey: string) => {
+  const requestImageChange = React.useCallback((fieldKey: string, sectionId?: string) => {
     if (!editMode) return;
     
     window.parent.postMessage({
       type: 'VISUAL_EDIT_PICK_IMAGE',
       fieldKey,
-      sectionId: selectedSectionId,
+      sectionId: sectionId || selectedSectionId,
+      id: sectionId || selectedSectionId,
       slug
     }, '*');
   }, [editMode, slug, selectedSectionId]);
@@ -197,20 +213,34 @@ export const VisualEditorProvider = ({ children, slug = '' }: VisualEditorProvid
   // Listen for messages from Admin
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
-      const { type, fieldKey, imageUrl, sectionId, props, blockType, index, direction, sections } = event.data;
+      console.log('[VisualEditorContext] Received message:', event.data);
+      const data = event.data?.data || event.data || {};
+      const type = event.data?.type || event.data?.data?.type;
+      const { fieldKey, imageUrl, url, image, sectionId: msgSectionId, id: msgId, section_id: msgSid, props, blockType, index, direction, sections } = data;
+      const effectiveImageUrl = imageUrl || url || image;
+      const sectionId = msgSectionId || msgId || msgSid || (type === 'VISUAL_EDIT_IMAGE_SELECTED' ? selectedSectionId : null);
       
       switch (type) {
         case 'VISUAL_EDIT_UPDATE_DATA':
-          if (sections) {
-            console.log('[VisualEditorContext] Updating data from parent:', sections.length);
+          if (sectionId && props) {
+            updateSectionProps(sectionId, props, true);
+          } else if (sections) {
+            console.log('[VisualEditorContext] Updating all sections from parent:', sections.length);
+            isSyncingFromParent.current = true;
             setContentData((prev: any) => ({ ...prev, sections }));
+            setTimeout(() => { isSyncingFromParent.current = false; }, 100);
           }
           break;
         case 'VISUAL_EDIT_IMAGE_SELECTED':
-          if (sectionId) {
-            updateSectionProps(sectionId, { [fieldKey]: imageUrl });
+          if (fieldKey && effectiveImageUrl) {
+            console.log('[VisualEditorContext] Image selected for update:', { sectionId, fieldKey, imageUrl: effectiveImageUrl });
+            if (sectionId) {
+              updateSectionProps(sectionId, { [fieldKey]: effectiveImageUrl }, false);
+            } else {
+              updateField(fieldKey, effectiveImageUrl, false);
+            }
           } else {
-            updateField(fieldKey, imageUrl);
+            console.warn('[VisualEditorContext] Image selected but missing required fields:', { fieldKey, effectiveImageUrl });
           }
           break;
         case 'VISUAL_EDIT_ADD_SECTION':

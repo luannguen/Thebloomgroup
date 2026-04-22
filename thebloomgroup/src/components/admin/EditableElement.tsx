@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { useVisualEditor } from '../../context/VisualEditorContext';
 import { useTranslation } from 'react-i18next';
+import { getNestedValue } from '../../utils/objectUtils';
 
 interface EditableElementProps {
   fieldKey: string;
@@ -61,15 +62,13 @@ export const EditableElement = ({
     // Try section props first
     if (effectiveSectionId && contentData.sections) {
       const section = contentData.sections.find((s: any) => s.id === effectiveSectionId);
-      if (section && section.props && section.props[key] !== undefined) {
-        return section.props[key];
+      if (section && section.props) {
+        const val = getNestedValue(section.props, key);
+        if (val !== undefined) return val;
       }
     }
     // Then global contentData
-    if (contentData[key] !== undefined) {
-      return contentData[key];
-    }
-    return undefined;
+    return getNestedValue(contentData, key);
   };
 
   const localizedValue = getValue(effectiveFieldKey);
@@ -114,7 +113,7 @@ export const EditableElement = ({
 
       // Call standard requestImageChange
       if (typeof requestImageChange === 'function') {
-        requestImageChange(fieldKey);
+        requestImageChange(fieldKey, effectiveSectionId);
       }
       
       // Dispatch to parent & top as backup
@@ -145,7 +144,37 @@ export const EditableElement = ({
     }
   }, [currentContent, type]);
 
-  // Reset requesting if content changed
+  // Reset requesting when image is selected via message
+  useEffect(() => {
+    if (!requesting || type !== 'image') return;
+
+    const handleMessage = (event: MessageEvent) => {
+      const data = event.data?.data || event.data || {};
+      const { type: msgType } = event.data || {};
+      const { fieldKey: respKey, sectionId: respId, id: respIdAlt, section_id: respSid, sections } = data;
+      const effectiveRespId = respId || respIdAlt || respSid;
+      
+      // Stop requesting on image selection confirmation OR on general data updates
+      const isImageSelected = msgType === 'VISUAL_EDIT_IMAGE_SELECTED' && respKey === fieldKey;
+      const isDataUpdate = msgType === 'VISUAL_EDIT_UPDATE_DATA' || msgType === 'VISUAL_EDIT_UPDATE_SECTION_PROPS';
+      
+      if (isImageSelected || isDataUpdate) {
+        // If it's a specific image selection, match ID and key
+        if (isImageSelected && (!effectiveRespId || effectiveRespId === effectiveSectionId)) {
+          setRequesting(false);
+        } 
+        // If it's a general data update, if it targets our section or is a global update (sections array present)
+        else if (isDataUpdate && (effectiveRespId === effectiveSectionId || !!sections)) {
+          setRequesting(false);
+        }
+      }
+    };
+
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
+  }, [requesting, fieldKey, effectiveSectionId, type]);
+
+  // Reset requesting if content changed (as a fallback)
   useEffect(() => {
     if (type === 'image' && currentContent !== defaultContent) {
       setRequesting(false);

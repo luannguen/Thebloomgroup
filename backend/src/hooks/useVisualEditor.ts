@@ -140,11 +140,13 @@ export function useVisualEditor(iframeRef: React.RefObject<HTMLIFrameElement>) {
     const [imagePicker, setImagePicker] = useState<{ 
         isOpen: boolean; 
         fieldId: string | null; 
+        parentPath?: string | null;
         sectionId: string | null;
         isForMetadata?: boolean;
     }>({
         isOpen: false,
         fieldId: null,
+        parentPath: null,
         sectionId: null
     });
 
@@ -251,6 +253,25 @@ export function useVisualEditor(iframeRef: React.RefObject<HTMLIFrameElement>) {
         setHasPendingChanges(true);
     };
 
+    // Helper to set nested value in an object
+    const setDeepValue = (obj: any, path: string, value: any) => {
+        const keys = path.split('.');
+        let current = obj;
+        for (let i = 0; i < keys.length - 1; i++) {
+            const key = keys[i];
+            const nextKey = keys[i + 1];
+            
+            // If the next key is a number, the current level should be an array
+            const isNextKeyIndex = !isNaN(Number(nextKey));
+            
+            if (!current[key]) {
+                current[key] = isNextKeyIndex ? [] : {};
+            }
+            current = current[key];
+        }
+        current[keys[keys.length - 1]] = value;
+    };
+
     const handleImageSelect = (url: string) => {
         if (imagePicker.isForMetadata) {
             setPageMetadata(prev => ({ ...prev, image_url: url }));
@@ -258,10 +279,13 @@ export function useVisualEditor(iframeRef: React.RefObject<HTMLIFrameElement>) {
         } else if (imagePicker.sectionId && imagePicker.fieldId) {
             const section = sections.find(s => s.id === imagePicker.sectionId);
             if (section) {
-                const newProps = { 
-                    ...(section.props || {}), 
-                    [imagePicker.fieldId]: url 
-                };
+                // Deep clone to avoid direct mutation
+                const newProps = JSON.parse(JSON.stringify(section.props || {}));
+                
+                // Use the new helper to handle nested paths like "milestones.0.logo"
+                setDeepValue(newProps, imagePicker.fieldId, url);
+                
+                console.log(`[VisualEditor Parent] Updating section ${imagePicker.sectionId} field ${imagePicker.fieldId} to:`, url);
                 updateSection(imagePicker.sectionId, { props: newProps });
             }
         } else if (!imagePicker.sectionId && imagePicker.fieldId) {

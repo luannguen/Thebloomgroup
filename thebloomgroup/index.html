@@ -2,7 +2,43 @@
 <html lang="vi">
   <head>
     <meta charset="UTF-8" />
+    
+    <!-- Nuclear Cleanup Script: Run as early as possible to fix network ERR_FAILED -->
+    <script>
+      (function() {
+        // 1. Force unregister all Service Workers
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.getRegistrations().then(function(registrations) {
+            for(let registration of registrations) {
+              registration.unregister().then(function() {
+                console.log('Service Worker unregistered successfully.');
+                // Refresh if a critical asset was failing
+                if (window.location.hash === '#sw-fixed') return;
+                // window.location.hash = 'sw-fixed';
+                // window.location.reload(); 
+              });
+            }
+          });
+          
+          // 2. Prevent any future registrations in this session
+          const originalRegister = navigator.serviceWorker.register;
+          navigator.serviceWorker.register = function(url, options) {
+            console.warn('Blocked Service Worker registration for:', url);
+            return Promise.reject(new Error('Service Workers are disabled in this environment to prevent network errors.'));
+          };
+        }
+
+        // 3. Clear all browser caches
+        if ('caches' in window) {
+          caches.keys().then(function(names) {
+            for (let name of names) caches.delete(name);
+          });
+        }
+      })();
+    </script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="mobile-web-app-capable" content="yes">
     <title>Thuong Thien Technologies (TTT) - Solar Turbines Partner</title>
     <meta name="description" content="Việt Vinh Corp - Giải pháp điện lạnh toàn diện cho mọi công trình. Uy tín, Chất lượng, Hiệu quả." />
     <meta name="author" content="Việt Vinh Corp - Tổng công ty kỹ thuật điện lạnh Việt Nam" />
@@ -92,7 +128,11 @@
     <!-- Error handler to display JavaScript errors -->
     <script>
       window.addEventListener('error', function(event) {
-        console.error('Error:', event.error);
+        // Suppress known external noise
+        if (event.message && (event.message.includes('fontawesome') || event.message.includes('tailwindcss'))) {
+          return true;
+        }
+
         if (!document.getElementById('js-error-display')) {
           const errorDiv = document.createElement('div');
           errorDiv.id = 'js-error-display';
@@ -137,7 +177,6 @@
     </script>
     
     <!-- External module script -->
-    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     
     <!-- Main application script with error handling -->
     <script type="module">

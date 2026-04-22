@@ -47,6 +47,12 @@ const SEOHelmet: React.FC<SEOHelmetProps> = ({ title, description, keywords, ima
                 tempDiv.innerHTML = settings['header_scripts'];
                 const scripts = tempDiv.getElementsByTagName('script');
                 Array.from(scripts).forEach(s => {
+                    // Block problematic script injections (Tailwind CDN, CORS-blocked FontAwesome)
+                    if (s.src && (s.src.includes('tailwindcss.com') || s.src.includes('kit.fontawesome.com'))) {
+                        console.warn('Blocked external script injection:', s.src);
+                        return;
+                    }
+                    
                     const scriptNode = document.createElement('script');
                     scriptNode.id = 'injected-header-scripts';
                     if (s.src) scriptNode.src = s.src;
@@ -66,6 +72,12 @@ const SEOHelmet: React.FC<SEOHelmetProps> = ({ title, description, keywords, ima
                 tempDiv.innerHTML = settings['footer_scripts'];
                 const scripts = tempDiv.getElementsByTagName('script');
                 Array.from(scripts).forEach(s => {
+                    // Block problematic script injections (Tailwind CDN, CORS-blocked FontAwesome)
+                    if (s.src && (s.src.includes('tailwindcss.com') || s.src.includes('kit.fontawesome.com'))) {
+                        console.warn('Blocked external script injection:', s.src);
+                        return;
+                    }
+                    
                     const scriptNode = document.createElement('script');
                     scriptNode.id = 'injected-footer-scripts';
                     if (s.src) scriptNode.src = s.src;
