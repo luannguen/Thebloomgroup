@@ -51,7 +51,7 @@ export const NewsEventsBlock = ({
   const otherNews = newsList.slice(1);
 
   const displayTitle = title || t('home_news_title', "Tin tức & Sự kiện");
-  const displaySubtitle = subtitle || t('home_news_subtitle', "Cập nhật những hoạt động mới nhất, công nghệ tiên tiến và thông tin ngành từ VietVinhCorp.");
+  const displaySubtitle = subtitle || t('home_news_subtitle', "Cập nhật những hoạt động mới nhất, công nghệ tiên tiến và thông tin ngành từ Thebloomgroup.");
 
   return (
     <section className="py-20 bg-white">
@@ -139,7 +139,7 @@ export const ProjectsBlock = ({
   }, []);
 
   const displayTitle = title || t('home_projects_title', "Dự Án Tiêu Biểu");
-  const displaySubtitle = subtitle || t('home_projects_subtitle', "Những công trình thực tế khẳng định năng lực thi công và chất lượng giải pháp từ VietVinhCorp.");
+  const displaySubtitle = subtitle || t('home_projects_subtitle', "Những công trình thực tế khẳng định năng lực thi công và chất lượng giải pháp từ Thebloomgroup.");
 
   return (
     <section className="py-20 bg-slate-50">
@@ -233,7 +233,7 @@ export const ProductsBlock = ({
           <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="max-w-xl">
               <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white">{t('bulk_quote_request', 'Bạn cần báo giá thiết bị số lượng lớn?')}</h3>
-              <p className="text-white/70">{t('bulk_quote_request_desc', 'Liên hệ ngay với bộ phận dự án để nhận chính sách giá ưu đãi và hỗ trợ kỹ thuật chuyên sâu từ các chuyên gia của VVC.')}</p>
+              <p className="text-white/70">{t('bulk_quote_request_desc', 'Liên hệ ngay với bộ phận dự án để nhận chính sách giá ưu đãi và hỗ trợ kỹ thuật chuyên sâu từ các chuyên gia của Thebloomgroup.')}</p>
             </div>
             <Link to="/contact" className="px-8 py-4 bg-secondary text-white font-bold rounded-xl hover:scale-105 transition-transform shadow-xl shrink-0">
               {t('get_quote_now', 'Nhận báo giá ngay')}

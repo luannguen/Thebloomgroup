@@ -27,11 +27,11 @@ const EnergyEfficiency = () => {
       <div className="container mx-auto py-12 px-4">
         <div className="grid md:grid-cols-3 gap-8">
           <div className="md:col-span-2">
-            <h2 className="text-2xl md:text-3xl font-bold text-green-600 mb-6">Công nghệ tiết kiệm năng lượng VVC</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-green-600 mb-6">Công nghệ tiết kiệm năng lượng Thebloomgroup</h2>
             
             <div className="prose max-w-none">
               <p className="text-lg leading-relaxed mb-6">
-                Tại VVC, chúng tôi hiểu rằng hiệu quả năng lượng không chỉ giúp giảm chi phí vận hành mà còn góp phần bảo vệ 
+                Tại Thebloomgroup, chúng tôi hiểu rằng hiệu quả năng lượng không chỉ giúp giảm chi phí vận hành mà còn góp phần bảo vệ 
                 môi trường. Chúng tôi đã phát triển và triển khai nhiều công nghệ tiết kiệm năng lượng tiên tiến trong các 
                 sản phẩm điều hòa không khí và hệ thống lạnh.
               </p>
@@ -135,7 +135,7 @@ const EnergyEfficiency = () => {
                   <div>
                     <h4 className="font-medium">Đạt tiêu chuẩn công trình xanh</h4>
                     <p className="text-gray-600 mt-1">
-                      Hệ thống điều hòa tiết kiệm năng lượng của VVC giúp các công trình đạt được chứng nhận LEED, LOTUS, EDGE và các
+                      Hệ thống điều hòa tiết kiệm năng lượng của Thebloomgroup giúp các công trình đạt được chứng nhận LEED, LOTUS, EDGE và các
                       tiêu chuẩn công trình xanh quốc tế khác.
                     </p>
                   </div>
@@ -147,7 +147,7 @@ const EnergyEfficiency = () => {
                 <div className="mb-4">
                   <h4 className="font-medium">Tòa nhà văn phòng GreenTower</h4>
                   <p className="text-gray-600 mt-1">
-                    Sau khi lắp đặt hệ thống VRV/VRF tiết kiệm năng lượng của VVC, tòa nhà đã giảm 28% chi phí điện năng hàng năm,
+                    Sau khi lắp đặt hệ thống VRV/VRF tiết kiệm năng lượng của Thebloomgroup, tòa nhà đã giảm 28% chi phí điện năng hàng năm,
                     tương đương 150 triệu đồng tiết kiệm mỗi tháng.
                   </p>
                 </div>
@@ -162,7 +162,7 @@ const EnergyEfficiency = () => {
               
               <h3 className="text-xl font-semibold text-green-600 mb-4">Tương lai của công nghệ tiết kiệm năng lượng</h3>
               <p className="mb-4">
-                VVC không ngừng nghiên cứu và phát triển các công nghệ tiết kiệm năng lượng mới. Trong tương lai gần, chúng tôi
+                Thebloomgroup không ngừng nghiên cứu và phát triển các công nghệ tiết kiệm năng lượng mới. Trong tương lai gần, chúng tôi
                 sẽ giới thiệu:
               </p>
               

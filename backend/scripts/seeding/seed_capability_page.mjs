@@ -2,31 +2,31 @@ import pg from 'pg';
 import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
-
+ 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 dotenv.config({ path: path.join(__dirname, './.env') });
-
+ 
 const { Pool } = pg;
 const pool = new Pool({ 
   connectionString: process.env.DATABASE_URL, 
   ssl: { rejectUnauthorized: false } 
 });
-
+ 
 async function seedCapabilityPage() {
   const client = await pool.connect();
   try {
     console.log('--- Seeding Hồ sơ năng lực Page via PostgreSQL ---');
-
+ 
     const content = {
       sections: [
         {
           id: 'cap-prof-hero',
           type: 'capability_profile',
           props: {
-            title: 'Hồ sơ năng lực Viet Vinh Corp',
-            description: 'Khám phá năng lực thiết kế, thi công và vận hành hệ thống điện lạnh hàng đầu của VVC. Cam kết chất lượng, tiến độ và giải pháp tối ưu bảo vệ môi trường.',
+            title: 'Hồ sơ năng lực Thebloomgroup',
+            description: 'Khám phá năng lực thiết kế, thi công và vận hành hệ thống điện lạnh hàng đầu của Thebloomgroup. Cam kết chất lượng, tiến độ và giải pháp tối ưu bảo vệ môi trường.',
             previewImage: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80',
-            pdfUrl: 'https://rfzuevsyegqbdlttmloa.supabase.co/storage/v1/object/public/documents/VVC_Capability_Profile_2024.pdf',
+            pdfUrl: 'https://rfzuevsyegqbdlttmloa.supabase.co/storage/v1/object/public/documents/Capability_Profile.pdf',
             downloadText: 'Tải xuống Hồ sơ năng lực (PDF)'
           }
         },
@@ -37,7 +37,7 @@ async function seedCapabilityPage() {
         }
       ]
     };
-
+ 
     // 1. Upsert Static Page
     const queryPage = `
       INSERT INTO static_pages (slug, title, content, excerpt)
@@ -52,10 +52,10 @@ async function seedCapabilityPage() {
       'ho-so-nang-luc',
       'Hồ sơ năng lực',
       JSON.stringify(content),
-      'Tài liệu chi tiết về năng lực và kinh nghiệm triển khai dự án điện lạnh của Viet Vinh Corp.'
+      'Tài liệu chi tiết về năng lực và kinh nghiệm triển khai dự án điện lạnh của Thebloomgroup.'
     ]);
     console.log('✅ Successfully upserted "ho-so-nang-luc" static page');
-
+ 
     // 2. Update Navigation Link
     // We target navigation items with label similar to "Hồ sơ năng lực"
     const queryNav = `
@@ -66,7 +66,7 @@ async function seedCapabilityPage() {
     
     const navResult = await client.query(queryNav);
     console.log(`✅ Successfully updated ${navResult.rowCount} navigation link(s) for "Hồ sơ năng lực"`);
-
+ 
   } catch (err) {
     console.error('❌ Error seeding capability page:', err.message);
   } finally {
@@ -74,5 +74,5 @@ async function seedCapabilityPage() {
     pool.end();
   }
 }
-
+ 
 seedCapabilityPage();

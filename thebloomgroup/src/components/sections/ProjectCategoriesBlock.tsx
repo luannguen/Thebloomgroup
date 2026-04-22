@@ -35,7 +35,7 @@ export const ProjectCategoriesBlock = ({
   };
 
   const displayTitle = title || t('project_cat_title', "Lĩnh vực hoạt động");
-  const displaySubtitle = subtitle || t('project_cat_desc_list', 'Việt Vinh Corporation tự hào thực hiện các dự án đa dạng với quy mô khác nhau, từ hệ thống điều hòa không khí trung tâm đến các hệ thống làm lạnh công nghiệp phức tạp.');
+  const displaySubtitle = subtitle || t('project_cat_desc_list', 'Thebloomgrouporation tự hào thực hiện các dự án đa dạng với quy mô khác nhau, từ hệ thống điều hòa không khí trung tâm đến các hệ thống làm lạnh công nghiệp phức tạp.');
 
   return (
     <section className="py-20 bg-slate-50">

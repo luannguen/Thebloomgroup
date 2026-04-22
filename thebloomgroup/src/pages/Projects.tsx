@@ -85,7 +85,7 @@ const Projects = () => {
             <div>
               <h2 className="mb-6">{t('capability_experience', 'Năng lực và kinh nghiệm')}</h2>
               <p className="text-muted-foreground mb-6">
-                {t('projects_overview_desc', 'Với hơn 20 năm kinh nghiệm, Việt Vinh Corporation đã thực hiện hàng trăm dự án lớn nhỏ trong lĩnh vực điện lạnh công nghiệp và dân dụng. Chúng tôi tự hào là đối tác tin cậy của nhiều tập đoàn lớn và các đơn vị hàng đầu trong các ngành công nghiệp.')}
+                {t('projects_overview_desc', 'Với hơn 20 năm kinh nghiệm, Thebloomgrouporation đã thực hiện hàng trăm dự án lớn nhỏ trong lĩnh vực điện lạnh công nghiệp và dân dụng. Chúng tôi tự hào là đối tác tin cậy của nhiều tập đoàn lớn và các đơn vị hàng đầu trong các ngành công nghiệp.')}
               </p>
               <ul className="space-y-3">
                 <li className="flex items-start">
@@ -127,7 +127,7 @@ const Projects = () => {
           <div className="text-center mb-10">
             <h2 className="mb-4">{t('project_cat_title')}</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              {t('project_cat_desc_list', 'Việt Vinh Corporation tự hào thực hiện các dự án đa dạng với quy mô khác nhau, từ hệ thống điều hòa không khí trung tâm cho tòa nhà thương mại đến các hệ thống làm lạnh công nghiệp phức tạp.')}
+              {t('project_cat_desc_list', 'Thebloomgrouporation tự hào thực hiện các dự án đa dạng với quy mô khác nhau, từ hệ thống điều hòa không khí trung tâm cho tòa nhà thương mại đến các hệ thống làm lạnh công nghiệp phức tạp.')}
             </p>
           </div>
 
@@ -240,7 +240,7 @@ const Projects = () => {
             <h2 className="mb-6">Bạn có dự án cần tư vấn?</h2>
             <p className="text-muted-foreground mb-8">
               Hãy liên hệ với đội ngũ kỹ sư của chúng tôi để được tư vấn giải pháp tối ưu cho dự án của bạn.
-              Việt Vinh Corporation cam kết mang đến các giải pháp điện lạnh hiện đại, hiệu quả và tiết kiệm chi phí.
+              Thebloomgrouporation cam kết mang đến các giải pháp điện lạnh hiện đại, hiệu quả và tiết kiệm chi phí.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Link to="/contact" className="btn-primary">

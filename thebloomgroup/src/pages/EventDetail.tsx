@@ -137,7 +137,7 @@ const EventDetail = () => {
                                     <User className="w-5 h-5 text-primary mt-1 mr-3 flex-shrink-0" />
                                     <div>
                                         <span className="block font-medium text-gray-900">Đơn vị tổ chức</span>
-                                        <span className="text-muted-foreground">{event.organizer || "VVC"}</span>
+                                        <span className="text-muted-foreground">{event.organizer || "Thebloomgroup"}</span>
                                     </div>
                                 </div>
                                 <div className="flex items-start">

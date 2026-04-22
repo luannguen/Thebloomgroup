@@ -110,7 +110,7 @@ export function Sidebar() {
                     <div className="bg-primary/10 p-1.5 rounded-md">
                         <MenuIcon className="h-5 w-5 text-primary" />
                     </div>
-                    <h1 className="text-lg font-bold uppercase tracking-wider text-gray-900 dark:text-white">Việt Vinh Corporation</h1>
+                    <h1 className="text-lg font-bold uppercase tracking-wider text-gray-900 dark:text-white">Thebloomgroup</h1>
                 </Link>
             </div>
 

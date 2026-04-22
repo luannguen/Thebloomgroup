@@ -115,14 +115,14 @@ const CommercialProjects = () => {
                       với nhu cầu về một không gian sống tiện nghi, thoải mái và đẳng cấp.
                     </p>
                     <p>
-                      VVC được chọn là đơn vị cung cấp và lắp đặt toàn bộ hệ thống điều hòa không khí cho dự án, 
-                      bao gồm 500 bộ điều hòa dân dụng VVC Smart Inverter cho các căn hộ và hệ thống điều hòa trung tâm VRV/VRF 
+                      Thebloomgroup được chọn là đơn vị cung cấp và lắp đặt toàn bộ hệ thống điều hòa không khí cho dự án, 
+                      bao gồm 500 bộ điều hòa dân dụng Thebloomgroup Smart Inverter cho các căn hộ và hệ thống điều hòa trung tâm VRV/VRF 
                       cho các khu vực công cộng như sảnh, hành lang, khu tiện ích và văn phòng quản lý.
                     </p>
                     <p>
                       Dự án được triển khai trong thời gian 6 tháng, từ tháng 12/2022 đến tháng 06/2023, với tổng diện tích lắp đặt 
                       là 35.000 m². Việc triển khai hệ thống điều hòa được thực hiện song song với các hạng mục hoàn thiện 
-                      nội thất của dự án, đòi hỏi sự phối hợp chặt chẽ giữa VVC và các nhà thầu khác.
+                      nội thất của dự án, đòi hỏi sự phối hợp chặt chẽ giữa Thebloomgroup và các nhà thầu khác.
                     </p>
                   </div>
                 </TabsContent>
@@ -157,14 +157,14 @@ const CommercialProjects = () => {
                 
                 <TabsContent value="solution" className="mt-6">
                   <div className="space-y-4">
-                    <h3 className="text-lg font-medium mb-3">Giải pháp của VVC</h3>
+                    <h3 className="text-lg font-medium mb-3">Giải pháp của Thebloomgroup</h3>
                     <ul className="list-disc pl-5 space-y-2 mb-6">
                       <li>
-                        <strong>Điều hòa dân dụng VVC Smart Inverter:</strong> Lắp đặt 500 bộ điều hòa dân dụng tiết kiệm năng lượng 
+                        <strong>Điều hòa dân dụng Thebloomgroup Smart Inverter:</strong> Lắp đặt 500 bộ điều hòa dân dụng tiết kiệm năng lượng 
                         với thiết kế gọn nhẹ, vận hành êm ái chỉ từ 18dB, phù hợp với nhu cầu của các căn hộ cao cấp.
                       </li>
                       <li>
-                        <strong>Hệ thống VRV/VRF cho khu vực công cộng:</strong> Sử dụng hệ thống điều hòa trung tâm VRV/VRF VVC-Multi 
+                        <strong>Hệ thống VRV/VRF cho khu vực công cộng:</strong> Sử dụng hệ thống điều hòa trung tâm VRV/VRF Thebloomgroup-Multi 
                         cho các khu vực công cộng, đảm bảo hiệu suất cao và khả năng điều chỉnh linh hoạt theo tải.
                       </li>
                       <li>
@@ -207,9 +207,9 @@ const CommercialProjects = () => {
 
                     <div className="mt-8">
                       <p className="italic font-medium">
-                        "VVC đã cung cấp giải pháp điều hòa không khí hoàn hảo cho Star Heights, giúp chúng tôi nâng cao 
+                        "Thebloomgroup đã cung cấp giải pháp điều hòa không khí hoàn hảo cho Star Heights, giúp chúng tôi nâng cao 
                         trải nghiệm sống của cư dân và đạt được các mục tiêu về tiết kiệm năng lượng của dự án. 
-                        Chúng tôi đặc biệt ấn tượng với khả năng triển khai đúng tiến độ và chất lượng dịch vụ chuyên nghiệp của đội ngũ VVC."
+                        Chúng tôi đặc biệt ấn tượng với khả năng triển khai đúng tiến độ và chất lượng dịch vụ chuyên nghiệp của đội ngũ Thebloomgroup."
                       </p>
                       <p className="mt-2 font-medium">
                         — Nguyễn Văn A, Giám đốc Dự án, Star Heights Investment JSC
@@ -309,11 +309,11 @@ const CommercialProjects = () => {
                       <div className="flex items-center">
                         <img 
                           src="https://images.unsplash.com/photo-1499573550747-98de39d9ad77?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" 
-                          alt="Điều hòa dân dụng VVC Smart Inverter" 
+                          alt="Điều hòa dân dụng Thebloomgroup Smart Inverter" 
                           className="w-16 h-16 object-cover rounded mr-4"
                         />
                         <div>
-                          <h4 className="font-medium">VVC Smart Inverter</h4>
+                          <h4 className="font-medium">Thebloomgroup Smart Inverter</h4>
                           <p className="text-sm text-muted-foreground">Điều hòa dân dụng</p>
                           <Link to="/products/residential" className="text-primary hover:underline text-sm">
                             Xem sản phẩm
@@ -328,11 +328,11 @@ const CommercialProjects = () => {
                       <div className="flex items-center">
                         <img 
                           src="https://images.unsplash.com/photo-1527149074866-a9733dcc96e2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" 
-                          alt="Hệ thống VRV/VRF VVC-Multi" 
+                          alt="Hệ thống VRV/VRF Thebloomgroup-Multi" 
                           className="w-16 h-16 object-cover rounded mr-4"
                         />
                         <div>
-                          <h4 className="font-medium">VVC-Multi VRV/VRF</h4>
+                          <h4 className="font-medium">Thebloomgroup-Multi VRV/VRF</h4>
                           <p className="text-sm text-muted-foreground">Hệ thống điều hòa trung tâm</p>
                           <Link to="/products/commercial" className="text-primary hover:underline text-sm">
                             Xem sản phẩm
@@ -351,7 +351,7 @@ const CommercialProjects = () => {
             <div className="text-center max-w-3xl mx-auto">
               <h2 className="text-2xl font-bold mb-4">Bạn có dự án tương tự?</h2>
               <p className="text-muted-foreground mb-6">
-                Đội ngũ chuyên gia của VVC sẵn sàng tư vấn giải pháp điều hòa không khí tối ưu cho dự án của bạn. 
+                Đội ngũ chuyên gia của Thebloomgroup sẵn sàng tư vấn giải pháp điều hòa không khí tối ưu cho dự án của bạn. 
                 Liên hệ ngay để nhận báo giá và tư vấn miễn phí!
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">

@@ -36,33 +36,33 @@ const ColdStorageProducts = () => {
         <div className="container mx-auto py-12 px-4">
           <div className="grid md:grid-cols-3 gap-8">
             <div className="md:col-span-2">
-              <h2 className="text-2xl md:text-3xl font-bold text-primary mb-6">Kho Lạnh Bảo Quản VVC-KL500</h2>
+              <h2 className="text-2xl md:text-3xl font-bold text-primary mb-6">Kho Lạnh Bảo Quản Thebloomgroup-KL500</h2>
               
               <div className="bg-gray-100 p-4 rounded-lg mb-8">
                 <img 
                   src="https://images.unsplash.com/photo-1534398079543-7ae6d016b86a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" 
-                  alt="Kho lạnh bảo quản VVC-KL500" 
+                  alt="Kho lạnh bảo quản Thebloomgroup-KL500" 
                   className="w-full h-auto rounded-lg mb-4"
                 />
                 <div className="grid grid-cols-4 gap-2">
                   <img 
                     src="https://images.unsplash.com/photo-1534398079543-7ae6d016b86a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" 
-                    alt="Kho lạnh bảo quản VVC-KL500 - 1" 
+                    alt="Kho lạnh bảo quản Thebloomgroup-KL500 - 1" 
                     className="w-full h-24 object-cover rounded cursor-pointer"
                   />
                   <img 
                     src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" 
-                    alt="Kho lạnh bảo quản VVC-KL500 - 2" 
+                    alt="Kho lạnh bảo quản Thebloomgroup-KL500 - 2" 
                     className="w-full h-24 object-cover rounded cursor-pointer"
                   />
                   <img 
                     src="https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" 
-                    alt="Kho lạnh bảo quản VVC-KL500 - 3" 
+                    alt="Kho lạnh bảo quản Thebloomgroup-KL500 - 3" 
                     className="w-full h-24 object-cover rounded cursor-pointer"
                   />
                   <img 
                     src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" 
-                    alt="Kho lạnh bảo quản VVC-KL500 - Lắp đặt" 
+                    alt="Kho lạnh bảo quản Thebloomgroup-KL500 - Lắp đặt" 
                     className="w-full h-24 object-cover rounded cursor-pointer"
                   />
                 </div>
@@ -78,17 +78,17 @@ const ColdStorageProducts = () => {
                 <TabsContent value="overview" className="mt-6">
                   <div className="space-y-4">
                     <p>
-                      Kho lạnh bảo quản VVC-KL500 là giải pháp kho lạnh công nghiệp hiệu suất cao, được thiết kế đặc biệt cho các doanh nghiệp 
+                      Kho lạnh bảo quản Thebloomgroup-KL500 là giải pháp kho lạnh công nghiệp hiệu suất cao, được thiết kế đặc biệt cho các doanh nghiệp 
                       trong ngành thực phẩm, dược phẩm và các ngành công nghiệp đòi hỏi bảo quản lạnh chuyên nghiệp. Với khả năng mở rộng linh hoạt 
                       từ 50 đến 500m², hệ thống có thể đáp ứng nhu cầu từ các doanh nghiệp vừa và nhỏ đến các nhà máy sản xuất quy mô lớn.
                     </p>
                     <p>
-                      Được chế tạo với panel cách nhiệt PU 100mm chất lượng cao, kho lạnh VVC-KL500 đảm bảo khả năng cách nhiệt tối ưu, 
+                      Được chế tạo với panel cách nhiệt PU 100mm chất lượng cao, kho lạnh Thebloomgroup-KL500 đảm bảo khả năng cách nhiệt tối ưu, 
                       giúp duy trì nhiệt độ ổn định từ -30°C đến +20°C tùy theo yêu cầu bảo quản cụ thể. Hệ thống còn được tích hợp 
                       công nghệ điều khiển tự động tiên tiến, cho phép giám sát và điều chỉnh nhiệt độ từ xa, đảm bảo an toàn cho hàng hóa 24/7.
                     </p>
                     <p>
-                      VVC cung cấp giải pháp kho lạnh trọn gói, từ tư vấn thiết kế, cung cấp thiết bị, thi công lắp đặt đến bảo trì 
+                      Thebloomgroup cung cấp giải pháp kho lạnh trọn gói, từ tư vấn thiết kế, cung cấp thiết bị, thi công lắp đặt đến bảo trì 
                       và hỗ trợ kỹ thuật lâu dài, đảm bảo hệ thống kho lạnh của bạn luôn vận hành ổn định và hiệu quả suốt vòng đời sản phẩm.
                     </p>
 
@@ -128,7 +128,7 @@ const ColdStorageProducts = () => {
 
                     <div className="mt-8">
                       <h3 className="text-xl font-semibold mb-4">Ứng dụng</h3>
-                      <p>Kho lạnh bảo quản VVC-KL500 phù hợp với nhiều ngành công nghiệp như:</p>
+                      <p>Kho lạnh bảo quản Thebloomgroup-KL500 phù hợp với nhiều ngành công nghiệp như:</p>
                       <ul className="list-disc pl-5 mt-2 space-y-1">
                         <li>Chế biến và bảo quản thực phẩm tươi sống</li>
                         <li>Bảo quản thực phẩm đông lạnh và kem</li>
@@ -199,7 +199,7 @@ const ColdStorageProducts = () => {
                     <div className="grid gap-4">
                       <div className="p-4 border rounded-lg flex justify-between items-center">
                         <div>
-                          <h4 className="font-medium">Hướng dẫn vận hành kho lạnh VVC-KL500</h4>
+                          <h4 className="font-medium">Hướng dẫn vận hành kho lạnh Thebloomgroup-KL500</h4>
                           <p className="text-sm text-muted-foreground">PDF - 3.5MB</p>
                         </div>
                         <Button variant="outline">Tải xuống</Button>
@@ -207,7 +207,7 @@ const ColdStorageProducts = () => {
                       
                       <div className="p-4 border rounded-lg flex justify-between items-center">
                         <div>
-                          <h4 className="font-medium">Hướng dẫn lắp đặt kho lạnh VVC-KL500</h4>
+                          <h4 className="font-medium">Hướng dẫn lắp đặt kho lạnh Thebloomgroup-KL500</h4>
                           <p className="text-sm text-muted-foreground">PDF - 4.2MB</p>
                         </div>
                         <Button variant="outline">Tải xuống</Button>
@@ -215,7 +215,7 @@ const ColdStorageProducts = () => {
                       
                       <div className="p-4 border rounded-lg flex justify-between items-center">
                         <div>
-                          <h4 className="font-medium">Catalog kho lạnh VVC-KL500</h4>
+                          <h4 className="font-medium">Catalog kho lạnh Thebloomgroup-KL500</h4>
                           <p className="text-sm text-muted-foreground">PDF - 2.8MB</p>
                         </div>
                         <Button variant="outline">Tải xuống</Button>
@@ -243,12 +243,12 @@ const ColdStorageProducts = () => {
                   
                   <div className="mt-6 space-y-6">
                     <div className="bg-muted p-4 rounded-lg">
-                      <h4 className="font-medium mb-2">VVC-KL500</h4>
+                      <h4 className="font-medium mb-2">Thebloomgroup-KL500</h4>
                       <p className="text-xl font-semibold text-primary">Liên hệ để nhận giá</p>
                     </div>
                     
                     <Button className="w-full" asChild>
-                      <Link to="/contact?product=VVC-kl500">
+                      <Link to="/contact?product=Thebloomgroup-kl500">
                         Yêu cầu báo giá ngay
                       </Link>
                     </Button>
@@ -270,12 +270,12 @@ const ColdStorageProducts = () => {
                     <div className="w-1/3 bg-gray-200">
                       <img 
                         src="https://images.unsplash.com/photo-1562769203-2d3ee3970449?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" 
-                        alt="Máy làm lạnh nước công nghiệp VVC-Chiller" 
+                        alt="Máy làm lạnh nước công nghiệp Thebloomgroup-Chiller" 
                         className="w-full h-full object-cover"
                       />
                     </div>
                     <div className="p-4 w-2/3">
-                      <h4 className="font-medium mb-1">Máy làm lạnh nước VVC-Chiller</h4>
+                      <h4 className="font-medium mb-1">Máy làm lạnh nước Thebloomgroup-Chiller</h4>
                       <p className="text-sm text-muted-foreground mb-2">Chiller công nghiệp</p>
                       <Link to="/products/chiller" className="text-primary hover:underline text-sm">
                         Xem chi tiết
@@ -287,12 +287,12 @@ const ColdStorageProducts = () => {
                     <div className="w-1/3 bg-gray-200">
                       <img 
                         src="https://images.unsplash.com/photo-1615252302352-667966ed2e18?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" 
-                        alt="Điều hòa công nghiệp VVC-5000" 
+                        alt="Điều hòa công nghiệp Thebloomgroup-5000" 
                         className="w-full h-full object-cover"
                       />
                     </div>
                     <div className="p-4 w-2/3">
-                      <h4 className="font-medium mb-1">Điều hòa công nghiệp VVC-5000</h4>
+                      <h4 className="font-medium mb-1">Điều hòa công nghiệp Thebloomgroup-5000</h4>
                       <p className="text-sm text-muted-foreground mb-2">Điều hòa công nghiệp</p>
                       <Link to="/products/industrial" className="text-primary hover:underline text-sm">
                         Xem chi tiết
@@ -304,12 +304,12 @@ const ColdStorageProducts = () => {
                     <div className="w-1/3 bg-gray-200">
                       <img 
                         src="https://images.unsplash.com/photo-1582891420766-5d7fb480ada3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" 
-                        alt="Hệ thống thông gió VVC-Ventilation" 
+                        alt="Hệ thống thông gió Thebloomgroup-Ventilation" 
                         className="w-full h-full object-cover"
                       />
                     </div>
                     <div className="p-4 w-2/3">
-                      <h4 className="font-medium mb-1">Hệ thống thông gió VVC-Ventilation</h4>
+                      <h4 className="font-medium mb-1">Hệ thống thông gió Thebloomgroup-Ventilation</h4>
                       <p className="text-sm text-muted-foreground mb-2">Hệ thống phụ trợ</p>
                       <Link to="/products/auxiliary" className="text-primary hover:underline text-sm">
                         Xem chi tiết

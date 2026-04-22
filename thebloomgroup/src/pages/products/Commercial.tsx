@@ -28,32 +28,32 @@ const CommercialProducts = () => {
       <div className="container mx-auto py-12 px-4">
         <div className="grid md:grid-cols-3 gap-8">
           <div className="md:col-span-2">
-            <h2 className="text-2xl md:text-3xl font-bold text-primary mb-6">Hệ Thống VRV/VRF VVC-Multi</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-primary mb-6">Hệ Thống VRV/VRF Thebloomgroup-Multi</h2>
               <div className="bg-gray-100 p-4 rounded-lg mb-8">
               <img 
                 src="https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" 
-                alt="Hệ thống VRV/VRF VVC-Multi" 
+                alt="Hệ thống VRV/VRF Thebloomgroup-Multi" 
                 className="w-full h-auto rounded-lg mb-4"
               />
               <div className="grid grid-cols-4 gap-2">
                 <img 
                   src="https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" 
-                  alt="Hệ thống VRV/VRF VVC-Multi - 1" 
+                  alt="Hệ thống VRV/VRF Thebloomgroup-Multi - 1" 
                   className="w-full h-24 object-cover rounded cursor-pointer"
                 />
                 <img 
                   src="https://images.pexels.com/photos/4481326/pexels-photo-4481326.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" 
-                  alt="Hệ thống VRV/VRF VVC-Multi - 2" 
+                  alt="Hệ thống VRV/VRF Thebloomgroup-Multi - 2" 
                   className="w-full h-24 object-cover rounded cursor-pointer"
                 />
                 <img 
                   src="https://images.pexels.com/photos/2647714/pexels-photo-2647714.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" 
-                  alt="Hệ thống VRV/VRF VVC-Multi - 3" 
+                  alt="Hệ thống VRV/VRF Thebloomgroup-Multi - 3" 
                   className="w-full h-24 object-cover rounded cursor-pointer"
                 />
                 <img 
                   src="https://images.pexels.com/photos/1662159/pexels-photo-1662159.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" 
-                  alt="Hệ thống VRV/VRF VVC-Multi - Lắp đặt" 
+                  alt="Hệ thống VRV/VRF Thebloomgroup-Multi - Lắp đặt" 
                   className="w-full h-24 object-cover rounded cursor-pointer"
                 />
               </div>
@@ -69,12 +69,12 @@ const CommercialProducts = () => {
               <TabsContent value="overview" className="mt-6">
                 <div className="space-y-4">
                   <p>
-                    Hệ thống VRV/VRF VVC-Multi là giải pháp điều hòa không khí hiện đại dành cho các tòa nhà thương mại, văn phòng và khách sạn. 
+                    Hệ thống VRV/VRF Thebloomgroup-Multi là giải pháp điều hòa không khí hiện đại dành cho các tòa nhà thương mại, văn phòng và khách sạn. 
                     Với khả năng kết nối và điều khiển độc lập nhiều dàn lạnh từ một dàn nóng, hệ thống cho phép tối ưu hóa việc sử dụng năng lượng và 
                     đáp ứng nhu cầu điều hòa không khí đa dạng trong các không gian khác nhau.
                   </p>
                   <p>
-                    Công nghệ VRV/VRF (Variable Refrigerant Volume/Flow) của VVC-Multi cho phép điều chỉnh lưu lượng gas làm lạnh đến từng dàn lạnh, 
+                    Công nghệ VRV/VRF (Variable Refrigerant Volume/Flow) của Thebloomgroup-Multi cho phép điều chỉnh lưu lượng gas làm lạnh đến từng dàn lạnh, 
                     tạo ra sự linh hoạt cao trong việc kiểm soát nhiệt độ và tiết kiệm năng lượng đáng kể so với các hệ thống điều hòa trung tâm thông thường.
                   </p>
                   <p>
@@ -117,7 +117,7 @@ const CommercialProducts = () => {
 
                   <div className="mt-8 p-6 bg-green-50 border border-green-200 rounded-lg">
                     <h3 className="text-xl font-semibold mb-3 text-green-700">Giải pháp tiết kiệm năng lượng</h3>
-                    <p className="mb-4">Công nghệ VRV/VRF VVC-Multi không chỉ mang lại hiệu quả làm mát vượt trội mà còn giúp doanh nghiệp tiết kiệm đáng kể chi phí vận hành và giảm thiểu tác động đến môi trường:</p>
+                    <p className="mb-4">Công nghệ VRV/VRF Thebloomgroup-Multi không chỉ mang lại hiệu quả làm mát vượt trội mà còn giúp doanh nghiệp tiết kiệm đáng kể chi phí vận hành và giảm thiểu tác động đến môi trường:</p>
                     
                     <ul className="space-y-3 mb-5">
                       <li className="flex items-start">
@@ -147,7 +147,7 @@ const CommercialProducts = () => {
 
                   <div className="mt-8">
                     <h3 className="text-xl font-semibold mb-4">Ứng dụng</h3>
-                    <p>Hệ thống VRV/VRF VVC-Multi phù hợp với nhiều loại không gian như:</p>
+                    <p>Hệ thống VRV/VRF Thebloomgroup-Multi phù hợp với nhiều loại không gian như:</p>
                     <ul className="list-disc pl-5 mt-2 space-y-1">
                       <li>Tòa nhà văn phòng và trung tâm thương mại</li>
                       <li>Khách sạn và khu nghỉ dưỡng</li>
@@ -218,7 +218,7 @@ const CommercialProducts = () => {
                   <div className="grid gap-4">
                     <div className="p-4 border rounded-lg flex justify-between items-center">
                       <div>
-                        <h4 className="font-medium">Hướng dẫn sử dụng VVC-Multi</h4>
+                        <h4 className="font-medium">Hướng dẫn sử dụng Thebloomgroup-Multi</h4>
                         <p className="text-sm text-muted-foreground">PDF - 3.2MB</p>
                       </div>
                       <Button variant="outline">Tải xuống</Button>
@@ -226,7 +226,7 @@ const CommercialProducts = () => {
                     
                     <div className="p-4 border rounded-lg flex justify-between items-center">
                       <div>
-                        <h4 className="font-medium">Hướng dẫn lắp đặt VVC-Multi</h4>
+                        <h4 className="font-medium">Hướng dẫn lắp đặt Thebloomgroup-Multi</h4>
                         <p className="text-sm text-muted-foreground">PDF - 5.1MB</p>
                       </div>
                       <Button variant="outline">Tải xuống</Button>
@@ -234,7 +234,7 @@ const CommercialProducts = () => {
                     
                     <div className="p-4 border rounded-lg flex justify-between items-center">
                       <div>
-                        <h4 className="font-medium">Catalog VVC-Multi</h4>
+                        <h4 className="font-medium">Catalog Thebloomgroup-Multi</h4>
                         <p className="text-sm text-muted-foreground">PDF - 2.4MB</p>
                       </div>
                       <Button variant="outline">Tải xuống</Button>
@@ -262,12 +262,12 @@ const CommercialProducts = () => {
                 
                 <div className="mt-6 space-y-6">
                   <div className="bg-muted p-4 rounded-lg">
-                    <h4 className="font-medium mb-2">VVC-Multi</h4>
+                    <h4 className="font-medium mb-2">Thebloomgroup-Multi</h4>
                     <p className="text-xl font-semibold text-primary">Liên hệ để nhận giá</p>
                   </div>
                   
                   <Button className="w-full" asChild>
-                    <Link to="/contact?product=VVC-multi">
+                    <Link to="/contact?product=Thebloomgroup-multi">
                       Yêu cầu báo giá ngay
                     </Link>
                   </Button>
@@ -288,12 +288,12 @@ const CommercialProducts = () => {
                   <div className="w-1/3 bg-gray-200">
                     <img 
                       src="https://images.pexels.com/photos/2599537/pexels-photo-2599537.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" 
-                      alt="Điều hòa công nghiệp VVC-5000" 
+                      alt="Điều hòa công nghiệp Thebloomgroup-5000" 
                       className="w-full h-full object-cover"
                     />
                   </div>
                   <div className="p-4 w-2/3">
-                    <h4 className="font-medium mb-1">Điều hòa công nghiệp VVC-5000</h4>
+                    <h4 className="font-medium mb-1">Điều hòa công nghiệp Thebloomgroup-5000</h4>
                     <p className="text-sm text-muted-foreground mb-2">Điều hòa công nghiệp</p>
                     <Link to="/products/industrial" className="text-primary hover:underline text-sm">
                       Xem chi tiết
@@ -305,12 +305,12 @@ const CommercialProducts = () => {
                   <div className="w-1/3 bg-gray-200">
                     <img 
                       src="https://images.pexels.com/photos/3690856/pexels-photo-3690856.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" 
-                      alt="Điều hòa dân dụng VVC Smart Inverter" 
+                      alt="Điều hòa dân dụng Thebloomgroup Smart Inverter" 
                       className="w-full h-full object-cover"
                     />
                   </div>
                   <div className="p-4 w-2/3">
-                    <h4 className="font-medium mb-1">Điều hòa dân dụng VVC Smart Inverter</h4>
+                    <h4 className="font-medium mb-1">Điều hòa dân dụng Thebloomgroup Smart Inverter</h4>
                     <p className="text-sm text-muted-foreground mb-2">Điều hòa văn phòng & gia đình</p>
                     <Link to="/products/residential" className="text-primary hover:underline text-sm">
                       Xem chi tiết
@@ -322,12 +322,12 @@ const CommercialProducts = () => {
                   <div className="w-1/3 bg-gray-200">
                     <img 
                       src="https://images.pexels.com/photos/236730/pexels-photo-236730.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" 
-                      alt="Máy làm lạnh nước công nghiệp VVC-Chiller" 
+                      alt="Máy làm lạnh nước công nghiệp Thebloomgroup-Chiller" 
                       className="w-full h-full object-cover"
                     />
                   </div>
                   <div className="p-4 w-2/3">
-                    <h4 className="font-medium mb-1">Máy làm lạnh nước VVC-Chiller</h4>
+                    <h4 className="font-medium mb-1">Máy làm lạnh nước Thebloomgroup-Chiller</h4>
                     <p className="text-sm text-muted-foreground mb-2">Chiller công nghiệp</p>
                     <Link to="/products/chiller" className="text-primary hover:underline text-sm">
                       Xem chi tiết

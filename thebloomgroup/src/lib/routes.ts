@@ -41,7 +41,7 @@ export const ROUTES = {
   // Main pages
   HOME: { path: '/', label: 'Trang chủ' },
   ABOUT: { path: '/about', label: 'Về chúng tôi' },
-  INTRO: { path: '/intro', label: 'Giới thiệu VVC' },
+  INTRO: { path: '/intro', label: 'Giới thiệu Thebloomgroup' },
   CONTACT: { path: '/contact', label: 'Liên hệ' },
 
   // Service pages

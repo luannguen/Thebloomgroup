@@ -36,7 +36,7 @@ const allPublications: PublicationProps[] = [
     type: "Hướng dẫn",
     imageUrl: "https://images.unsplash.com/photo-1548407260-da850faa41e3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80",
     link: "/publications/green-building-standards",
-    excerpt: "Hệ thống điều hòa tiết kiệm năng lượng của VVC giúp các công trình đạt được chứng nhận LEED, LOTUS, EDGE và các tiêu chuẩn công trình xanh quốc tế khác."
+    excerpt: "Hệ thống điều hòa tiết kiệm năng lượng của Thebloomgroup giúp các công trình đạt được chứng nhận LEED, LOTUS, EDGE và các tiêu chuẩn công trình xanh quốc tế khác."
   },
   {
     title: "Báo cáo hiệu quả tiết kiệm năng lượng: Phân tích chi phí-lợi ích các công nghệ mới",

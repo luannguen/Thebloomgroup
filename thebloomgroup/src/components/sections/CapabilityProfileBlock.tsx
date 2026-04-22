@@ -20,8 +20,8 @@ interface CapabilityProfileBlockProps {
 
 export const CapabilityProfileBlock = ({
   sectionId,
-  title = "Hồ sơ năng lực Viet Vinh Corp",
-  description = "Tài liệu chi tiết về năng lực thiết kế, thi công và vận hành các hệ thống điện lạnh công nghiệp tiêu chuẩn quốc tế của VietVinhCorp.",
+  title = "Hồ sơ năng lực Thebloomgroup",
+  description = "Tài liệu chi tiết về năng lực thiết kế, thi công và vận hành các hệ thống điện lạnh công nghiệp tiêu chuẩn quốc tế của Thebloomgroup.",
   previewImage = "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80",
   pdfUrl = "#",
   downloadText = "Tải xuống Hồ sơ năng lực (PDF)",
@@ -229,7 +229,7 @@ export const CapabilityProfileBlock = ({
                 defaultContent={previewImage}
                 className="aspect-[3/4] w-full h-full"
               >
-                <img src={previewImage} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Hồ sơ năng lực VVC" />
+                <img src={previewImage} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Hồ sơ năng lực Thebloomgroup" />
               </EditableElement>
               
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 pointer-events-none" />
@@ -239,7 +239,7 @@ export const CapabilityProfileBlock = ({
                   <Zap className="w-5 h-5 text-secondary" />
                   <span className="text-sm font-bold uppercase tracking-wider">Professional Profile</span>
                 </div>
-                <p className="text-sm opacity-90 font-medium">Viet Vinh Engineering & Refrigeration Corp</p>
+                <p className="text-sm opacity-90 font-medium">Thebloomgroup Engineering & Refrigeration Corp</p>
               </div>
             </div>
             

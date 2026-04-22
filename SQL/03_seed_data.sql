@@ -1,5 +1,5 @@
 -- 03_seed_data.sql
--- VVC Database Seed Data
+-- Thebloomgroup Database Seed Data
 -- Generated: 2025-12-13
 -- Contains: Roles, Permissions, Initial Content
 
@@ -78,16 +78,16 @@ ON CONFLICT (slug) DO NOTHING;
 
 -- 2.2 Site Settings
 INSERT INTO public.site_settings (key, value, description) VALUES
-('site_name', 'VVC', 'Tên ngắn của website'),
-('site_title', 'VVC - Tổng công ty kỹ thuật điện lạnh Việt Nam', 'Tiêu đề đầy đủ'),
+('site_name', 'Thebloomgroup', 'Tên ngắn của website'),
+('site_title', 'Thebloomgroup - Giải pháp kỹ thuật nhiệt lạnh công nghiệp', 'Tiêu đề đầy đủ'),
 ('site_description', 'Giải pháp điện lạnh toàn diện cho mọi công trình. Uy tín, Chất lượng, Hiệu quả.', 'Mô tả SEO'),
-('site_keywords', 'điện lạnh, vvc, hvac, construction, cơ điện lạnh, bảo trì', 'Từ khóa SEO'),
+('site_keywords', 'điện lạnh, thebloomgroup, hvac, construction, cơ điện lạnh, bảo trì', 'Từ khóa SEO'),
 ('og_image_url', '/lovable-uploads/0bd3c048-8e37-4775-a6bc-0b54ec07edbe.png', 'Ảnh chia sẻ MXH'),
-('contact_email', 'info@vvc.com.vn', 'Email liên hệ'),
+('contact_email', 'info@thebloomgroup.vn', 'Email liên hệ'),
 ('contact_phone', '028 3833 3333', 'Hotline'),
 ('contact_address', '123 Nguyễn Văn Linh, Quận 7, TP. Hồ Chí Minh', 'Địa chỉ'),
-('copyright_text', '© 2025 VVC - Tổng công ty kỹ thuật điện lạnh Việt Nam. Tất cả quyền được bảo lưu.', 'Text bản quyền'),
-('site_url', 'http://vietvinhcorp.com/', 'Tên miền website (Domain)')
+('copyright_text', '© 2025 Thebloomgroup. Tất cả quyền được bảo lưu.', 'Text bản quyền'),
+('site_url', 'https://thebloomgroup.vn/', 'Tên miền website (Domain)')
 ON CONFLICT (key) DO UPDATE SET value = EXCLUDED.value;
 
 -- 2.3 Achievements
@@ -102,19 +102,19 @@ ON CONFLICT DO NOTHING;
 INSERT INTO public.faqs (question, answer, sort_order, category) VALUES
 (
     'Làm thế nào để chọn công suất điều hòa phù hợp?',
-    'Để chọn công suất điều hòa phù hợp, bạn cần tính toán dựa trên diện tích phòng, số người sử dụng, hướng phòng, thiết bị sinh nhiệt trong phòng và vị trí địa lý. Thông thường, cần 9.000 BTU cho phòng 15m², 12.000 BTU cho phòng 20m², 18.000 BTU cho phòng 30m². Với không gian công nghiệp hoặc thương mại, VVC có đội ngũ kỹ sư sẽ tính toán chi tiết và đề xuất giải pháp tối ưu.',
+    'Để chọn công suất điều hòa phù hợp, bạn cần tính toán dựa trên diện tích phòng, số người sử dụng, hướng phòng, thiết bị sinh nhiệt trong phòng và vị trí địa lý. Thông thường, cần 9.000 BTU cho phòng 15m², 12.000 BTU cho phòng 20m², 18.000 BTU cho phòng 30m². Với không gian công nghiệp hoặc thương mại, Thebloomgroup có đội ngũ kỹ sư sẽ tính toán chi tiết và đề xuất giải pháp tối ưu.',
     1,
     'product'
 ),
 (
-    'Thời gian bảo hành cho các sản phẩm của VVC là bao lâu?',
-    'VVC cung cấp chế độ bảo hành 24 tháng cho tất cả các sản phẩm điều hòa dân dụng, 36 tháng đối với máy nén của hệ thống VRV/VRF, và 12 tháng đối với các thiết bị công nghiệp. Ngoài ra, chúng tôi có các gói bảo trì và gia hạn bảo hành để đảm bảo hệ thống của bạn luôn vận hành ổn định và hiệu quả trong suốt vòng đời sản phẩm.',
+    'Thời gian bảo hành cho các sản phẩm của Thebloomgroup là bao lâu?',
+    'Thebloomgroup cung cấp chế độ bảo hành 24 tháng cho tất cả các sản phẩm điều hòa dân dụng, 36 tháng đối với máy nén của hệ thống VRV/VRF, và 12 tháng đối với các thiết bị công nghiệp. Ngoài ra, chúng tôi có các gói bảo trì và gia hạn bảo hành để đảm bảo hệ thống của bạn luôn vận hành ổn định và hiệu quả trong suốt vòng đời sản phẩm.',
     2,
     'service'
 ),
 (
     'Chi phí lắp đặt hệ thống kho lạnh phụ thuộc vào yếu tố nào?',
-    'Chi phí lắp đặt kho lạnh phụ thuộc vào nhiều yếu tố như: diện tích kho, nhiệt độ yêu cầu, loại hàng hóa cần bảo quản, độ dày panel cách nhiệt, hệ thống điện, hệ thống giám sát, và các trang thiết bị đi kèm. VVC cung cấp giải pháp kho lạnh theo yêu cầu cụ thể của từng khách hàng với mức giá cạnh tranh nhất trên thị trường.',
+    'Chi phí lắp đặt kho lạnh phụ thuộc vào nhiều yếu tố như: diện tích kho, nhiệt độ yêu cầu, loại hàng hóa cần bảo quản, độ dày panel cách nhiệt, hệ thống điện, hệ thống giám sát, và các trang thiết bị đi kèm. Thebloomgroup cung cấp giải pháp kho lạnh theo yêu cầu cụ thể của từng khách hàng với mức giá cạnh tranh nhất trên thị trường.',
     3,
     'pricing'
 )
@@ -125,26 +125,26 @@ INSERT INTO static_pages (slug, title, content, excerpt) VALUES
 (
     'chinh-sach-bao-mat', 
     'Chính sách bảo mật', 
-    '<h1>Chính sách bảo mật</h1><p>VVC cam kết bảo mật thông tin cá nhân của khách hàng...</p><p>Nội dung đang cập nhật.</p>',
-    'Cam kết của VVC về bảo mật thông tin khách hàng.'
+    '<h1>Chính sách bảo mật</h1><p>Thebloomgroup cam kết bảo mật thông tin cá nhân của khách hàng...</p><p>Nội dung đang cập nhật.</p>',
+    'Cam kết của Thebloomgroup về bảo mật thông tin khách hàng.'
 ),
 (
     'dieu-khoan-su-dung', 
     'Điều khoản sử dụng', 
-    '<h1>Điều khoản sử dụng</h1><p>Chào mừng bạn đến với website VVC...</p>',
-    'Các quy định và điều khoản khi sử dụng dịch vụ của VVC.'
+    '<h1>Điều khoản sử dụng</h1><p>Chào mừng bạn đến với website Thebloomgroup...</p>',
+    'Các quy định và điều khoản khi sử dụng dịch vụ của Thebloomgroup.'
 ),
 (
     'chinh-sach-cookie', 
     'Chính sách Cookie', 
     '<h1>Chính sách Cookie</h1><p>Website này sử dụng cookie để nâng cao trải nghiệm...</p>',
-    'Thông tin về cách VVC sử dụng cookie trên website.'
+    'Thông tin về cách Thebloomgroup sử dụng cookie trên website.'
 ),
 (
     'about-us', 
     'Về chúng tôi', 
-    '<h1>Về VVC</h1><p>Tổng công ty kỹ thuật điện lạnh Việt Nam (VVC) là đơn vị hàng đầu...</p>',
-    'Giới thiệu tổng quan về lịch sử, sứ mệnh và tầm nhìn của VVC.'
+    '<h1>Về Thebloomgroup</h1><p>Thebloomgroup là đơn vị hàng đầu trong lĩnh vực kỹ thuật nhiệt lạnh...</p>',
+    'Giới thiệu tổng quan về lịch sử, sứ mệnh và tầm nhìn của Thebloomgroup.'
 ),
 (
     'intro', 
@@ -155,8 +155,8 @@ INSERT INTO static_pages (slug, title, content, excerpt) VALUES
 (
     'ho-so-nang-luc', 
     'Hồ sơ năng lực', 
-    '{"sections":[{"id":"cap-prof-hero","type":"capability_profile","props":{"title":"Hồ sơ năng lực Viet Vinh Corp","description":"Khám phá năng lực thiết kế, thi công và vận hành hệ thống điện lạnh hàng đầu của VVC. Cam kết chất lượng, tiến độ và giải pháp tối ưu bảo vệ môi trường.","previewImage":"https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80","pdfUrl":"https://rfzuevsyegqbdlttmloa.supabase.co/storage/v1/object/public/documents/VVC_Capability_Profile_2024.pdf","downloadText":"Tải xuống Hồ sơ năng lực (PDF)"}},{"id":"cap-prof-contact","type":"contact_form","props":{}}]}', 
-    'Tài liệu chi tiết về năng lực và kinh nghiệm triển khai dự án điện lạnh của Viet Vinh Corp.'
+    '{"sections":[{"id":"cap-prof-hero","type":"capability_profile","props":{"title":"Hồ sơ năng lực Thebloomgroup","description":"Khám phá năng lực thiết kế, thi công và vận hành hệ thống điện lạnh hàng đầu của Thebloomgroup. Cam kết chất lượng, tiến độ và giải pháp tối ưu bảo vệ môi trường.","previewImage":"https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80","pdfUrl":"https://rfzuevsyegqbdlttmloa.supabase.co/storage/v1/object/public/documents/Thebloomgroup_Capability_Profile_2024.pdf","downloadText":"Tải xuống Hồ sơ năng lực (PDF)"}},{"id":"cap-prof-contact","type":"contact_form","props":{}}]}', 
+    'Tài liệu chi tiết về năng lực và kinh nghiệm triển khai dự án điện lạnh của Thebloomgroup.'
 )
 ON CONFLICT (slug) DO UPDATE SET title = EXCLUDED.title, content = EXCLUDED.content, excerpt = EXCLUDED.excerpt;
 
@@ -182,9 +182,9 @@ BEGIN
     ('Liên hệ', '/contact', 'internal', 'header', 7, true);
 
     -- FOOTER NAVIGATION
-    -- Column 1: Về VVC
+    -- Column 1: Về Thebloomgroup
     INSERT INTO navigation (label, path, type, position, order_index, is_active)
-    VALUES ('Về VVC', '#', 'custom', 'footer', 1, true)
+    VALUES ('Về Thebloomgroup', '#', 'custom', 'footer', 1, true)
     RETURNING id INTO footer_col_1;
 
     INSERT INTO navigation (parent_id, label, path, type, position, order_index, is_active) VALUES
@@ -250,4 +250,3 @@ BEGIN
         SELECT id INTO tools_id FROM public.resources WHERE slug = 'tools';
     END IF;
 END $$;
-

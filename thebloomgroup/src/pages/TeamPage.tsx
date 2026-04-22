@@ -6,7 +6,7 @@ const DEFAULT_TEAM_SECTIONS = [
     id: 'team-hero',
     type: 'team_hero',
     props: { 
-      title: 'ĐỘI NGŨ CHUYÊN GIA VVC', 
+      title: 'ĐỘI NGŨ CHUYÊN GIA Thebloomgroup', 
       description: 'Hội tụ những tinh hoa trong ngành kỹ thuật lạnh, tâm huyết với từng giải pháp của khách hàng.' 
     }
   },

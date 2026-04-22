@@ -92,16 +92,16 @@ export const mockNewsItems: NewsItem[] = [
       
       <h3>Đăng ký tham dự</h3>
       <p>Để đăng ký tham dự, vui lòng điền form đăng ký online tại website hoặc liên hệ:</p>
-      <p>Email: workshop@VVC.com.vn</p>
+      <p>Email: workshop@Thebloomgroup.com.vn</p>
       <p>Hotline: 098 765 4321</p>
     `,
         image: "/assets/images/projects-overview.jpg",
         publishDate: "2025-03-25",
-        author: "VVC",
+        author: "Thebloomgroup",
         category: "Hội thảo",
         tags: ["Tiết kiệm năng lượng", "Công nghệ mới", "Hệ thống lạnh"],
         location: "Khách sạn Melia, 44 Lý Thường Kiệt, Hà Nội",
-        organizer: "VVC",
+        organizer: "Thebloomgroup",
         comments: 8,
         views: 734,
         type: "event",
@@ -114,10 +114,10 @@ export const mockNewsItems: NewsItem[] = [
         content: "<p>Nội dung chi tiết đang được cập nhật...</p>",
         image: "/assets/images/service-overview.jpg",
         publishDate: "2025-03-20",
-        author: "VVC Academy",
+        author: "Thebloomgroup Academy",
         category: "Đào tạo",
         tags: ["Đào tạo kỹ thuật", "Bảo trì", "Hệ thống lạnh công nghiệp"],
-        location: "Trung tâm Đào tạo VVC, Biên Hòa, Đồng Nai",
+        location: "Trung tâm Đào tạo Thebloomgroup, Biên Hòa, Đồng Nai",
         comments: 3,
         views: 421,
         type: "news"
@@ -129,7 +129,7 @@ export const mockNewsItems: NewsItem[] = [
         content: "<p>Nội dung chi tiết đang được cập nhật...</p>",
         image: "/assets/images/projects-overview.jpg",
         publishDate: "2025-03-10",
-        author: "VVC",
+        author: "Thebloomgroup",
         category: "Ra mắt sản phẩm",
         tags: ["Inverter", "Điều hòa", "Tiết kiệm năng lượng"],
         location: "Trung tâm Hội nghị Quốc gia, Hà Nội",
@@ -140,8 +140,8 @@ export const mockNewsItems: NewsItem[] = [
     },
     {
         id: 5,
-        title: "VVC ký kết hợp tác với tập đoàn điện lạnh hàng đầu châu Âu",
-        summary: "VVC vừa ký kết thỏa thuận hợp tác chiến lược với tập đoàn điện lạnh hàng đầu châu Âu, mở rộng cơ hội phát triển thị trường và chuyển giao công nghệ...",
+        title: "Thebloomgroup ký kết hợp tác với tập đoàn điện lạnh hàng đầu châu Âu",
+        summary: "Thebloomgroup vừa ký kết thỏa thuận hợp tác chiến lược với tập đoàn điện lạnh hàng đầu châu Âu, mở rộng cơ hội phát triển thị trường và chuyển giao công nghệ...",
         content: "<p>Nội dung chi tiết đang được cập nhật...</p>",
         image: "/assets/images/service-overview.jpg",
         publishDate: "2025-03-15",
@@ -168,8 +168,8 @@ export const mockNewsItems: NewsItem[] = [
     },
     {
         id: 7,
-        title: "VVC nhận giải thưởng Doanh nghiệp Xanh 2025",
-        summary: "VVC vinh dự nhận giải thưởng Doanh nghiệp Xanh 2025 cho những đóng góp tích cực trong việc phát triển sản phẩm và giải pháp thân thiện với môi trường...",
+        title: "Thebloomgroup nhận giải thưởng Doanh nghiệp Xanh 2025",
+        summary: "Thebloomgroup vinh dự nhận giải thưởng Doanh nghiệp Xanh 2025 cho những đóng góp tích cực trong việc phát triển sản phẩm và giải pháp thân thiện với môi trường...",
         content: "<p>Nội dung chi tiết đang được cập nhật...</p>",
         image: "/assets/images/service-overview.jpg",
         publishDate: "2025-02-28",

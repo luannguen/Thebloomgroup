@@ -26,7 +26,7 @@ const Contact = () => {
     return settings[key] || defaultVal;
   };
 
-  const companyName = getSetting('company_name', 'Tổng công ty Kỹ thuật lạnh Việt Nam (VVC)');
+  const companyName = getSetting('company_name', 'Tổng công ty Kỹ thuật lạnh Việt Nam (Thebloomgroup)');
   const slogan = getSetting('company_slogan', 'Tiên phong trong lĩnh vực kỹ thuật lạnh tại Việt Nam');
   const rawAddress = getSetting('contact_address', '123 Nguyễn Văn Linh, Quận 7, TP. Hồ Chí Minh');
   
@@ -46,7 +46,7 @@ const Contact = () => {
 
   const address = getDisplayAddress(rawAddress);
   const phone = getSetting('contact_phone', '+84 (28) 1234 5678');
-  const email = getSetting('contact_email', 'info@VVCorp.vn');
+  const email = getSetting('contact_email', 'info@Thebloomgrouporp.vn');
   const hotline = getSetting('contact_hotline', '1800 1234');
   const workingHours = getSetting('contact_working_hours', '8:00 - 17:30, Thứ 2 - Thứ 6');
   // Helper to extract src from iframe fallback or raw URL

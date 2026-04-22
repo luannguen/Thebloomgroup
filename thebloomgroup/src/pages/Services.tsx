@@ -19,7 +19,7 @@ const DEFAULT_SERVICES_SECTIONS = [
     type: "media_section", 
     props: {
       title: "Dịch vụ toàn diện",
-      description: "<p>Với hơn 20 năm kinh nghiệm trong lĩnh vực điện lạnh công nghiệp và dân dụng, VVC đã trở thành đối tác tin cậy của hàng nghìn khách hàng trên cả nước. Chúng tôi tự hào cung cấp các dịch vụ kỹ thuật chất lượng cao với đội ngũ chuyên viên được đào tạo bài bản.</p>",
+      description: "<p>Với hơn 20 năm kinh nghiệm trong lĩnh vực điện lạnh công nghiệp và dân dụng, Thebloomgroup đã trở thành đối tác tin cậy của hàng nghìn khách hàng trên cả nước. Chúng tôi tự hào cung cấp các dịch vụ kỹ thuật chất lượng cao với đội ngũ chuyên viên được đào tạo bài bản.</p>",
       image: "/assets/images/service-overview.jpg",
       layout: "image-right",
       imageWidth: 50
@@ -38,7 +38,7 @@ const DEFAULT_SERVICES_SECTIONS = [
     type: "cta_section", 
     props: {
         title: "Bắt đầu với dịch vụ của chúng tôi",
-        description: "Hãy liên hệ với chúng tôi ngay hôm nay để được tư vấn và báo giá các dịch vụ điện lạnh phù hợp với nhu cầu của bạn. Đội ngũ kỹ thuật của VVC luôn sẵn sàng hỗ trợ.",
+        description: "Hãy liên hệ với chúng tôi ngay hôm nay để được tư vấn và báo giá các dịch vụ điện lạnh phù hợp với nhu cầu của bạn. Đội ngũ kỹ thuật của Thebloomgroup luôn sẵn sàng hỗ trợ.",
         badge: "Tư vấn miễn phí"
     } 
   }

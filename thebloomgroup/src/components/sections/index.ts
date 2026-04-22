@@ -235,7 +235,7 @@ export const registerAllBlocks = () => {
     type: 'about_hero',
     name: 'About: Hero',
     component: AboutHeroBlock,
-    defaultProps: { title: 'Giới thiệu', description: 'Tổng công ty Kỹ thuật lạnh Việt Nam (VVC)...' },
+    defaultProps: { title: 'Giới thiệu', description: 'Tổng công ty Kỹ thuật lạnh Việt Nam (Thebloomgroup)...' },
     fields: [
       { id: 'title', label: 'Tiêu đề', type: 'text' },
       { id: 'description', label: 'Mô tả', type: 'textarea' },
@@ -318,7 +318,7 @@ export const registerAllBlocks = () => {
     component: ProductionFacilitiesBlock,
     defaultProps: { 
       title: 'Cơ sở hạ tầng & Trung tâm sản xuất',
-      description: 'VVC đầu tư mạnh mẽ vào hệ thống nhà xưởng hiện đại...' 
+      description: 'Thebloomgroup đầu tư mạnh mẽ vào hệ thống nhà xưởng hiện đại...' 
     },
     fields: [
       { id: 'title', label: 'Tiêu đề', type: 'text' },
@@ -332,7 +332,7 @@ export const registerAllBlocks = () => {
     type: 'about_quality',
     name: 'About: Nguyên tắc chất lượng',
     component: QualityPrinciplesBlock,
-    defaultProps: { title: 'Nguyên tắc chất lượng của VVC' },
+    defaultProps: { title: 'Nguyên tắc chất lượng của Thebloomgroup' },
     fields: [{ id: 'title', label: 'Tiêu đề', type: 'text' }]
   });
 
@@ -374,7 +374,7 @@ export const registerAllBlocks = () => {
     component: RefrigerationBlock,
     defaultProps: {
       title: 'Hệ Thống Lạnh Công Nghiệp',
-      description: 'VVC cung cấp các giải pháp làm lạnh chuyên sâu...',
+      description: 'Thebloomgroup cung cấp các giải pháp làm lạnh chuyên sâu...',
     },
     fields: [
       { id: 'title', label: 'Tiêu đề', type: 'text' },
@@ -501,7 +501,7 @@ export const registerAllBlocks = () => {
     component: NewsEventsBlock,
     defaultProps: {
       title: 'Tin tức & Sự kiện',
-      subtitle: 'Cập nhật những hoạt động mới nhất từ VietVinhCorp.'
+      subtitle: 'Gia nhập đội ngũ Thebloomgroup để cùng xây dựng những giá trị bền vững.'
     },
     fields: [
       { id: 'title', label: 'Tiêu đề', type: 'text' },
@@ -552,8 +552,8 @@ export const registerAllBlocks = () => {
     name: 'Hồ sơ năng lực',
     component: CapabilityProfileBlock,
     defaultProps: {
-      title: 'Hồ sơ năng lực Viet Vinh Corp',
-      description: 'Tài liệu chi tiết về năng lực thiết kế, thi công và vận hành các hệ thống điện lạnh công nghiệp tiêu chuẩn quốc tế của VVC.',
+      title: 'Hồ sơ năng lực Thebloomgroup',
+      description: 'Tài liệu chi tiết về năng lực và kinh nghiệm triển khai dự án điện lạnh của Thebloomgroup.',
       previewImage: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80',
       pdfUrl: '#',
       downloadText: 'Tải xuống Hồ sơ năng lực (PDF)',
@@ -740,7 +740,7 @@ export const registerAllBlocks = () => {
     component: ProjectOverviewBlock,
     defaultProps: {
       title: 'Năng lực & Kinh nghiệm',
-      description: 'Mô tả về năng lực thi công dự án của VVC.'
+      description: 'Mô tả về năng lực thi công dự án của Thebloomgroup.'
     },
     fields: [
       { id: 'title', label: 'Tiêu đề', type: 'text' },

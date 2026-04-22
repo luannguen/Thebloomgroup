@@ -23,7 +23,7 @@ export const AboutHeroBlock = ({
 }: AboutHeroBlockProps) => {
   const { t } = useTranslation();
   const defaultTitle = t('about_hero_title', "Giới thiệu");
-  const defaultDescription = t('about_hero_desc', "Tổng công ty Kỹ thuật lạnh Việt Nam (VVC) - Đơn vị tiên phong trong giải pháp nhiệt lạnh công nghiệp.");
+  const defaultDescription = t('about_hero_desc', "Thebloomgroup - Đơn vị tiên phong trong giải pháp nhiệt lạnh công nghiệp.");
 
   return (
     <div className="bg-gradient-to-b from-primary/10 to-transparent py-12 md:py-20">
@@ -62,9 +62,9 @@ export const HistoryBlock = ({
 }: any) => {
   const { t } = useTranslation();
   const defaultTitle = t('history_title', "Lịch sử phát triển");
-  const defaultP1 = t('history_p1', "Được thành lập vào năm 2003, VietVinhCorp bắt đầu hành trình với khát vọng chinh phục đỉnh cao công nghệ lạnh.");
+  const defaultP1 = t('history_p1', "Được thành lập vào năm 2003, Thebloomgroup bắt đầu hành trình với khát vọng chinh phục đỉnh cao công nghệ lạnh.");
   const defaultP2 = t('history_p2', "Từ một đơn vị chuyên về lắp đặt, chúng tôi đã mở rộng sang tư vấn thiết kế và sản xuất cấu kiện cơ khí lạnh chính xác.");
-  const defaultP3 = t('history_p3', "Ngày nay, VVC tự hào là đối tác chiến lược của nhiều tập đoàn đa quốc gia và các dự án hạ tầng trọng điểm.");
+  const defaultP3 = t('history_p3', "Ngày nay, Thebloomgroup tự hào là đối tác chiến lược của nhiều tập đoàn đa quốc gia và các dự án hạ tầng trọng điểm.");
   const defaultExpText = t('years_experience', "Năm kinh nghiệm");
 
   return (
@@ -270,7 +270,7 @@ export const ProductionFacilitiesBlock = ({
 }: any) => {
   const { t } = useTranslation();
   const defaultTitle = t('facilities_title', "Cơ sở hạ tầng & Trung tâm sản xuất");
-  const defaultDescription = t('facilities_desc', "VVC đầu tư mạnh mẽ vào hệ thống nhà xưởng hiện đại, kho bãi quy mô lớn và trung tâm điều chuyển hàng hóa tại các địa bàn trọng điểm.");
+  const defaultDescription = t('facilities_desc', "Thebloomgroup đầu tư mạnh mẽ vào hệ thống nhà xưởng hiện đại, kho bãi quy mô lớn và trung tâm điều chuyển hàng hóa tại các địa bàn trọng điểm.");
 
   return (
     <section className="py-12 md:py-20 bg-white relative overflow-hidden">
@@ -335,7 +335,7 @@ export const QualityPrinciplesBlock = ({
   ...props
 }: any) => {
   const { t } = useTranslation();
-  const defaultTitle = t('quality_principles_title', "Nguyên tắc chất lượng của VVC");
+  const defaultTitle = t('quality_principles_title', "Nguyên tắc chất lượng của Thebloomgroup");
   const principles = [
     { key: 'q1', title: props.q1_title || t('q_principle1_title', 'Chất lượng là sống còn'), desc: props.q1_desc || t('q_principle1_desc', 'Mọi sản phẩm và giải pháp đều phải trải qua quy trình kiểm soát 3 lớp nghiêm ngặt.') },
     { key: 'q2', title: props.q2_title || t('q_principle2_title', 'Sáng tạo & Đổi mới'), desc: props.q2_desc || t('q_principle2_desc', 'Không ngừng cập nhật công nghệ làm mát tiên tiến nhất từ Nhật Bản và Châu Âu.') },

@@ -107,7 +107,7 @@ const SEOHelmet: React.FC<SEOHelmetProps> = ({ title, description, keywords, ima
     const finalDescription = description || getLocalizedSetting('site_description') || t('site_description_fallback');
     const finalKeywords = keywords || getLocalizedSetting('site_keywords') || t('site_keywords_fallback');
     const finalImage = image || settings['og_image_url'] || '/lovable-uploads/0bd3c048-8e37-4775-a6bc-0b54ec07edbe.png';
-    const siteUrl = settings['site_url'] || 'http://vietvinhcorp.com/';
+    const siteUrl = settings['site_url'] || 'https://thebloomgroup.vn/';
 
     return (
         <Helmet>
@@ -121,7 +121,7 @@ const SEOHelmet: React.FC<SEOHelmetProps> = ({ title, description, keywords, ima
             <meta property="og:image" content={finalImage} />
             <meta property="og:url" content={siteUrl} />
             <meta property="og:type" content={settings['og_type'] || 'website'} />
-            <meta property="og:site_name" content={settings['site_name'] || 'VVC'} />
+            <meta property="og:site_name" content={settings['site_name'] || 'Thebloomgroup'} />
 
             <meta name="twitter:card" content={settings['twitter_card'] || 'summary_large_image'} />
             <meta name="twitter:title" content={finalTitle} />

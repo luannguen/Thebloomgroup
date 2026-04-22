@@ -70,7 +70,7 @@ const SpecializedProjects = () => {
                       và các phòng chức năng đặc biệt khác.
                     </p>
                     <p>
-                      VVC đã cung cấp giải pháp toàn diện với các hệ thống AHU (Air Handling Unit) và PAU (Precision Air Unit) 
+                      Thebloomgroup đã cung cấp giải pháp toàn diện với các hệ thống AHU (Air Handling Unit) và PAU (Precision Air Unit) 
                       chuyên dụng cho y tế, cùng các hệ thống lọc HEPA, UV và kiểm soát độ ẩm chuyên biệt. 
                       Dự án đáp ứng các tiêu chuẩn y tế khắt khe nhất của Bộ Y Tế Việt Nam và các tiêu chuẩn quốc tế ISO 14644, ASHRAE và HTM 03-01.
                     </p>
@@ -255,7 +255,7 @@ const SpecializedProjects = () => {
                       và độ ẩm ổn định 24/7, đảm bảo hoạt động liên tục của hệ thống máy chủ.
                     </p>
                     <p>
-                      VVC đã triển khai hệ thống làm mát chính xác (Precision Cooling) kết hợp với giải pháp làm mát 
+                      Thebloomgroup đã triển khai hệ thống làm mát chính xác (Precision Cooling) kết hợp với giải pháp làm mát 
                       hàng nóng-hàng lạnh (Hot-Cold Aisle Containment) và hệ thống dự phòng N+1. 
                       Dự án đáp ứng các tiêu chuẩn TIER III về độ tin cậy và hiệu quả năng lượng với chỉ số PUE 
                       (Power Usage Effectiveness) đạt 1.45, thấp hơn nhiều so với mức trung bình ngành.
@@ -429,7 +429,7 @@ const SpecializedProjects = () => {
             <div className="max-w-3xl mx-auto text-center">
               <h2 className="text-2xl md:text-3xl font-bold mb-4">Bạn cần tư vấn về dự án chuyên biệt?</h2>
               <p className="text-muted-foreground mb-6">
-                Đội ngũ kỹ sư chuyên môn cao của VVC sẵn sàng hỗ trợ bạn thiết kế và triển khai hệ thống điều hòa không khí đặc biệt cho phòng sạch, phòng thí nghiệm, bệnh viện, data center và các không gian đặc thù khác.
+                Đội ngũ kỹ sư chuyên môn cao của Thebloomgroup sẵn sàng hỗ trợ bạn thiết kế và triển khai hệ thống điều hòa không khí đặc biệt cho phòng sạch, phòng thí nghiệm, bệnh viện, data center và các không gian đặc thù khác.
               </p>
               <div className="flex flex-wrap gap-4 justify-center">
                 <Button size="lg" asChild>

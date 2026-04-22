@@ -36,33 +36,33 @@ const ResidentialProducts = () => {
         <div className="container mx-auto py-12 px-4">
           <div className="grid md:grid-cols-3 gap-8">
             <div className="md:col-span-2">
-              <h2 className="text-2xl md:text-3xl font-bold text-primary mb-6">Điều Hòa VVC Smart Inverter</h2>
+              <h2 className="text-2xl md:text-3xl font-bold text-primary mb-6">Điều Hòa Thebloomgroup Smart Inverter</h2>
               
               <div className="bg-gray-100 p-4 rounded-lg mb-8">
                 <img 
                   src="https://images.unsplash.com/photo-1499573550747-98de39d9ad77?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" 
-                  alt="Điều hòa VVC Smart Inverter" 
+                  alt="Điều hòa Thebloomgroup Smart Inverter" 
                   className="w-full h-auto rounded-lg mb-4"
                 />
                 <div className="grid grid-cols-4 gap-2">
                   <img 
                     src="https://images.unsplash.com/photo-1499573550747-98de39d9ad77?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" 
-                    alt="Điều hòa VVC Smart Inverter - 1" 
+                    alt="Điều hòa Thebloomgroup Smart Inverter - 1" 
                     className="w-full h-24 object-cover rounded cursor-pointer"
                   />
                   <img 
                     src="https://images.unsplash.com/photo-1551522975-36a6e66a35d7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" 
-                    alt="Điều hòa VVC Smart Inverter - 2" 
+                    alt="Điều hòa Thebloomgroup Smart Inverter - 2" 
                     className="w-full h-24 object-cover rounded cursor-pointer"
                   />
                   <img 
                     src="https://images.unsplash.com/photo-1577552568192-467fa6c70aa0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" 
-                    alt="Điều hòa VVC Smart Inverter - 3" 
+                    alt="Điều hòa Thebloomgroup Smart Inverter - 3" 
                     className="w-full h-24 object-cover rounded cursor-pointer"
                   />
                   <img 
                     src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" 
-                    alt="Điều hòa VVC Smart Inverter - Ứng dụng" 
+                    alt="Điều hòa Thebloomgroup Smart Inverter - Ứng dụng" 
                     className="w-full h-24 object-cover rounded cursor-pointer"
                   />
                 </div>
@@ -78,17 +78,17 @@ const ResidentialProducts = () => {
                 <TabsContent value="overview" className="mt-6">
                   <div className="space-y-4">
                     <p>
-                      Điều hòa VVC Smart Inverter là giải pháp điều hòa không khí tiết kiệm năng lượng và thông minh dành cho gia đình và văn phòng. 
+                      Điều hòa Thebloomgroup Smart Inverter là giải pháp điều hòa không khí tiết kiệm năng lượng và thông minh dành cho gia đình và văn phòng. 
                       Sử dụng công nghệ Inverter tiên tiến, sản phẩm có khả năng tiết kiệm điện năng lên đến 60% so với các dòng điều hòa thông thường, 
                       đồng thời vẫn đảm bảo hiệu suất làm lạnh tối ưu.
                     </p>
                     <p>
-                      Được thiết kế với chức năng lọc không khí kháng khuẩn hiệu quả cao, điều hòa VVC Smart Inverter không chỉ làm mát 
+                      Được thiết kế với chức năng lọc không khí kháng khuẩn hiệu quả cao, điều hòa Thebloomgroup Smart Inverter không chỉ làm mát 
                       không gian sống mà còn góp phần tạo ra môi trường không khí trong lành, bảo vệ sức khỏe người dùng. 
                       Công nghệ lọc đa tầng giúp loại bỏ bụi mịn, phấn hoa, vi khuẩn và mùi hôi, mang lại không khí trong lành.
                     </p>
                     <p>
-                      Đặc biệt, điều hòa VVC Smart Inverter tích hợp khả năng kết nối WiFi, cho phép người dùng điều khiển thiết bị mọi lúc, 
+                      Đặc biệt, điều hòa Thebloomgroup Smart Inverter tích hợp khả năng kết nối WiFi, cho phép người dùng điều khiển thiết bị mọi lúc, 
                       mọi nơi thông qua smartphone. Ứng dụng điều khiển thông minh còn hỗ trợ các tính năng như lập lịch, theo dõi mức tiêu thụ điện năng, 
                       và điều chỉnh chế độ hoạt động tối ưu dựa trên thói quen sử dụng.
                     </p>
@@ -129,7 +129,7 @@ const ResidentialProducts = () => {
 
                     <div className="mt-8">
                       <h3 className="text-xl font-semibold mb-4">Ứng dụng</h3>
-                      <p>Điều hòa VVC Smart Inverter phù hợp với nhiều không gian như:</p>
+                      <p>Điều hòa Thebloomgroup Smart Inverter phù hợp với nhiều không gian như:</p>
                       <ul className="list-disc pl-5 mt-2 space-y-1">
                         <li>Phòng khách và phòng ngủ trong gia đình</li>
                         <li>Căn hộ chung cư và nhà phố</li>
@@ -200,7 +200,7 @@ const ResidentialProducts = () => {
                     <div className="grid gap-4">
                       <div className="p-4 border rounded-lg flex justify-between items-center">
                         <div>
-                          <h4 className="font-medium">Hướng dẫn sử dụng điều hòa VVC Smart Inverter</h4>
+                          <h4 className="font-medium">Hướng dẫn sử dụng điều hòa Thebloomgroup Smart Inverter</h4>
                           <p className="text-sm text-muted-foreground">PDF - 2.1MB</p>
                         </div>
                         <Button variant="outline">Tải xuống</Button>
@@ -208,7 +208,7 @@ const ResidentialProducts = () => {
                       
                       <div className="p-4 border rounded-lg flex justify-between items-center">
                         <div>
-                          <h4 className="font-medium">Hướng dẫn lắp đặt điều hòa VVC Smart Inverter</h4>
+                          <h4 className="font-medium">Hướng dẫn lắp đặt điều hòa Thebloomgroup Smart Inverter</h4>
                           <p className="text-sm text-muted-foreground">PDF - 3.4MB</p>
                         </div>
                         <Button variant="outline">Tải xuống</Button>
@@ -216,7 +216,7 @@ const ResidentialProducts = () => {
                       
                       <div className="p-4 border rounded-lg flex justify-between items-center">
                         <div>
-                          <h4 className="font-medium">Catalog điều hòa VVC Smart Inverter</h4>
+                          <h4 className="font-medium">Catalog điều hòa Thebloomgroup Smart Inverter</h4>
                           <p className="text-sm text-muted-foreground">PDF - 1.8MB</p>
                         </div>
                         <Button variant="outline">Tải xuống</Button>
@@ -244,11 +244,11 @@ const ResidentialProducts = () => {
                   
                   <div className="mt-6 space-y-6">
                     <div className="bg-muted p-4 rounded-lg">
-                      <h4 className="font-medium mb-2">VVC Smart Inverter</h4>
+                      <h4 className="font-medium mb-2">Thebloomgroup Smart Inverter</h4>
                       <p className="text-xl font-semibold text-primary">Từ 8.500.000 VNĐ</p>
                     </div>
                       <Button className="w-full">
-                      <AppLink routeKey="CONTACT" query={{ product: "VVC-smart-inverter" }}>
+                      <AppLink routeKey="CONTACT" query={{ product: "Thebloomgroup-smart-inverter" }}>
                         Yêu cầu báo giá ngay
                       </AppLink>
                     </Button>
@@ -269,12 +269,12 @@ const ResidentialProducts = () => {
                     <div className="w-1/3 bg-gray-200">
                       <img 
                         src="https://images.unsplash.com/photo-1527149074866-a9733dcc96e2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" 
-                        alt="Hệ thống VRV/VRF VVC-Multi" 
+                        alt="Hệ thống VRV/VRF Thebloomgroup-Multi" 
                         className="w-full h-full object-cover"
                       />
                     </div>
                     <div className="p-4 w-2/3">
-                      <h4 className="font-medium mb-1">Hệ thống VRV/VRF VVC-Multi</h4>                      <p className="text-sm text-muted-foreground mb-2">Điều hòa thương mại</p>
+                      <h4 className="font-medium mb-1">Hệ thống VRV/VRF Thebloomgroup-Multi</h4>                      <p className="text-sm text-muted-foreground mb-2">Điều hòa thương mại</p>
                       <AppLink routeKey="PRODUCTS_COMMERCIAL" className="text-primary hover:underline text-sm">
                         Xem chi tiết
                       </AppLink>
@@ -285,12 +285,12 @@ const ResidentialProducts = () => {
                     <div className="w-1/3 bg-gray-200">
                       <img 
                         src="https://images.unsplash.com/photo-1615252302352-667966ed2e18?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" 
-                        alt="Điều hòa công nghiệp VVC-5000" 
+                        alt="Điều hòa công nghiệp Thebloomgroup-5000" 
                         className="w-full h-full object-cover"
                       />
                     </div>
                     <div className="p-4 w-2/3">
-                      <h4 className="font-medium mb-1">Điều hòa công nghiệp VVC-5000</h4>
+                      <h4 className="font-medium mb-1">Điều hòa công nghiệp Thebloomgroup-5000</h4>
                       <p className="text-sm text-muted-foreground mb-2">Điều hòa công nghiệp</p>
                       <Link to="/products/industrial" className="text-primary hover:underline text-sm">
                         Xem chi tiết
@@ -302,12 +302,12 @@ const ResidentialProducts = () => {
                     <div className="w-1/3 bg-gray-200">
                       <img 
                         src="https://images.unsplash.com/photo-1582891420766-5d7fb480ada3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" 
-                        alt="Hệ thống thông gió VVC-Ventilation" 
+                        alt="Hệ thống thông gió Thebloomgroup-Ventilation" 
                         className="w-full h-full object-cover"
                       />
                     </div>
                     <div className="p-4 w-2/3">
-                      <h4 className="font-medium mb-1">Hệ thống thông gió VVC-Ventilation</h4>
+                      <h4 className="font-medium mb-1">Hệ thống thông gió Thebloomgroup-Ventilation</h4>
                       <p className="text-sm text-muted-foreground mb-2">Hệ thống phụ trợ</p>
                       <Link to="/products/auxiliary" className="text-primary hover:underline text-sm">
                         Xem chi tiết

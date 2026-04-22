@@ -13,7 +13,7 @@ export const ProjectOverviewBlock = ({
   const { t } = useTranslation();
   
   const defaultTitle = t('capability_experience', 'Năng lực và kinh nghiệm');
-  const defaultDesc = t('projects_overview_desc', 'Với hơn 20 năm kinh nghiệm, Việt Vinh Corporation đã thực hiện hàng trăm dự án lớn nhỏ trong lĩnh vực điện lạnh công nghiệp và dân dụng. Chúng tôi tự hào là đối tác tin cậy của nhiều tập đoàn lớn và các đơn vị hàng đầu trong các ngành công nghiệp.');
+  const defaultDesc = t('projects_overview_desc', 'Với hơn 20 năm kinh nghiệm, Thebloomgrouporation đã thực hiện hàng trăm dự án lớn nhỏ trong lĩnh vực điện lạnh công nghiệp và dân dụng. Chúng tôi tự hào là đối tác tin cậy của nhiều tập đoàn lớn và các đơn vị hàng đầu trong các ngành công nghiệp.');
   
   const items = [
     { key: 'item1', defaultText: t('completed_projects_stat', 'Hơn 500 dự án lớn nhỏ đã hoàn thành') },

@@ -57,7 +57,7 @@ const ResourceDetail: React.FC = () => {
                     </span>
                     <span className="flex items-center">
                         <User size={16} className="mr-2" />
-                        VVC Admin
+                        Thebloomgroup Admin
                     </span>
                 </div>
 

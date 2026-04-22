@@ -22,7 +22,7 @@ const IndustrialProjects = () => {
             </div>
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold">Dự Án Hệ Thống Làm Lạnh Công Nghiệp</h1>
             <p className="mt-4 text-lg max-w-3xl">
-              Các dự án tiêu biểu về hệ thống làm lạnh công nghiệp mà VVC đã triển khai thành công cho nhà máy sản xuất và chế biến
+              Các dự án tiêu biểu về hệ thống làm lạnh công nghiệp mà Thebloomgroup đã triển khai thành công cho nhà máy sản xuất và chế biến
             </p>
           </div>
         </div>
@@ -64,12 +64,12 @@ const IndustrialProjects = () => {
                   
                   <div className="space-y-4">
                     <p>
-                      Dự án lắp đặt hệ thống điều hòa công nghiệp VVC-5000 cho nhà máy sản xuất ABC với diện tích 
+                      Dự án lắp đặt hệ thống điều hòa công nghiệp Thebloomgroup-5000 cho nhà máy sản xuất ABC với diện tích 
                       2000m² tại Bình Dương. Hệ thống được thiết kế để đáp ứng yêu cầu khắt khe về nhiệt độ và độ ẩm 
                       trong quy trình sản xuất điện tử, đồng thời tối ưu hóa chi phí vận hành.
                     </p>
                     <p>
-                      VVC đã cung cấp giải pháp trọn gói bao gồm thiết kế, cung cấp thiết bị, lắp đặt và bảo trì 
+                      Thebloomgroup đã cung cấp giải pháp trọn gói bao gồm thiết kế, cung cấp thiết bị, lắp đặt và bảo trì 
                       cho toàn bộ hệ thống điều hòa không khí của nhà máy, giúp đảm bảo môi trường làm việc thoải mái 
                       cho hơn 500 công nhân và duy trì điều kiện lý tưởng cho các thiết bị máy móc.
                     </p>
@@ -82,7 +82,7 @@ const IndustrialProjects = () => {
                       </li>
                       <li className="flex items-start">
                         <CheckCircle size={18} className="text-primary mr-3 mt-1 flex-shrink-0" />
-                        <span>Cung cấp và lắp đặt 8 hệ thống điều hòa công nghiệp VVC-5000</span>
+                        <span>Cung cấp và lắp đặt 8 hệ thống điều hòa công nghiệp Thebloomgroup-5000</span>
                       </li>
                       <li className="flex items-start">
                         <CheckCircle size={18} className="text-primary mr-3 mt-1 flex-shrink-0" />
@@ -170,11 +170,11 @@ const IndustrialProjects = () => {
                         <div className="flex items-center">
                           <img 
                             src="https://images.unsplash.com/photo-1615252302352-667966ed2e18?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=100&q=80" 
-                            alt="VVC-5000" 
+                            alt="Thebloomgroup-5000" 
                             className="w-16 h-16 object-cover rounded mr-4"
                           />
                           <div>
-                            <h5 className="font-medium">Điều hòa công nghiệp VVC-5000</h5>
+                            <h5 className="font-medium">Điều hòa công nghiệp Thebloomgroup-5000</h5>
                             <p className="text-sm text-muted-foreground">Xem thông tin sản phẩm</p>
                           </div>
                         </div>
@@ -184,11 +184,11 @@ const IndustrialProjects = () => {
                         <div className="flex items-center">
                           <img 
                             src="https://images.unsplash.com/photo-1582891420766-5d7fb480ada3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=100&q=80" 
-                            alt="VVC-Ventilation" 
+                            alt="Thebloomgroup-Ventilation" 
                             className="w-16 h-16 object-cover rounded mr-4"
                           />
                           <div>
-                            <h5 className="font-medium">Hệ thống thông gió VVC-Ventilation</h5>
+                            <h5 className="font-medium">Hệ thống thông gió Thebloomgroup-Ventilation</h5>
                             <p className="text-sm text-muted-foreground">Xem thông tin sản phẩm</p>
                           </div>
                         </div>
@@ -257,11 +257,11 @@ const IndustrialProjects = () => {
                   <div className="space-y-4">
                     <p>
                       Dự án thiết kế và thi công hệ thống kho lạnh và dây chuyền đông lạnh cho nhà máy thực phẩm XYZ 
-                      tại Long An. Đây là một trong những dự án lớn nhất của VVC trong lĩnh vực làm lạnh công nghiệp cho 
+                      tại Long An. Đây là một trong những dự án lớn nhất của Thebloomgroup trong lĩnh vực làm lạnh công nghiệp cho 
                       ngành thực phẩm với tổng diện tích kho lạnh lên đến 5,000m².
                     </p>
                     <p>
-                      VVC đã cung cấp giải pháp toàn diện bao gồm hệ thống kho lạnh đa nhiệt độ (-18°C đến +10°C), 
+                      Thebloomgroup đã cung cấp giải pháp toàn diện bao gồm hệ thống kho lạnh đa nhiệt độ (-18°C đến +10°C), 
                       dây chuyền làm lạnh nhanh IQF, hệ thống băng chuyền làm lạnh và hệ thống giám sát nhiệt độ tự động. 
                       Dự án đã giúp khách hàng tăng 40% công suất bảo quản và đáp ứng các tiêu chuẩn khắt khe của 
                       thị trường xuất khẩu.
@@ -279,7 +279,7 @@ const IndustrialProjects = () => {
                       </li>
                       <li className="flex items-start">
                         <CheckCircle size={18} className="text-primary mr-3 mt-1 flex-shrink-0" />
-                        <span>Cung cấp hệ thống máy làm lạnh nước công nghiệp VVC-Chiller</span>
+                        <span>Cung cấp hệ thống máy làm lạnh nước công nghiệp Thebloomgroup-Chiller</span>
                       </li>
                       <li className="flex items-start">
                         <CheckCircle size={18} className="text-primary mr-3 mt-1 flex-shrink-0" />
@@ -367,11 +367,11 @@ const IndustrialProjects = () => {
                         <div className="flex items-center">
                           <img 
                             src="https://images.unsplash.com/photo-1534398079543-7ae6d016b86a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=100&q=80" 
-                            alt="VVC-KL500" 
+                            alt="Thebloomgroup-KL500" 
                             className="w-16 h-16 object-cover rounded mr-4"
                           />
                           <div>
-                            <h5 className="font-medium">Kho lạnh bảo quản VVC-KL500</h5>
+                            <h5 className="font-medium">Kho lạnh bảo quản Thebloomgroup-KL500</h5>
                             <p className="text-sm text-muted-foreground">Xem thông tin sản phẩm</p>
                           </div>
                         </div>
@@ -381,11 +381,11 @@ const IndustrialProjects = () => {
                         <div className="flex items-center">
                           <img 
                             src="https://images.unsplash.com/photo-1562769203-2d3ee3970449?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=100&q=80" 
-                            alt="VVC-Chiller" 
+                            alt="Thebloomgroup-Chiller" 
                             className="w-16 h-16 object-cover rounded mr-4"
                           />
                           <div>
-                            <h5 className="font-medium">Máy làm lạnh nước VVC-Chiller</h5>
+                            <h5 className="font-medium">Máy làm lạnh nước Thebloomgroup-Chiller</h5>
                             <p className="text-sm text-muted-foreground">Xem thông tin sản phẩm</p>
                           </div>
                         </div>
@@ -428,7 +428,7 @@ const IndustrialProjects = () => {
             <div className="max-w-3xl mx-auto text-center">
               <h2 className="text-2xl md:text-3xl font-bold mb-4">Bạn cần tư vấn về dự án công nghiệp?</h2>
               <p className="text-muted-foreground mb-6">
-                Đội ngũ kỹ sư giàu kinh nghiệm của VVC sẵn sàng hỗ trợ bạn thiết kế, lắp đặt và bảo trì hệ thống làm lạnh công nghiệp phù hợp với nhu cầu cụ thể của doanh nghiệp.
+                Đội ngũ kỹ sư giàu kinh nghiệm của Thebloomgroup sẵn sàng hỗ trợ bạn thiết kế, lắp đặt và bảo trì hệ thống làm lạnh công nghiệp phù hợp với nhu cầu cụ thể của doanh nghiệp.
               </p>
               <div className="flex flex-wrap gap-4 justify-center">
                 <Button size="lg" asChild>

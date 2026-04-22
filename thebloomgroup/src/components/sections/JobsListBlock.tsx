@@ -12,7 +12,7 @@ interface JobsListBlockProps {
 
 export const JobsListBlock = ({
   title = 'Cơ hội nghề nghiệp',
-  subtitle = 'Gia nhập đội ngũ Viet Vinh Corp để cùng xây dựng những giá trị bền vững.',
+  subtitle = 'Gia nhập đội ngũ Thebloomgroup để cùng xây dựng những giá trị bền vững.',
   sectionId
 }: JobsListBlockProps) => {
   const [jobs, setJobs] = useState<Job[]>([]);

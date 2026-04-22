@@ -28,7 +28,7 @@ const NewsForm: React.FC<NewsFormProps> = ({ initialData, onSave, onCancel }) =>
         content: '',
         image_url: '',
         publish_date: new Date().toISOString().split('T')[0],
-        author: 'Viet Vinh Admin',
+        author: 'Thebloomgroup Admin',
         category_id: '',
         tags: []
     });

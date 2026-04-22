@@ -36,33 +36,33 @@ const AuxiliaryProducts = () => {
         <div className="container mx-auto py-12 px-4">
           <div className="grid md:grid-cols-3 gap-8">
             <div className="md:col-span-2">
-              <h2 className="text-2xl md:text-3xl font-bold text-primary mb-6">Hệ Thống Thông Gió VVC-Ventilation</h2>
+              <h2 className="text-2xl md:text-3xl font-bold text-primary mb-6">Hệ Thống Thông Gió Thebloomgroup-Ventilation</h2>
               
               <div className="bg-gray-100 p-4 rounded-lg mb-8">
                 <img 
                   src="https://images.unsplash.com/photo-1582891420766-5d7fb480ada3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" 
-                  alt="Hệ thống thông gió VVC-Ventilation" 
+                  alt="Hệ thống thông gió Thebloomgroup-Ventilation" 
                   className="w-full h-auto rounded-lg mb-4"
                 />
                 <div className="grid grid-cols-4 gap-2">
                   <img 
                     src="https://images.unsplash.com/photo-1582891420766-5d7fb480ada3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" 
-                    alt="Hệ thống thông gió VVC-Ventilation - 1" 
+                    alt="Hệ thống thông gió Thebloomgroup-Ventilation - 1" 
                     className="w-full h-24 object-cover rounded cursor-pointer"
                   />
                   <img 
                     src="https://images.unsplash.com/photo-1563501045771-07d988aa4cd1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" 
-                    alt="Hệ thống thông gió VVC-Ventilation - 2" 
+                    alt="Hệ thống thông gió Thebloomgroup-Ventilation - 2" 
                     className="w-full h-24 object-cover rounded cursor-pointer"
                   />
                   <img 
                     src="https://images.unsplash.com/photo-1627745193246-1fa1c9404b21?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" 
-                    alt="Hệ thống thông gió VVC-Ventilation - 3" 
+                    alt="Hệ thống thông gió Thebloomgroup-Ventilation - 3" 
                     className="w-full h-24 object-cover rounded cursor-pointer"
                   />
                   <img 
                     src="https://images.unsplash.com/photo-1599696848652-f0d25ed9c226?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" 
-                    alt="Hệ thống thông gió VVC-Ventilation - Ứng dụng" 
+                    alt="Hệ thống thông gió Thebloomgroup-Ventilation - Ứng dụng" 
                     className="w-full h-24 object-cover rounded cursor-pointer"
                   />
                 </div>
@@ -78,13 +78,13 @@ const AuxiliaryProducts = () => {
                 <TabsContent value="overview" className="mt-6">
                   <div className="space-y-4">
                     <p>
-                      Hệ thống thông gió VVC-Ventilation là giải pháp tối ưu để cải thiện chất lượng không khí và đảm bảo lưu thông không khí hiệu quả 
+                      Hệ thống thông gió Thebloomgroup-Ventilation là giải pháp tối ưu để cải thiện chất lượng không khí và đảm bảo lưu thông không khí hiệu quả 
                       trong các không gian công nghiệp, thương mại và dân dụng. Hệ thống được thiết kế để hoạt động độc lập hoặc kết hợp với các hệ thống 
                       điều hòa không khí, tạo ra môi trường làm việc và sinh hoạt khỏe mạnh, thoải mái.
                     </p>
                     <p>
                       Bằng việc sử dụng công nghệ quạt tiên tiến với động cơ EC (Electronically Commutated) tiết kiệm năng lượng, 
-                      hệ thống VVC-Ventilation đạt hiệu suất vận hành cao trong khi vẫn đảm bảo vận hành êm ái và tiết kiệm điện năng. 
+                      hệ thống Thebloomgroup-Ventilation đạt hiệu suất vận hành cao trong khi vẫn đảm bảo vận hành êm ái và tiết kiệm điện năng. 
                       Hệ thống còn được trang bị bộ lọc không khí đa tầng, giúp loại bỏ bụi mịn, phấn hoa, vi khuẩn và các chất gây ô nhiễm khác 
                       trước khi không khí được đưa vào không gian sử dụng.
                     </p>
@@ -131,7 +131,7 @@ const AuxiliaryProducts = () => {
 
                     <div className="mt-8">
                       <h3 className="text-xl font-semibold mb-4">Ứng dụng</h3>
-                      <p>Hệ thống thông gió VVC-Ventilation phù hợp với nhiều không gian như:</p>
+                      <p>Hệ thống thông gió Thebloomgroup-Ventilation phù hợp với nhiều không gian như:</p>
                       <ul className="list-disc pl-5 mt-2 space-y-1">
                         <li>Nhà xưởng sản xuất và nhà máy công nghiệp</li>
                         <li>Tòa nhà văn phòng và trung tâm thương mại</li>
@@ -206,7 +206,7 @@ const AuxiliaryProducts = () => {
                     <div className="grid gap-4">
                       <div className="p-4 border rounded-lg flex justify-between items-center">
                         <div>
-                          <h4 className="font-medium">Hướng dẫn sử dụng hệ thống thông gió VVC-Ventilation</h4>
+                          <h4 className="font-medium">Hướng dẫn sử dụng hệ thống thông gió Thebloomgroup-Ventilation</h4>
                           <p className="text-sm text-muted-foreground">PDF - 2.8MB</p>
                         </div>
                         <Button variant="outline">Tải xuống</Button>
@@ -214,7 +214,7 @@ const AuxiliaryProducts = () => {
                       
                       <div className="p-4 border rounded-lg flex justify-between items-center">
                         <div>
-                          <h4 className="font-medium">Hướng dẫn lắp đặt hệ thống thông gió VVC-Ventilation</h4>
+                          <h4 className="font-medium">Hướng dẫn lắp đặt hệ thống thông gió Thebloomgroup-Ventilation</h4>
                           <p className="text-sm text-muted-foreground">PDF - 4.1MB</p>
                         </div>
                         <Button variant="outline">Tải xuống</Button>
@@ -222,7 +222,7 @@ const AuxiliaryProducts = () => {
                       
                       <div className="p-4 border rounded-lg flex justify-between items-center">
                         <div>
-                          <h4 className="font-medium">Catalog hệ thống thông gió VVC-Ventilation</h4>
+                          <h4 className="font-medium">Catalog hệ thống thông gió Thebloomgroup-Ventilation</h4>
                           <p className="text-sm text-muted-foreground">PDF - 3.2MB</p>
                         </div>
                         <Button variant="outline">Tải xuống</Button>
@@ -250,12 +250,12 @@ const AuxiliaryProducts = () => {
                   
                   <div className="mt-6 space-y-6">
                     <div className="bg-muted p-4 rounded-lg">
-                      <h4 className="font-medium mb-2">VVC-Ventilation</h4>
+                      <h4 className="font-medium mb-2">Thebloomgroup-Ventilation</h4>
                       <p className="text-xl font-semibold text-primary">Liên hệ để nhận giá</p>
                     </div>
                     
                     <Button className="w-full" asChild>
-                      <Link to="/contact?product=VVC-ventilation">
+                      <Link to="/contact?product=Thebloomgroup-ventilation">
                         Yêu cầu báo giá ngay
                       </Link>
                     </Button>
@@ -277,12 +277,12 @@ const AuxiliaryProducts = () => {
                     <div className="w-1/3 bg-gray-200">
                       <img 
                         src="https://images.unsplash.com/photo-1615252302352-667966ed2e18?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" 
-                        alt="Điều hòa công nghiệp VVC-5000" 
+                        alt="Điều hòa công nghiệp Thebloomgroup-5000" 
                         className="w-full h-full object-cover"
                       />
                     </div>
                     <div className="p-4 w-2/3">
-                      <h4 className="font-medium mb-1">Điều hòa công nghiệp VVC-5000</h4>
+                      <h4 className="font-medium mb-1">Điều hòa công nghiệp Thebloomgroup-5000</h4>
                       <p className="text-sm text-muted-foreground mb-2">Điều hòa công nghiệp</p>
                       <Link to="/products/industrial" className="text-primary hover:underline text-sm">
                         Xem chi tiết
@@ -294,12 +294,12 @@ const AuxiliaryProducts = () => {
                     <div className="w-1/3 bg-gray-200">
                       <img 
                         src="https://images.unsplash.com/photo-1534398079543-7ae6d016b86a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" 
-                        alt="Kho lạnh bảo quản VVC-KL500" 
+                        alt="Kho lạnh bảo quản Thebloomgroup-KL500" 
                         className="w-full h-full object-cover"
                       />
                     </div>
                     <div className="p-4 w-2/3">
-                      <h4 className="font-medium mb-1">Kho lạnh bảo quản VVC-KL500</h4>
+                      <h4 className="font-medium mb-1">Kho lạnh bảo quản Thebloomgroup-KL500</h4>
                       <p className="text-sm text-muted-foreground mb-2">Kho lạnh công nghiệp</p>
                       <Link to="/products/cold-storage" className="text-primary hover:underline text-sm">
                         Xem chi tiết
@@ -311,12 +311,12 @@ const AuxiliaryProducts = () => {
                     <div className="w-1/3 bg-gray-200">
                       <img 
                         src="https://images.unsplash.com/photo-1499573550747-98de39d9ad77?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" 
-                        alt="Điều hòa dân dụng VVC Smart Inverter" 
+                        alt="Điều hòa dân dụng Thebloomgroup Smart Inverter" 
                         className="w-full h-full object-cover"
                       />
                     </div>
                     <div className="p-4 w-2/3">
-                      <h4 className="font-medium mb-1">Điều hòa VVC Smart Inverter</h4>
+                      <h4 className="font-medium mb-1">Điều hòa Thebloomgroup Smart Inverter</h4>
                       <p className="text-sm text-muted-foreground mb-2">Điều hòa dân dụng</p>
                       <Link to="/products/residential" className="text-primary hover:underline text-sm">
                         Xem chi tiết

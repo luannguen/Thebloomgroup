@@ -15,7 +15,7 @@ interface TeamHeroBlockProps {
 }
 
 export const TeamHeroBlock = ({ 
-  title = "ĐỘI NGŨ CHUYÊN GIA VVC", 
+  title = "ĐỘI NGŨ CHUYÊN GIA THEBLOOMGROUP", 
   description = "Hội tụ những tinh hoa trong ngành kỹ thuật lạnh...",
   sectionId,
   titleColor = 'var(--primary)',
