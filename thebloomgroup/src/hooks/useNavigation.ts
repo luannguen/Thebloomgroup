@@ -51,9 +51,21 @@ export const useNavigation = (position: 'header' | 'footer' = 'header') => {
           // Identify the home item from ALL active roots (regardless of menu visibility)
           const primaryHome = roots.length > 0 ? roots[0] : null;
           
-          // Filter items that should be visible in the menu
-          // Treat undefined/null as true (visible by default)
-          const visibleRoots = roots.filter(item => item.show_in_menu !== false);
+          // 4. Mutual Exclusion for Home Items: If multiple home-like items exist, only keep the first one visible
+          const homePaths = ['/', '/home', '/home-v2', '/home_v2'];
+          let homeFound = false;
+          
+          const visibleRoots = roots.filter(item => {
+              // Standard visibility filter
+              if (item.show_in_menu === false) return false;
+              
+              // Mutual exclusion logic for home paths
+              if (homePaths.includes(item.path || '')) {
+                  if (homeFound) return false; // Hide subsequent home items
+                  homeFound = true;
+              }
+              return true;
+          });
           
           // Also filter children
           const filterVisibleChildren = (items: NavigationItem[]) => {
