@@ -8,7 +8,6 @@ import SEOHelmet from "@/components/common/SEOHelmet";
 import MainLayout from "./components/layouts/MainLayout";
 import { registerAllBlocks } from "./components/sections";
 import SecurityManager from "./components/common/SecurityManager";
-import { VisualEditorProvider } from "./context/VisualEditorContext";
 
 // Register all visual editor blocks
 registerAllBlocks();
@@ -89,10 +88,9 @@ const ProjectCategory = lazy(() => import("./pages/ProjectCategory"));
 const App = () => (
   <TooltipProvider>
     <HelmetProvider>
-      <VisualEditorProvider>
-        <SEOHelmet />
-        <SecurityManager />
-        <BrowserRouter>
+      <SEOHelmet />
+      <SecurityManager />
+      <BrowserRouter>
           <Suspense fallback={<PageLoader />}>
           <Routes>
             {/* Public routes */}
@@ -164,7 +162,6 @@ const App = () => (
         <Toaster />
         <Sonner />
       </BrowserRouter>
-      </VisualEditorProvider>
     </HelmetProvider>
   </TooltipProvider >
 );

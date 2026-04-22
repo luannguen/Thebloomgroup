@@ -64,7 +64,31 @@ export default function PagesPage() {
         try {
             setLoading(true);
             const data = await pageService.getPages();
-            setPages(data);
+            
+            // Đảm bảo Trang chủ luôn có mặt trong danh sách để quản lý Visual Edit
+            const hasHome = data.some(p => p.slug === 'home');
+            if (!hasHome) {
+                const homePage: StaticPage = {
+                    id: 'home-virtual', // Virtual ID, sẽ được tạo thật khi lưu trong Visual Editor
+                    slug: 'home',
+                    title: 'Trang chủ (Mặc định)',
+                    content: '{"sections":[]}',
+                    excerpt: 'Trang chủ chính của website',
+                    image_url: null,
+                    is_active: true,
+                    created_at: new Date().toISOString(),
+                    updated_at: new Date().toISOString()
+                };
+                setPages([homePage, ...data]);
+            } else {
+                // Sắp xếp để Trang chủ luôn ở đầu danh sách
+                const sortedData = [...data].sort((a, b) => {
+                    if (a.slug === 'home') return -1;
+                    if (b.slug === 'home') return 1;
+                    return 0;
+                });
+                setPages(sortedData);
+            }
         } catch (error) {
             console.error(error);
             toast({
@@ -240,6 +264,11 @@ export default function PagesPage() {
                                         <div className="flex items-center">
                                             <FileText className="mr-2 h-4 w-4 text-muted-foreground" />
                                             {page.title}
+                                            {page.slug === 'home' && (
+                                                <span className="ml-2 px-2 py-0.5 text-[10px] font-bold bg-indigo-100 text-indigo-700 rounded-full border border-indigo-200">
+                                                    Hệ thống
+                                                </span>
+                                            )}
                                         </div>
                                     </TableCell>
                                     <TableCell><code className="bg-muted px-1 py-0.5 rounded text-xs">{page.slug}</code></TableCell>
@@ -271,15 +300,17 @@ export default function PagesPage() {
                                         >
                                             <Pencil className="h-4 w-4" />
                                         </Button>
-                                        <Button
-                                            variant="ghost"
-                                            size="icon"
-                                            className="text-destructive hover:text-destructive"
-                                            onClick={() => handleDelete(page.id)}
-                                            title="Xóa trang"
-                                        >
-                                            <Trash2 className="h-4 w-4" />
-                                        </Button>
+                                        {page.slug !== 'home' && (
+                                            <Button
+                                                variant="ghost"
+                                                size="icon"
+                                                className="text-destructive hover:text-destructive"
+                                                onClick={() => handleDelete(page.id)}
+                                                title="Xóa trang"
+                                            >
+                                                <Trash2 className="h-4 w-4" />
+                                            </Button>
+                                        )}
                                     </TableCell>
                                 </TableRow>
                             ))

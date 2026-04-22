@@ -64,7 +64,8 @@ export const PageSettingsModal: React.FC<PageSettingsModalProps> = ({
                                 value={config.slug || ''}
                                 onChange={(e) => onConfigChange({ ...config, slug: e.target.value.toLowerCase().replace(/\s+/g, '-') })}
                                 placeholder="ve-chung-toi"
-                                className="rounded-xl border-slate-200 focus:ring-primary/20"
+                                disabled={config.slug === 'home'}
+                                className="rounded-xl border-slate-200 focus:ring-primary/20 disabled:bg-slate-50 disabled:text-slate-400"
                             />
                         </div>
                         <p className="text-[10px] text-slate-400 italic">Dùng làm URL truy cập. Không chứa dấu cách.</p>
