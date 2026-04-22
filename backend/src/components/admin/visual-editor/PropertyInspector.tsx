@@ -160,6 +160,22 @@ export const PropertyInspector: React.FC<PropertyInspectorProps> = ({
                         placeholder={`Nhập ${field.label.toLowerCase()}...`}
                     />
                 );
+            case 'color':
+                return (
+                    <div className="flex gap-2 items-center">
+                        <Input 
+                            type="color"
+                            className="h-10 w-12 p-1 border-slate-200 cursor-pointer shadow-sm"
+                            value={value || '#000000'}
+                            onChange={(e) => onChange(e.target.value)}
+                        />
+                        <Input 
+                            className="h-10 flex-grow border-slate-200 focus-visible:ring-primary text-sm shadow-sm"
+                            value={value || '#000000'}
+                            onChange={(e) => onChange(e.target.value)}
+                        />
+                    </div>
+                );
             case 'number':
                 return (
                     <Input 

@@ -14,6 +14,7 @@ interface EditableElementProps {
   onUpdate?: (value: string) => void; // Optional custom update handler
   href?: string; // Tích hợp link
   target?: string;
+  style?: React.CSSProperties;
 }
 
 export const EditableElement = ({
@@ -27,6 +28,7 @@ export const EditableElement = ({
   onUpdate,
   href,
   target,
+  style,
 }: EditableElementProps) => {
   const { 
     editMode, 
@@ -196,7 +198,7 @@ export const EditableElement = ({
       }
 
       return (
-        <Tag className={`relative w-full h-full ${className}`}>
+        <Tag className={`relative w-full h-full ${className}`} style={style}>
           {imgContent}
         </Tag>
       );
@@ -206,6 +208,7 @@ export const EditableElement = ({
         <Tag 
           className={className} 
           dangerouslySetInnerHTML={{ __html: currentContent }} 
+          style={style}
         />
       );
     }
@@ -214,9 +217,9 @@ export const EditableElement = ({
       : currentContent;
 
     if (tagName === 'a') {
-      return <Tag href={href} target={target} className={className}>{displayContent}</Tag>;
+      return <Tag href={href} target={target} className={className} style={style}>{displayContent}</Tag>;
     }
-    return <Tag className={className}>{displayContent}</Tag>;
+    return <Tag className={className} style={style}>{displayContent}</Tag>;
   }
 
   // Edit Mode for Text / Rich Text
@@ -231,6 +234,7 @@ export const EditableElement = ({
           handleContentUpdate(newValue);
         }}
         className={`outline-dashed outline-1 outline-blue-400 hover:outline-2 hover:bg-blue-50/50 transition-all cursor-text min-w-[20px] inline-block ${className}`}
+        style={style}
       >
         {type === 'rich-text' ? null : currentContent}
       </Tag>
@@ -241,14 +245,34 @@ export const EditableElement = ({
   return (
     <Tag
       className={`relative group cursor-pointer outline-dashed outline-1 outline-blue-400 hover:outline-2 transition-all ${className}`}
+      style={style}
     >
-      {/* Render the actual image with dynamic src */}
+      {/* Render children with dynamic updates for images */}
       {React.Children.map(children, child => {
-        if (React.isValidElement(child) && child.type === 'img') {
-          return React.cloneElement(child as React.ReactElement<any>, { src: currentContent });
+        if (!React.isValidElement(child)) return child;
+
+        // Update <img> tags
+        if (child.type === 'img') {
+          return React.cloneElement(child as React.ReactElement<any>, { 
+            src: currentContent 
+          });
         }
+
+        // Update <div> tags with backgroundImage if it's an image field
+        if (type === 'image' && child.type === 'div') {
+          const childStyle = (child.props as any).style || {};
+          if (childStyle.backgroundImage) {
+            return React.cloneElement(child as React.ReactElement<any>, {
+              style: {
+                ...childStyle,
+                backgroundImage: `url(${currentContent})`
+              }
+            });
+          }
+        }
+
         return child;
-      }) || <img src={currentContent} className="w-full h-full object-cover" alt="" />}
+      }) || (type === 'image' ? <img src={currentContent} className="w-full h-full object-cover" alt="" /> : null)}
 
       {/* Hover Overlay - Attached onClick here explicitly */}
       <div 

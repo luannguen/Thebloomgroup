@@ -72,7 +72,9 @@ export const registerAllBlocks = () => {
         { label: 'Trái', value: 'left' },
         { label: 'Giữa', value: 'center' },
         { label: 'Phải', value: 'right' }
-      ]}
+      ]},
+      { id: 'titleColor', label: 'Màu tiêu đề', type: 'color' },
+      { id: 'descriptionColor', label: 'Màu mô tả', type: 'color' }
     ]
   });
 
@@ -229,7 +231,9 @@ export const registerAllBlocks = () => {
     defaultProps: { title: 'Giới thiệu', description: 'Tổng công ty Kỹ thuật lạnh Việt Nam (VVC)...' },
     fields: [
       { id: 'title', label: 'Tiêu đề', type: 'text' },
-      { id: 'description', label: 'Mô tả', type: 'textarea' }
+      { id: 'description', label: 'Mô tả', type: 'textarea' },
+      { id: 'titleColor', label: 'Màu tiêu đề', type: 'color' },
+      { id: 'descriptionColor', label: 'Màu mô tả', type: 'color' }
     ]
   });
 
@@ -336,7 +340,9 @@ export const registerAllBlocks = () => {
     },
     fields: [
       { id: 'title', label: 'Tiêu đề', type: 'text' },
-      { id: 'description', label: 'Mô tả', type: 'textarea' }
+      { id: 'description', label: 'Mô tả', type: 'textarea' },
+      { id: 'titleColor', label: 'Màu tiêu đề', type: 'color' },
+      { id: 'descriptionColor', label: 'Màu mô tả', type: 'color' }
     ]
   });
 
@@ -583,6 +589,8 @@ export const registerAllBlocks = () => {
     fields: [
       { id: 'title', label: 'Tiêu đề', type: 'text' },
       { id: 'description', label: 'Mô tả', type: 'textarea' },
+      { id: 'titleColor', label: 'Màu tiêu đề', type: 'color' },
+      { id: 'descriptionColor', label: 'Màu mô tả', type: 'color' },
       { id: 'primaryButtonLabel', label: 'Nút chính', type: 'text' },
       { id: 'primaryButtonLink', label: 'Link nút chính', type: 'text' },
       { id: 'secondaryButtonLabel', label: 'Nút phụ', type: 'text' },
@@ -652,7 +660,8 @@ export const registerAllBlocks = () => {
     },
     fields: [
       { id: 'title', label: 'Tiêu đề chính', type: 'text' },
-      { id: 'backgroundImage', label: 'Ảnh nền banner', type: 'image' }
+      { id: 'backgroundImage', label: 'Ảnh nền banner', type: 'image' },
+      { id: 'titleColor', label: 'Màu tiêu đề', type: 'color' }
     ]
   });
 

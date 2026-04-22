@@ -10,6 +10,8 @@ interface ServiceHeroBlockProps {
   secondaryButtonLabel?: string;
   secondaryButtonLink?: string;
   sectionId?: string;
+  titleColor?: string;
+  descriptionColor?: string;
 }
 
 export const ServiceHeroBlock = ({
@@ -19,7 +21,9 @@ export const ServiceHeroBlock = ({
   primaryButtonLink = '/contact',
   secondaryButtonLabel,
   secondaryButtonLink = '/service-support',
-  sectionId
+  sectionId,
+  titleColor = '#ffffff',
+  descriptionColor = 'rgba(255, 255, 255, 0.9)'
 }: ServiceHeroBlockProps) => {
   const { t } = useTranslation();
 
@@ -42,6 +46,7 @@ export const ServiceHeroBlock = ({
             sectionId={sectionId}
             defaultContent={displayTitle}
             className="text-white mb-6 animate-in slide-in-from-left duration-700"
+            style={{ color: titleColor }}
           />
           <EditableElement
             tagName="p"
@@ -49,6 +54,7 @@ export const ServiceHeroBlock = ({
             sectionId={sectionId}
             defaultContent={displayDescription}
             className="text-xl md:text-2xl mb-8 opacity-90 animate-in slide-in-from-left duration-700 delay-100"
+            style={{ color: descriptionColor }}
           />
           <div className="flex flex-wrap gap-4 animate-in slide-in-from-left duration-700 delay-200">
             <EditableElement

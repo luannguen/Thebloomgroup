@@ -172,16 +172,16 @@ export const VisualEditorProvider = ({ children, slug = '' }: VisualEditorProvid
     setContentData((prev: any) => {
       const currentSections = prev.sections || [];
       console.log('[VisualEditorContext] updateSectionProps:', { targetId: id, availableIds: currentSections.map((s: any) => s.id), skipSync });
-      const sections = currentSections.map((s: any) => {
-        if (s.id === id) {
+      const sections = currentSections.map((section: any) => {
+        if (section.id === id) {
           console.log('[VisualEditorContext] Found section to update:', id);
-          let updatedProps = { ...s.props };
+          let updatedProps = { ...(section.props || section.data || {}) };
           Object.entries(newProps).forEach(([key, value]) => {
             updatedProps = setNestedValue(updatedProps, key, value);
           });
-          return { ...s, props: updatedProps };
+          return { ...section, props: updatedProps };
         }
-        return s;
+        return section;
       });
       const newData = { ...prev, sections };
       if (!skipSync) syncWithParent(newData);

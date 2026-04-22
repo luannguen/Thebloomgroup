@@ -10,12 +10,16 @@ interface TeamHeroBlockProps {
   title: string;
   description: string;
   sectionId?: string;
+  titleColor?: string;
+  descriptionColor?: string;
 }
 
 export const TeamHeroBlock = ({ 
   title = "ĐỘI NGŨ CHUYÊN GIA VVC", 
   description = "Hội tụ những tinh hoa trong ngành kỹ thuật lạnh...",
-  sectionId
+  sectionId,
+  titleColor = 'var(--primary)',
+  descriptionColor = 'var(--muted-foreground)'
 }: TeamHeroBlockProps) => (
   <div className="bg-gradient-to-b from-primary/10 to-transparent py-12 md:py-20">
     <div className="container mx-auto px-4 text-center">
@@ -25,6 +29,7 @@ export const TeamHeroBlock = ({
         sectionId={sectionId}
         defaultContent={title} 
         className="text-3xl md:text-5xl font-bold text-primary mb-6" 
+        style={{ color: titleColor }}
       />
       <EditableElement 
         tagName="p" 
@@ -32,6 +37,7 @@ export const TeamHeroBlock = ({
         sectionId={sectionId}
         defaultContent={description} 
         className="text-lg text-muted-foreground max-w-3xl mx-auto" 
+        style={{ color: descriptionColor }}
       />
     </div>
   </div>

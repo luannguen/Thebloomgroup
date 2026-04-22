@@ -10,12 +10,17 @@ export const BLOCK_LIBRARY = [
         fields: [
             { id: 'title', label: 'Tiêu đề', type: 'text' },
             { id: 'description', label: 'Mô tả', type: 'textarea' },
-            { id: 'image_url', label: 'Hình ảnh nền', type: 'image' },
+            { id: 'backgroundImage', label: 'Ảnh nền', type: 'image' },
+            { id: 'titleColor', label: 'Màu tiêu đề', type: 'color' },
+            { id: 'descriptionColor', label: 'Màu mô tả', type: 'color' },
             { id: 'alignment', label: 'Căn lề', type: 'select', options: [
                 { label: 'Trái', value: 'left' },
                 { label: 'Giữa', value: 'center' },
                 { label: 'Phải', value: 'right' }
-            ]}
+            ]},
+            { id: 'buttonText', label: 'Chữ trên nút 1', type: 'text' },
+            { id: 'buttonLink', label: 'Liên kết nút 1', type: 'text' },
+            { id: 'badge', label: 'Badge/Tagline', type: 'text' }
         ]
     },
     { 
@@ -109,6 +114,22 @@ export const BLOCK_LIBRARY = [
             { id: 'feature2_desc', label: 'Tính năng 2: Mô tả', type: 'text' },
             { id: 'feature3_title', label: 'Tính năng 3: Tiêu đề', type: 'text' },
             { id: 'feature3_desc', label: 'Tính năng 3: Mô tả', type: 'text' }
+        ]
+    },
+    {
+        type: 'service_hero',
+        name: 'Service: Hero',
+        icon: '🛠️',
+        category: 'Industry & Tech',
+        fields: [
+            { id: 'title', label: 'Tiêu đề', type: 'text' },
+            { id: 'description', label: 'Mô tả', type: 'textarea' },
+            { id: 'primaryButtonLabel', label: 'Nút chính', type: 'text' },
+            { id: 'primaryButtonLink', label: 'Link nút chính', type: 'text' },
+            { id: 'secondaryButtonLabel', label: 'Nút phụ', type: 'text' },
+            { id: 'secondaryButtonLink', label: 'Link nút phụ', type: 'text' },
+            { id: 'titleColor', label: 'Màu tiêu đề', type: 'color' },
+            { id: 'descriptionColor', label: 'Màu mô tả', type: 'color' }
         ]
     },
     {
@@ -258,7 +279,9 @@ export const BLOCK_LIBRARY = [
         defaultProps: { title: 'Giới thiệu', description: 'Tổng công ty Kỹ thuật lạnh Việt Nam (VVC)...' },
         fields: [
             { id: 'title', label: 'Tiêu đề', type: 'text' },
-            { id: 'description', label: 'Mô tả', type: 'textarea' }
+            { id: 'description', label: 'Mô tả', type: 'textarea' },
+            { id: 'titleColor', label: 'Màu tiêu đề', type: 'color' },
+            { id: 'descriptionColor', label: 'Màu mô tả', type: 'color' }
         ]
     },
     {
@@ -333,7 +356,9 @@ export const BLOCK_LIBRARY = [
         defaultProps: { title: 'Đội ngũ', subtitle: 'Chúng tôi là một tập thể...' },
         fields: [
             { id: 'title', label: 'Tiêu đề', type: 'text' },
-            { id: 'subtitle', label: 'Mô tả', type: 'textarea' }
+            { id: 'subtitle', label: 'Mô tả', type: 'textarea' },
+            { id: 'titleColor', label: 'Màu tiêu đề', type: 'color' },
+            { id: 'descriptionColor', label: 'Màu mô tả', type: 'color' }
         ]
     },
     {
@@ -383,7 +408,8 @@ export const BLOCK_LIBRARY = [
         defaultProps: { title: 'About Us', backgroundImage: '/assets/about-v2/banner.jpg' },
         fields: [
             { id: 'title', label: 'Tiêu đề', type: 'text' },
-            { id: 'backgroundImage', label: 'Ảnh banner', type: 'image' }
+            { id: 'backgroundImage', label: 'Ảnh banner', type: 'image' },
+            { id: 'titleColor', label: 'Màu tiêu đề', type: 'color' }
         ]
     },
     {

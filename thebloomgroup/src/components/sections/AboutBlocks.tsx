@@ -10,13 +10,17 @@ interface AboutHeroBlockProps {
   title: string;
   description: string;
   sectionId?: string;
+  titleColor?: string;
+  descriptionColor?: string;
 }
 
 export const AboutHeroBlock = ({ 
   title, 
   description,
-  sectionId
-}: any) => {
+  sectionId,
+  titleColor = 'var(--primary)',
+  descriptionColor = 'var(--muted-foreground)'
+}: AboutHeroBlockProps) => {
   const { t } = useTranslation();
   const defaultTitle = t('about_hero_title', "Giới thiệu");
   const defaultDescription = t('about_hero_desc', "Tổng công ty Kỹ thuật lạnh Việt Nam (VVC) - Đơn vị tiên phong trong giải pháp nhiệt lạnh công nghiệp.");
@@ -30,6 +34,7 @@ export const AboutHeroBlock = ({
           sectionId={sectionId}
           defaultContent={title || defaultTitle} 
           className="text-3xl md:text-5xl font-bold text-primary mb-6" 
+          style={{ color: titleColor }}
         />
         <EditableElement 
           tagName="p" 
@@ -37,6 +42,7 @@ export const AboutHeroBlock = ({
           sectionId={sectionId}
           defaultContent={description || defaultDescription} 
           className="text-lg text-muted-foreground max-w-3xl" 
+          style={{ color: descriptionColor }}
         />
       </div>
     </div>

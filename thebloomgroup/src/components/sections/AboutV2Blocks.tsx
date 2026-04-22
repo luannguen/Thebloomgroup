@@ -5,18 +5,23 @@ import { MapPin, Phone, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../ui/accordion';
 import { useSettings } from '../../hooks/useSettings';
+import { useVisualEditor } from '../../context/VisualEditorContext';
 
 interface AboutV2HeroProps {
   sectionId?: string;
   title?: string;
   backgroundImage?: string;
+  titleColor?: string;
 }
 
 export const AboutV2HeroBlock: React.FC<AboutV2HeroProps> = ({ 
   sectionId,
   title = 'About Us', 
-  backgroundImage = '/assets/about-v2/banner.jpg' 
+  backgroundImage = '/assets/about-v2/banner.jpg',
+  titleColor = '#ffffff'
 }) => {
+  const { editMode } = useVisualEditor();
+
   return (
     <section className="relative h-[400px] flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 z-0">
@@ -29,8 +34,11 @@ export const AboutV2HeroBlock: React.FC<AboutV2HeroProps> = ({
         </EditableElement>
       </div>
       
-      <div className="relative z-10 text-center px-4 -mt-12">
-        <h1 className="text-5xl md:text-7xl font-extrabold text-white mb-6 animate-fade-in uppercase tracking-[0.2em]">
+      <div className={`relative z-10 text-center px-4 -mt-12 ${editMode ? 'pointer-events-none' : ''}`}>
+        <h1 
+          className={`text-5xl md:text-7xl font-extrabold text-white mb-6 animate-fade-in uppercase tracking-[0.2em] ${editMode ? 'pointer-events-auto' : ''}`}
+          style={{ color: titleColor }}
+        >
           <EditableElement sectionId={sectionId} fieldKey="title" defaultContent={title || ""} />
         </h1>
         <div className="flex items-center justify-center gap-3 text-white font-medium text-base md:text-lg">

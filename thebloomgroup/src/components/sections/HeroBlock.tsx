@@ -1,4 +1,5 @@
 import { EditableElement } from '../admin/EditableElement';
+import { useVisualEditor } from '../../context/VisualEditorContext';
 
 interface HeroBlockProps {
   title: string;
@@ -11,6 +12,8 @@ interface HeroBlockProps {
   button2Link?: string;
   badge?: string;
   sectionId?: string;
+  titleColor?: string;
+  descriptionColor?: string;
 }
 
 export const HeroBlock = ({ 
@@ -23,8 +26,12 @@ export const HeroBlock = ({
   buttonText,
   buttonLink,
   button2Text,
-  button2Link
+  button2Link,
+  titleColor = '#ffffff',
+  descriptionColor = 'rgba(255, 255, 255, 0.9)'
 }: HeroBlockProps) => {
+  const { editMode } = useVisualEditor();
+
   return (
     <div className={`relative py-20 md:py-32 overflow-hidden ${backgroundImage ? 'text-white' : ''}`}>
       <div className="absolute inset-0 z-0">
@@ -39,8 +46,8 @@ export const HeroBlock = ({
         </EditableElement>
         <div className="absolute inset-0 bg-black/50 pointer-events-none" />
       </div>
-      <div className={`container-custom relative z-10 ${alignment === 'center' ? 'text-center items-center' : 'text-left'}`}>
-        <div className={`max-w-3xl ${alignment === 'center' ? 'mx-auto' : ''}`}>
+      <div className={`container-custom relative z-10 ${alignment === 'center' ? 'text-center items-center' : 'text-left'} ${editMode ? 'pointer-events-none' : ''}`}>
+        <div className={`max-w-3xl ${alignment === 'center' ? 'mx-auto' : ''} ${editMode ? 'pointer-events-auto' : ''}`}>
           {badge && (
             <EditableElement 
               tagName="span" 
@@ -56,6 +63,7 @@ export const HeroBlock = ({
             sectionId={sectionId} 
             defaultContent={title} 
             className="text-4xl md:text-6xl font-extrabold mb-6 transition-all tracking-tight leading-tight" 
+            style={{ color: titleColor }}
           />
           <EditableElement 
             tagName="p" 
@@ -63,6 +71,7 @@ export const HeroBlock = ({
             sectionId={sectionId} 
             defaultContent={description} 
             className={`text-lg md:text-xl mb-8 opacity-90 max-w-2xl leading-relaxed ${alignment === 'center' ? 'mx-auto' : ''}`} 
+            style={{ color: descriptionColor }}
           />
           <div className={`flex flex-wrap gap-4 items-center ${alignment === 'center' ? 'justify-center' : ''}`}>
             {buttonText && (
