@@ -8,6 +8,8 @@ export interface Banner {
     image_url: string;
     link: string | null;
     description: string | null;
+    title_color: string | null;
+    description_color: string | null;
     position: 'home_main' | 'popup' | 'sidebar' | string;
     order_index: number;
     is_active: boolean;

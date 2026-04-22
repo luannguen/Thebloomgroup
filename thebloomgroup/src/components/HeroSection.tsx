@@ -23,6 +23,8 @@ const HeroSection = () => {
               id: '1',
               title: "Hệ thống điện lạnh công nghiệp",
               description: "Giải pháp hiện đại cho mọi quy mô doanh nghiệp",
+              title_color: null,
+              description_color: null,
               image_url: "https://images.unsplash.com/photo-1459767129954-1b1c1f9b9ace?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
               link: "/products/industrial",
               position: 'home_main',
@@ -33,6 +35,8 @@ const HeroSection = () => {
               id: '2',
               title: "Công nghệ tiết kiệm năng lượng",
               description: "Giải pháp xanh cho tương lai bền vững",
+              title_color: null,
+              description_color: null,
               image_url: "https://images.unsplash.com/photo-1497604401993-f2e922e5cb0a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
               link: "/technology",
               position: 'home_main',
@@ -43,6 +47,8 @@ const HeroSection = () => {
               id: '3',
               title: "Dịch vụ bảo trì chuyên nghiệp",
               description: "Đội ngũ kỹ thuật hàng đầu, phục vụ 24/7",
+              title_color: null,
+              description_color: null,
               image_url: "https://images.unsplash.com/photo-1551038247-3d9af20df552?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
               link: "/services",
               position: 'home_main',
@@ -93,8 +99,18 @@ const HeroSection = () => {
           </div>
           <div className="container-custom h-full flex items-center relative z-20">
             <div className="max-w-2xl text-white">
-              <h1 className="text-white text-4xl md:text-5xl font-bold mb-4">{slide.title}</h1>
-              <p className="text-xl md:text-2xl mb-8">{slide.description}</p>
+              <h1 
+                className="text-white text-4xl md:text-5xl font-bold mb-4"
+                style={{ color: slide.title_color || 'inherit' }}
+              >
+                {slide.title}
+              </h1>
+              <p 
+                className="text-xl md:text-2xl mb-8"
+                style={{ color: slide.description_color || 'inherit' }}
+              >
+                {slide.description}
+              </p>
               {slide.link && (
                 <a
                   href={slide.link}

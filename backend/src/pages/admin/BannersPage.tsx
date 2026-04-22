@@ -37,6 +37,8 @@ export default function BannersPage() {
         image_url: "",
         link: "",
         description: "",
+        title_color: "#ffffff",
+        description_color: "#ffffff",
         position: "home_main",
         order_index: 0,
         is_active: true,
@@ -73,6 +75,8 @@ export default function BannersPage() {
                 image_url: banner.image_url,
                 link: banner.link,
                 description: banner.description,
+                title_color: banner.title_color || "#ffffff",
+                description_color: banner.description_color || "#ffffff",
                 position: banner.position,
                 order_index: banner.order_index,
                 is_active: banner.is_active,
@@ -84,6 +88,8 @@ export default function BannersPage() {
                 image_url: "",
                 link: "",
                 description: "",
+                title_color: "#ffffff",
+                description_color: "#ffffff",
                 position: "home_main",
                 order_index: 0,
                 is_active: true,
@@ -338,6 +344,51 @@ export default function BannersPage() {
                                     setFormData({ ...formData, description: e.target.value })
                                 }
                             />
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-4">
+                            <div className="space-y-2">
+                                <Label htmlFor="title_color">Title Color</Label>
+                                <div className="flex gap-2">
+                                    <Input
+                                        id="title_color"
+                                        type="color"
+                                        className="w-12 h-10 p-1"
+                                        value={formData.title_color || "#ffffff"}
+                                        onChange={(e) =>
+                                            setFormData({ ...formData, title_color: e.target.value })
+                                        }
+                                    />
+                                    <Input
+                                        value={formData.title_color || "#ffffff"}
+                                        onChange={(e) =>
+                                            setFormData({ ...formData, title_color: e.target.value })
+                                        }
+                                        className="flex-1"
+                                    />
+                                </div>
+                            </div>
+                            <div className="space-y-2">
+                                <Label htmlFor="description_color">Description Color</Label>
+                                <div className="flex gap-2">
+                                    <Input
+                                        id="description_color"
+                                        type="color"
+                                        className="w-12 h-10 p-1"
+                                        value={formData.description_color || "#ffffff"}
+                                        onChange={(e) =>
+                                            setFormData({ ...formData, description_color: e.target.value })
+                                        }
+                                    />
+                                    <Input
+                                        value={formData.description_color || "#ffffff"}
+                                        onChange={(e) =>
+                                            setFormData({ ...formData, description_color: e.target.value })
+                                        }
+                                        className="flex-1"
+                                    />
+                                </div>
+                            </div>
                         </div>
 
                         <DialogFooter>
