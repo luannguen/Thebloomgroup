@@ -63,8 +63,14 @@ const HomePage = () => {
       );
   }
 
-  // Get the primary home slug from settings, fallback to 'home'
-  const homeSlug = getSetting('primary_home_slug', 'home');
+  // Determine the slug based on Navigation Menu
+  // 1. If explicitly at /home, we want 'home'
+  // 2. If at /, we use the path configured in the menu's primary home item
+  const isExplicitHome = location.pathname === '/home';
+  
+  // Extract slug from homePath (e.g. /home_v2 -> home_v2, / -> home)
+  const menuHomeSlug = homePath && homePath !== '/' ? homePath.replace(/^\//, '') : 'home';
+  const homeSlug = isExplicitHome ? 'home' : menuHomeSlug;
 
   return (
     <VisualEditorProvider slug={homeSlug}>

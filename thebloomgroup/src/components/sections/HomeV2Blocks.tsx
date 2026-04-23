@@ -10,63 +10,151 @@ export const HomeV2PartnershipBlock = ({
   title,
   subtitle,
   description,
-  partnerLogo,
-  partnerName,
+  partnerImage,
+  logo1,
+  logo2,
+  logo3,
+  exp_value,
+  exp_text,
   sectionId
 }: any) => {
   const { t } = useTranslation();
-  
-  const displayTitle = title || t('home_v2_partnership_title', "Đối Tác Chiến Lược Của Solar Turbines");
-  const displaySubtitle = subtitle || t('home_v2_partnership_subtitle', "Thuong Thien Technologies (TTT)");
-  const displayDesc = description || t('home_v2_partnership_desc', "Chúng tôi tự hào là đại diện chính thức và đối tác chiến lược của Solar Turbines tại Việt Nam, cung cấp các giải pháp năng lượng và hệ thống nén khí tiên tiến nhất.");
-  const displayLogo = partnerLogo || "/assets/partners/solar-turbines-logo.svg";
 
-  const partners = [
-    { name: "Caterpillar", logo: "https://www.solar-turbines.com/etc.clientlibs/solar-turbines/clientlibs/clientlib-site/resources/images/cat-logo.png" },
-    { name: "Solar Turbines", logo: "https://www.solar-turbines.com/etc.clientlibs/solar-turbines/clientlibs/clientlib-site/resources/images/solar-logo.png" },
-    { name: "TTT", logo: "/assets/partners/ttt-logo.svg" }
-  ];
+  // Dữ liệu mặc định an toàn
+  const dTitle = title || t('home_v2_partnership_title', "Đối Tác Chiến Lược Của Solar Turbines");
+  const dSubtitle = subtitle || t('home_v2_partnership_subtitle', "Thuong Thien Technologies (TTT)");
+  const dDesc = description || t('home_v2_partnership_desc', "Chúng tôi tự hào là đại diện chính thức và đối tác chiến lược của Solar Turbines tại Việt Nam, cung cấp các giải pháp năng lượng và hệ thống nén khí tiên tiến nhất.");
+  const dPartnerImage = partnerImage || "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=800";
+  const dLogo1 = logo1 || 'https://www.solar-turbines.com/etc.clientlibs/solar-turbines/clientlibs/clientlib-site/resources/images/cat-logo.png';
+  const dLogo2 = logo2 || 'https://www.solar-turbines.com/etc.clientlibs/solar-turbines/clientlibs/clientlib-site/resources/images/solar-logo.png';
+  const dLogo3 = logo3 || '/assets/partners/ttt-logo.svg';
+  const dExpValue = exp_value || "20+";
+  const dExpText = exp_text || "Năm kinh nghiệm trong ngành công nghiệp nặng";
 
   return (
-    <section className="py-24 bg-white overflow-hidden">
-      <div className="container-custom">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+    <section className="py-24 bg-white relative" data-section-id={sectionId}>
+      <div className="container mx-auto px-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          {/* Nội dung bên trái */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
+            className="z-10"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-bold mb-6">
-              <Shield className="w-4 h-4" />
-              <EditableElement tagName="span" fieldKey="subtitle" sectionId={sectionId} defaultContent={displaySubtitle} />
-            </div>
-            <EditableElement tagName="h2" fieldKey="title" sectionId={sectionId} defaultContent={displayTitle} className="text-4xl md:text-5xl font-black mb-8 text-slate-900 leading-tight block" />
-            <EditableElement tagName="div" fieldKey="description" sectionId={sectionId} defaultContent={displayDesc} className="text-lg text-slate-600 mb-10 leading-relaxed block" />
-            
-            <div className="flex flex-wrap gap-8 items-center grayscale opacity-60">
-              {partners.map((p, i) => (
-                <img key={i} src={p.logo} alt={p.name} className="h-10 object-contain" />
-              ))}
+            <div className="relative z-20 space-y-8 md:space-y-12 pr-0 md:pr-12">
+              <div className="space-y-4">
+                <EditableElement
+                  fieldKey="subtitle"
+                  sectionId={sectionId}
+                  defaultContent={dSubtitle}
+                  className="inline-block px-4 py-1.5 bg-slate-100 text-[#B8860B] text-[10px] font-black uppercase tracking-[0.3em] border-l-4 border-[#B8860B] mb-2"
+                >
+                  {dSubtitle}
+                </EditableElement>
+
+                <div className="mb-6">
+                  <EditableElement
+                    tagName="h2"
+                    fieldKey="title"
+                    sectionId={sectionId}
+                    defaultContent={dTitle}
+                    className="text-4xl md:text-5xl font-black text-slate-900 leading-tight inline-block"
+                  />
+                </div>
+
+                <div className="mb-10">
+                  <EditableElement
+                    tagName="div"
+                    fieldKey="description"
+                    sectionId={sectionId}
+                    defaultContent={dDesc}
+                    type="rich-text"
+                    className="text-lg text-slate-600 leading-relaxed block"
+                  />
+                </div>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-8 md:gap-12 pt-8 border-t border-slate-100 relative z-30">
+                <EditableElement
+                  type="image"
+                  fieldKey="logo1"
+                  defaultContent={dLogo1}
+                  className="h-10 w-auto grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300 pointer-events-auto"
+                >
+                  <img src={dLogo1} alt="Logo 1" className="h-full w-auto" />
+                </EditableElement>
+
+                <EditableElement
+                  type="image"
+                  fieldKey="logo2"
+                  defaultContent={dLogo2}
+                  className="h-10 w-auto grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300 pointer-events-auto"
+                >
+                  <img src={dLogo2} alt="Logo 2" className="h-full w-auto" />
+                </EditableElement>
+
+                <EditableElement
+                  type="image"
+                  fieldKey="logo3"
+                  defaultContent={dLogo3}
+                  className="h-10 w-auto grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300 pointer-events-auto"
+                >
+                  <img src={dLogo3} alt="Logo 3" className="h-full w-auto" />
+                </EditableElement>
+              </div>
             </div>
           </motion.div>
-          
+
+          {/* Hình ảnh bên phải */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 1 }}
-            className="relative"
+            transition={{ duration: 0.8 }}
+            className="relative z-20"
           >
-            <div className="aspect-square rounded-[3rem] bg-slate-100 overflow-hidden relative shadow-2xl">
-              <EditableElement type="image" fieldKey="partnerImage" sectionId={sectionId} defaultContent="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=800">
-                <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=800" alt="Industrial" className="w-full h-full object-cover" />
+            {/* Main Image Container - Sharp Corners & Heavy Shadow */}
+            <div className="relative aspect-[4/3] rounded-none overflow-hidden shadow-[30px_30px_60px_-15px_rgba(0,0,0,0.4)] border-b-[12px] border-primary group">
+              <EditableElement
+                type="image"
+                fieldKey="partnerImage"
+                sectionId={sectionId}
+                defaultContent={dPartnerImage}
+                className="w-full h-full z-30 relative"
+              >
+                <img src={dPartnerImage} alt="Industrial" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" />
               </EditableElement>
-              <div className="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent" />
+
+              {/* Professional Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-slate-900/60 via-slate-900/20 to-transparent mix-blend-multiply pointer-events-none z-20" />
+              <div className="absolute inset-0 ring-1 ring-inset ring-white/10 pointer-events-none z-20" />
             </div>
-            <div className="absolute -bottom-10 -left-10 p-10 bg-white rounded-3xl shadow-2xl border border-slate-100 max-w-[280px]">
-              <div className="text-4xl font-black text-primary mb-2">20+</div>
-              <div className="text-slate-600 font-bold uppercase tracking-widest text-xs">Năm kinh nghiệm trong ngành công nghiệp nặng</div>
+
+            {/* Stats Badge - High Contrast & Elevated */}
+            <div className="absolute -bottom-10 -left-6 md:-left-12 p-8 md:p-10 bg-white shadow-[0_40px_100px_rgba(0,0,0,0.35)] border-l-[10px] border-primary max-w-[320px] z-[60] transform hover:-translate-y-2 transition-all duration-500">
+              <div className="relative mb-3">
+                <EditableElement
+                  type="text"
+                  fieldKey="exp_value"
+                  defaultContent={dExpValue}
+                  className="text-6xl font-black text-primary block"
+                >
+                  {dExpValue}
+                </EditableElement>
+              </div>
+              <div className="relative">
+                <EditableElement
+                  type="text"
+                  fieldKey="exp_text"
+                  defaultContent={dExpText}
+                  className="text-slate-800 font-extrabold uppercase tracking-[0.2em] text-[10px] md:text-xs leading-relaxed block"
+                >
+                  {dExpText}
+                </EditableElement>
+                <div className="w-12 h-1 bg-primary mt-2" />
+              </div>
             </div>
           </motion.div>
         </div>
@@ -82,7 +170,7 @@ export const HomeV2SectorsBlock = ({
   sectionId
 }: any) => {
   const { t } = useTranslation();
-  
+
   const displayTitle = title || t('home_v2_sectors_title', "Lĩnh Vực Hoạt Động");
   const displaySubtitle = subtitle || t('home_v2_sectors_subtitle', "Chúng tôi cung cấp giải pháp chuyên biệt cho các ngành công nghiệp trọng điểm.");
 
@@ -100,7 +188,7 @@ export const HomeV2SectorsBlock = ({
           <EditableElement tagName="h2" fieldKey="title" sectionId={sectionId} defaultContent={displayTitle} className="text-4xl font-black mb-6 text-slate-900 block" />
           <EditableElement tagName="p" fieldKey="subtitle" sectionId={sectionId} defaultContent={displaySubtitle} className="text-lg text-slate-600 block" />
         </div>
-        
+
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {sectors.map((sector, i) => (
             <motion.div
@@ -137,7 +225,7 @@ export const HomeV2SolutionsBlock = ({
   sectionId
 }: any) => {
   const { t } = useTranslation();
-  
+
   const displayTitle = title || t('home_v2_solutions_title', "Giải Pháp Năng Lượng & Hệ Thống Nén");
   const displaySubtitle = subtitle || t('home_v2_solutions_subtitle', "Các dòng sản phẩm tuabin khí và máy nén khí hàng đầu thế giới.");
 
@@ -159,7 +247,7 @@ export const HomeV2SolutionsBlock = ({
             {t('all_solutions', 'Tất cả giải pháp')} <ArrowRight className="ml-2 w-4 h-4" />
           </Link>
         </div>
-        
+
         <div className="grid md:grid-cols-3 gap-10">
           {solutions.map((sol, i) => (
             <motion.div
@@ -193,7 +281,7 @@ export const HomeV2StatsBlock = ({
   sectionId
 }: any) => {
   const { t } = useTranslation();
-  
+
   const displayTitle = title || t('home_v2_stats_title', "Sức Mạnh Từ Kinh Nghiệm & Công Nghệ");
 
   const stats = [
@@ -208,12 +296,12 @@ export const HomeV2StatsBlock = ({
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-0 right-0 w-1/2 h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent" />
       </div>
-      
+
       <div className="container-custom relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-20">
           <EditableElement tagName="h2" fieldKey="title" sectionId={sectionId} defaultContent={displayTitle} className="text-4xl md:text-5xl font-black mb-8 block leading-tight" />
         </div>
-        
+
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-12">
           {stats.map((stat, i) => (
             <motion.div

@@ -35,7 +35,19 @@ export function usePages() {
                     id: 'home-virtual',
                     slug: 'home',
                     title: 'Trang chủ (Mặc định)',
-                    content: '{"sections":[]}',
+                    content: JSON.stringify({
+                        sections: [
+                            { id: 'banner', type: 'home_banner_slider', props: {} },
+                            { id: 'refrigeration', type: 'refrigeration', props: {} },
+                            { id: 'me_systems', type: 'me_systems', props: {} },
+                            { id: 'data_center', type: 'data_center', props: {} },
+                            { id: 'products', type: 'product_categories', props: {} },
+                            { id: 'projects', type: 'featured_projects', props: {} },
+                            { id: 'service_lifecycle', type: 'service_lifecycle', props: {} },
+                            { id: 'news_events', type: 'news_events', props: {} },
+                            { id: 'contact', type: 'contact_form', props: {} }
+                        ]
+                    }),
                     excerpt: 'Trang chủ chính của website',
                     image_url: null,
                     is_active: true,
@@ -49,7 +61,18 @@ export function usePages() {
                     id: 'home-v2-virtual',
                     slug: 'home_v2',
                     title: 'Trang chủ V2 (Hệ thống mới)',
-                    content: '{"sections":[]}',
+                    content: JSON.stringify({
+                        sections: [
+                            { id: 'banner', type: 'home_banner_slider', props: {} },
+                            { id: 'partnership', type: 'home_v2_partnership', props: {} },
+                            { id: 'sectors', type: 'home_v2_sectors', props: {} },
+                            { id: 'solutions', type: 'home_v2_solutions', props: {} },
+                            { id: 'stats', type: 'home_v2_stats', props: {} },
+                            { id: 'featured_projects', type: 'featured_projects', props: {} },
+                            { id: 'news', type: 'news_events', props: {} },
+                            { id: 'contact', type: 'contact_form', props: {} }
+                        ]
+                    }),
                     excerpt: 'Trang chủ phiên bản mới với cấu trúc công nghiệp',
                     image_url: null,
                     is_active: true,

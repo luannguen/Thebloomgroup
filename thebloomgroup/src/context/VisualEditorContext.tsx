@@ -17,6 +17,7 @@ interface VisualEditorContextType {
   syncSections: (sections: any[]) => void;
   selectedSectionId: string | null;
   setSelectedSectionId: (id: string | null) => void;
+  selectSection: (id: string | null) => void;
   requestImageChange: (fieldKey: string, sectionId?: string) => void;
   isLoading: boolean;
   isPageActive: boolean;
@@ -35,6 +36,7 @@ const VisualEditorContext = createContext<VisualEditorContextType>({
   syncSections: () => {},
   selectedSectionId: null,
   setSelectedSectionId: () => {},
+  selectSection: () => {},
   requestImageChange: () => {},
   isLoading: false,
   isPageActive: true,
@@ -49,11 +51,18 @@ interface VisualEditorProviderProps {
 }
 
 export const VisualEditorProvider = ({ children, slug = '' }: VisualEditorProviderProps) => {
-  const [editMode, setEditMode] = useState(false);
+  const [editMode, setEditMode] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('edit_mode') === 'true';
+    }
+    return false;
+  });
   const [contentData, setContentData] = useState<any>({});
   const [selectedSectionId, setSelectedSectionId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isPageActive, setIsPageActive] = useState(true);
+  const isInitialLoad = React.useRef(true);
 
   // Initialize blocks
   useEffect(() => {
@@ -202,13 +211,18 @@ export const VisualEditorProvider = ({ children, slug = '' }: VisualEditorProvid
     }, '*');
   }, [editMode, slug, selectedSectionId]);
 
-  // Check URL params for edit_mode
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    if (params.get('edit_mode') === 'true') {
-      setEditMode(true);
-    }
-  }, []);
+  // Select a section and notify parent
+  const selectSection = React.useCallback((id: string | null) => {
+    if (!editMode) return;
+    console.log('[VisualEditorContext] Selecting section:', id);
+    setSelectedSectionId(id);
+    window.parent.postMessage({
+      type: 'VISUAL_EDIT_SECTION_SELECTED',
+      sectionId: id,
+      slug
+    }, '*');
+  }, [editMode, slug]);
+
 
   // Listen for messages from Admin
   useEffect(() => {
@@ -222,13 +236,23 @@ export const VisualEditorProvider = ({ children, slug = '' }: VisualEditorProvid
       
       switch (type) {
         case 'VISUAL_EDIT_UPDATE_DATA':
+          const { sections: newSections } = data;
+          if (newSections && Array.isArray(newSections)) {
+            console.log('[VisualEditorContext] Received update data:', newSections.length, 'sections');
+            setContentData((prev: any) => {
+              const updatedSections = newSections.map((s: any, idx: number) => ({
+                ...s,
+                id: s.id || (prev.sections?.[idx]?.id || `section_${idx}`)
+              }));
+              return { ...prev, sections: updatedSections };
+            });
+            isInitialLoad.current = false;
+          }
+          break;
+        case 'VISUAL_EDIT_UPDATE_SECTION_PROPS':
           if (sectionId && props) {
-            updateSectionProps(sectionId, props, true);
-          } else if (sections) {
-            console.log('[VisualEditorContext] Updating all sections from parent:', sections.length);
-            isSyncingFromParent.current = true;
-            setContentData((prev: any) => ({ ...prev, sections }));
-            setTimeout(() => { isSyncingFromParent.current = false; }, 100);
+            console.log('[VisualEditorContext] Updating section props from message:', { sectionId, props });
+            updateSectionProps(sectionId, props, true); // skipSync=true because we are receiving it from parent
           }
           break;
         case 'VISUAL_EDIT_IMAGE_SELECTED':
@@ -330,7 +354,7 @@ export const VisualEditorProvider = ({ children, slug = '' }: VisualEditorProvid
     <VisualEditorContext.Provider value={{ 
       editMode, contentData, updateField, updateSectionProps, 
       addSection, removeSection, reorderSections, moveSection, syncSections,
-      selectedSectionId, setSelectedSectionId,
+      selectedSectionId, setSelectedSectionId, selectSection,
       requestImageChange, isLoading, isPageActive, slug 
     }}>
       {children}

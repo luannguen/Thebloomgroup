@@ -8,6 +8,8 @@ import SEOHelmet from "@/components/common/SEOHelmet";
 import MainLayout from "./components/layouts/MainLayout";
 import { registerAllBlocks } from "./components/sections";
 import SecurityManager from "./components/common/SecurityManager";
+import { useSettings } from "./hooks/useSettings";
+import MaintenanceMode from "./components/common/MaintenanceMode";
 
 // Register all visual editor blocks
 registerAllBlocks();
@@ -86,88 +88,101 @@ const CommercialProjects = lazy(() => import("./pages/projects/Commercial"));
 const SpecializedProjects = lazy(() => import("./pages/projects/Specialized"));
 const ProjectCategory = lazy(() => import("./pages/ProjectCategory"));
 
-const App = () => (
-  <TooltipProvider>
-    <HelmetProvider>
-      <SEOHelmet />
-      <SecurityManager />
-      <BrowserRouter>
+const App = () => {
+  const { settings, loading } = useSettings();
+  const isMaintenanceMode = settings['maintenance_mode'] === 'true';
+
+  if (loading) {
+    return <PageLoader />;
+  }
+
+  if (isMaintenanceMode) {
+    return <MaintenanceMode />;
+  }
+
+  return (
+    <TooltipProvider>
+      <HelmetProvider>
+        <SEOHelmet />
+        <SecurityManager />
+        <BrowserRouter>
           <Suspense fallback={<PageLoader />}>
-          <Routes>
-            {/* Public routes */}
-            <Route path="/" element={<MainLayout />}>
-              <Route index element={<HomePage />} />
-              <Route path="home" element={<HomePage />} />
-              <Route path="home-v2" element={<HomeV2 />} />
-              <Route path="home_v2" element={<HomeV2 />} />
-              <Route path="about" element={<Navigate to="/about-us" replace />} />
-              <Route path="gioi-thieu" element={<Navigate to="/about-us" replace />} />
-              <Route path="about-us" element={<About />} />
-              <Route path="about-us-v2" element={<AboutUsV2 />} />
-              <Route path="about-vvc" element={<Navigate to="/about-us" replace />} />
-              <Route path="intro" element={<StaticPage slug="intro" />} />
-              <Route path="page/:slug" element={<StaticPage />} />
-              <Route path="products" element={<Products />} />
-              <Route path="products/industrial" element={<IndustrialProducts />} />
-              <Route path="products/commercial" element={<CommercialProducts />} />
-              <Route path="products/residential" element={<ResidentialProducts />} />
-              <Route path="products/cold-storage" element={<ColdStorageProducts />} />
-              <Route path="products/auxiliary" element={<AuxiliaryProducts />} />
-              <Route path="projects" element={<StaticPage slug="projects" />} />
-              <Route path="projects/category/:slug" element={<ProjectCategory />} /> {/* Dynamic Category Route */}
-              <Route path="projects/industrial" element={<IndustrialProjects />} />
-              <Route path="projects/commercial" element={<CommercialProjects />} />
-              <Route path="projects/specialized" element={<SpecializedProjects />} />
-              <Route path="services" element={<Services />} />
-              <Route path="services/:slug" element={<ServiceDetail />} /> {/* Dynamic Service Detail */}
-              <Route path="installation" element={<Installation />} />
-              <Route path="maintenance" element={<Maintenance />} />
-              <Route path="repair" element={<Repair />} />
-              <Route path="consulting" element={<Consulting />} />
-              <Route path="service-support" element={<ServiceSupport />} />
-              <Route path="technologies" element={<Technologies />} />
-              <Route path="technologies/energy-efficiency" element={<EnergyEfficiency />} />
-              <Route path="technology" element={<Navigate to="/technologies" replace />} />
-              <Route path="news" element={<News />} />
-              <Route path="news/category/:category" element={<News />} />
-              <Route path="news/tag/:tag" element={<News />} />
-              <Route path="news/:slug" element={<NewsDetail />} />
-              <Route path="events" element={<Events />} />
-              <Route path="event-details/:id" element={<EventDetail />} />
-              <Route path="project-details/:id" element={<ProjectDetail />} />
-              <Route path="search" element={<SearchResults />} />
-              <Route path="publications" element={<Publications />} />
-              <Route path="publications/inverter-technology" element={<InverterTechnology />} />
-              <Route path="publications/heat-recovery-solutions" element={<HeatRecoverySolutions />} />
-              <Route path="publications/green-building-standards" element={<GreenBuildingStandards />} />
-              <Route path="publications/energy-efficiency-report" element={<EnergyEfficiencyReport />} />
-              <Route path="contact" element={<StaticPage slug="contact" />} />
-              <Route path="team" element={<StaticPage slug="team" />} />
-              <Route path="recruitment/:slug" element={<JobDetail />} />
-              <Route path="legal/privacy" element={<Privacy />} />
-              <Route path="legal/terms" element={<Terms />} />
-              <Route path="legal/cookies" element={<Cookies />} />
-              <Route path="legal/sitemap" element={<Sitemap />} />
+            <Routes>
+              {/* Public routes */}
+              <Route path="/" element={<MainLayout />}>
+                <Route index element={<HomePage />} />
+                <Route path="home" element={<HomePage />} />
+                <Route path="home-v2" element={<HomeV2 />} />
+                <Route path="home_v2" element={<HomeV2 />} />
+                <Route path="about" element={<Navigate to="/about-us" replace />} />
+                <Route path="gioi-thieu" element={<Navigate to="/about-us" replace />} />
+                <Route path="about-us" element={<About />} />
+                <Route path="about-us-v2" element={<AboutUsV2 />} />
+                <Route path="about-vvc" element={<Navigate to="/about-us" replace />} />
+                <Route path="intro" element={<StaticPage slug="intro" />} />
+                <Route path="page/:slug" element={<StaticPage />} />
+                <Route path="products" element={<Products />} />
+                <Route path="products/industrial" element={<IndustrialProducts />} />
+                <Route path="products/commercial" element={<CommercialProducts />} />
+                <Route path="products/residential" element={<ResidentialProducts />} />
+                <Route path="products/cold-storage" element={<ColdStorageProducts />} />
+                <Route path="products/auxiliary" element={<AuxiliaryProducts />} />
+                <Route path="projects" element={<StaticPage slug="projects" />} />
+                <Route path="projects/category/:slug" element={<ProjectCategory />} /> {/* Dynamic Category Route */}
+                <Route path="projects/industrial" element={<IndustrialProjects />} />
+                <Route path="projects/commercial" element={<CommercialProjects />} />
+                <Route path="projects/specialized" element={<SpecializedProjects />} />
+                <Route path="services" element={<Services />} />
+                <Route path="services/:slug" element={<ServiceDetail />} /> {/* Dynamic Service Detail */}
+                <Route path="installation" element={<Installation />} />
+                <Route path="maintenance" element={<Maintenance />} />
+                <Route path="repair" element={<Repair />} />
+                <Route path="consulting" element={<Consulting />} />
+                <Route path="service-support" element={<ServiceSupport />} />
+                <Route path="technologies" element={<Technologies />} />
+                <Route path="technologies/energy-efficiency" element={<EnergyEfficiency />} />
+                <Route path="technology" element={<Navigate to="/technologies" replace />} />
+                <Route path="news" element={<News />} />
+                <Route path="news/category/:category" element={<News />} />
+                <Route path="news/tag/:tag" element={<News />} />
+                <Route path="news/:slug" element={<NewsDetail />} />
+                <Route path="events" element={<Events />} />
+                <Route path="event-details/:id" element={<EventDetail />} />
+                <Route path="project-details/:id" element={<ProjectDetail />} />
+                <Route path="search" element={<SearchResults />} />
+                <Route path="publications" element={<Publications />} />
+                <Route path="publications/inverter-technology" element={<InverterTechnology />} />
+                <Route path="publications/heat-recovery-solutions" element={<HeatRecoverySolutions />} />
+                <Route path="publications/green-building-standards" element={<GreenBuildingStandards />} />
+                <Route path="publications/energy-efficiency-report" element={<EnergyEfficiencyReport />} />
+                <Route path="contact" element={<StaticPage slug="contact" />} />
+                <Route path="team" element={<StaticPage slug="team" />} />
+                <Route path="recruitment/:slug" element={<JobDetail />} />
+                <Route path="legal/privacy" element={<Privacy />} />
+                <Route path="legal/terms" element={<Terms />} />
+                <Route path="legal/cookies" element={<Cookies />} />
+                <Route path="legal/sitemap" element={<Sitemap />} />
 
-              {/* Dynamic Data Resources Routes */}
-              <Route path="data/statistics" element={<Statistics />} />
-              <Route path="data/tools" element={<Tools />} />
-              <Route path="data/:slug" element={<ResourceCategory />} />
-              <Route path="data/:category/:slug" element={<ResourceDetail />} />
+                {/* Dynamic Data Resources Routes */}
+                <Route path="data/statistics" element={<Statistics />} />
+                <Route path="data/tools" element={<Tools />} />
+                <Route path="data/:slug" element={<ResourceCategory />} />
+                <Route path="data/:category/:slug" element={<ResourceDetail />} />
 
-              {/* Catch-all dynamic slug for static pages at root level */}
-              <Route path=":slug" element={<StaticPage />} />
+                {/* Catch-all dynamic slug for static pages at root level */}
+                <Route path=":slug" element={<StaticPage />} />
 
-              {/* <Route path="login" element={<Login />} /> */}
-              <Route path="*" element={<NotFound />} />
-            </Route>
-          </Routes>
-        </Suspense>
-        <Toaster />
-        <Sonner />
-      </BrowserRouter>
-    </HelmetProvider>
-  </TooltipProvider >
-);
+                {/* <Route path="login" element={<Login />} /> */}
+                <Route path="*" element={<NotFound />} />
+              </Route>
+            </Routes>
+          </Suspense>
+          <Toaster />
+          <Sonner />
+        </BrowserRouter>
+      </HelmetProvider>
+    </TooltipProvider >
+  );
+};
 
 export default App;

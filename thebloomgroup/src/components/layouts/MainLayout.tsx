@@ -4,6 +4,7 @@ import Footer from '../Footer';
 import FooterV2 from '../FooterV2';
 import BackToTop from '../BackToTop';
 import RouteGuard from '../common/RouteGuard';
+import ZaloButton from '../common/ZaloButton';
 import { useSettings } from '@/hooks/useSettings';
 
 const MainLayout = () => {
@@ -22,6 +23,7 @@ const MainLayout = () => {
 
       {footerVersion === 'v2' ? <FooterV2 /> : <Footer />}
       <BackToTop />
+      <ZaloButton />
     </div>
   );
 };

@@ -1,17 +1,17 @@
 -- Kịch bản seed tài khoản Admin
--- Tự động tạo user admin@vrc.com.vn với mật khẩu Admin@123456
+-- Tự động tạo user admin@vvc.com.vn với mật khẩu Admin@123456
 
 DO $$
 DECLARE
   admin_uid UUID := gen_random_uuid();
 BEGIN
   -- Kiểm tra xem user đã tồn tại chưa
-  IF EXISTS (SELECT 1 FROM auth.users WHERE email = 'admin@vrc.com.vn') THEN
+  IF EXISTS (SELECT 1 FROM auth.users WHERE email = 'admin@vvc.com.vn') THEN
     RAISE NOTICE 'Admin user already exists!';
     -- Đảm bảo role là admin/super_admin
     UPDATE public.users 
     SET role = 'admin' 
-    WHERE email = 'admin@vrc.com.vn';
+    WHERE email = 'admin@vvc.com.vn';
     RETURN;
   END IF;
 
@@ -33,7 +33,7 @@ BEGIN
     '00000000-0000-0000-0000-000000000000', 
     'authenticated', 
     'authenticated', 
-    'admin@vrc.com.vn', 
+    'admin@vvc.com.vn', 
     crypt('Admin@123456', gen_salt('bf')), 
     now(), 
     '{"provider":"email","providers":["email"]}', 
@@ -55,7 +55,7 @@ BEGIN
     gen_random_uuid(), 
     admin_uid, 
     admin_uid::text,
-    format('{"sub":"%s","email":"%s"}', admin_uid::text, 'admin@vrc.com.vn')::jsonb, 
+    format('{"sub":"%s","email":"%s"}', admin_uid::text, 'admin@vvc.com.vn')::jsonb, 
     'email', 
     now(), 
     now()
@@ -67,5 +67,5 @@ BEGIN
   SET role = 'admin' 
   WHERE id = admin_uid;
 
-  RAISE NOTICE 'Admin user created successfully: admin@vrc.com.vn / Admin@123456';
+  RAISE NOTICE 'Admin user created successfully: admin@vvc.com.vn / Admin@123456';
 END $$;

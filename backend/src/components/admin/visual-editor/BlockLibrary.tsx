@@ -506,6 +506,90 @@ export const BLOCK_LIBRARY = [
                 ]
             }
         ]
+    },
+    // --- HOMEPAGE BLOCKS ---
+    {
+        type: 'home_banner_slider',
+        name: 'Home: Banner Slider',
+        icon: '🎞️',
+        category: 'Homepage',
+        fields: [] // Managed via Banner Manager
+    },
+    {
+        type: 'home_v2_partnership',
+        name: 'Home V2: Đối tác',
+        icon: '🤝',
+        category: 'Homepage',
+        fields: [
+            { id: 'title', label: 'Tiêu đề', type: 'text', default: 'Đối Tác Chiến Lược Của Solar Turbines' },
+            { id: 'subtitle', label: 'Tiêu đề phụ', type: 'text', default: 'Thuong Thien Technologies (TTT)' },
+            { id: 'description', label: 'Mô tả', type: 'textarea', default: 'Chúng tôi tự hào là đại diện chính thức và đối tác chiến lược của Solar Turbines tại Việt Nam, cung cấp các giải pháp năng lượng và hệ thống nén khí tiên tiến nhất.' },
+            { id: 'partnerImage', label: 'Hình ảnh chính', type: 'image', default: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=800' },
+            { id: 'logo1', label: 'Logo đối tác 1', type: 'image', default: 'https://www.solar-turbines.com/etc.clientlibs/solar-turbines/clientlibs/clientlib-site/resources/images/cat-logo.png' },
+            { id: 'logo2', label: 'Logo đối tác 2', type: 'image', default: 'https://www.solar-turbines.com/etc.clientlibs/solar-turbines/clientlibs/clientlib-site/resources/images/solar-logo.png' },
+            { id: 'logo3', label: 'Logo đối tác 3', type: 'image', default: '/assets/partners/ttt-logo.svg' },
+            { id: 'exp_value', label: 'Số năm kinh nghiệm', type: 'text', default: '20+' },
+            { id: 'exp_text', label: 'Văn bản kinh nghiệm', type: 'text', default: 'Năm kinh nghiệm trong ngành công nghiệp nặng' }
+        ]
+    },
+    {
+        type: 'home_v2_sectors',
+        name: 'Home V2: Lĩnh vực',
+        icon: '🏗️',
+        category: 'Homepage',
+        fields: [
+            { id: 'title', label: 'Tiêu đề', type: 'text' },
+            { id: 'subtitle', label: 'Mô tả phụ', type: 'text' }
+        ]
+    },
+    {
+        type: 'home_v2_solutions',
+        name: 'Home V2: Giải pháp',
+        icon: '💡',
+        category: 'Homepage',
+        fields: [
+            { id: 'title', label: 'Tiêu đề', type: 'text' },
+            { id: 'subtitle', label: 'Mô tả phụ', type: 'text' }
+        ]
+    },
+    {
+        type: 'home_v2_stats',
+        name: 'Home V2: Thống kê',
+        icon: '📊',
+        category: 'Homepage',
+        fields: [
+            { id: 'title', label: 'Tiêu đề chính', type: 'text' }
+        ]
+    },
+    {
+        type: 'featured_projects',
+        name: 'Home: Dự án tiêu biểu',
+        icon: '🏗️',
+        category: 'Homepage',
+        fields: [
+            { id: 'title', label: 'Tiêu đề', type: 'text' },
+            { id: 'subtitle', label: 'Mô tả phụ', type: 'text' }
+        ]
+    },
+    {
+        type: 'news_events',
+        name: 'Home: Tin tức & Sự kiện',
+        icon: '📰',
+        category: 'Homepage',
+        fields: [
+            { id: 'title', label: 'Tiêu đề', type: 'text' },
+            { id: 'subtitle', label: 'Mô tả phụ', type: 'text' }
+        ]
+    },
+    {
+        type: 'product_categories',
+        name: 'Home: Sản phẩm phân phối',
+        icon: '📦',
+        category: 'Homepage',
+        fields: [
+            { id: 'title', label: 'Tiêu đề', type: 'text' },
+            { id: 'subtitle', label: 'Mô tả phụ', type: 'text' }
+        ]
     }
 ];
 
@@ -520,7 +604,7 @@ export const BlockLibrary: React.FC = () => {
     }, {} as Record<string, typeof BLOCK_LIBRARY>);
 
     // Order categories logically
-    const categoryOrder = ['Basic', 'About Us V2', 'About Us', 'Industry & Tech', 'Corporate', 'General'];
+    const categoryOrder = ['Basic', 'Homepage', 'About Us V2', 'About Us', 'Industry & Tech', 'Corporate', 'General'];
     const sortedCategories = Object.keys(categories).sort((a, b) => {
         const idxA = categoryOrder.indexOf(a);
         const idxB = categoryOrder.indexOf(b);

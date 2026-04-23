@@ -21,7 +21,7 @@ const supabase = createClient(supabaseUrl, keyToUse, {
   }
 });
 
-const ADMIN_EMAIL = 'admin@vrc.com.vn';
+const ADMIN_EMAIL = 'admin@vvc.com.vn';
 const ADMIN_PASSWORD = 'Admin@123456';
 
 async function createAdminUser() {
@@ -33,7 +33,7 @@ async function createAdminUser() {
     password: ADMIN_PASSWORD,
     options: {
       data: {
-        full_name: 'VRC Administrator',
+        full_name: 'VVC Administrator',
         role: 'admin',
       }
     }
@@ -63,7 +63,7 @@ async function createAdminUser() {
           .upsert({
             id: loginData.user.id,
             email: ADMIN_EMAIL,
-            full_name: 'VRC Administrator',
+            full_name: 'VVC Administrator',
             role: 'admin',
           }, { onConflict: 'id' });
 
@@ -96,7 +96,7 @@ async function createAdminUser() {
     .upsert({
       id: signUpData.user.id,
       email: ADMIN_EMAIL,
-      full_name: 'VRC Administrator',
+      full_name: 'VVC Administrator',
       role: 'admin',
     }, { onConflict: 'id' });
 

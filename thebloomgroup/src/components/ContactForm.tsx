@@ -1,4 +1,4 @@
-
+import React, { useState } from "react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
@@ -6,6 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { useContactForm } from "@/hooks/useContactForm";
 import { useTranslation } from 'react-i18next';
 import { useAntiSpam } from "@/hooks/useAntiSpam";
+import { useSettings } from "@/hooks/useSettings";
 
 const ContactForm = () => {
   const { t } = useTranslation();
@@ -21,10 +22,17 @@ const ContactForm = () => {
 
   const { HoneypotField, isBot } = useAntiSpam();
 
+  const { settings } = useSettings();
+  const [verified, setVerified] = useState(false);
+  const isCaptchaEnabled = settings['enable_captcha'] === 'true';
+
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (isBot()) {
       // Fake success for bots
+      return;
+    }
+    if (isCaptchaEnabled && !verified) {
       return;
     }
     submit(e);
@@ -152,10 +160,34 @@ const ContactForm = () => {
                   {errors.message && <p className="text-red-500 text-sm mt-1 animate-in fade-in slide-in-from-top-1">{errors.message}</p>}
                 </div>
 
+                {isCaptchaEnabled && (
+                  <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 flex items-center justify-between shadow-inner animate-in fade-in duration-500">
+                    <div className="flex items-center gap-4">
+                      <div 
+                        onClick={() => setVerified(!verified)}
+                        className={`w-6 h-6 rounded border-2 flex items-center justify-center cursor-pointer transition-all ${verified ? 'bg-primary border-primary' : 'bg-white border-slate-300'}`}
+                      >
+                        {verified && (
+                          <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
+                          </svg>
+                        )}
+                      </div>
+                      <span className="text-sm font-semibold text-slate-700 select-none cursor-pointer" onClick={() => setVerified(!verified)}>
+                        Tôi không phải là người máy
+                      </span>
+                    </div>
+                    <div className="flex flex-col items-center opacity-40">
+                      <img src="https://www.gstatic.com/recaptcha/api2/logo_48.png" alt="reCAPTCHA" className="h-6 w-6 grayscale" />
+                      <span className="text-[8px] font-bold uppercase mt-0.5 tracking-tighter">reCAPTCHA</span>
+                    </div>
+                  </div>
+                )}
+
                 <div className="pt-4 text-center md:text-left">
                   <Button
                     type="submit"
-                    disabled={isSubmitting}
+                    disabled={isSubmitting || (isCaptchaEnabled && !verified)}
                     className="w-full md:w-auto px-10 py-4 h-auto text-lg font-medium shadow-lg hover:shadow-xl transition-all duration-200"
                   >
                     {isSubmitting ? (

@@ -37,6 +37,7 @@ export const EditableElement = ({
     updateSectionProps,
     requestImageChange, 
     selectedSectionId, 
+    selectSection,
     slug 
   } = useVisualEditor();
   
@@ -56,28 +57,39 @@ export const EditableElement = ({
   // Default tagName based on type if not provided
   const Tag = (tagName || (type === 'image' ? 'div' : 'span')) as any;
 
-  // Find current content: try localized field first, then base field, then defaultContent
-  let currentContent = defaultContent;
-  
-  // Helper to get value from props or global data
+  // Helper to get value from context's contentData
   const getValue = (key: string) => {
-    // Try section props first
+    if (!contentData) return undefined;
+    
+    // 1. Try finding in Global contentData FIRST (like Title/Subtitle)
+    const globalVal = getNestedValue(contentData, key);
+    if (globalVal !== undefined && globalVal !== null && globalVal !== "") return globalVal;
+
+    // 2. Try finding in sections array if we have an ID
     if (effectiveSectionId && contentData.sections) {
-      const section = contentData.sections.find((s: any) => s.id === effectiveSectionId);
-      if (section && section.props) {
-        const val = getNestedValue(section.props, key);
+      const section = contentData.sections.find((s: any) => s.id === effectiveSectionId || s._id === effectiveSectionId);
+      if (section) {
+        const val = getNestedValue(section.props || section.data || {}, key);
         if (val !== undefined) return val;
       }
     }
-    // Then global contentData
-    return getNestedValue(contentData, key);
+    
+    return undefined;
   };
 
-  const localizedValue = getValue(effectiveFieldKey);
   const baseValue = getValue(fieldKey);
+  const localizedValue = isDefaultLang ? undefined : getValue(effectiveFieldKey);
   
-  // Logic: localized > base > default
-  currentContent = (localizedValue !== undefined && localizedValue !== "") ? localizedValue : (baseValue !== undefined ? baseValue : defaultContent);
+  // Validation function
+  const isValid = (val: any) => val !== undefined && val !== null && val !== "" && val !== "undefined";
+  
+  // CRITICAL: Priority resolution
+  let currentContent = defaultContent;
+  if (isValid(localizedValue)) {
+    currentContent = localizedValue;
+  } else if (isValid(baseValue)) {
+    currentContent = baseValue;
+  }
 
   // Handle data updates
   const handleContentUpdate = (value: string) => {
@@ -102,6 +114,10 @@ export const EditableElement = ({
       sectionId: effectiveSectionId,
       slug
     });
+
+    if (effectiveSectionId) {
+      selectSection(effectiveSectionId);
+    }
 
     setRequesting(true);
     
@@ -224,28 +240,50 @@ export const EditableElement = ({
 
   // Edit Mode for Text / Rich Text
   if (type === 'text' || type === 'rich-text') {
+    // If children are provided, we want to render them but make them editable
+    // This allows the component to react to external prop changes (like from the Parent Block)
     return (
       <Tag
         ref={contentRef}
         contentEditable
         suppressContentEditableWarning
+        onClick={(e: React.MouseEvent) => {
+          if (!editMode) return;
+          e.stopPropagation();
+          if (effectiveSectionId) {
+            selectSection(effectiveSectionId);
+          }
+        }}
+        onInput={(e: React.FormEvent<HTMLElement>) => {
+          const newValue = type === 'rich-text' ? e.currentTarget.innerHTML : (e.currentTarget.textContent || '');
+          handleContentUpdate(newValue);
+        }}
         onBlur={(e: React.FocusEvent<HTMLElement>) => {
           const newValue = type === 'rich-text' ? e.currentTarget.innerHTML : (e.currentTarget.textContent || '');
           handleContentUpdate(newValue);
         }}
-        className={`outline-dashed outline-1 outline-blue-400 hover:outline-2 hover:bg-blue-50/50 transition-all cursor-text min-w-[20px] inline-block ${className}`}
+        className={`${className} outline-none focus:ring-2 focus:ring-primary/50 focus:bg-primary/5 transition-all min-w-[20px] min-h-[1em]`}
         style={style}
       >
-        {type === 'rich-text' ? null : currentContent}
+        {currentContent}
       </Tag>
     );
   }
 
   // Edit Mode for Image
+  // Nếu Tag là 'img', chúng ta phải đổi nó thành 'div' vì <img> không thể chứa children (overlay)
+  const ImageWrapperTag = Tag === 'img' ? 'div' : Tag;
+
   return (
-    <Tag
-      className={`relative group cursor-pointer outline-dashed outline-1 outline-blue-400 hover:outline-2 transition-all ${className}`}
-      style={style}
+    <ImageWrapperTag
+      data-field-key={fieldKey}
+      data-section-id={effectiveSectionId}
+      className={`relative group cursor-pointer outline-dashed outline-2 transition-all ${
+        selectedSectionId === effectiveSectionId 
+          ? 'outline-blue-500 bg-blue-50/10' 
+          : 'outline-green-500/50 hover:outline-green-600 hover:bg-green-50/20'
+      } ${className}`}
+      style={{ ...style, minHeight: Tag === 'img' ? '40px' : undefined }}
     >
       {/* Render children with dynamic updates for images */}
       {React.Children.map(children, child => {
@@ -277,7 +315,7 @@ export const EditableElement = ({
       {/* Hover Overlay - Attached onClick here explicitly */}
       <div 
         onClick={handleImagePickerClick}
-        className={`absolute inset-0 bg-blue-600/20 flex items-center justify-center transition-opacity z-30 ${requesting ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
+        className={`absolute inset-0 bg-blue-600/20 flex items-center justify-center transition-opacity z-[9999] ${requesting ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
       >
         <div className="bg-white/90 px-4 py-2 rounded-full shadow-xl flex items-center gap-2 transform translate-y-2 group-hover:translate-y-0 transition-all hover:scale-105 active:scale-95 border-2 border-blue-500">
           {requesting ? (
@@ -295,6 +333,6 @@ export const EditableElement = ({
           )}
         </div>
       </div>
-    </Tag>
+    </ImageWrapperTag>
   );
 };

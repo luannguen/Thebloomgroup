@@ -20,6 +20,8 @@ export function useVisualEditor(iframeRef: React.RefObject<HTMLIFrameElement>) {
     const [isDragging, setIsDragging] = useState(false);
     const [iframeSrc, setIframeSrc] = useState<string>('');
     const [frontendUrl, setFrontendUrl] = useState<string>('');
+    const isIframeReady = React.useRef(false);
+    const hasInitialSyncHappened = React.useRef(false);
 
     // Page metadata for new pages or updating existing ones
     const [pageMetadata, setPageMetadata] = useState<Partial<PageFormData>>({
@@ -43,8 +45,19 @@ export function useVisualEditor(iframeRef: React.RefObject<HTMLIFrameElement>) {
 
     // Sync selected section
     useEffect(() => {
-        sendToIframe('VISUAL_EDIT_SELECT_SECTION', { sectionId: selectedSectionId });
-    }, [selectedSectionId, sendToIframe]);
+        if (!loading && isIframeReady.current) {
+            sendToIframe('VISUAL_EDIT_SELECT_SECTION', { sectionId: selectedSectionId });
+        }
+    }, [selectedSectionId, sendToIframe, loading]);
+
+    // Push data to iframe when loading completes
+    useEffect(() => {
+        if (!loading && isIframeReady.current && !hasInitialSyncHappened.current) {
+            console.log('[VisualEditor Parent] Loading finished, pushing initial data to ready iframe.');
+            sendToIframe('VISUAL_EDIT_UPDATE_DATA', { sections });
+            hasInitialSyncHappened.current = true;
+        }
+    }, [loading, sections, sendToIframe]);
 
     // Fetch initial data
     useEffect(() => {
@@ -208,8 +221,16 @@ export function useVisualEditor(iframeRef: React.RefObject<HTMLIFrameElement>) {
             }
         } else if (data.type === 'VISUAL_EDIT_READY' || data.type === 'VISUAL_EDIT_SYNC_REQUEST') {
             const iframeSlug = data.slug || 'unknown';
+            isIframeReady.current = true;
+            
+            if (loading) {
+                console.log(`[VisualEditor Parent] Iframe READY (${iframeSlug}) but Parent still loading. Postponing sync.`);
+                return;
+            }
+
             console.log(`[VisualEditor Parent] Iframe READY/SYNC_REQ (${iframeSlug}), pushing ${sections.length} sections to child.`);
             sendToIframe('VISUAL_EDIT_UPDATE_DATA', { sections });
+            hasInitialSyncHappened.current = true;
         }
     }, [sections, sendToIframe]);
 
@@ -227,6 +248,11 @@ export function useVisualEditor(iframeRef: React.RefObject<HTMLIFrameElement>) {
 
         setIsSaving(true);
         try {
+            // Safety check: Don't allow saving empty content if we haven't successfully synced yet
+            if (!isNewPage && sections.length === 0 && !hasInitialSyncHappened.current) {
+                throw new Error('Hệ thống chưa đồng bộ xong dữ liệu. Vui lòng đợi trong giây lát rồi thử lại.');
+            }
+
             const contentJson = JSON.stringify({ sections });
             
             if (isNewPage) {
@@ -274,7 +300,15 @@ export function useVisualEditor(iframeRef: React.RefObject<HTMLIFrameElement>) {
 
     const updateSection = (id: string, updates: any) => {
         setSections(prev => {
-            const next = prev.map(s => s.id === id ? { ...s, ...updates } : s);
+            const next = prev.map(s => {
+                if (s.id === id) {
+                    // If the updates don't already contain a 'props' object,
+                    // wrap the updates into a props object to match the registry structure
+                    const newProps = updates.props ? updates.props : { ...(s.props || {}), ...updates };
+                    return { ...s, props: newProps };
+                }
+                return s;
+            });
             sendToIframe('VISUAL_EDIT_UPDATE_DATA', { sections: next });
             return next;
         });

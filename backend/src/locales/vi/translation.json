@@ -83,6 +83,7 @@
     "confirm_delete_member": "Bạn có chắc chắn muốn xóa thành viên này không?",
     "image_url": "Đường dẫn ảnh",
     "image_preview": "Xem trước ảnh",
+    "reset": "Hoàn tác",
     "linkedin_url": "Liên kết LinkedIn",
     "twitter_url": "Liên kết Twitter",
     "email_address": "Địa chỉ Email",
@@ -165,6 +166,12 @@
     "settings_saved": "Đã lưu cài đặt thành công",
     "save_settings_fail": "Lưu cài đặt thất bại",
     "load_settings_fail": "Tải cài đặt thất bại",
+    "failed_to_fetch_settings": "Không thể tải cấu hình hệ thống",
+    "settings_updated_successfully": "Cấu hình đã được cập nhật thành công",
+    "failed_to_update_settings": "Cập nhật cấu hình thất bại",
+    "file_size_too_large": "Kích thước tệp quá lớn (tối đa 2MB)",
+    "image_uploaded_successfully": "Tải ảnh lên thành công",
+    "failed_to_upload_image": "Tải ảnh lên thất bại",
     "upload_logo_fail": "Tải logo thất bại",
     "confirm_remove_logo": "Bạn có chắc chắn muốn xóa logo?",
     "facebook_label": "Facebook URL",
@@ -301,8 +308,5 @@
         "delete_confirm_desc": "Hành động này không thể hoàn tác. Vai trò này sẽ bị xóa vĩnh viễn và người dùng có thể mất quyền truy cập.",
         "delete_button": "Xóa",
         "role_permissions": "Phân quyền Vai trò"
-    },
-    "homepage_config": "Cấu hình Trang chủ",
-    "primary_home_slug": "Trang chủ mặc định (Slug)",
-    "primary_home_slug_hint": "Slug của trang sẽ được hiển thị khi truy cập vào root (/). Mặc định là 'home'. Bạn có thể đổi qua 'home_v2' để kích hoạt trang chủ mới."
+    }
 }

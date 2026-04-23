@@ -12,14 +12,14 @@ const client = new pg.Client({ connectionString: databaseUrl, ssl: { rejectUnaut
 
 async function setAdminRole() {
   await client.connect();
-  console.log('🔄 Setting admin role for admin@vrc.com.vn...');
+  console.log('🔄 Setting admin role for admin@vvc.com.vn...');
 
   // Check if the user exists in public.users
-  const check = await client.query("SELECT id, role FROM public.users WHERE email = 'admin@vrc.com.vn'");
+  const check = await client.query("SELECT id, role FROM public.users WHERE email = 'admin@vvc.com.vn'");
   
   if (check.rows.length === 0) {
     // User might not be synced yet — insert directly
-    const authCheck = await client.query("SELECT id FROM auth.users WHERE email = 'admin@vrc.com.vn'");
+    const authCheck = await client.query("SELECT id FROM auth.users WHERE email = 'admin@vvc.com.vn'");
     if (authCheck.rows.length === 0) {
       console.error('❌ Admin user not found in auth.users. Run createAdmin.mjs first.');
       return;
@@ -27,23 +27,23 @@ async function setAdminRole() {
     
     const userId = authCheck.rows[0].id;
     await client.query(
-      "INSERT INTO public.users (id, email, full_name, role) VALUES ($1, 'admin@vrc.com.vn', 'VRC Administrator', 'admin') ON CONFLICT (id) DO UPDATE SET role = 'admin', full_name = 'VRC Administrator'",
+      "INSERT INTO public.users (id, email, full_name, role) VALUES ($1, 'admin@vvc.com.vn', 'VVC Administrator', 'admin') ON CONFLICT (id) DO UPDATE SET role = 'admin', full_name = 'VVC Administrator'",
       [userId]
     );
     console.log('✅ Admin user inserted into public.users with admin role!');
   } else {
     // User exists, update role
-    await client.query("UPDATE public.users SET role = 'admin', full_name = 'VRC Administrator' WHERE email = 'admin@vrc.com.vn'");
+    await client.query("UPDATE public.users SET role = 'admin', full_name = 'VVC Administrator' WHERE email = 'admin@vvc.com.vn'");
     console.log(`✅ Updated role from '${check.rows[0].role}' to 'admin'!`);
   }
 
   // Also confirm the email in auth.users so login works immediately
-  await client.query("UPDATE auth.users SET email_confirmed_at = NOW() WHERE email = 'admin@vrc.com.vn' AND email_confirmed_at IS NULL");
-  console.log('✅ Email confirmed for admin@vrc.com.vn');
+  await client.query("UPDATE auth.users SET email_confirmed_at = NOW() WHERE email = 'admin@vvc.com.vn' AND email_confirmed_at IS NULL");
+  console.log('✅ Email confirmed for admin@vvc.com.vn');
 
   await client.end();
   console.log('\n🎉 Done! Admin can now login at the backend dashboard.');
-  console.log('📧 Email:    admin@vrc.com.vn');
+  console.log('📧 Email:    admin@vvc.com.vn');
   console.log('🔑 Password: Admin@123456');
 }
 

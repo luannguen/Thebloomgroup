@@ -50,33 +50,36 @@ const ServicesContent = () => {
 
     const sections = contentData?.sections || [];
     const heroSection = sections.find((s: any) => s.type === 'hero');
+
+    // Nếu trong DB đã có Hero, ưu tiên để VisualPageRenderer xử lý toàn bộ trang
+    // Điều này tránh duplicate và đảm bảo Hero có EditWrapper trong Visual Editor
+    if (heroSection) {
+        return (
+            <main className="flex-grow">
+                <VisualPageRenderer />
+            </main>
+        );
+    }
+
     const otherSections = sections.filter((s: any) => s.type !== 'hero');
 
     return (
         <main className="flex-grow">
-            {/* Dynamic Banner */}
-            {heroSection ? (
-                <HeroBlock 
-                    sectionId={heroSection.id} 
-                    {...heroSection.props} 
-                />
-            ) : (
-                /* Fallback Banner */
-                <div className="bg-primary py-20 text-white text-center">
-                    <div className="container-custom">
-                        <h1 className="text-4xl md:text-5xl font-bold mb-4">{t('services', 'Dịch vụ')}</h1>
-                        <p className="text-xl text-blue-100 max-w-2xl mx-auto">
-                            {t('services_desc', 'Giải pháp kỹ thuật lạnh toàn diện')}
-                        </p>
-                    </div>
+            {/* Fallback Banner - Hiển thị khi DB không cấu hình Hero */}
+            <div className="bg-primary py-20 text-white text-center">
+                <div className="container-custom">
+                    <h1 className="text-4xl md:text-5xl font-bold mb-4">{t('services', 'Dịch vụ')}</h1>
+                    <p className="text-xl text-blue-100 max-w-2xl mx-auto">
+                        {t('services_desc', 'Giải pháp kỹ thuật lạnh toàn diện')}
+                    </p>
                 </div>
-            )}
+            </div>
 
             {/* Render other sections using the standard renderer */}
             {otherSections.length > 0 ? (
                 <VisualPageRenderer customSections={otherSections} />
             ) : (
-                /* Fallback content if DB only has hero or is empty */
+                /* Fallback content if DB is empty or doesn't have other sections */
                 <VisualPageRenderer customSections={DEFAULT_SERVICES_SECTIONS.filter(s => s.type !== 'hero')} />
             )}
         </main>

@@ -12,8 +12,11 @@ export const VisualPageRenderer = ({ customSections }: { customSections?: any[] 
         return <NotFound />;
     }
 
-    // Smart selection: Use customSections if passed, otherwise use persistent contentData from database
-    const sections = customSections || contentData?.sections || [];
+    // Smart selection: Use persistent contentData from context if available (source of truth for live edits)
+    // Otherwise fallback to customSections (initial/default data)
+    const sections = (contentData?.sections && contentData.sections.length > 0) 
+        ? contentData.sections 
+        : (customSections || []);
 
     // Listen for messages from Admin (e.g., Select Section)
     useEffect(() => {
@@ -88,7 +91,14 @@ export const VisualPageRenderer = ({ customSections }: { customSections?: any[] 
                 const sectionId = section.id;
 
                 // Support both new 'props' format and legacy 'data' format
-                const sectionProps = section.props || section.data || {};
+                const dbProps = section.props || section.data || {};
+                
+                // Merge defaultProps from registry with database props
+                // This ensures components have data even if not yet edited in DB
+                const sectionProps = {
+                    ...(blockDef.defaultProps || {}),
+                    ...dbProps
+                };
                 const content = (
                     <section id={`section-${sectionId}`} className="visual-builder-section">
                         <Component sectionId={sectionId} {...sectionProps} />

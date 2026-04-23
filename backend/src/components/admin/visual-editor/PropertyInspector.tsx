@@ -37,7 +37,7 @@ export const PropertyInspector: React.FC<PropertyInspectorProps> = ({
     const blockDef = BLOCK_LIBRARY.find(b => b.type === section?.type);
 
     const renderField = (field: any, props: any, onChange: (value: any) => void, path: string = '') => {
-        const value = props?.[field.id];
+        const value = props?.[field.id] !== undefined ? props[field.id] : field.default;
 
         if (field.type === 'list') {
             const list = Array.isArray(value) ? value : [];

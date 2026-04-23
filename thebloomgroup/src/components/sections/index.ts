@@ -769,15 +769,19 @@ export const registerAllBlocks = () => {
   // --- Home V2 Blocks ---
   registerBlock({
     type: 'home_v2_partnership',
-    name: 'Home V2: Partnership',
+    name: 'Home V2: Đối tác',
     component: HomeV2PartnershipBlock,
     defaultProps: {},
     fields: [
-      { id: 'title', label: 'Tiêu đề', type: 'text' },
-      { id: 'subtitle', label: 'Tiêu đề phụ', type: 'text' },
-      { id: 'description', label: 'Mô tả', type: 'rich-text' },
-      { id: 'partnerLogo', label: 'Logo đối tác', type: 'image' },
-      { id: 'partnerImage', label: 'Ảnh minh họa', type: 'image' }
+      { id: 'title', label: 'Tiêu đề', type: 'text', default: 'Đối Tác Chiến Lược Của Solar Turbines' },
+      { id: 'subtitle', label: 'Tiêu đề phụ', type: 'text', default: 'Thuong Thien Technologies (TTT)' },
+      { id: 'description', label: 'Mô tả', type: 'rich-text', default: 'Chúng tôi tự hào là đại diện chính thức và đối tác chiến lược của Solar Turbines tại Việt Nam, cung cấp các giải pháp năng lượng và hệ thống nén khí tiên tiến nhất.' },
+      { id: 'partnerImage', label: 'Ảnh minh họa', type: 'image', default: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=800' },
+      { id: 'logo1', label: 'Logo đối tác 1', type: 'image', default: 'https://www.solar-turbines.com/etc.clientlibs/solar-turbines/clientlibs/clientlib-site/resources/images/cat-logo.png' },
+      { id: 'logo2', label: 'Logo đối tác 2', type: 'image', default: 'https://www.solar-turbines.com/etc.clientlibs/solar-turbines/clientlibs/clientlib-site/resources/images/solar-logo.png' },
+      { id: 'logo3', label: 'Logo đối tác 3', type: 'image', default: '/assets/partners/ttt-logo.svg' },
+      { id: 'exp_value', label: 'Số năm kinh nghiệm', type: 'text', default: '20+' },
+      { id: 'exp_text', label: 'Văn bản kinh nghiệm', type: 'text', default: 'Năm kinh nghiệm trong ngành công nghiệp nặng' }
     ]
   });
 
