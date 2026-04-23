@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Shield, Globe, Award, Settings, Zap, Users, BarChart3 } from 'lucide-react';
+import { ArrowRight, Shield, Globe, Award, Settings, Zap, Users, BarChart3, Loader2 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { EditableElement } from '../admin/EditableElement';
 import { Link } from 'react-router-dom';
+import { productService } from '@/services/productService';
+import { Product } from '@/components/data/types';
 
 // --- BLOCK 1: PARTNERSHIP & INTRO ---
 export const HomeV2PartnershipBlock = ({
@@ -225,18 +227,40 @@ export const HomeV2SolutionsBlock = ({
   sectionId
 }: any) => {
   const { t } = useTranslation();
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
 
   const displayTitle = title || t('home_v2_solutions_title', "Giải Pháp Năng Lượng & Hệ Thống Nén");
   const displaySubtitle = subtitle || t('home_v2_solutions_subtitle', "Các dòng sản phẩm tuabin khí và máy nén khí hàng đầu thế giới.");
 
-  const solutions = [
-    { title: "Gas Turbine Packages", desc: "Công suất từ 1MW đến 22MW, hiệu suất vượt trội.", image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1280" },
-    { title: "Gas Compressors", desc: "Thiết kế ly tâm hiện đại cho vận chuyển khí.", image: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=1280" },
-    { title: "Customer Support", desc: "Dịch vụ sau bán hàng toàn diện, linh kiện chính hãng.", image: "https://images.unsplash.com/photo-1521737706045-3205363958c2?auto=format&fit=crop&q=80&w=1280" }
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const result = await productService.getProducts();
+        if (result.success) {
+          // Lấy tối đa 3 sản phẩm mới nhất hoặc nổi bật
+          setProducts(result.data.slice(0, 3));
+        }
+      } catch (error) {
+        console.error("Error fetching products for solutions block:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProducts();
+  }, []);
+
+  // Fallback nếu chưa có sản phẩm trong DB
+  const fallbackSolutions = [
+    { id: 'f1', name: "Gas Turbine Packages", description: "Công suất từ 1MW đến 22MW, hiệu suất vượt trội.", image_url: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1280", slug: "" },
+    { id: 'f2', name: "Gas Compressors", description: "Thiết kế ly tâm hiện đại cho vận chuyển khí.", image_url: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=1280", slug: "" },
+    { id: 'f3', name: "Customer Support", description: "Dịch vụ sau bán hàng toàn diện, linh kiện chính hãng.", image_url: "https://images.unsplash.com/photo-1521737706045-3205363958c2?auto=format&fit=crop&q=80&w=1280", slug: "" }
   ];
 
+  const displayProducts = products.length > 0 ? products : fallbackSolutions;
+
   return (
-    <section className="py-24 bg-white">
+    <section className="py-24 bg-white" data-section-id={sectionId}>
       <div className="container-custom">
         <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
           <div className="max-w-2xl">
@@ -248,28 +272,34 @@ export const HomeV2SolutionsBlock = ({
           </Link>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-10">
-          {solutions.map((sol, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.2 }}
-              className="group"
-            >
-              <div className="rounded-[2.5rem] overflow-hidden aspect-video mb-8 relative shadow-lg group-hover:shadow-2xl transition-all duration-500">
-                <img src={sol.image} alt={sol.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                <div className="absolute inset-0 bg-primary/10 group-hover:bg-transparent transition-colors" />
-              </div>
-              <h3 className="text-2xl font-bold mb-4 group-hover:text-primary transition-colors">{sol.title}</h3>
-              <p className="text-slate-600 mb-6">{sol.desc}</p>
-              <Link to="/products" className="inline-flex items-center text-primary font-bold hover:gap-3 transition-all">
-                {t('learn_more', 'Tìm hiểu thêm')} <ArrowRight className="ml-2 w-5 h-5" />
-              </Link>
-            </motion.div>
-          ))}
-        </div>
+        {loading ? (
+          <div className="flex justify-center py-20">
+            <Loader2 className="h-10 w-10 animate-spin text-primary/50" />
+          </div>
+        ) : (
+          <div className="grid md:grid-cols-3 gap-10">
+            {displayProducts.map((product: any, i) => (
+              <motion.div
+                key={product.id || i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: i * 0.2 }}
+                className="group"
+              >
+                <div className="rounded-[2.5rem] overflow-hidden aspect-video mb-8 relative shadow-lg group-hover:shadow-2xl transition-all duration-500">
+                  <img src={product.image_url || "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=800"} alt={product.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                  <div className="absolute inset-0 bg-primary/10 group-hover:bg-transparent transition-colors" />
+                </div>
+                <h3 className="text-2xl font-bold mb-4 group-hover:text-primary transition-colors line-clamp-1">{product.name}</h3>
+                <p className="text-slate-600 mb-6 line-clamp-2">{product.description}</p>
+                <Link to={product.slug ? `/products/${product.slug}` : "/products"} className="inline-flex items-center text-primary font-bold hover:gap-3 transition-all">
+                  {t('learn_more', 'Tìm hiểu thêm')} <ArrowRight className="ml-2 w-5 h-5" />
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
