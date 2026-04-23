@@ -31,9 +31,18 @@ dist-ssr
 # Temporary and database files
 tmp/
 db\ dump/
-
-# Project directory
-# thebloomgroup/
+scratch/
+**/scratch/
+assets_scan.csv
+backend_analysis_proposal.md
 
 # Documentation
 docs/
+.gitnexus
+
+# Build and IDE info
+*.tsbuildinfo
+**/*.tsbuildinfo
+.claude/
+.agents/
+**/.agents/
