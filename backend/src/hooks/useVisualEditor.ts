@@ -65,40 +65,66 @@ export function useVisualEditor(iframeRef: React.RefObject<HTMLIFrameElement>) {
             setLoading(true);
             try {
                 // Environment detection
-                const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+                const isLocal = window.location.hostname === 'localhost' || 
+                               window.location.hostname === '127.0.0.1' || 
+                               window.location.hostname.startsWith('192.168.') ||
+                               window.location.protocol === 'http:';
+                
+                const isLocalUrl = (url: string) => url.includes('localhost') || url.includes('127.0.0.1');
+                
                 let resolvedFrontendUrl: string | undefined;
                 
                 // Priority 1: Environment variable (Developer override)
-                resolvedFrontendUrl = import.meta.env.VITE_FRONTEND_URL;
-                if (resolvedFrontendUrl && resolvedFrontendUrl.endsWith('/')) {
-                    resolvedFrontendUrl = resolvedFrontendUrl.slice(0, -1);
+                // In local dev, we trust this. In prod, we only trust it if it's NOT a localhost URL.
+                const envFrontendUrl = import.meta.env.VITE_FRONTEND_URL;
+                if (envFrontendUrl) {
+                    const cleanEnvUrl = envFrontendUrl.endsWith('/') ? envFrontendUrl.slice(0, -1) : envFrontendUrl;
+                    if (isLocal || !isLocalUrl(cleanEnvUrl)) {
+                        resolvedFrontendUrl = cleanEnvUrl;
+                    }
                 }
 
-                // Priority 2: Local development default (User's local site is on 8081)
-                if (!resolvedFrontendUrl && isLocal) {
-                    resolvedFrontendUrl = 'http://localhost:8081';
-                    console.log('[VisualEditor Parent] Local environment detected, defaulting to:', resolvedFrontendUrl);
-                }
-
-                // Priority 3: Database settings (Production config)
-                if (!resolvedFrontendUrl) {
+                // Priority 2: Database settings (Production config)
+                // We fetch this if we haven't found a valid non-local URL yet
+                if (!resolvedFrontendUrl || (isLocalUrl(resolvedFrontendUrl) && !isLocal)) {
                     const settingsResult = await settingsService.getSettings();
                     if (settingsResult.success && settingsResult.data) {
                         const siteUrlSetting = settingsResult.data.find(s => s.key === 'site_url');
                         if (siteUrlSetting && siteUrlSetting.value) {
-                            resolvedFrontendUrl = siteUrlSetting.value.endsWith('/') 
+                            const cleanSiteUrl = siteUrlSetting.value.endsWith('/') 
                                 ? siteUrlSetting.value.slice(0, -1) 
                                 : siteUrlSetting.value;
+                            
+                            // Only use site_url from DB if it's appropriate for the environment
+                            if (isLocal || !isLocalUrl(cleanSiteUrl)) {
+                                resolvedFrontendUrl = cleanSiteUrl;
+                            }
                         }
                     }
                 }
-                
-                // Fallback: Final hardcoded production domain or local fallback
-                if (!resolvedFrontendUrl) {
-                    resolvedFrontendUrl = isLocal ? 'http://localhost:8081' : 'https://www.thebloomgroup.vn';
+
+                // Priority 3: Local development default
+                if (!resolvedFrontendUrl && isLocal) {
+                    resolvedFrontendUrl = 'http://localhost:8081';
+                    console.log('[VisualEditor Parent] Local environment detected, defaulting to:', resolvedFrontendUrl);
                 }
                 
+                // Priority 4: Dynamic fallback based on current origin
+                if (!resolvedFrontendUrl) {
+                    const currentOrigin = window.location.origin;
+                    // If we are on admin.thebloomgroup.vn, try to go to thebloomgroup.vn
+                    resolvedFrontendUrl = currentOrigin.replace('admin.', '').replace('backend.', '');
+                    console.log('[VisualEditor Parent] Using dynamic fallback URL:', resolvedFrontendUrl);
+                }
+
+                // Final safety fallback
+                if (!resolvedFrontendUrl) {
+                    resolvedFrontendUrl = 'https://www.thebloomgroup.vn';
+                }
+                
+                console.log('[VisualEditor Parent] Resolved frontend URL:', resolvedFrontendUrl);
                 setFrontendUrl(resolvedFrontendUrl);
+                
                 const previewSlug = isNewPage ? 'new-page' : (urlSlug === 'home' ? '' : (urlSlug || ''));
                 setIframeSrc(`${resolvedFrontendUrl}/${previewSlug}?edit_mode=true${isNewPage ? '&new=true' : ''}`);
 
