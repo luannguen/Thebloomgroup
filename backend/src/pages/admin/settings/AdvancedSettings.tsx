@@ -1,5 +1,4 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 import { Code, Terminal } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
@@ -12,7 +11,6 @@ interface AdvancedSettingsProps {
 }
 
 const AdvancedSettings: React.FC<AdvancedSettingsProps> = ({ settings, handleChange }) => {
-    const { t } = useTranslation();
 
     return (
         <div className="space-y-6">
