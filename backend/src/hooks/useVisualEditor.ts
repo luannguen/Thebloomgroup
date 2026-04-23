@@ -64,33 +64,43 @@ export function useVisualEditor(iframeRef: React.RefObject<HTMLIFrameElement>) {
         const loadPage = async () => {
             setLoading(true);
             try {
-                let frontendUrl: string | undefined;
-
-                // Priority 1: Database settings (Admin UI managed)
-                const settingsResult = await settingsService.getSettings();
-                if (settingsResult.success && settingsResult.data) {
-                    const siteUrlSetting = settingsResult.data.find(s => s.key === 'site_url');
-                    if (siteUrlSetting && siteUrlSetting.value) {
-                        frontendUrl = siteUrlSetting.value.endsWith('/') 
-                            ? siteUrlSetting.value.slice(0, -1) 
-                            : siteUrlSetting.value;
-                    }
+                // Environment detection
+                const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+                let resolvedFrontendUrl: string | undefined;
+                
+                // Priority 1: Environment variable (Developer override)
+                resolvedFrontendUrl = import.meta.env.VITE_FRONTEND_URL;
+                if (resolvedFrontendUrl && resolvedFrontendUrl.endsWith('/')) {
+                    resolvedFrontendUrl = resolvedFrontendUrl.slice(0, -1);
                 }
 
-                // Priority 2: Environment variable (Developer override)
-                if (!frontendUrl) {
-                    frontendUrl = import.meta.env.VITE_FRONTEND_URL;
-                    if (frontendUrl && frontendUrl.endsWith('/')) {
-                        frontendUrl = frontendUrl.slice(0, -1);
+                // Priority 2: Local development default (User's local site is on 8081)
+                if (!resolvedFrontendUrl && isLocal) {
+                    resolvedFrontendUrl = 'http://localhost:8081';
+                    console.log('[VisualEditor Parent] Local environment detected, defaulting to:', resolvedFrontendUrl);
+                }
+
+                // Priority 3: Database settings (Production config)
+                if (!resolvedFrontendUrl) {
+                    const settingsResult = await settingsService.getSettings();
+                    if (settingsResult.success && settingsResult.data) {
+                        const siteUrlSetting = settingsResult.data.find(s => s.key === 'site_url');
+                        if (siteUrlSetting && siteUrlSetting.value) {
+                            resolvedFrontendUrl = siteUrlSetting.value.endsWith('/') 
+                                ? siteUrlSetting.value.slice(0, -1) 
+                                : siteUrlSetting.value;
+                        }
                     }
                 }
                 
-                // Fallback: Default local port
-                if (!frontendUrl) frontendUrl = 'http://localhost:8080';
+                // Fallback: Final hardcoded production domain or local fallback
+                if (!resolvedFrontendUrl) {
+                    resolvedFrontendUrl = isLocal ? 'http://localhost:8081' : 'https://www.thebloomgroup.vn';
+                }
                 
-                setFrontendUrl(frontendUrl);
+                setFrontendUrl(resolvedFrontendUrl);
                 const previewSlug = isNewPage ? 'new-page' : (urlSlug === 'home' ? '' : (urlSlug || ''));
-                setIframeSrc(`${frontendUrl}/${previewSlug}?edit_mode=true${isNewPage ? '&new=true' : ''}`);
+                setIframeSrc(`${resolvedFrontendUrl}/${previewSlug}?edit_mode=true${isNewPage ? '&new=true' : ''}`);
 
                 if (isNewPage) {
                     setLoading(false);

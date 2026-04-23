@@ -117,7 +117,7 @@ export const HomeBannerSlider = ({ sectionId }: HomeBannerSliderProps) => {
                                                 className="text-4xl md:text-7xl font-extrabold tracking-tight leading-[1.1] animate-in slide-in-from-bottom-8 duration-1000"
                                                 style={{ color: banner.title_color || 'inherit' }}
                                             >
-                                                {t(banner.title || '')}
+                                                {banner.title}
                                             </h2>
                                         </div>
                                         
@@ -126,9 +126,10 @@ export const HomeBannerSlider = ({ sectionId }: HomeBannerSliderProps) => {
                                                 className="text-lg md:text-2xl opacity-90 max-w-2xl leading-relaxed animate-in slide-in-from-bottom-6 duration-1000 delay-300"
                                                 style={{ color: banner.description_color || 'inherit' }}
                                             >
-                                                {t(banner.description || '')}
+                                                {banner.description}
                                             </p>
                                         </div>
+
 
                                         <div className="flex flex-wrap gap-4 pt-4 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-500">
                                             {banner.link && (

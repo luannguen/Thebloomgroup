@@ -25,9 +25,9 @@ export const HomeV2PartnershipBlock = ({
   const dSubtitle = subtitle || t('home_v2_partnership_subtitle', "Thuong Thien Technologies (TTT)");
   const dDesc = description || t('home_v2_partnership_desc', "Chúng tôi tự hào là đại diện chính thức và đối tác chiến lược của Solar Turbines tại Việt Nam, cung cấp các giải pháp năng lượng và hệ thống nén khí tiên tiến nhất.");
   const dPartnerImage = partnerImage || "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=800";
-  const dLogo1 = logo1 || 'https://www.solar-turbines.com/etc.clientlibs/solar-turbines/clientlibs/clientlib-site/resources/images/cat-logo.png';
-  const dLogo2 = logo2 || 'https://www.solar-turbines.com/etc.clientlibs/solar-turbines/clientlibs/clientlib-site/resources/images/solar-logo.png';
-  const dLogo3 = logo3 || '/assets/partners/ttt-logo.svg';
+  const dLogo1 = logo1 || 'https://images.unsplash.com/photo-1560179707-f14e90ef3623?auto=format&fit=crop&q=80&w=200&h=80';
+  const dLogo2 = logo2 || 'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?auto=format&fit=crop&q=80&w=200&h=80';
+  const dLogo3 = logo3 || 'https://images.unsplash.com/photo-1542744094-24638eff58bb?auto=format&fit=crop&q=80&w=200&h=80';
   const dExpValue = exp_value || "20+";
   const dExpText = exp_text || "Năm kinh nghiệm trong ngành công nghiệp nặng";
 
@@ -230,9 +230,9 @@ export const HomeV2SolutionsBlock = ({
   const displaySubtitle = subtitle || t('home_v2_solutions_subtitle', "Các dòng sản phẩm tuabin khí và máy nén khí hàng đầu thế giới.");
 
   const solutions = [
-    { title: "Gas Turbine Packages", desc: "Công suất từ 1MW đến 22MW, hiệu suất vượt trội.", image: "https://www.solar-turbines.com/content/dam/solar-turbines/assets/product-families/gas-turbines/gas-turbine-packages-family.jpg/_jcr_content/renditions/cq5dam.web.1280.1280.jpeg" },
-    { title: "Gas Compressors", desc: "Thiết kế ly tâm hiện đại cho vận chuyển khí.", image: "https://www.solar-turbines.com/content/dam/solar-turbines/assets/product-families/compressors/compressors-family.jpg/_jcr_content/renditions/cq5dam.web.1280.1280.jpeg" },
-    { title: "Customer Support", desc: "Dịch vụ sau bán hàng toàn diện, linh kiện chính hãng.", image: "https://www.solar-turbines.com/content/dam/solar-turbines/assets/site-elements/home-page/customer-service.jpg/_jcr_content/renditions/cq5dam.web.1280.1280.jpeg" }
+    { title: "Gas Turbine Packages", desc: "Công suất từ 1MW đến 22MW, hiệu suất vượt trội.", image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1280" },
+    { title: "Gas Compressors", desc: "Thiết kế ly tâm hiện đại cho vận chuyển khí.", image: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=1280" },
+    { title: "Customer Support", desc: "Dịch vụ sau bán hàng toàn diện, linh kiện chính hãng.", image: "https://images.unsplash.com/photo-1521737706045-3205363958c2?auto=format&fit=crop&q=80&w=1280" }
   ];
 
   return (
