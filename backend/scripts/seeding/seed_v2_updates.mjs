@@ -24,7 +24,7 @@ const aboutV2Content = {
       props: {
         title: "Hơn 20 năm khẳng định vị thế",
         description: "Chúng tôi tự hào là đơn vị tiên phong mang đến những giải pháp kỹ thuật lạnh tối ưu cho doanh nghiệp. Với đội ngũ chuyên gia giàu kinh nghiệm, Việt Vinh (VVC) cam kết đồng hành cùng sự phát triển bền vững của khách hàng thông qua công nghệ hiện đại và dịch vụ tận tâm.",
-        image: "/assets/about-v2/intro-logo.png"
+        image: "/assets/about-v2/ttt-logo.svg"
       }
     },
     {
@@ -56,20 +56,30 @@ async function seedV2Updates() {
     console.log('Starting V2 seeding...');
 
     // 1. Seed About Us V2 page
-    const { data: pageData, error: pageError } = await supabase
+    const { data: existingPage } = await supabase
         .from('static_pages')
-        .upsert({ 
-            slug: 'about-us-v2',
-            title: 'About Us V2',
-            content: JSON.stringify(aboutV2Content),
-            is_active: true,
-            updated_at: new Date()
-        }, { onConflict: 'slug' });
-    
-    if (pageError) {
-        console.error('Error seeding about-us-v2 page:', pageError);
+        .select('content')
+        .eq('slug', 'about-us-v2')
+        .single();
+
+    if (existingPage && existingPage.content) {
+        console.log('Skipping about-us-v2 content seeding as it already exists.');
     } else {
-        console.log('Successfully seeded About Us V2 page.');
+        const { error: pageError } = await supabase
+            .from('static_pages')
+            .upsert({ 
+                slug: 'about-us-v2',
+                title: 'About Us V2',
+                content: JSON.stringify(aboutV2Content),
+                is_active: true,
+                updated_at: new Date()
+            }, { onConflict: 'slug' });
+        
+        if (pageError) {
+            console.error('Error seeding about-us-v2 page:', pageError);
+        } else {
+            console.log('Successfully seeded About Us V2 page.');
+        }
     }
 
     // 2. Update Footer Version & Logos in site_settings
@@ -81,7 +91,7 @@ async function seedV2Updates() {
         },
         {
             key: 'logo_url',
-            value: '/assets/about-v2/logo-vvc.png',
+            value: '/assets/about-v2/logo-vvc.svg',
             updated_at: new Date()
         },
         {

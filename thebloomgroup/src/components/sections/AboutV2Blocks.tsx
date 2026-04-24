@@ -74,7 +74,7 @@ export const AboutV2IntroBlock: React.FC<AboutV2IntroProps> = ({
   image = '/assets/about-v2/ttt-logo.svg',
   backgroundImage = '/assets/about-v2/intro-bg.jpg',
   memberText = 'TTT is a member of',
-  memberLogo = '/assets/about-v2/truong-dinh-logo.svg'
+  memberLogo = '/assets/about-v2/logo-vvc.svg'
 }) => {
   return (
     <section className="relative w-full pb-0 px-4 md:px-8 z-30">

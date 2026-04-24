@@ -112,7 +112,6 @@ async function seedAboutV2() {
     return;
   }
 
-  const payload = {
   if (existingPage) {
     console.log('Skipping about-us-v2 seeding as page already exists in database.');
   } else {
