@@ -351,9 +351,8 @@ export const VisualEditorProvider = ({ children, slug = '' }: VisualEditorProvid
     fetchContent();
   }, [slug, editMode]);
 
-  // Handle signalling Readiness to Admin
   useEffect(() => {
-    if (editMode && !isLoading && slug) {
+    if (editMode && slug) {
       console.log('[VisualEditor Child] Signalling READY to parent for slug:', slug);
       window.parent.postMessage({ type: 'VISUAL_EDIT_READY', slug }, '*');
       
