@@ -283,9 +283,6 @@ export const VisualEditorProvider = ({ children, slug = '' }: VisualEditorProvid
       case 'VISUAL_EDIT_REMOVE_SECTION':
         removeSection(sectionId);
         break;
-      case 'VISUAL_EDIT_UPDATE_SECTION_PROPS':
-        updateSectionProps(sectionId, props);
-        break;
       case 'VISUAL_EDIT_REORDER_SECTIONS':
         if (direction) {
           moveSection(sectionId, direction);

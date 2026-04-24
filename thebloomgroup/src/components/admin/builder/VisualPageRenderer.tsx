@@ -5,7 +5,7 @@ import { EditWrapper } from './EditWrapper';
 import NotFound from '../../../pages/NotFound';
 
 export const VisualPageRenderer = ({ customSections }: { customSections?: any[] }) => {
-    const { editMode, contentData, slug, syncSections, selectedSectionId, setSelectedSectionId, isPageActive, isLoading } = useVisualEditor();
+    const { editMode, contentData, slug, syncSections, selectedSectionId, setSelectedSectionId, isPageActive, isLoading, removeSection } = useVisualEditor();
 
     // If page is inactive and not in edit mode, return 404
     if (!isPageActive && !editMode) {
@@ -62,6 +62,10 @@ export const VisualPageRenderer = ({ customSections }: { customSections?: any[] 
     };
 
     const handleRemoveSection = (sectionId: string) => {
+        // First update locally in the iframe state
+        removeSection(sectionId);
+        
+        // Then notify the Admin (parent window) to save the change to the database
         window.parent.postMessage({
             type: 'VISUAL_EDIT_REMOVE_SECTION',
             sectionId

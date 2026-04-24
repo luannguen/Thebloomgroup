@@ -257,9 +257,9 @@ export const HomeV2SolutionsBlock = ({
 
   // Fallback nếu chưa có sản phẩm trong DB
   const fallbackSolutions = [
-    { id: 'f1', name: "Gas Turbine Packages", description: "Công suất từ 1MW đến 22MW, hiệu suất vượt trội.", image_url: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1280", slug: "" },
-    { id: 'f2', name: "Gas Compressors", description: "Thiết kế ly tâm hiện đại cho vận chuyển khí.", image_url: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=1280", slug: "" },
-    { id: 'f3', name: "Customer Support", description: "Dịch vụ sau bán hàng toàn diện, linh kiện chính hãng.", image_url: "https://images.unsplash.com/photo-1521737706045-3205363958c2?auto=format&fit=crop&q=80&w=1280", slug: "" }
+    { id: 'f1', name: "Gas Turbine Packages", description: "Công suất từ 1MW đến 22MW, hiệu suất vượt trội.", image_url: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1280", slug: "gas-turbine-packages" },
+    { id: 'f2', name: "Gas Compressors", description: "Thiết kế ly tâm hiện đại cho vận chuyển khí.", image_url: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=1280", slug: "gas-compressors" },
+    { id: 'f3', name: "Customer Support", description: "Dịch vụ sau bán hàng toàn diện, linh kiện chính hãng.", image_url: "https://images.unsplash.com/photo-1521737706045-3205363958c2?auto=format&fit=crop&q=80&w=1280", slug: "customer-support" }
   ];
 
   const displayProducts = products.length > 0 ? products : fallbackSolutions;

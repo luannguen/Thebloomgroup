@@ -63,14 +63,18 @@ export default defineConfig(({ mode }) => {
                   }
 
                   const files = data.filter(item => item.name && item.name !== '.emptyFolderPlaceholder')
-                  const paths = files.map(item => `${folder}/${item.name}`)
-                  const { data: signedUrls } = await adminClient.storage.from(BUCKET).createSignedUrls(paths, 3600)
+                  
+                  const items = files.map((item) => {
+                    const { data: { publicUrl } } = adminClient.storage
+                      .from(BUCKET)
+                      .getPublicUrl(`${folder}/${item.name}`)
 
-                  const items = files.map((item, index) => ({
-                    ...item,
-                    url: signedUrls?.[index]?.signedUrl || adminClient.storage.from(BUCKET).getPublicUrl(`${folder}/${item.name}`).data.publicUrl,
-                    path: `${folder}/${item.name}`,
-                  }))
+                    return {
+                      ...item,
+                      url: publicUrl,
+                      path: `${folder}/${item.name}`,
+                    }
+                  })
 
                   res.end(JSON.stringify({ data: items }))
                   return

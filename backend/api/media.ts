@@ -61,21 +61,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                 }
 
                 const files = data.filter(item => item.name && item.name !== '.emptyFolderPlaceholder');
-                const paths = files.map(item => `${folder}/${item.name}`);
-
-                const { data: signedUrls } = await supabase.storage
-                    .from(BUCKET)
-                    .createSignedUrls(paths, 3600);
-
-                const items = files.map((item, index) => {
-                    const signedUrl = signedUrls?.[index]?.signedUrl;
-                    const fallbackUrl = supabase.storage
+                const items = files.map((item) => {
+                    const { data: { publicUrl } } = supabase.storage
                         .from(BUCKET)
-                        .getPublicUrl(`${folder}/${item.name}`).data.publicUrl;
+                        .getPublicUrl(`${folder}/${item.name}`);
 
                     return {
                         ...item,
-                        url: signedUrl || fallbackUrl,
+                        url: publicUrl,
                         path: `${folder}/${item.name}`,
                     };
                 });

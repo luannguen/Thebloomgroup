@@ -14,8 +14,8 @@
                 console.log('Service Worker unregistered successfully.');
                 // Refresh if a critical asset was failing
                 if (window.location.hash === '#sw-fixed') return;
-                // window.location.hash = 'sw-fixed';
-                // window.location.reload(); 
+                window.location.hash = 'sw-fixed';
+                window.location.reload(); 
               });
             }
           });
