@@ -50,21 +50,32 @@ const aboutContent = {
 };
 
 async function seedAboutPage() {
-    const { data, error } = await supabase
+    const pageData = { 
+        slug: 'about-us',
+        content_json: aboutContent,
+        title: 'About Us',
+        is_active: true,
+        updated_at: new Date()
+    };
+
+    // Check if exists
+    const { data: existing } = await supabase
         .from('static_pages')
-        .update({ 
-            content_json: aboutContent,
-            title: 'About Us',
-            updated_at: new Date()
-        })
-        .eq('slug', 'about-us');
-    
-    if (error) {
-        console.error('Error seeding about-us page:', error);
+        .select('id')
+        .eq('slug', pageData.slug)
+        .single();
+
+    if (existing) {
+        console.log(`Page ${pageData.slug} already exists, skipping seed.`);
         return;
     }
     
-    console.log('Successfully seeded About Us page with dynamic content.');
+    const { error } = await supabase.from('static_pages').insert([pageData]);
+    if (error) {
+        console.error('Error seeding About Us page:', error.message);
+    } else {
+        console.log('Successfully seeded About Us page.');
+    }
 }
 
 seedAboutPage();

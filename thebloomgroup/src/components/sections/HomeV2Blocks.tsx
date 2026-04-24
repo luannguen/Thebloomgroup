@@ -82,6 +82,7 @@ export const HomeV2PartnershipBlock = ({
                 <EditableElement
                   type="image"
                   fieldKey="logo1"
+                  sectionId={sectionId}
                   defaultContent={dLogo1}
                   className="h-10 w-auto grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300 pointer-events-auto"
                 >
@@ -91,6 +92,7 @@ export const HomeV2PartnershipBlock = ({
                 <EditableElement
                   type="image"
                   fieldKey="logo2"
+                  sectionId={sectionId}
                   defaultContent={dLogo2}
                   className="h-10 w-auto grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300 pointer-events-auto"
                 >
@@ -100,6 +102,7 @@ export const HomeV2PartnershipBlock = ({
                 <EditableElement
                   type="image"
                   fieldKey="logo3"
+                  sectionId={sectionId}
                   defaultContent={dLogo3}
                   className="h-10 w-auto grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300 pointer-events-auto"
                 >
@@ -140,6 +143,7 @@ export const HomeV2PartnershipBlock = ({
                 <EditableElement
                   type="text"
                   fieldKey="exp_value"
+                  sectionId={sectionId}
                   defaultContent={dExpValue}
                   className="text-6xl font-black text-primary block"
                 >
@@ -150,6 +154,7 @@ export const HomeV2PartnershipBlock = ({
                 <EditableElement
                   type="text"
                   fieldKey="exp_text"
+                  sectionId={sectionId}
                   defaultContent={dExpText}
                   className="text-slate-800 font-extrabold uppercase tracking-[0.2em] text-[10px] md:text-xs leading-relaxed block"
                 >

@@ -113,31 +113,18 @@ async function seedAboutV2() {
   }
 
   const payload = {
-    content: JSON.stringify(aboutV2Content),
-    title: 'About Us V2',
-    updated_at: new Date()
-  };
-
   if (existingPage) {
-    console.log('Updating existing about-us-v2 page...');
-    const { error: updateError } = await supabase
-      .from('static_pages')
-      .update(payload)
-      .eq('slug', 'about-us-v2');
-
-    if (updateError) {
-      console.error('Error updating page:', updateError);
-    } else {
-      console.log('Successfully updated About Us V2 page');
-    }
+    console.log('Skipping about-us-v2 seeding as page already exists in database.');
   } else {
     console.log('Creating new about-us-v2 page...');
     const { error: insertError } = await supabase
       .from('static_pages')
       .insert({
-        ...payload,
+        content: JSON.stringify(aboutV2Content),
+        title: 'About Us V2',
         slug: 'about-us-v2',
-        is_active: true
+        is_active: true,
+        updated_at: new Date()
       });
 
     if (insertError) {

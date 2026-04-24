@@ -28,9 +28,16 @@ async function seedData() {
     { name: 'Logistics & Bán lẻ', slug: 'logistics-ban-le', type: 'project', description: 'Kho lạnh trung tâm và hệ thống lạnh cho siêu thị.' }
   ];
 
+  // Upsert categories (slug is unique, we check existence)
+  for (const cat of [...productCats, ...projectCats]) {
+    const { data: existing } = await supabase.from('categories').select('id').eq('slug', cat.slug).single();
+    if (!existing) {
+        await supabase.from('categories').insert(cat);
+    }
+  }
+
   const { data: catData, error: catError } = await supabase
     .from('categories')
-    .upsert([...productCats, ...projectCats], { onConflict: 'slug' })
     .select();
 
   if (catError) {
@@ -74,7 +81,14 @@ async function seedData() {
     }
   ];
 
-  const { error: prodError } = await supabase.from('products').upsert(products, { onConflict: 'slug' });
+  // Insert products if not exist
+  for (const prod of products) {
+    const { data: existing } = await supabase.from('products').select('id').eq('slug', prod.slug).single();
+    if (!existing) {
+        const { error } = await supabase.from('products').insert(prod);
+        if (error) console.error(`❌ Error creating product ${prod.slug}:`, error.message);
+    }
+  }
   if (prodError) console.error('❌ Lỗi tạo sản phẩm:', prodError.message);
   else console.log('✅ Đã tạo sản phẩm.');
 
@@ -112,7 +126,14 @@ async function seedData() {
     }
   ];
 
-  const { error: projError } = await supabase.from('projects').upsert(projects, { onConflict: 'slug' });
+  // Insert projects if not exist
+  for (const proj of projects) {
+    const { data: existing } = await supabase.from('projects').select('id').eq('slug', proj.slug).single();
+    if (!existing) {
+        const { error } = await supabase.from('projects').insert(proj);
+        if (error) console.error(`❌ Error creating project ${proj.slug}:`, error.message);
+    }
+  }
   if (projError) console.error('❌ Lỗi tạo dự án:', projError.message);
   else console.log('✅ Đã tạo dự án.');
 

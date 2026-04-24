@@ -42,10 +42,7 @@ async function seedCapabilityPage() {
     const queryPage = `
       INSERT INTO static_pages (slug, title, content, excerpt)
       VALUES ($1, $2, $3, $4)
-      ON CONFLICT (slug) DO UPDATE
-      SET title = EXCLUDED.title,
-          content = EXCLUDED.content,
-          excerpt = EXCLUDED.excerpt;
+      ON CONFLICT (slug) DO NOTHING;
     `;
     
     await client.query(queryPage, [

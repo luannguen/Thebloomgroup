@@ -249,6 +249,15 @@ export function useVisualEditor(iframeRef: React.RefObject<HTMLIFrameElement>) {
         } else if (data.type === 'VISUAL_EDIT_SYNC_SECTIONS') {
             // Fired by VisualPageRenderer on mount or when hydration happens
             if (data.sections && Array.isArray(data.sections)) {
+                // SECURITY: Only trust child if parent is empty or it's a new page
+                // This prevents race conditions where child default content overwrites DB content
+                if (sections.length > 0 && !isNewPage) {
+                    console.warn('[VisualEditor Parent] Ignoring sync from iframe - Parent already has data. Forcing Parent -> Child sync.');
+                    // Still send our data to the iframe to ensure it's up to date
+                    sendToIframe('VISUAL_EDIT_UPDATE_DATA', { sections: sections });
+                    return;
+                }
+                
                 console.log('[VisualEditor Parent] Full sections sync from iframe:', data.sections.length);
                 setSections(data.sections);
                 // Also update page metadata if it was a new page or empty

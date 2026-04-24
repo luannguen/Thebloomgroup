@@ -60,9 +60,11 @@ export const VisualEditorProvider = ({ children, slug = '' }: VisualEditorProvid
   });
   const [contentData, setContentData] = useState<any>({});
   const [selectedSectionId, setSelectedSectionId] = useState<string | null>(null);
+  // Initial loading state: if editMode, wait for parent
   const [isLoading, setIsLoading] = useState(true);
   const [isPageActive, setIsPageActive] = useState(true);
   const isInitialLoad = React.useRef(true);
+  const isHydratedByParent = React.useRef(false);
 
   // Initialize blocks
   useEffect(() => {
@@ -247,12 +249,16 @@ export const VisualEditorProvider = ({ children, slug = '' }: VisualEditorProvid
               return { ...prev, sections: updatedSections };
             });
             isInitialLoad.current = false;
+            isHydratedByParent.current = true;
+            setIsLoading(false);
           }
           break;
         case 'VISUAL_EDIT_SYNC_SECTIONS':
           if (data.sections && Array.isArray(data.sections)) {
             console.log('[VisualEditorContext] Syncing sections from parent:', data.sections.length);
             setContentData((prev: any) => ({ ...prev, sections: data.sections }));
+            isHydratedByParent.current = true;
+            setIsLoading(false);
           }
           break;
         case 'VISUAL_EDIT_UPDATE_SECTION_PROPS':
@@ -308,10 +314,10 @@ export const VisualEditorProvider = ({ children, slug = '' }: VisualEditorProvid
   // Fetch initial content
   useEffect(() => {
     const fetchContent = async () => {
-      // If in editMode, we wait for parent to push initial data
+      // If in editMode, we wait for parent to push initial data via postMessage
       if (editMode) {
-        console.log('[VisualEditor Child] In edit_mode, skipping internal fetch, waiting for parent.');
-        setIsLoading(false);
+        console.log('[VisualEditor Child] In edit_mode, waiting for parent to push data...');
+        // We do NOT set isLoading(false) here, we wait for VISUAL_EDIT_UPDATE_DATA
         return;
       }
 

@@ -56,10 +56,24 @@ async function seedHomeVersions() {
     ];
 
     for (const page of pages) {
-        console.log(`📝 Seeding page: ${page.slug}...`);
+        console.log(`📝 Checking page: ${page.slug}...`);
+        
+        // Check if page already exists
+        const { data: existingPage } = await supabase
+            .from('static_pages')
+            .select('id')
+            .eq('slug', page.slug)
+            .single();
+
+        if (existingPage) {
+            console.log(`⏭️ Skipping ${page.slug} as it already exists in database.`);
+            continue;
+        }
+
+        console.log(`✨ Creating new page: ${page.slug}...`);
         const { error } = await supabase
             .from('static_pages')
-            .upsert(page, { onConflict: 'slug' });
+            .insert(page);
 
         if (error) {
             console.error(`❌ Error seeding ${page.slug}:`, error);

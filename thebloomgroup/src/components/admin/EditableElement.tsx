@@ -198,15 +198,46 @@ export const EditableElement = ({
       setRequesting(false);
     }
   }, [currentContent, defaultContent, type]);
+  
+  // Helper to recursively update children props (e.g. for images/backgrounds)
+  const injectContentProps = (nodes: React.ReactNode): React.ReactNode => {
+    return React.Children.map(nodes, (child) => {
+      if (!React.isValidElement(child)) return child;
+
+      let updatedProps: any = { ...child.props };
+      let hasUpdates = false;
+
+      // 1. Check for <img> tags
+      if (child.type === 'img') {
+        updatedProps.src = currentContent;
+        hasUpdates = true;
+      }
+
+      // 2. Check for <div> with backgroundImage
+      if (child.type === 'div' && updatedProps.style?.backgroundImage) {
+        updatedProps.style = {
+          ...updatedProps.style,
+          backgroundImage: `url(${currentContent})`
+        };
+        hasUpdates = true;
+      }
+
+      // 3. Recursively check children
+      if (child.props.children) {
+        const updatedChildren = injectContentProps(child.props.children);
+        if (updatedChildren !== child.props.children) {
+          updatedProps.children = updatedChildren;
+          hasUpdates = true;
+        }
+      }
+
+      return hasUpdates ? React.cloneElement(child, updatedProps) : child;
+    });
+  };
 
   if (!editMode) {
     if (type === 'image') {
-      const imgContent = React.Children.map(children, child => {
-        if (React.isValidElement(child) && child.type === 'img') {
-          return React.cloneElement(child as React.ReactElement<any>, { src: currentContent });
-        }
-        return child;
-      }) || <img src={currentContent} className="w-full h-full object-cover" alt="" />;
+      const imgContent = injectContentProps(children) || <img src={currentContent} className="w-full h-full object-cover" alt="" />;
       
       // If no className is provided, avoid extra wrapper which might break some layouts (like RefrigerationBlock)
       if (!className) {
@@ -286,36 +317,12 @@ export const EditableElement = ({
       style={{ ...style, minHeight: Tag === 'img' ? '40px' : undefined }}
     >
       {/* Render children with dynamic updates for images */}
-      {React.Children.map(children, child => {
-        if (!React.isValidElement(child)) return child;
-
-        // Update <img> tags
-        if (child.type === 'img') {
-          return React.cloneElement(child as React.ReactElement<any>, { 
-            src: currentContent 
-          });
-        }
-
-        // Update <div> tags with backgroundImage if it's an image field
-        if (type === 'image' && child.type === 'div') {
-          const childStyle = (child.props as any).style || {};
-          if (childStyle.backgroundImage) {
-            return React.cloneElement(child as React.ReactElement<any>, {
-              style: {
-                ...childStyle,
-                backgroundImage: `url(${currentContent})`
-              }
-            });
-          }
-        }
-
-        return child;
-      }) || (type === 'image' ? <img src={currentContent} className="w-full h-full object-cover" alt="" /> : null)}
+      {injectContentProps(children) || (type === 'image' ? <img src={currentContent} className="w-full h-full object-cover" alt="" /> : null)}
 
       {/* Hover Overlay - Attached onClick here explicitly */}
       <div 
         onClick={handleImagePickerClick}
-        className={`absolute inset-0 bg-blue-600/20 flex items-center justify-center transition-opacity z-[9999] ${requesting ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
+        className={`absolute inset-0 bg-blue-600/20 flex items-center justify-center transition-opacity z-[9999] cursor-pointer pointer-events-auto ${requesting ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
       >
         <div className="bg-white/90 px-4 py-2 rounded-full shadow-xl flex items-center gap-2 transform translate-y-2 group-hover:translate-y-0 transition-all hover:scale-105 active:scale-95 border-2 border-blue-500">
           {requesting ? (

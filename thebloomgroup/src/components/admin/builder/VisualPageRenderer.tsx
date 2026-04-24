@@ -5,7 +5,7 @@ import { EditWrapper } from './EditWrapper';
 import NotFound from '../../../pages/NotFound';
 
 export const VisualPageRenderer = ({ customSections }: { customSections?: any[] }) => {
-    const { editMode, contentData, slug, syncSections, selectedSectionId, setSelectedSectionId, isPageActive } = useVisualEditor();
+    const { editMode, contentData, slug, syncSections, selectedSectionId, setSelectedSectionId, isPageActive, isLoading } = useVisualEditor();
 
     // If page is inactive and not in edit mode, return 404
     if (!isPageActive && !editMode) {
@@ -26,7 +26,8 @@ export const VisualPageRenderer = ({ customSections }: { customSections?: any[] 
         }
 
         // Signal to parent that we are ready and provide current sections
-        if (sections && sections.length > 0) {
+        // ONLY if not loading and we truly have sections to sync
+        if (!isLoading && sections && sections.length > 0) {
             window.parent.postMessage({ 
                 type: 'VISUAL_EDIT_SYNC_SECTIONS', 
                 sections,
@@ -68,6 +69,13 @@ export const VisualPageRenderer = ({ customSections }: { customSections?: any[] 
     };
 
     if (!sections || sections.length === 0) {
+        if (isLoading) {
+            return (
+                <div className="flex items-center justify-center min-h-[400px]">
+                    <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
+                </div>
+            );
+        }
         return (
             <div className="py-20 text-center bg-gray-50 border-2 border-dashed border-gray-200 rounded-lg m-8">
                 <p className="text-muted-foreground">This page is empty. Start adding sections!</p>

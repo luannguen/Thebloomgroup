@@ -14,8 +14,17 @@ const DEFAULT_HOME_V2_SECTIONS = [
 ];
 
 const HomeV2Content = () => {
-  const { contentData } = useVisualEditor();
+  const { contentData, isLoading } = useVisualEditor();
   
+  if (isLoading) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[60vh]">
+        <div className="w-12 h-12 border-4 border-primary/20 border-t-primary rounded-full animate-spin mb-4"></div>
+        <p className="text-muted-foreground animate-pulse">Đang tải nội dung...</p>
+      </div>
+    );
+  }
+
   if (contentData?.sections && contentData.sections.length > 0) {
     return <VisualPageRenderer />;
   }
