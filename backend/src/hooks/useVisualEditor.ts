@@ -246,6 +246,9 @@ export function useVisualEditor(iframeRef: React.RefObject<HTMLIFrameElement>) {
                 fieldId: data.fieldKey,
                 sectionId: data.sectionId
             });
+        } else if (data.type === 'VISUAL_EDIT_REMOVE_SECTION') {
+            console.log('[VisualEditor Parent] Removing section requested from iframe:', data.sectionId);
+            removeSection(data.sectionId);
         } else if (data.type === 'VISUAL_EDIT_SYNC_SECTIONS') {
             // Fired by VisualPageRenderer on mount or when hydration happens
             if (data.sections && Array.isArray(data.sections)) {
