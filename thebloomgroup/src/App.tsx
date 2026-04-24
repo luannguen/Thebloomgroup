@@ -52,6 +52,7 @@ const TeamPage = lazy(() => import("./pages/TeamPage"));
 const Events = lazy(() => import("./pages/Events"));
 const EventDetail = lazy(() => import("./pages/EventDetail"));
 const ProjectDetail = lazy(() => import("./pages/ProjectDetail"));
+const ProductDetail = lazy(() => import("./pages/ProductDetail"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const SearchResults = lazy(() => import("./pages/SearchResults"));
 const JobDetail = lazy(() => import("./pages/JobDetail"));
@@ -127,6 +128,7 @@ const App = () => {
                 <Route path="products/residential" element={<ResidentialProducts />} />
                 <Route path="products/cold-storage" element={<ColdStorageProducts />} />
                 <Route path="products/auxiliary" element={<AuxiliaryProducts />} />
+                <Route path="products/:slug" element={<ProductDetail />} />
                 <Route path="projects" element={<StaticPage slug="projects" />} />
                 <Route path="projects/category/:slug" element={<ProjectCategory />} /> {/* Dynamic Category Route */}
                 <Route path="projects/industrial" element={<IndustrialProjects />} />
