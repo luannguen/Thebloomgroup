@@ -164,7 +164,7 @@ export const VisualEditorProvider = ({ children, slug = '' }: VisualEditorProvid
       if (!prev.sections || prev.sections.length === 0) {
         const sectionsWithIds = sections.map((s: any, idx: number) => ({
           ...s,
-          id: s.id || `sec_${Date.now()}_${idx}_${Math.random().toString(36).substr(2, 4)}`
+          id: s.id || `sec_stable_${idx}`
         }));
         console.log('[VisualEditorContext] Hydrating context with sections:', sectionsWithIds.length);
         const newData = { ...prev, sections: sectionsWithIds };
@@ -242,11 +242,17 @@ export const VisualEditorProvider = ({ children, slug = '' }: VisualEditorProvid
             setContentData((prev: any) => {
               const updatedSections = newSections.map((s: any, idx: number) => ({
                 ...s,
-                id: s.id || (prev.sections?.[idx]?.id || `section_${idx}`)
+                id: s.id || `sec_stable_${idx}`
               }));
               return { ...prev, sections: updatedSections };
             });
             isInitialLoad.current = false;
+          }
+          break;
+        case 'VISUAL_EDIT_SYNC_SECTIONS':
+          if (data.sections && Array.isArray(data.sections)) {
+            console.log('[VisualEditorContext] Syncing sections from parent:', data.sections.length);
+            setContentData((prev: any) => ({ ...prev, sections: data.sections }));
           }
           break;
         case 'VISUAL_EDIT_UPDATE_SECTION_PROPS':

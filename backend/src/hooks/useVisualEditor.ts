@@ -176,7 +176,8 @@ export function useVisualEditor(iframeRef: React.RefObject<HTMLIFrameElement>) {
                         const rawSections = parsed.sections || [];
                         const processedSections = rawSections.map((s: any, idx: number) => ({
                             ...s,
-                            id: s.id || `sec_${Date.now()}_${idx}_${Math.random().toString(36).substr(2, 4)}`
+                            // Use existing ID or generate a stable one based on index
+                            id: s.id || `sec_stable_${idx}`
                         }));
                         setSections(processedSections);
                     } catch (e) {
@@ -338,9 +339,21 @@ export function useVisualEditor(iframeRef: React.RefObject<HTMLIFrameElement>) {
         setSections(prev => {
             const next = prev.map(s => {
                 if (s.id === id) {
-                    // If the updates don't already contain a 'props' object,
-                    // wrap the updates into a props object to match the registry structure
-                    const newProps = updates.props ? updates.props : { ...(s.props || {}), ...updates };
+                    // Check if updates is already a full props object
+                    if (updates.props) {
+                        return { ...s, props: updates.props };
+                    }
+                    
+                    // Otherwise, apply each update potentially deep
+                    let newProps = { ...(s.props || {}) };
+                    Object.entries(updates).forEach(([key, value]) => {
+                        if (key.includes('.')) {
+                            newProps = setDeepValue(newProps, key, value);
+                        } else {
+                            newProps[key] = value;
+                        }
+                    });
+                    
                     return { ...s, props: newProps };
                 }
                 return s;
@@ -351,23 +364,33 @@ export function useVisualEditor(iframeRef: React.RefObject<HTMLIFrameElement>) {
         setHasPendingChanges(true);
     };
 
-    // Helper to set nested value in an object
     const setDeepValue = (obj: any, path: string, value: any) => {
         const keys = path.split('.');
-        let current = obj;
-        for (let i = 0; i < keys.length - 1; i++) {
+        const root = { ...obj };
+        let current = root;
+        
+        for (let i = 0; i < keys.length; i++) {
             const key = keys[i];
-            const nextKey = keys[i + 1];
             
-            // If the next key is a number, the current level should be an array
-            const isNextKeyIndex = !isNaN(Number(nextKey));
-            
-            if (!current[key]) {
-                current[key] = isNextKeyIndex ? [] : {};
+            if (i === keys.length - 1) {
+                current[key] = value;
+            } else {
+                const nextKey = keys[i + 1];
+                const isNextKeyIndex = !isNaN(Number(nextKey));
+                
+                // Clone the next level to ensure immutability
+                if (Array.isArray(current[key])) {
+                    current[key] = [...current[key]];
+                } else if (current[key] && typeof current[key] === 'object') {
+                    current[key] = { ...current[key] };
+                } else {
+                    current[key] = isNextKeyIndex ? [] : {};
+                }
+                
+                current = current[key];
             }
-            current = current[key];
         }
-        current[keys[keys.length - 1]] = value;
+        return root;
     };
 
     const handleImageSelect = (url: string) => {
@@ -377,14 +400,26 @@ export function useVisualEditor(iframeRef: React.RefObject<HTMLIFrameElement>) {
         } else if (imagePicker.sectionId && imagePicker.fieldId) {
             const section = sections.find(s => s.id === imagePicker.sectionId);
             if (section) {
-                // Deep clone to avoid direct mutation
-                const newProps = JSON.parse(JSON.stringify(section.props || {}));
+                const newProps = { ...(section.props || {}) };
                 
-                // Use the new helper to handle nested paths like "milestones.0.logo"
-                setDeepValue(newProps, imagePicker.fieldId, url);
+                // Construct the full path if parentPath exists
+                const fullPath = imagePicker.parentPath 
+                    ? `${imagePicker.parentPath}.${imagePicker.fieldId}`
+                    : imagePicker.fieldId;
                 
-                console.log(`[VisualEditor Parent] Updating section ${imagePicker.sectionId} field ${imagePicker.fieldId} to:`, url);
+                console.log('[useVisualEditor] Updating nested image:', { fullPath, url });
+                setDeepValue(newProps, fullPath, url);
+                
                 updateSection(imagePicker.sectionId, { props: newProps });
+                
+                // If it's a forMetadata update, we don't send to iframe yet
+                if (!imagePicker.isForMetadata) {
+                    sendToIframe('VISUAL_EDIT_IMAGE_SELECTED', {
+                        fieldKey: fullPath, // Send the FULL path
+                        imageUrl: url,
+                        sectionId: imagePicker.sectionId
+                    });
+                }
             }
         } else if (!imagePicker.sectionId && imagePicker.fieldId) {
             // Trường hợp cập nhật các field toàn cục (với sectionId = null)
