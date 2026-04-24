@@ -12,8 +12,10 @@ const DEFAULT_ABOUT_V2_SECTIONS = [
   { id: 'contact', type: 'contact_form', props: {} }
 ];
 
+import { VisualSectionRenderer } from "@/components/visual-editor/VisualSectionRenderer";
+
 const AboutUsV2Content = () => {
-    const { contentData, isLoading } = useVisualEditor();
+    const { contentData, isLoading, editMode } = useVisualEditor();
     
     if (isLoading) {
         return (
@@ -24,17 +26,21 @@ const AboutUsV2Content = () => {
         );
     }
     
-    if (contentData?.sections && contentData.sections.length > 0) {
+    const sections = (contentData?.sections && contentData.sections.length > 0) 
+        ? contentData.sections 
+        : DEFAULT_ABOUT_V2_SECTIONS;
+
+    if (editMode) {
         return (
             <main className="flex-grow">
-                <VisualPageRenderer />
+                <VisualPageRenderer customSections={DEFAULT_ABOUT_V2_SECTIONS} />
             </main>
         );
     }
 
     return (
         <main className="flex-grow">
-            <VisualPageRenderer customSections={DEFAULT_ABOUT_V2_SECTIONS} />
+            <VisualSectionRenderer sections={sections} isEditMode={false} />
         </main>
     );
 };

@@ -26,8 +26,8 @@ export const VisualPageRenderer = ({ customSections }: { customSections?: any[] 
         }
 
         // Signal to parent that we are ready and provide current sections
-        // ONLY if not loading and we truly have sections to sync
-        if (!isLoading && sections && sections.length > 0) {
+        // ONLY if not loading, in editMode, and we truly have sections to sync
+        if (editMode && !isLoading && sections && sections.length > 0) {
             window.parent.postMessage({ 
                 type: 'VISUAL_EDIT_SYNC_SECTIONS', 
                 sections,

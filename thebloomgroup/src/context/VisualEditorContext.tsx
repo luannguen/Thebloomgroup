@@ -226,90 +226,92 @@ export const VisualEditorProvider = ({ children, slug = '' }: VisualEditorProvid
   }, [editMode, slug]);
 
 
+  const handleMessage = React.useCallback((event: MessageEvent) => {
+    console.log('[VisualEditorContext] Received message:', event.data);
+    const data = event.data?.data || event.data || {};
+    const type = event.data?.type || event.data?.data?.type;
+    const { fieldKey, imageUrl, url, image, sectionId: msgSectionId, id: msgId, section_id: msgSid, props, blockType, index, direction, sections } = data;
+    const effectiveImageUrl = imageUrl || url || image;
+    const sectionId = msgSectionId || msgId || msgSid || (type === 'VISUAL_EDIT_IMAGE_SELECTED' ? selectedSectionId : null);
+    
+    switch (type) {
+      case 'VISUAL_EDIT_UPDATE_DATA':
+        const { sections: newSections } = data;
+        if (newSections && Array.isArray(newSections)) {
+          console.log('[VisualEditorContext] Received update data:', newSections.length, 'sections');
+          setContentData((prev: any) => {
+            const updatedSections = newSections.map((s: any, idx: number) => ({
+              ...s,
+              id: s.id || `sec_stable_${idx}`
+            }));
+            return { ...prev, sections: updatedSections };
+          });
+          isInitialLoad.current = false;
+          isHydratedByParent.current = true;
+          setIsLoading(false);
+        }
+        break;
+      case 'VISUAL_EDIT_SYNC_SECTIONS':
+        if (data.sections && Array.isArray(data.sections)) {
+          console.log('[VisualEditorContext] Syncing sections from parent:', data.sections.length);
+          setContentData((prev: any) => ({ ...prev, sections: data.sections }));
+          isHydratedByParent.current = true;
+          setIsLoading(false);
+        }
+        break;
+      case 'VISUAL_EDIT_UPDATE_SECTION_PROPS':
+        if (sectionId && props) {
+          console.log('[VisualEditorContext] Updating section props from message:', { sectionId, props });
+          updateSectionProps(sectionId, props, true); // skipSync=true because we are receiving it from parent
+        }
+        break;
+      case 'VISUAL_EDIT_IMAGE_SELECTED':
+        if (fieldKey && effectiveImageUrl) {
+          console.log('[VisualEditorContext] Image selected for update:', { sectionId, fieldKey, imageUrl: effectiveImageUrl });
+          if (sectionId) {
+            updateSectionProps(sectionId, { [fieldKey]: effectiveImageUrl }, false);
+          } else {
+            updateField(fieldKey, effectiveImageUrl, false);
+          }
+        } else {
+          console.warn('[VisualEditorContext] Image selected but missing required fields:', { fieldKey, effectiveImageUrl });
+        }
+        break;
+      case 'VISUAL_EDIT_ADD_SECTION':
+        addSection(blockType, index);
+        break;
+      case 'VISUAL_EDIT_REMOVE_SECTION':
+        removeSection(sectionId);
+        break;
+      case 'VISUAL_EDIT_UPDATE_SECTION_PROPS':
+        updateSectionProps(sectionId, props);
+        break;
+      case 'VISUAL_EDIT_REORDER_SECTIONS':
+        if (direction) {
+          moveSection(sectionId, direction);
+        } else if (sections) {
+          reorderSections(sections);
+        }
+        break;
+      case 'VISUAL_EDIT_SELECT_SECTION':
+        setSelectedSectionId(sectionId);
+        break;
+      case 'VISUAL_EDIT_CHANGE_LANGUAGE':
+        if (event.data.lng) {
+          console.log('[VisualEditorContext] Changing language to:', event.data.lng);
+          i18n.changeLanguage(event.data.lng);
+        }
+        break;
+    }
+  }, [selectedSectionId, updateSectionProps, updateField, addSection, removeSection, reorderSections, moveSection]);
+
   // Listen for messages from Admin
   useEffect(() => {
-    const handleMessage = (event: MessageEvent) => {
-      console.log('[VisualEditorContext] Received message:', event.data);
-      const data = event.data?.data || event.data || {};
-      const type = event.data?.type || event.data?.data?.type;
-      const { fieldKey, imageUrl, url, image, sectionId: msgSectionId, id: msgId, section_id: msgSid, props, blockType, index, direction, sections } = data;
-      const effectiveImageUrl = imageUrl || url || image;
-      const sectionId = msgSectionId || msgId || msgSid || (type === 'VISUAL_EDIT_IMAGE_SELECTED' ? selectedSectionId : null);
-      
-      switch (type) {
-        case 'VISUAL_EDIT_UPDATE_DATA':
-          const { sections: newSections } = data;
-          if (newSections && Array.isArray(newSections)) {
-            console.log('[VisualEditorContext] Received update data:', newSections.length, 'sections');
-            setContentData((prev: any) => {
-              const updatedSections = newSections.map((s: any, idx: number) => ({
-                ...s,
-                id: s.id || `sec_stable_${idx}`
-              }));
-              return { ...prev, sections: updatedSections };
-            });
-            isInitialLoad.current = false;
-            isHydratedByParent.current = true;
-            setIsLoading(false);
-          }
-          break;
-        case 'VISUAL_EDIT_SYNC_SECTIONS':
-          if (data.sections && Array.isArray(data.sections)) {
-            console.log('[VisualEditorContext] Syncing sections from parent:', data.sections.length);
-            setContentData((prev: any) => ({ ...prev, sections: data.sections }));
-            isHydratedByParent.current = true;
-            setIsLoading(false);
-          }
-          break;
-        case 'VISUAL_EDIT_UPDATE_SECTION_PROPS':
-          if (sectionId && props) {
-            console.log('[VisualEditorContext] Updating section props from message:', { sectionId, props });
-            updateSectionProps(sectionId, props, true); // skipSync=true because we are receiving it from parent
-          }
-          break;
-        case 'VISUAL_EDIT_IMAGE_SELECTED':
-          if (fieldKey && effectiveImageUrl) {
-            console.log('[VisualEditorContext] Image selected for update:', { sectionId, fieldKey, imageUrl: effectiveImageUrl });
-            if (sectionId) {
-              updateSectionProps(sectionId, { [fieldKey]: effectiveImageUrl }, false);
-            } else {
-              updateField(fieldKey, effectiveImageUrl, false);
-            }
-          } else {
-            console.warn('[VisualEditorContext] Image selected but missing required fields:', { fieldKey, effectiveImageUrl });
-          }
-          break;
-        case 'VISUAL_EDIT_ADD_SECTION':
-          addSection(blockType, index);
-          break;
-        case 'VISUAL_EDIT_REMOVE_SECTION':
-          removeSection(sectionId);
-          break;
-        case 'VISUAL_EDIT_UPDATE_SECTION_PROPS':
-          updateSectionProps(sectionId, props);
-          break;
-        case 'VISUAL_EDIT_REORDER_SECTIONS':
-          if (direction) {
-            moveSection(sectionId, direction);
-          } else if (sections) {
-            reorderSections(sections);
-          }
-          break;
-        case 'VISUAL_EDIT_SELECT_SECTION':
-          setSelectedSectionId(sectionId);
-          break;
-        case 'VISUAL_EDIT_CHANGE_LANGUAGE':
-          if (event.data.lng) {
-            console.log('[VisualEditorContext] Changing language to:', event.data.lng);
-            i18n.changeLanguage(event.data.lng);
-          }
-          break;
-      }
-    };
+    if (!editMode) return;
 
     window.addEventListener('message', handleMessage);
     return () => window.removeEventListener('message', handleMessage);
-  }, [updateField, addSection, removeSection, updateSectionProps, reorderSections, moveSection]);
+  }, [editMode, handleMessage]);
 
   // Fetch initial content
   useEffect(() => {
