@@ -14,10 +14,10 @@ interface AboutV2HeroProps {
   titleColor?: string;
 }
 
-export const AboutV2HeroBlock: React.FC<AboutV2HeroProps> = ({ 
+export const AboutV2HeroBlock = ({
   sectionId,
-  title = 'About Us', 
   backgroundImage = '/assets/about-v2/banner.jpg',
+  title = 'About Us',
   titleColor = '#ffffff'
 }) => {
   const { editMode } = useVisualEditor();
@@ -25,7 +25,13 @@ export const AboutV2HeroBlock: React.FC<AboutV2HeroProps> = ({
   return (
     <section className="relative h-[400px] flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 z-0">
-        <EditableElement sectionId={sectionId} fieldKey="backgroundImage" defaultContent={backgroundImage || ""} type="image">
+        <EditableElement 
+          sectionId={sectionId} 
+          fieldKey="backgroundImage" 
+          defaultContent={backgroundImage || ""} 
+          type="image"
+          className="w-full h-full"
+        >
           <div 
             className="absolute inset-0 bg-cover bg-center transition-transform duration-700 hover:scale-105"
             style={{ backgroundImage: `url(${backgroundImage})` }}
@@ -36,7 +42,7 @@ export const AboutV2HeroBlock: React.FC<AboutV2HeroProps> = ({
       
       <div className={`relative z-10 text-center px-4 -mt-12 ${editMode ? 'pointer-events-none' : ''}`}>
         <h1 
-          className={`text-5xl md:text-7xl font-extrabold text-white mb-6 animate-fade-in uppercase tracking-[0.2em] ${editMode ? 'pointer-events-auto' : ''}`}
+          className={`inline-block mx-auto text-5xl md:text-7xl font-extrabold text-white mb-6 animate-fade-in uppercase tracking-[0.2em] ${editMode ? 'pointer-events-auto' : ''}`}
           style={{ color: titleColor }}
         >
           <EditableElement sectionId={sectionId} fieldKey="title" defaultContent={title || ""} />
@@ -74,14 +80,20 @@ export const AboutV2IntroBlock: React.FC<AboutV2IntroProps> = ({
     <section className="relative w-full pb-0 px-4 md:px-8 z-30">
       <div className="max-w-5xl mx-auto relative -mt-24 shadow-[0_20px_50px_rgba(0,0,0,0.2)] rounded-t-lg overflow-hidden">
         <div className="absolute inset-0 z-0">
-        <EditableElement sectionId={sectionId} fieldKey="backgroundImage" defaultContent={backgroundImage || ""} type="image">
-          <div 
-            className="absolute inset-0 bg-cover bg-fixed bg-center"
-            style={{ backgroundImage: `url(${backgroundImage})` }}
-          />
-          <div className="absolute inset-0 bg-gray-900/10 backdrop-blur-[1px]" />
-        </EditableElement>
-      </div>
+          <EditableElement 
+            sectionId={sectionId} 
+            fieldKey="backgroundImage" 
+            defaultContent={backgroundImage || ""} 
+            type="image"
+            className="w-full h-full"
+          >
+            <div 
+              className="absolute inset-0 bg-cover bg-fixed bg-center"
+              style={{ backgroundImage: `url(${backgroundImage})` }}
+            />
+            <div className="absolute inset-0 bg-gray-900/10 backdrop-blur-[1px]" />
+          </EditableElement>
+        </div>
       
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-0 relative z-10 w-full p-6 md:p-12">
         {/* Overlapping Content Card */}
