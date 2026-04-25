@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { projectService } from '@/services/projectService';
-import { productService } from '@/services/productService'; // Reusing for getCategories
+import { categoryService } from '@/services/categoryService';
 import { Project, Category } from '@/components/data/types';
 import { Plus, Edit2, Trash2, Search, Loader2, Briefcase } from 'lucide-react';
 import ProjectForm from '@/components/admin/projects/ProjectForm';
@@ -25,13 +25,13 @@ const ProjectsPage: React.FC = () => {
     const loadData = async () => {
         setLoading(true);
         try {
-            const [projectsData, catResult] = await Promise.all([
+            const [projectsData, categoriesData] = await Promise.all([
                 projectService.getProjects(),
-                productService.getCategories()
+                categoryService.getCategories('project')
             ]);
 
             setProjects(projectsData || []);
-            if (catResult.success) setCategories(catResult.data || []);
+            setCategories(categoriesData || []);
         } catch (error) {
             console.error('Failed to load data', error);
         } finally {
