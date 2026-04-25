@@ -21,6 +21,7 @@ export default function MenuManager() {
     const [isEditing, setIsEditing] = useState(false);
     const [editingItem, setEditingItem] = useState<Partial<NavigationItem>>({});
     const [saving, setSaving] = useState(false);
+    const [originalChildIds, setOriginalChildIds] = useState<string[]>([]);
 
     useEffect(() => {
         fetchItems();
@@ -76,6 +77,9 @@ export default function MenuManager() {
 
     const handleEdit = (item: NavigationItem) => {
         setEditingItem(item);
+        setOriginalChildIds(
+            (item.children || []).map(c => c.id).filter(id => id && !id.startsWith('temp-'))
+        );
         setIsEditing(true);
     };
     const handleCreate = () => {
@@ -139,7 +143,22 @@ export default function MenuManager() {
         if (result.success && result.data) {
             const savedParent = result.data;
             
-            // Persist children as separate rows with matching parent_id
+            // Delete children that were removed from the list
+            const currentChildIds = (processedChildren || [])
+                .map(c => c.id)
+                .filter(id => id && !id.startsWith('temp-'));
+            
+            const removedChildIds = originalChildIds.filter(id => !currentChildIds.includes(id));
+            
+            // Delete removed children from database
+            if (removedChildIds.length > 0) {
+                const deletePromises = removedChildIds.map(id => 
+                    navigationService.deleteNavigationItem(id)
+                );
+                await Promise.all(deletePromises);
+            }
+
+            // Persist remaining children as separate rows with matching parent_id
             if (processedChildren && processedChildren.length > 0) {
                 const childPromises = processedChildren.map(child => {
                     const childData = { 
