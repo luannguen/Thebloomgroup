@@ -18,6 +18,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/components/ui/use-toast';
 import { useAntiSpam } from '@/hooks/useAntiSpam';
+import { useTranslation } from 'react-i18next';
 
 export default function JobDetail() {
   const { slug } = useParams<{ slug: string }>();
@@ -28,6 +29,7 @@ export default function JobDetail() {
   const [file, setFile] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
+  const { t } = useTranslation();
   const { HoneypotField, isBot } = useAntiSpam();
 
   const [formData, setFormData] = useState({
@@ -81,9 +83,10 @@ export default function JobDetail() {
     }
     if (!job) return;
     if (!file) {
+      console.warn('Submission blocked: No file selected');
       toast({
-        title: 'Thiếu hồ sơ',
-        description: 'Vui lòng đính kèm CV của bạn',
+        title: t('Thiếu hồ sơ', 'Thiếu hồ sơ'),
+        description: t('Vui lòng đính kèm CV của bạn', 'Vui lòng đính kèm CV của bạn'),
         variant: 'destructive'
       });
       return;
@@ -107,13 +110,20 @@ export default function JobDetail() {
         title: 'Thành công',
         description: 'Hồ sơ của bạn đã được gửi đi. Chúng tôi sẽ sớm liên hệ!'
       });
-    } catch (error) {
-      console.error('Submission failed:', error);
+    } catch (error: any) {
+      console.error('Submission failed deep check:', error);
+      const errorMessage = error?.message || error?.error_description || 'Unknown error';
+      
       toast({
-        title: 'Lỗi',
-        description: 'Gửi hồ sơ thất bại. Vui lòng thử lại sau.',
+        title: t('Lỗi', 'Lỗi'),
+        description: `${t('Gửi hồ sơ thất bại. Vui lòng thử lại sau.', 'Gửi hồ sơ thất bại. Vui lòng thử lại sau.')} (${errorMessage})`,
         variant: 'destructive'
       });
+      
+      // Fallback alert if toast is not visible for some reason
+      if (process.env.NODE_ENV === 'development') {
+        alert(`Lỗi gửi hồ sơ: ${errorMessage}`);
+      }
     } finally {
       setSubmitting(false);
     }
@@ -257,7 +267,7 @@ export default function JobDetail() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="cv">Đính kèm CV (PDF, JPG, PNG - Max 10MB)</Label>
+                  <Label htmlFor="cv">Đính kèm CV (PDF, DOC, DOCX - Max 10MB)</Label>
                   <div 
                     onClick={() => fileInputRef.current?.click()}
                     className={`mt-1 border-2 border-dashed rounded-xl p-6 text-center cursor-pointer transition-colors ${

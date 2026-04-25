@@ -8,9 +8,11 @@ import {
   ToastViewport,
 } from "@/components/ui/toast"
 
+import { useToast } from "@/components/ui/use-toast"
+
 export function Toaster() {
-  // Patch: fallback toasts to avoid missing hook error
-  const toasts = [];
+  const { toasts } = useToast()
+  console.log('🍞 Toaster rendering with toasts:', toasts.length);
 
   return (
     <ToastProvider>

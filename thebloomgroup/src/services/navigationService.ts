@@ -58,12 +58,13 @@ export const navigationService = {
                 .from('navigation')
                 .select('is_active, path')
                 .or(`path.eq.${normalizedPath},path.eq.${normalizedPath.substring(1)}`)
-                .maybeSingle();
+                .limit(1);
 
             if (error) throw error;
+            const item = data && data.length > 0 ? data[0] : null;
 
             // If entry exists and is_active is false, it's blocked
-            if (data && data.is_active === false) {
+            if (item && item.is_active === false) {
                 return { isBlocked: true };
             }
 

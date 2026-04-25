@@ -41,6 +41,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         const action = req.method === 'GET'
             ? (req.query.action as string)
             : (req.body as Record<string, string>)?.action;
+        
+        const targetBucket = (req.method === 'GET'
+            ? (req.query.bucket as string)
+            : (req.body as Record<string, string>)?.bucket) || BUCKET;
 
         switch (action) {
             case 'list': {
@@ -49,7 +53,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                     : (req.body as Record<string, string>)?.folder) || 'uploads';
 
                 const { data, error } = await supabase.storage
-                    .from(BUCKET)
+                    .from(targetBucket)
                     .list(folder, {
                         limit: 100,
                         offset: 0,
@@ -63,7 +67,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                 const files = data.filter(item => item.name && item.name !== '.emptyFolderPlaceholder');
                 const items = files.map((item) => {
                     const { data: { publicUrl } } = supabase.storage
-                        .from(BUCKET)
+                        .from(targetBucket)
                         .getPublicUrl(`${folder}/${item.name}`);
 
                     return {
@@ -83,7 +87,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                 }
 
                 const { data, error } = await supabase.storage
-                    .from(BUCKET)
+                    .from(targetBucket)
                     .createSignedUploadUrl(filePath);
 
                 if (error) {
@@ -100,7 +104,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                 }
 
                 const { error } = await supabase.storage
-                    .from(BUCKET)
+                    .from(targetBucket)
                     .remove([deletePath]);
 
                 if (error) {
@@ -114,7 +118,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                 const cleanupFolder = (req.body as Record<string, string>)?.folder || 'uploads';
 
                 const { data, error } = await supabase.storage
-                    .from(BUCKET)
+                    .from(targetBucket)
                     .list(cleanupFolder, { limit: 200, offset: 0 });
 
                 if (error) {
@@ -127,7 +131,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                 for (const file of files) {
                     const fp = `${cleanupFolder}/${file.name}`;
                     const { error: dlError } = await supabase.storage
-                        .from(BUCKET)
+                        .from(targetBucket)
                         .download(fp);
 
                     if (dlError) {
@@ -137,7 +141,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
                 if (ghostPaths.length > 0) {
                     await supabase.storage
-                        .from(BUCKET)
+                        .from(targetBucket)
                         .remove(ghostPaths);
                 }
 

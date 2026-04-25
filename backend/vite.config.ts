@@ -48,12 +48,13 @@ export default defineConfig(({ mode }) => {
               const body: Record<string, string> = req.method === 'POST' ? await parseBody(req) : {}
               const parsedUrl = new URL(req.url || '', 'http://localhost')
               const action = req.method === 'GET' ? parsedUrl.searchParams.get('action') : body.action
+              const targetBucket = (req.method === 'GET' ? parsedUrl.searchParams.get('bucket') : body.bucket) || BUCKET
 
               switch (action) {
                 case 'list': {
                   const folder = (req.method === 'GET' ? parsedUrl.searchParams.get('folder') : body.folder) || 'uploads'
                   const { data, error } = await adminClient.storage
-                    .from(BUCKET)
+                    .from(targetBucket)
                     .list(folder, { limit: 100, offset: 0, sortBy: { column: 'created_at', order: 'desc' } })
 
                   if (error) {
@@ -66,7 +67,7 @@ export default defineConfig(({ mode }) => {
                   
                   const items = files.map((item) => {
                     const { data: { publicUrl } } = adminClient.storage
-                      .from(BUCKET)
+                      .from(targetBucket)
                       .getPublicUrl(`${folder}/${item.name}`)
 
                     return {
@@ -87,7 +88,7 @@ export default defineConfig(({ mode }) => {
                     res.end(JSON.stringify({ error: 'path is required' }))
                     return
                   }
-                  const { data, error } = await adminClient.storage.from(BUCKET).createSignedUploadUrl(filePath)
+                  const { data, error } = await adminClient.storage.from(targetBucket).createSignedUploadUrl(filePath)
                   if (error) {
                     res.statusCode = 400
                     res.end(JSON.stringify({ error: error.message }))
@@ -104,7 +105,7 @@ export default defineConfig(({ mode }) => {
                     res.end(JSON.stringify({ error: 'path is required' }))
                     return
                   }
-                  const { error } = await adminClient.storage.from(BUCKET).remove([deletePath])
+                  const { error } = await adminClient.storage.from(targetBucket).remove([deletePath])
                   if (error) {
                     res.statusCode = 400
                     res.end(JSON.stringify({ error: error.message }))
@@ -116,7 +117,7 @@ export default defineConfig(({ mode }) => {
 
                 case 'cleanup': {
                   const cleanupFolder = body.folder || 'uploads'
-                  const { data, error } = await adminClient.storage.from(BUCKET).list(cleanupFolder, { limit: 200, offset: 0 })
+                  const { data, error } = await adminClient.storage.from(targetBucket).list(cleanupFolder, { limit: 200, offset: 0 })
                   if (error) {
                     res.statusCode = 400
                     res.end(JSON.stringify({ error: error.message }))
@@ -128,12 +129,12 @@ export default defineConfig(({ mode }) => {
 
                   for (const file of files) {
                     const fp = `${cleanupFolder}/${file.name}`
-                    const { error: dlErr } = await adminClient.storage.from(BUCKET).download(fp)
+                    const { error: dlErr } = await adminClient.storage.from(targetBucket).download(fp)
                     if (dlErr) ghostPaths.push(fp)
                   }
 
                   if (ghostPaths.length > 0) {
-                    await adminClient.storage.from(BUCKET).remove(ghostPaths)
+                    await adminClient.storage.from(targetBucket).remove(ghostPaths)
                   }
 
                   res.end(JSON.stringify({ data: { deleted: ghostPaths.length, kept: files.length - ghostPaths.length } }))

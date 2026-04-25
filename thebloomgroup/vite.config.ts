@@ -24,6 +24,11 @@ export default defineConfig(async ({ mode }) => {
       host: "::",
       port: 8081,
       proxy: {
+        '/api/media': {
+          target: 'http://localhost:5173',
+          changeOrigin: true,
+          secure: false,
+        },
         '/api': {
           target: 'http://localhost:5173',
           changeOrigin: true,
