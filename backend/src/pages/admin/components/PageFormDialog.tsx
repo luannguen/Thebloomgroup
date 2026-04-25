@@ -176,7 +176,7 @@ export function PageFormDialog({
                                             asChild 
                                             className="bg-primary hover:bg-primary/90 text-white rounded-xl h-11 flex items-center gap-2 px-6 shadow-lg shadow-primary/20"
                                         >
-                                            <Link to={`/pages/visual-edit/${formData.slug}`}>
+                                            <Link to={`/pages/visual-edit/${formData.slug.replace(/^\/+/, '')}`}>
                                                 <Wand2 className="h-4 w-4" />
                                                 Mở Visual Editor
                                             </Link>

@@ -116,7 +116,12 @@ export default function PagesPage() {
                 image_url = await pageService.uploadImage(selectedFile);
             }
 
-            const dataToSubmit = { ...formData, image_url };
+            const dataToSubmit = { 
+                ...formData, 
+                image_url,
+                // Sanitize slug: remove leading/trailing slashes
+                slug: formData.slug.replace(/^\/+|\/+$/g, '')
+            };
 
             if (currentPage) {
                 await pageService.updatePage(currentPage.id, dataToSubmit);

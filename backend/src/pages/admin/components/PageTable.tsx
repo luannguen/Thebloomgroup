@@ -178,7 +178,7 @@ export function PageTable({
                                         className="h-8 w-8 rounded-lg text-blue-600 hover:text-blue-700 hover:bg-blue-50"
                                         title="Xem trên trang web"
                                     >
-                                        <a href={`/${page.slug}`} target="_blank" rel="noreferrer">
+                                        <a href={`/${page.slug.replace(/^\/+/, '')}`} target="_blank" rel="noreferrer">
                                             <ExternalLink className="h-4 w-4" />
                                         </a>
                                     </Button>
@@ -189,7 +189,7 @@ export function PageTable({
                                         className="h-8 w-8 rounded-lg text-indigo-600 hover:text-indigo-700 hover:bg-indigo-50"
                                         title="Chỉnh sửa Visual"
                                     >
-                                        <Link to={`/pages/visual-edit/${page.slug}`}>
+                                        <Link to={`/pages/visual-edit/${page.slug.replace(/^\/+/, '')}`}>
                                             <Wand2 className="h-4 w-4" />
                                         </Link>
                                     </Button>
