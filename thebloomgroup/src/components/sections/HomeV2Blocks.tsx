@@ -191,9 +191,9 @@ export const HomeV2SectorsBlock = ({
   return (
     <section className="py-24 bg-slate-50">
       <div className="container-custom">
-        <div className="text-center max-w-3xl mx-auto mb-20">
-          <EditableElement tagName="h2" fieldKey="title" sectionId={sectionId} defaultContent={displayTitle} className="text-4xl font-black mb-6 text-slate-900 block" />
-          <EditableElement tagName="p" fieldKey="subtitle" sectionId={sectionId} defaultContent={displaySubtitle} className="text-lg text-slate-600 block" />
+        <div className="max-w-3xl mx-auto mb-20">
+          <EditableElement tagName="h2" fieldKey="title" sectionId={sectionId} defaultContent={displayTitle} className="text-4xl font-black mb-6 text-slate-900 block text-center" />
+          <EditableElement tagName="div" fieldKey="subtitle" sectionId={sectionId} defaultContent={displaySubtitle} className="text-lg text-slate-600 block" />
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -270,7 +270,7 @@ export const HomeV2SolutionsBlock = ({
         <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
           <div className="max-w-2xl">
             <EditableElement tagName="h2" fieldKey="title" sectionId={sectionId} defaultContent={displayTitle} className="text-4xl font-black mb-6 text-slate-900 block" />
-            <EditableElement tagName="p" fieldKey="subtitle" sectionId={sectionId} defaultContent={displaySubtitle} className="text-lg text-slate-600 block" />
+            <EditableElement tagName="div" fieldKey="subtitle" sectionId={sectionId} defaultContent={displaySubtitle} className="text-lg text-slate-600 block" />
           </div>
           <Link to="/products" className="btn-primary flex items-center shrink-0">
             {t('all_solutions', 'Tất cả giải pháp')} <ArrowRight className="ml-2 w-4 h-4" />
@@ -333,8 +333,8 @@ export const HomeV2StatsBlock = ({
       </div>
 
       <div className="container-custom relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-20">
-          <EditableElement tagName="h2" fieldKey="title" sectionId={sectionId} defaultContent={displayTitle} className="text-4xl md:text-5xl font-black mb-8 block leading-tight" />
+        <div className="max-w-3xl mx-auto mb-20">
+          <EditableElement tagName="h2" fieldKey="title" sectionId={sectionId} defaultContent={displayTitle} className="text-4xl md:text-5xl font-black mb-8 block leading-tight text-center" />
         </div>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-12">

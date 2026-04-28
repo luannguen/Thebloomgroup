@@ -96,3 +96,10 @@
     @apply text-gray-200 hover:text-white transition-colors;
   }
 }
+
+/* ─── Quill Rich Text: inline styles dùng cho alignment, không cần CSS class ─── */
+/* Quill đã được cấu hình để xuất style="text-align:..." nên không cần .ql-align-* ở đây */
+/* Các nội dung cũ dùng class sẽ vẫn được handle bởi rules dưới: */
+.ql-align-center  { text-align: center; }
+.ql-align-right   { text-align: right; }
+.ql-align-justify { text-align: justify; }

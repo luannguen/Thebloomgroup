@@ -55,24 +55,26 @@ export const FeatureListBlock = ({
 
       <div className="container-custom relative z-10">
         {(title || subtitle) && (
-          <div className="max-w-3xl mx-auto text-center mb-20">
+          <div className="max-w-3xl mx-auto mb-20">
             <EditableElement 
               tagName="h2" 
               fieldKey="title" 
               sectionId={sectionId} 
               defaultContent={title} 
-              className="text-3xl md:text-5xl font-extrabold text-primary mb-6 tracking-tight" 
+              className="text-3xl md:text-5xl font-extrabold text-primary mb-6 tracking-tight text-center" 
             />
             {subtitle && (
-              <div className="relative inline-block">
-                <EditableElement 
-                  tagName="p" 
-                  fieldKey="subtitle" 
-                  sectionId={sectionId} 
-                  defaultContent={subtitle} 
-                  className="text-lg md:text-xl text-muted-foreground leading-relaxed" 
-                />
-                <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-transparent via-primary/30 to-transparent rounded-full" />
+              <div className="flex justify-center">
+                <div className="relative inline-block w-full">
+                  <EditableElement 
+                    tagName="div" 
+                    fieldKey="subtitle" 
+                    sectionId={sectionId} 
+                    defaultContent={subtitle} 
+                    className="text-lg md:text-xl text-muted-foreground leading-relaxed" 
+                  />
+                  <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-transparent via-primary/30 to-transparent rounded-full" />
+                </div>
               </div>
             )}
           </div>
@@ -120,7 +122,7 @@ export const FeatureListBlock = ({
 
               <div className="relative z-10 lg:pl-[calc(5rem+1.5rem)] md:pl-[calc(4rem+1.5rem)]">
                 <EditableElement 
-                  tagName="p" 
+                  tagName="div" 
                   fieldKey={`items.${idx}.description`} 
                   sectionId={sectionId} 
                   defaultContent={item.description} 

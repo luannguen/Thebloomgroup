@@ -59,7 +59,7 @@ export const NewsEventsBlock = ({
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
           <div className="max-w-2xl">
             <EditableElement tagName="h2" fieldKey="title" sectionId={sectionId} defaultContent={displayTitle} className="text-3xl md:text-4xl font-bold mb-4" />
-            <EditableElement tagName="p" fieldKey="subtitle" sectionId={sectionId} defaultContent={displaySubtitle} className="text-lg text-muted-foreground" />
+            <EditableElement tagName="div" fieldKey="subtitle" sectionId={sectionId} defaultContent={displaySubtitle} className="text-lg text-muted-foreground" />
           </div>
           <Link to="/news" className="mt-6 md:mt-0 inline-flex items-center text-primary font-bold hover:gap-2 transition-all">
             {t('view_all_news_posts', 'Xem tất cả bài viết')} <ArrowRight className="ml-2 w-5 h-5" />
@@ -144,9 +144,9 @@ export const ProjectsBlock = ({
   return (
     <section className="py-20 bg-slate-50">
       <div className="container-custom">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <EditableElement tagName="h2" fieldKey="title" sectionId={sectionId} defaultContent={displayTitle} className="text-3xl md:text-4xl font-bold mb-6" />
-          <EditableElement tagName="p" fieldKey="subtitle" sectionId={sectionId} defaultContent={displaySubtitle} className="text-lg text-muted-foreground" />
+        <div className="max-w-3xl mx-auto mb-16">
+          <EditableElement tagName="h2" fieldKey="title" sectionId={sectionId} defaultContent={displayTitle} className="text-3xl md:text-4xl font-bold mb-6 text-center" />
+          <EditableElement tagName="div" fieldKey="subtitle" sectionId={sectionId} defaultContent={displaySubtitle} className="text-lg text-muted-foreground" />
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
