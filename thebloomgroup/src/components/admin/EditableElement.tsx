@@ -60,6 +60,7 @@ export const EditableElement = ({
 
   const [requesting, setRequesting] = React.useState(false);
   const contentRef = useRef<HTMLElement>(null);
+  const isFocused = useRef<boolean>(false);
 
   // Use explicit sectionId from props, fallback to context's selectedSectionId
   const effectiveSectionId = explicitSectionId || selectedSectionId;
@@ -170,7 +171,7 @@ export const EditableElement = ({
 
   // Sync ref when not in focus (only for text and rich-text)
   useEffect(() => {
-    if (contentRef.current) {
+    if (contentRef.current && !isFocused.current) {
       if (effectiveType === 'text' && contentRef.current.textContent !== currentContent) {
         contentRef.current.textContent = currentContent;
       } else if (effectiveType === 'rich-text' && contentRef.current.innerHTML !== currentContent) {
@@ -302,11 +303,15 @@ export const EditableElement = ({
             selectSection(effectiveSectionId);
           }
         }}
+        onFocus={() => {
+          isFocused.current = true;
+        }}
         onInput={(e: React.FormEvent<HTMLElement>) => {
           const newValue = effectiveType === 'rich-text' ? e.currentTarget.innerHTML : (e.currentTarget.textContent || '');
           handleContentUpdate(newValue);
         }}
         onBlur={(e: React.FocusEvent<HTMLElement>) => {
+          isFocused.current = false;
           const newValue = effectiveType === 'rich-text' ? e.currentTarget.innerHTML : (e.currentTarget.textContent || '');
           handleContentUpdate(newValue);
         }}
