@@ -101,6 +101,10 @@ export const EditableElement = ({
     currentContent = baseValue;
   }
 
+  // Auto-upgrade text to rich-text if it contains HTML (from new Admin Quill Editor)
+  const isHtml = typeof currentContent === 'string' && /<[a-z][\s\S]*>/i.test(currentContent);
+  const effectiveType = (type === 'text' && isHtml) ? 'rich-text' : type;
+
   // Use initial content to prevent React from re-rendering the text node and losing cursor position
   const [initialContent] = React.useState(currentContent);
 
@@ -167,13 +171,13 @@ export const EditableElement = ({
   // Sync ref when not in focus (only for text and rich-text)
   useEffect(() => {
     if (contentRef.current) {
-      if (type === 'text' && contentRef.current.textContent !== currentContent) {
+      if (effectiveType === 'text' && contentRef.current.textContent !== currentContent) {
         contentRef.current.textContent = currentContent;
-      } else if (type === 'rich-text' && contentRef.current.innerHTML !== currentContent) {
+      } else if (effectiveType === 'rich-text' && contentRef.current.innerHTML !== currentContent) {
         contentRef.current.innerHTML = currentContent;
       }
     }
-  }, [currentContent, type]);
+  }, [currentContent, effectiveType]);
 
   // Reset requesting when image is selected via message
   useEffect(() => {
@@ -249,7 +253,7 @@ export const EditableElement = ({
   };
 
   if (!editMode) {
-    if (type === 'image') {
+    if (effectiveType === 'image') {
       const imgContent = injectContentProps(children) || <img src={currentContent} className="w-full h-full object-cover" alt="" />;
       
       // If no className is provided, avoid extra wrapper which might break some layouts (like RefrigerationBlock)
@@ -263,7 +267,7 @@ export const EditableElement = ({
         </Tag>
       );
     }
-    if (type === 'rich-text') {
+    if (effectiveType === 'rich-text') {
       return (
         <Tag 
           className={className} 
@@ -272,7 +276,7 @@ export const EditableElement = ({
         />
       );
     }
-    const displayContent = (type === 'text' && typeof currentContent === 'string') 
+    const displayContent = (effectiveType === 'text' && typeof currentContent === 'string') 
       ? t(currentContent, { defaultValue: currentContent }) 
       : currentContent;
 
@@ -283,7 +287,7 @@ export const EditableElement = ({
   }
 
   // Edit Mode for Text / Rich Text
-  if (type === 'text' || type === 'rich-text') {
+  if (effectiveType === 'text' || effectiveType === 'rich-text') {
     // If children are provided, we want to render them but make them editable
     // This allows the component to react to external prop changes (like from the Parent Block)
     return (
@@ -299,16 +303,16 @@ export const EditableElement = ({
           }
         }}
         onInput={(e: React.FormEvent<HTMLElement>) => {
-          const newValue = type === 'rich-text' ? e.currentTarget.innerHTML : (e.currentTarget.textContent || '');
+          const newValue = effectiveType === 'rich-text' ? e.currentTarget.innerHTML : (e.currentTarget.textContent || '');
           handleContentUpdate(newValue);
         }}
         onBlur={(e: React.FocusEvent<HTMLElement>) => {
-          const newValue = type === 'rich-text' ? e.currentTarget.innerHTML : (e.currentTarget.textContent || '');
+          const newValue = effectiveType === 'rich-text' ? e.currentTarget.innerHTML : (e.currentTarget.textContent || '');
           handleContentUpdate(newValue);
         }}
         className={`${className} outline-none focus:ring-2 focus:ring-primary/50 focus:bg-primary/5 transition-all min-w-[20px] min-h-[1em]`}
         style={style}
-        dangerouslySetInnerHTML={{ __html: type === 'rich-text' ? initialContent : escapeHtml(initialContent) }}
+        dangerouslySetInnerHTML={{ __html: effectiveType === 'rich-text' ? initialContent : escapeHtml(initialContent) }}
       />
     );
   }
@@ -329,7 +333,7 @@ export const EditableElement = ({
       style={{ ...style, minHeight: Tag === 'img' ? '40px' : undefined }}
     >
       {/* Render children with dynamic updates for images */}
-      {injectContentProps(children) || (type === 'image' ? <img src={currentContent} className="w-full h-full object-cover" alt="" /> : null)}
+      {injectContentProps(children) || (effectiveType === 'image' ? <img src={currentContent} className="w-full h-full object-cover" alt="" /> : null)}
 
       {/* Hover Overlay - Attached onClick here explicitly */}
       <div 

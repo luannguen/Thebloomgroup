@@ -1,7 +1,7 @@
 import React from 'react';
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+
 import { 
     Select, 
     SelectContent, 
@@ -12,6 +12,7 @@ import {
 import { Settings2, Zap, X, Info, ExternalLink, Plus, Trash2, GripVertical } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { BLOCK_LIBRARY } from './BlockLibrary';
+import { RichTextEditorWidget } from './RichTextEditorWidget';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { useNavigate } from 'react-router-dom';
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
@@ -152,12 +153,12 @@ export const PropertyInspector: React.FC<PropertyInspectorProps> = ({
                     />
                 );
             case 'textarea':
+            case 'rich-text':
                 return (
-                    <Textarea 
-                        className="min-h-[120px] border-slate-200 focus-visible:ring-primary text-sm shadow-sm resize-none"
-                        value={value || ''}
-                        onChange={(e) => onChange(e.target.value)}
-                        placeholder={`Nhập ${field.label.toLowerCase()}...`}
+                    <RichTextEditorWidget 
+                        value={value} 
+                        onChange={onChange} 
+                        label={field.label}
                     />
                 );
             case 'color':
@@ -263,12 +264,7 @@ export const PropertyInspector: React.FC<PropertyInspectorProps> = ({
                         )}
                     </Alert>
                 );
-            case 'rich-text':
-                return (
-                    <div className="p-4 bg-slate-50 border border-slate-200 rounded-lg text-[10px] text-slate-400 font-medium">
-                        [Rich Text Editor - Ready for future binding]
-                    </div>
-                );
+            // rich-text case has been merged with textarea case above
             default:
                 return null;
         }
