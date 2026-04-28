@@ -1,5 +1,6 @@
 import { EditableElement } from '../admin/EditableElement';
 import { useVisualEditor } from '../../context/VisualEditorContext';
+import { FloatingToolbar } from '../admin/FloatingToolbar';
 
 interface HeroBlockProps {
   title: string;
@@ -14,6 +15,7 @@ interface HeroBlockProps {
   sectionId?: string;
   titleColor?: string;
   descriptionColor?: string;
+  iconSize?: number;
 }
 
 export const HeroBlock = ({ 
@@ -28,9 +30,10 @@ export const HeroBlock = ({
   button2Text,
   button2Link,
   titleColor = '#ffffff',
-  descriptionColor = 'rgba(255, 255, 255, 0.9)'
+  descriptionColor = 'rgba(255, 255, 255, 0.9)',
+  iconSize = 100
 }: HeroBlockProps) => {
-  const { editMode } = useVisualEditor();
+  const { editMode, updateSectionProps } = useVisualEditor();
 
   return (
     <div className={`relative py-20 md:py-32 overflow-hidden ${backgroundImage ? 'text-white' : ''}`}>
@@ -42,11 +45,18 @@ export const HeroBlock = ({
           defaultContent={backgroundImage || ""}
           className="w-full h-full"
         >
+          {editMode && (
+            <FloatingToolbar 
+              iconSize={iconSize || 100}
+              onIconSizeChange={(s) => updateSectionProps(sectionId!, { iconSize: s })}
+              className="top-10 right-10 translate-x-0"
+            />
+          )}
           <img src={backgroundImage || ""} className="w-full h-full object-cover" alt="" />
         </EditableElement>
         <div className="absolute inset-0 bg-black/50 pointer-events-none" />
       </div>
-      <div className={`container-custom relative z-10 ${alignment === 'center' ? 'text-center items-center' : 'text-left'} ${editMode ? 'pointer-events-none' : ''}`}>
+      <div className={`container-custom relative z-10 flex flex-col ${alignment === 'center' ? 'items-center' : 'items-start'} ${editMode ? 'pointer-events-none' : ''}`}>
         <div className={`max-w-3xl ${alignment === 'center' ? 'mx-auto' : ''} ${editMode ? 'pointer-events-auto' : ''}`}>
           {badge && (
             <EditableElement 

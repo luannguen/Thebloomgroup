@@ -1,6 +1,8 @@
 import React from "react";
 import { CheckCircle } from "lucide-react";
 import { EditableElement } from "../admin/EditableElement";
+import { useVisualEditor } from "../../context/VisualEditorContext";
+import { FloatingToolbar } from "../admin/FloatingToolbar";
 
 interface MediaSectionProps {
   title?: string;
@@ -13,6 +15,7 @@ interface MediaSectionProps {
   sectionId?: string;
   features?: string[];
   content?: string; // Legacy support from ContentBlock
+  iconSize?: number;
 }
 
 export const MediaSectionBlock = ({
@@ -25,8 +28,10 @@ export const MediaSectionBlock = ({
   padding = "medium",
   bgColor = "white",
   sectionId,
-  features = []
+  features = [],
+  iconSize = 400
 }: MediaSectionProps) => {
+  const { editMode, updateSectionProps } = useVisualEditor();
   const paddingClasses = {
     none: "py-0",
     small: "py-8",
@@ -54,7 +59,14 @@ export const MediaSectionBlock = ({
           style={!isVertical ? { gridTemplateColumns: isImageRight ? `1fr ${imageWidth}%` : `${imageWidth}% 1fr` } : {}}
         >
           {/* Media Column */}
-          <div className={`${isVertical ? "w-full" : ""} ${layout === "image-bottom" ? "order-2" : (layout === "image-right" ? "order-2" : "order-1")}`}>
+          <div className={`${isVertical ? "w-full" : ""} ${layout === "image-bottom" ? "order-2" : (layout === "image-right" ? "order-2" : "order-1")} relative group`}>
+            {editMode && (
+              <FloatingToolbar 
+                iconSize={iconSize || 400}
+                onIconSizeChange={(s) => updateSectionProps(sectionId!, { iconSize: s })}
+                className="top-4 left-1/2 -translate-x-1/2"
+              />
+            )}
             <EditableElement
               type="image"
               fieldKey="image"
@@ -62,12 +74,12 @@ export const MediaSectionBlock = ({
               defaultContent={image}
               className="shadow-xl overflow-hidden w-full h-full min-h-[300px]"
             >
-              <img src={image} className="w-full h-full object-cover" alt={title} />
+              <img src={image} className="w-full h-full object-cover" alt={title} style={{ width: isVertical ? '100%' : iconSize }} />
             </EditableElement>
           </div>
 
           {/* Content Column */}
-          <div className={`${isVertical ? "w-full text-center" : ""} ${layout === "image-bottom" ? "order-1" : (layout === "image-right" ? "order-1" : "order-2")}`}>
+          <div className={`${isVertical ? "w-full" : ""} ${layout === "image-bottom" ? "order-1" : (layout === "image-right" ? "order-1" : "order-2")}`}>
             {title && (
               <EditableElement
                 tagName="h2"

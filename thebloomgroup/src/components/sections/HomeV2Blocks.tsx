@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Shield, Globe, Award, Settings, Zap, Users, BarChart3, Loader2 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { EditableElement } from '../admin/EditableElement';
+import { useVisualEditor } from '../../context/VisualEditorContext';
+import { FloatingToolbar } from '../admin/FloatingToolbar';
 import { Link } from 'react-router-dom';
 import { productService } from '@/services/productService';
 import { Product } from '@/components/data/types';
@@ -18,9 +20,12 @@ export const HomeV2PartnershipBlock = ({
   logo3,
   exp_value,
   exp_text,
+  iconSize = 40,
+  partnerImageWidth = 800,
   sectionId
 }: any) => {
   const { t } = useTranslation();
+  const { editMode, updateSectionProps } = useVisualEditor();
 
   // Dữ liệu mặc định an toàn
   const dTitle = title || t('home_v2_partnership_title', "Đối Tác Chiến Lược Của Solar Turbines");
@@ -79,24 +84,35 @@ export const HomeV2PartnershipBlock = ({
               </div>
 
               <div className="flex flex-wrap items-center gap-8 md:gap-12 pt-8 border-t border-slate-100 relative z-30">
-                <EditableElement
-                  type="image"
-                  fieldKey="logo1"
-                  sectionId={sectionId}
-                  defaultContent={dLogo1}
-                  className="h-10 w-auto grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300 pointer-events-auto"
-                >
-                  <img src={dLogo1} alt="Logo 1" className="h-full w-auto" />
-                </EditableElement>
+                <div className="relative group">
+                  {editMode && (
+                    <FloatingToolbar 
+                      iconSize={iconSize}
+                      onIconSizeChange={(s) => updateSectionProps(sectionId, { iconSize: s })}
+                      className="-top-10 left-0 translate-x-0 scale-75"
+                    />
+                  )}
+                  <EditableElement
+                    type="image"
+                    fieldKey="logo1"
+                    sectionId={sectionId}
+                    defaultContent={dLogo1}
+                    className="grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300 pointer-events-auto"
+                    style={{ height: iconSize }}
+                  >
+                    <img src={dLogo1} alt="Logo 1" className="h-full w-auto" style={{ height: iconSize }} />
+                  </EditableElement>
+                </div>
 
                 <EditableElement
                   type="image"
                   fieldKey="logo2"
                   sectionId={sectionId}
                   defaultContent={dLogo2}
-                  className="h-10 w-auto grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300 pointer-events-auto"
+                  className="grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300 pointer-events-auto"
+                  style={{ height: iconSize }}
                 >
-                  <img src={dLogo2} alt="Logo 2" className="h-full w-auto" />
+                  <img src={dLogo2} alt="Logo 2" className="h-full w-auto" style={{ height: iconSize }} />
                 </EditableElement>
 
                 <EditableElement
@@ -104,9 +120,10 @@ export const HomeV2PartnershipBlock = ({
                   fieldKey="logo3"
                   sectionId={sectionId}
                   defaultContent={dLogo3}
-                  className="h-10 w-auto grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300 pointer-events-auto"
+                  className="grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300 pointer-events-auto"
+                  style={{ height: iconSize }}
                 >
-                  <img src={dLogo3} alt="Logo 3" className="h-full w-auto" />
+                  <img src={dLogo3} alt="Logo 3" className="h-full w-auto" style={{ height: iconSize }} />
                 </EditableElement>
               </div>
             </div>
@@ -122,6 +139,13 @@ export const HomeV2PartnershipBlock = ({
           >
             {/* Main Image Container - Sharp Corners & Heavy Shadow */}
             <div className="relative aspect-[4/3] rounded-none overflow-hidden shadow-[30px_30px_60px_-15px_rgba(0,0,0,0.4)] border-b-[12px] border-primary group">
+              {editMode && (
+                <FloatingToolbar 
+                  iconSize={partnerImageWidth}
+                  onIconSizeChange={(s) => updateSectionProps(sectionId, { partnerImageWidth: s })}
+                  className="top-4 left-1/2 -translate-x-1/2"
+                />
+              )}
               <EditableElement
                 type="image"
                 fieldKey="partnerImage"
@@ -129,7 +153,7 @@ export const HomeV2PartnershipBlock = ({
                 defaultContent={dPartnerImage}
                 className="w-full h-full z-30 relative"
               >
-                <img src={dPartnerImage} alt="Industrial" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" />
+                <img src={dPartnerImage} alt="Industrial" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" style={{ width: partnerImageWidth }} />
               </EditableElement>
 
               {/* Professional Overlay */}
@@ -192,7 +216,7 @@ export const HomeV2SectorsBlock = ({
     <section className="py-24 bg-slate-50">
       <div className="container-custom">
         <div className="max-w-3xl mx-auto mb-20">
-          <EditableElement tagName="h2" fieldKey="title" sectionId={sectionId} defaultContent={displayTitle} className="text-4xl font-black mb-6 text-slate-900 block text-center" />
+          <EditableElement tagName="h2" fieldKey="title" sectionId={sectionId} defaultContent={displayTitle} className="text-4xl font-black mb-6 text-slate-900 block" />
           <EditableElement tagName="div" fieldKey="subtitle" sectionId={sectionId} defaultContent={displaySubtitle} className="text-lg text-slate-600 block" />
         </div>
 
@@ -334,7 +358,7 @@ export const HomeV2StatsBlock = ({
 
       <div className="container-custom relative z-10">
         <div className="max-w-3xl mx-auto mb-20">
-          <EditableElement tagName="h2" fieldKey="title" sectionId={sectionId} defaultContent={displayTitle} className="text-4xl md:text-5xl font-black mb-8 block leading-tight text-center" />
+          <EditableElement tagName="h2" fieldKey="title" sectionId={sectionId} defaultContent={displayTitle} className="text-4xl md:text-5xl font-black mb-8 block leading-tight" />
         </div>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-12">

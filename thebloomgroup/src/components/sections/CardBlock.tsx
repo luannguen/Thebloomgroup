@@ -1,5 +1,6 @@
 import { EditableElement } from '../admin/EditableElement';
 import { useVisualEditor } from '../../context/VisualEditorContext';
+import { FloatingToolbar } from '../admin/FloatingToolbar';
 
 interface CardItem {
   id: string;
@@ -17,6 +18,8 @@ interface CardBlockProps {
   padding?: 'none' | 'small' | 'medium' | 'large';
   title?: string;
   sectionId?: string;
+  iconSize?: number;
+  iconSpacing?: number;
 }
 
 export const CardBlock = ({ 
@@ -25,9 +28,11 @@ export const CardBlock = ({
   style = 'elevated', 
   padding = 'medium',
   title,
-  sectionId
+  sectionId,
+  iconSize = 48,
+  iconSpacing = 24
 }: CardBlockProps) => {
-  const { updateSectionProps } = useVisualEditor();
+  const { updateSectionProps, editMode } = useVisualEditor();
   
   const paddingClasses = {
     none: 'py-0',
@@ -56,6 +61,9 @@ export const CardBlock = ({
     updateSectionProps(sectionId, { items: newItems });
   };
 
+  const iconWidth = Number(iconSize) || 48;
+  const spacing = Number(iconSpacing) || 24;
+
   return (
     <div className={`container-custom ${paddingClasses[padding]}`}>
       {title !== undefined && (
@@ -64,16 +72,29 @@ export const CardBlock = ({
           fieldKey="title" 
           sectionId={sectionId} 
           defaultContent={title} 
-          className="text-3xl font-bold text-primary mb-12 text-center" 
+          className="text-3xl font-bold text-primary mb-12" 
         />
       )}
-      <div className={`grid ${gridCols[columns]} gap-8`}>
+      <div className={`grid ${gridCols[columns as keyof typeof gridCols]} gap-8`}>
         {items.map((item, idx) => (
           <div 
             key={item.id || idx} 
-            className={`rounded-xl overflow-hidden transition-all duration-300 transform hover:-translate-y-1 ${cardStyles[style]}`}
+            className={`rounded-xl overflow-hidden transition-all duration-300 transform hover:-translate-y-1 group relative ${cardStyles[style as keyof typeof cardStyles]}`}
           >
-            <div className="aspect-video overflow-hidden bg-primary/5 flex items-center justify-center">
+            {editMode && (
+              <FloatingToolbar 
+                iconSize={iconWidth}
+                onIconSizeChange={(size) => updateSectionProps(sectionId!, { iconSize: size })}
+                iconSpacing={spacing}
+                onIconSpacingChange={(s) => updateSectionProps(sectionId!, { iconSpacing: s })}
+                className="top-4"
+              />
+            )}
+
+            <div 
+              className="overflow-hidden bg-primary/5 flex items-center justify-center transition-all duration-500"
+              style={{ height: item.image ? 'auto' : (iconWidth + 40), aspectRatio: item.image ? '16/9' : 'auto' }}
+            >
               <EditableElement 
                 type="image" 
                 fieldKey={`items.${idx}.image`} 
@@ -85,13 +106,13 @@ export const CardBlock = ({
                 {item.image ? (
                   <img src={item.image} className="w-full h-full object-cover" alt={item.title} />
                 ) : item.icon && item.icon.startsWith('<svg') ? (
-                  <div dangerouslySetInnerHTML={{ __html: item.icon }} className="w-12 h-12 text-primary" />
+                  <div dangerouslySetInnerHTML={{ __html: item.icon }} style={{ width: iconWidth, height: iconWidth }} className="text-primary" />
                 ) : (
-                  <img src={item.icon || '/assets/placeholder.svg'} className="w-12 h-12 object-contain text-primary" alt="" />
+                  <img src={item.icon || '/assets/placeholder.svg'} style={{ width: iconWidth, height: iconWidth }} className="object-contain text-primary" alt="" />
                 )}
               </EditableElement>
             </div>
-            <div className="p-6">
+            <div className="p-6" style={{ paddingTop: spacing }}>
               <EditableElement 
                 tagName="h3" 
                 fieldKey={`items.${idx}.title`} 
@@ -120,3 +141,4 @@ export const CardBlock = ({
     </div>
   );
 };
+

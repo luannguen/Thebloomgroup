@@ -30,6 +30,7 @@ import {
 import { useTranslation } from 'react-i18next';
 import { EditableElement } from '../admin/EditableElement';
 import { useVisualEditor } from '../../context/VisualEditorContext';
+import { FloatingToolbar } from '../admin/FloatingToolbar';
 import ContactForm from '../ContactForm';
 
 // --- HỆ THỐNG LẠNH ---
@@ -43,9 +44,12 @@ export const RefrigerationBlock = ({
   feature2_desc,
   feature3_title,
   feature3_desc,
+  iconSize = 64,
+  iconSpacing = 24,
   sectionId 
 }: any) => {
   const { t } = useTranslation();
+  const { updateSectionProps, editMode } = useVisualEditor();
   
   const displayTitle = title || t('industry_refrigeration_hero_title', "Công Nghệ Làm Lạnh");
   const displayDesc = description || t('industry_refrigeration_hero_desc', "Bảo quản thực phẩm trong điều kiện lành mạnh lâu hơn.");
@@ -79,9 +83,21 @@ export const RefrigerationBlock = ({
                 const Icon = i === 0 ? ThermometerSnowflake : i === 1 ? Wind : CircleCheckBig;
                 const fieldPrefix = `feature${i+1}`;
                 return (
-                  <div key={i} className="flex gap-6 group items-start">
-                    <div className="flex-shrink-0 w-16 h-16 rounded-2xl bg-primary/5 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all duration-300 shadow-sm border border-primary/10">
-                      <Icon className="text-primary w-8 h-8 group-hover:text-white group-hover:scale-110 transition-transform" />
+                  <div key={i} className="flex gap-6 group items-start relative">
+                    {editMode && (
+                      <FloatingToolbar 
+                        iconSize={iconSize}
+                        onIconSizeChange={(size) => updateSectionProps(sectionId, { iconSize: size })}
+                        iconSpacing={iconSpacing}
+                        onIconSpacingChange={(s) => updateSectionProps(sectionId, { iconSpacing: s })}
+                        className="top-0 left-0 -translate-x-full"
+                      />
+                    )}
+                    <div 
+                      className="flex-shrink-0 rounded-2xl bg-primary/5 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all duration-300 shadow-sm border border-primary/10"
+                      style={{ width: iconSize, height: iconSize }}
+                    >
+                      <Icon className="text-primary group-hover:text-white group-hover:scale-110 transition-transform" style={{ width: iconSize * 0.5, height: iconSize * 0.5 }} />
                     </div>
                     <div className="flex-grow">
                       <EditableElement tagName="h4" fieldKey={`${fieldPrefix}_title`} sectionId={sectionId} defaultContent={f.title} className="font-bold text-xl mb-2 group-hover:text-primary transition-colors block" />
@@ -142,7 +158,7 @@ export const ColdStorageCatalogBlock = ({
     <section className="py-24 bg-slate-50 relative overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
       <div className="container-custom relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-20">
+        <div className="max-w-3xl mx-auto mb-20">
           <EditableElement tagName="h2" fieldKey="title" sectionId={sectionId} defaultContent={displayTitle} className="text-3xl md:text-5xl font-extrabold mb-6 tracking-tight block" />
           <EditableElement tagName="p" fieldKey="subtitle" sectionId={sectionId} defaultContent={displaySubtitle} className="text-lg text-muted-foreground font-medium block" />
         </div>
@@ -181,9 +197,11 @@ export const IndustrialExpertiseBlock = ({
   refrig_title,
   refrig1_title, refrig1_desc,
   refrig2_title, refrig2_desc,
+  iconSize = 56,
   sectionId 
 }: any) => {
   const { t } = useTranslation();
+  const { updateSectionProps, editMode } = useVisualEditor();
 
   const displayDiffTitle = diff_title || t('vietvinh_difference_title', 'Sự Khác Biệt Của VIETVINH');
   const displayDiffDesc = diff_desc || t('vietvinh_difference_desc', 'Kỹ thuật tập trung R&D bảo quản thực phẩm tốt nhất.');
@@ -212,9 +230,19 @@ export const IndustrialExpertiseBlock = ({
               {diffFeatures.map((f, i) => {
                 const prefix = `diff_feat${i+1}`;
                 return (
-                  <div key={i} className="flex gap-6">
-                    <div className={`flex-shrink-0 w-14 h-14 rounded-2xl bg-${f.color}-50 flex items-center justify-center border border-${f.color}-100 shadow-sm`}>
-                      <f.icon className={`text-${f.color}-600 w-7 h-7`} />
+                  <div key={i} className="flex gap-6 relative group">
+                    {editMode && (
+                      <FloatingToolbar 
+                        iconSize={iconSize}
+                        onIconSizeChange={(size) => updateSectionProps(sectionId, { iconSize: size })}
+                        className="top-0 left-0 -translate-x-full"
+                      />
+                    )}
+                    <div 
+                      className={`flex-shrink-0 rounded-2xl bg-${f.color}-50 flex items-center justify-center border border-${f.color}-100 shadow-sm`}
+                      style={{ width: iconSize, height: iconSize }}
+                    >
+                      <f.icon className={`text-${f.color}-600`} style={{ width: iconSize * 0.5, height: iconSize * 0.5 }} />
                     </div>
                     <div className="flex-grow">
                       <EditableElement tagName="h4" fieldKey={`${prefix}_title`} sectionId={sectionId} defaultContent={f.title} className="font-bold text-lg mb-1 block" />
@@ -264,9 +292,11 @@ export const MEBlock = ({
   cat4_label, cat4_sub, cat4_link,
   cat5_label, cat5_sub, cat5_link,
   cat6_label, cat6_sub, cat6_link,
+  iconSize = 80,
   sectionId
 }: any) => {
   const { t } = useTranslation();
+  const { updateSectionProps, editMode } = useVisualEditor();
   
   const displayTitle = title || t('industry_me_title', "Tổng Thầu Cơ Điện (M&E)");
   const displayDesc = description || t('industry_me_desc', "Giải pháp cơ điện toàn diện cho mọi công trình.");
@@ -285,7 +315,7 @@ export const MEBlock = ({
     <section className="py-24 bg-slate-50 relative overflow-hidden">
       <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-primary/5 rounded-full blur-[120px] -mr-20 -mt-20 pointer-events-none" />
       <div className="container-custom relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-20 animate-in fade-in slide-in-from-bottom duration-700">
+        <div className="max-w-3xl mx-auto mb-20 animate-in fade-in slide-in-from-bottom duration-700">
           <EditableElement tagName="h2" fieldKey="title" sectionId={sectionId} defaultContent={displayTitle} className="text-4xl md:text-5xl font-black mb-8 text-primary block tracking-tight" />
           <EditableElement tagName="p" fieldKey="description" sectionId={sectionId} defaultContent={displayDesc} className="text-xl text-slate-600 leading-relaxed block" />
         </div>
@@ -296,8 +326,10 @@ export const MEBlock = ({
             const CardContent = (
               <div className="h-full bg-white p-10 rounded-[2.5rem] shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 border border-slate-100 group relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-[80px] -mr-16 -mt-16 group-hover:bg-primary/10 transition-all duration-500" />
-                <div className="w-20 h-20 bg-primary/10 text-primary rounded-3xl flex items-center justify-center mb-10 group-hover:bg-primary group-hover:text-white transition-all duration-500 shadow-inner group-hover:rotate-6">
-                  <cat.icon className="w-10 h-10 group-hover:scale-110 transition-transform" />
+                <div className="w-20 h-20 bg-primary/10 text-primary rounded-3xl flex items-center justify-center mb-10 group-hover:bg-primary group-hover:text-white transition-all duration-500 shadow-inner group-hover:rotate-6"
+                  style={{ width: iconSize, height: iconSize }}
+                >
+                  <cat.icon className="group-hover:scale-110 transition-transform" style={{ width: iconSize * 0.5, height: iconSize * 0.5 }} />
                 </div>
                 <EditableElement tagName="h3" fieldKey={`${prefix}_label`} sectionId={sectionId} defaultContent={cat.label} className="text-2xl font-bold mb-5 text-slate-900 group-hover:text-primary transition-colors block" />
                 <EditableElement tagName="p" fieldKey={`${prefix}_sub`} sectionId={sectionId} defaultContent={cat.sub} className="text-slate-500 leading-relaxed mb-8 block text-sm" />
@@ -346,9 +378,11 @@ export const AdvancedTechShowcaseBlock = ({
   item2_title, item2_desc,
   item3_title, item3_desc,
   item4_title, item4_desc,
+  iconSize = 56,
   sectionId 
 }: any) => {
   const { t } = useTranslation();
+  const { updateSectionProps, editMode } = useVisualEditor();
 
   const displayTitle = title || t('advanced_preservation_tech', 'Công Nghệ Bảo Quản & Cấp Đông Chuyên Sâu');
   const displaySubtitle = subtitle || t('advanced_tech_subtitle', 'VIETVINH tiên phong ứng dụng các giải pháp bảo quản tiên tiến nhất.');
@@ -369,7 +403,7 @@ export const AdvancedTechShowcaseBlock = ({
       </div>
 
       <div className="container-custom relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-bold uppercase tracking-wider mb-6">
             <EditableElement tagName="span" fieldKey="badge" sectionId={sectionId} defaultContent={displayBadge} />
           </div>
@@ -384,8 +418,11 @@ export const AdvancedTechShowcaseBlock = ({
             return (
               <div key={i} className="group p-8 rounded-3xl bg-slate-900/50 border border-white/5 hover:border-blue-500/30 transition-all duration-500 backdrop-blur-sm relative overflow-hidden block">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 rounded-full blur-3xl group-hover:bg-blue-500/10 transition-colors" />
-                <div className="w-14 h-14 rounded-2xl mb-6 flex items-center justify-center bg-blue-500/10 text-blue-400 group-hover:scale-110 transition-transform duration-500 shadow-inner border border-white/5">
-                  <Icon className="w-8 h-8" />
+                <div 
+                  className="rounded-2xl mb-6 flex items-center justify-center bg-blue-500/10 text-blue-400 group-hover:scale-110 transition-transform duration-500 shadow-inner border border-white/5"
+                  style={{ width: iconSize, height: iconSize }}
+                >
+                  <Icon style={{ width: iconSize * 0.5, height: iconSize * 0.5 }} />
                 </div>
                 <EditableElement tagName="h3" fieldKey={`${prefix}_title`} sectionId={sectionId} defaultContent={tech.title} className="text-xl font-bold mb-4 text-white group-hover:text-blue-400 transition-colors block" />
                 <EditableElement tagName="p" fieldKey={`${prefix}_desc`} sectionId={sectionId} defaultContent={tech.desc} className="text-slate-400 text-sm leading-relaxed group-hover:text-slate-300 transition-colors block" />
@@ -408,9 +445,11 @@ export const DataCenterBlock = ({
   image,
   dc_feat1_title, dc_feat1_desc,
   dc_feat2_title, dc_feat2_desc,
+  iconSize = 80,
   sectionId
 }: any) => {
   const { t } = useTranslation();
+  const { updateSectionProps, editMode } = useVisualEditor();
   
   const displayTitle = title || t('industry_dc_title', "Trung Tâm Dữ Liệu & Quản Lý Tập Trung");
   const displayDesc = description || t('industry_dc_desc', "Tư vấn và triển khai hạ tầng trung tâm dữ liệu tiêu chuẩn TIER III.");
@@ -436,9 +475,12 @@ export const DataCenterBlock = ({
               {features.map((f, i) => {
                 const prefix = `dc_feat${i+1}`;
                 return (
-                  <div key={i} className="flex items-start gap-6 group">
-                    <div className="w-20 h-20 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-secondary group-hover:border-secondary transition-all duration-500">
-                      <f.icon className="w-10 h-10 text-secondary group-hover:text-white transition-colors" />
+                  <div key={i} className="flex items-start gap-6 group relative">
+                    <div 
+                      className="rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-secondary group-hover:border-secondary transition-all duration-500"
+                      style={{ width: iconSize, height: iconSize }}
+                    >
+                      <f.icon className="text-secondary group-hover:text-white transition-colors" style={{ width: iconSize * 0.5, height: iconSize * 0.5 }} />
                     </div>
                     <div className="flex-grow">
                       <EditableElement tagName="h4" fieldKey={`${prefix}_title`} sectionId={sectionId} defaultContent={f.title} className="font-bold text-xl mb-3 text-white group-hover:text-secondary transition-colors block" />
@@ -471,9 +513,11 @@ export const ServiceLifecycleBlock = ({
   step2_title, step2_desc,
   step3_title, step3_desc,
   step4_title, step4_desc,
+  iconSize = 96,
   sectionId
 }: any) => {
   const { t } = useTranslation();
+  const { updateSectionProps, editMode } = useVisualEditor();
   
   const displayTitle = title || t('industry_lifecycle_title', "Vòng Đời Dịch Vụ Toàn Diện");
   const displayDesc = description || t('industry_lifecycle_desc', "Đồng hành cùng khách hàng từ khâu lên ý tưởng đến vận hành lâu dài.");
@@ -488,16 +532,10 @@ export const ServiceLifecycleBlock = ({
   return (
     <section className="py-24 bg-white overflow-hidden">
       <div className="container-custom">
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-center max-w-3xl mx-auto mb-20"
-        >
+        <div className="max-w-3xl mx-auto mb-20">
           <EditableElement tagName="h2" fieldKey="title" sectionId={sectionId} defaultContent={displayTitle} className="text-4xl md:text-5xl font-extrabold mb-6 block tracking-tight" />
           <EditableElement tagName="p" fieldKey="description" sectionId={sectionId} defaultContent={displayDesc} className="text-xl text-muted-foreground block leading-relaxed" />
-        </motion.div>
+        </div>
 
         <div className="relative">
           <motion.div 
@@ -517,20 +555,20 @@ export const ServiceLifecycleBlock = ({
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.8, delay: 0.2 * i }}
-                  className="text-center group"
+                  className="group"
                 >
-                  <motion.div 
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    className="w-24 h-24 bg-white border-2 border-slate-100 rounded-3xl flex items-center justify-center mx-auto mb-8 transition-colors group-hover:border-primary group-hover:shadow-2xl group-hover:shadow-primary/20 bg-white relative"
+                  <div 
+                    className="bg-white border-2 border-slate-100 rounded-3xl flex items-center justify-center mx-auto mb-8 transition-colors group-hover:border-primary group-hover:shadow-2xl group-hover:shadow-primary/20 bg-white relative"
+                    style={{ width: iconSize, height: iconSize }}
                   >
                     <div className="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center text-xs font-bold text-slate-400 group-hover:bg-primary group-hover:text-white transition-colors">
                       0{i+1}
                     </div>
-                    <step.icon className="w-10 h-10 text-slate-400 group-hover:text-primary transition-colors" />
-                  </motion.div>
+                    <step.icon className="text-slate-400 group-hover:text-primary transition-colors" style={{ width: iconSize * 0.4, height: iconSize * 0.4 }} />
+                  </div>
                   <div className="flex flex-col items-center">
-                    <EditableElement tagName="h3" fieldKey={`${prefix}_title`} sectionId={sectionId} defaultContent={step.title} className="font-bold text-2xl mb-4 text-primary block" />
-                    <EditableElement tagName="p" fieldKey={`${prefix}_desc`} sectionId={sectionId} defaultContent={step.desc} className="text-muted-foreground text-base leading-relaxed block text-center max-w-[240px]" />
+                    <EditableElement tagName="h3" fieldKey={`${prefix}_title`} sectionId={sectionId} defaultContent={step.title} className="font-bold text-2xl mb-4 text-primary block text-center" />
+                    <EditableElement tagName="p" fieldKey={`${prefix}_desc`} sectionId={sectionId} defaultContent={step.desc} className="text-muted-foreground text-base leading-relaxed block text-center max-w-[240px] mx-auto" />
                   </div>
                 </motion.div>
               );
@@ -566,9 +604,11 @@ export const TechnicalDetailBlock = ({
   image,
   accent = 'blue',
   techType = 'ca',
+  iconSize = 80,
   sectionId 
 }: any) => {
   const { t } = useTranslation();
+  const { updateSectionProps, editMode } = useVisualEditor();
 
   const techConfigs: Record<string, any> = {
     ca: {
@@ -640,9 +680,19 @@ export const TechnicalDetailBlock = ({
     <section className="py-24 bg-slate-50 overflow-hidden">
       <div className="container-custom">
         <div className="grid lg:grid-cols-2 gap-20 items-center">
-          <div className="animate-in fade-in slide-in-from-left duration-700">
-            <div className={`w-20 h-20 rounded-3xl bg-${displayAccent}-500/10 flex items-center justify-center mb-10 border border-${displayAccent}-500/20 shadow-lg shadow-${displayAccent}-500/5`}>
-              <Icon className={`w-10 h-10 text-${displayAccent}-600`} />
+          <div className="animate-in fade-in slide-in-from-left duration-700 relative">
+            {editMode && (
+              <FloatingToolbar 
+                iconSize={iconSize}
+                onIconSizeChange={(size) => updateSectionProps(sectionId, { iconSize: size })}
+                className="top-0 left-0 -translate-x-full"
+              />
+            )}
+            <div 
+              className={`rounded-3xl bg-${displayAccent}-500/10 flex items-center justify-center mb-10 border border-${displayAccent}-500/20 shadow-lg shadow-${displayAccent}-500/5`}
+              style={{ width: iconSize, height: iconSize }}
+            >
+              <Icon className={`text-${displayAccent}-600`} style={{ width: iconSize * 0.5, height: iconSize * 0.5 }} />
             </div>
             
             <EditableElement 

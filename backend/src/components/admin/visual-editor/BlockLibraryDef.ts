@@ -17,7 +17,8 @@ export const BLOCK_LIBRARY = [
             ]},
             { id: 'buttonText', label: 'Chữ trên nút 1', type: 'textarea' },
             { id: 'buttonLink', label: 'Liên kết nút 1', type: 'text' },
-            { id: 'badge', label: 'Badge/Tagline', type: 'text' }
+            { id: 'badge', label: 'Badge/Tagline', type: 'text' },
+            { id: 'iconSize', label: 'Kích thước Ảnh nền (scale %)', type: 'number' }
         ]
     },
     { 
@@ -65,8 +66,9 @@ export const BLOCK_LIBRARY = [
             { id: 'title', label: 'Tiêu đề lưới card', type: 'textarea' },
             { id: 'image_url', label: 'Ảnh mặc định', type: 'image' },
             { id: 'columns', label: 'Số cột hiển thị', type: 'number' },
-            { 
-                id: 'items', 
+            { id: 'iconSize', label: 'Kích thước Icon/Ảnh (px)', type: 'number' },
+            { id: 'iconSpacing', label: 'Khoảng cách nội dung (px)', type: 'number' },
+            { id: 'items', 
                 label: 'Danh sách thẻ (Cards)', 
                 type: 'list', 
                 itemSchema: [ 
@@ -115,6 +117,7 @@ export const BLOCK_LIBRARY = [
             ]},
             { id: 'image', label: 'Hình ảnh', type: 'image' },
             { id: 'imageWidth', label: 'Độ rộng ảnh (%)', type: 'number' },
+            { id: 'iconSize', label: 'Kích thước ảnh thực tế (px)', type: 'number' },
             { id: 'description', label: 'Mô tả', type: 'textarea' }
         ]
     },
@@ -127,6 +130,8 @@ export const BLOCK_LIBRARY = [
             { id: 'title', label: 'Tiêu đề', type: 'textarea' },
             { id: 'description', label: 'Mô tả', type: 'textarea' },
             { id: 'image', label: 'Hình ảnh', type: 'image' },
+            { id: 'iconSize', label: 'Kích thước Icon (px)', type: 'number' },
+            { id: 'iconSpacing', label: 'Khoảng cách nội dung (px)', type: 'number' },
             { id: 'feature1_title', label: 'Tính năng 1: Tiêu đề', type: 'textarea' },
             { id: 'feature1_desc', label: 'Tính năng 1: Mô tả', type: 'textarea' },
             { id: 'feature2_title', label: 'Tính năng 2: Tiêu đề', type: 'textarea' },
@@ -159,6 +164,7 @@ export const BLOCK_LIBRARY = [
         fields: [
             { id: 'title', label: 'Tiêu đề lưới', type: 'textarea' },
             { id: 'subtitle', label: 'Mô tả lưới', type: 'textarea' },
+            { id: 'iconSize', label: 'Kích thước Icon (px)', type: 'number' },
             { id: 'item1_name', label: 'Loại 1: Tên', type: 'textarea' },
             { id: 'item1_range', label: 'Loại 1: Dải nhiệt', type: 'text' },
             { id: 'item2_name', label: 'Loại 2: Tên', type: 'textarea' },
@@ -181,6 +187,7 @@ export const BLOCK_LIBRARY = [
         fields: [
             { id: 'diff_title', label: 'Khác biệt: Tiêu đề', type: 'textarea' },
             { id: 'diff_desc', label: 'Khác biệt: Mô tả', type: 'textarea' },
+            { id: 'iconSize', label: 'Kích thước Icon (px)', type: 'number' },
             { id: 'diff_feat1_title', label: 'K.Biệt 1: Tiêu đề', type: 'textarea' },
             { id: 'diff_feat1_desc', label: 'K.Biệt 1: Mô tả', type: 'textarea' },
             { id: 'diff_feat2_title', label: 'K.Biệt 2: Tiêu đề', type: 'textarea' },
@@ -203,6 +210,7 @@ export const BLOCK_LIBRARY = [
             { id: 'title', label: 'Tiêu đề', type: 'textarea' },
             { id: 'subtitle', label: 'Mô tả phụ', type: 'textarea' },
             { id: 'badge', label: 'Nhãn (Badge)', type: 'text' },
+            { id: 'iconSize', label: 'Kích thước Icon (px)', type: 'number' },
             { id: 'item1_title', label: 'CN 1: Tiêu đề', type: 'textarea' },
             { id: 'item1_desc', label: 'CN 1: Mô tả', type: 'textarea' },
             { id: 'item2_title', label: 'CN 2: Tiêu đề', type: 'textarea' },
@@ -222,6 +230,8 @@ export const BLOCK_LIBRARY = [
             { id: 'title', label: 'Tiêu đề trang', type: 'textarea' },
             { id: 'description', label: 'Mô tả chi tiết', type: 'textarea' },
             { id: 'image', label: 'Hình ảnh chính', type: 'image' },
+            { id: 'iconSize', label: 'Kích thước Ảnh (px)', type: 'number' },
+            { id: 'iconSpacing', label: 'Khoảng cách nội dung (px)', type: 'number' },
             { id: 'feature1', label: 'Điểm nhấn 1', type: 'textarea' },
             { id: 'feature2', label: 'Điểm nhấn 2', type: 'textarea' },
             { id: 'feature3', label: 'Điểm nhấn 3', type: 'textarea' },
@@ -237,6 +247,7 @@ export const BLOCK_LIBRARY = [
             { id: 'title', label: 'Tiêu đề', type: 'textarea' },
             { id: 'description', label: 'Mô tả', type: 'textarea' },
             { id: 'image', label: 'Hình ảnh banner', type: 'image' },
+            { id: 'iconSize', label: 'Kích thước Icon (px)', type: 'number' },
             { id: 'cat1_label', label: 'HT 1: Tên', type: 'textarea' },
             { id: 'cat1_sub', label: 'HT 1: Mô tả', type: 'textarea' },
             { id: 'cat1_link', label: 'HT 1: Link', type: 'text' },
@@ -280,6 +291,7 @@ export const BLOCK_LIBRARY = [
         fields: [
             { id: 'title', label: 'Tiêu đề', type: 'textarea' },
             { id: 'description', label: 'Mô tả', type: 'textarea' },
+            { id: 'iconSize', label: 'Kích thước Icon (px)', type: 'number' },
             { id: 'step1_title', label: 'Bước 1: Tiêu đề', type: 'textarea' },
             { id: 'step1_desc', label: 'Bước 1: Mô tả', type: 'textarea' },
             { id: 'step2_title', label: 'Bước 2: Tiêu đề', type: 'textarea' },
@@ -547,6 +559,8 @@ export const BLOCK_LIBRARY = [
             { id: 'logo1', label: 'Logo đối tác 1', type: 'image', default: 'https://www.solar-turbines.com/etc.clientlibs/solar-turbines/clientlibs/clientlib-site/resources/images/cat-logo.png' },
             { id: 'logo2', label: 'Logo đối tác 2', type: 'image', default: 'https://www.solar-turbines.com/etc.clientlibs/solar-turbines/clientlibs/clientlib-site/resources/images/solar-logo.png' },
             { id: 'logo3', label: 'Logo đối tác 3', type: 'image', default: '/assets/partners/ttt-logo.svg' },
+            { id: 'iconSize', label: 'Kích thước Logo (px)', type: 'number' },
+            { id: 'partnerImageWidth', label: 'Độ rộng ảnh chính (px)', type: 'number' },
             { id: 'exp_value', label: 'Số năm kinh nghiệm', type: 'textarea', default: '20+' },
             { id: 'exp_text', label: 'Văn bản kinh nghiệm', type: 'textarea', default: 'Năm kinh nghiệm trong ngành công nghiệp nặng' }
         ]
