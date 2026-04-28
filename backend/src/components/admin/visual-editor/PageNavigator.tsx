@@ -2,7 +2,7 @@ import React from 'react';
 import { Droppable, Draggable } from '@hello-pangea/dnd';
 import { Layers, GripVertical, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { BLOCK_LIBRARY } from './BlockLibrary';
+import { BLOCK_LIBRARY } from './BlockLibraryDef';
 
 interface PageNavigatorProps {
     sections: any[];

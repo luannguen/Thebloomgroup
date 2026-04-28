@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/select";
 import { Settings2, Zap, X, Info, ExternalLink, Plus, Trash2, GripVertical } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { BLOCK_LIBRARY } from './BlockLibrary';
+import { BLOCK_LIBRARY } from './BlockLibraryDef';
 import { RichTextEditorWidget } from './RichTextEditorWidget';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { useNavigate } from 'react-router-dom';

@@ -135,6 +135,13 @@ export const EditableElement = ({
 
     if (effectiveSectionId) {
       selectSection(effectiveSectionId);
+      
+      // Focus the field in side panel
+      window.parent.postMessage({
+        type: 'VISUAL_EDIT_FIELD_FOCUSED',
+        sectionId: effectiveSectionId,
+        fieldKey: fieldKey
+      }, '*');
     }
 
     setRequesting(true);
