@@ -173,7 +173,7 @@ export const FeatureListBlock = ({
                 {/* Background accent on hover */}
                 <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-full -mr-16 -mt-16 group-hover:bg-primary/10 transition-colors duration-500" />
                 
-                <div className={`flex ${isTop ? 'flex-col items-center text-center' : 'flex-row items-center'} relative z-10 mb-6`} style={{ gap: spacing }}>
+                <div className={`flex ${isTop ? 'flex-col items-center' : 'flex-row items-center'} relative z-10 mb-6`} style={{ gap: spacing }}>
                   <div className="relative flex-shrink-0" style={{ width: iconWidth, height: iconWidth }}>
                     <EditableElement
                       type="image"
@@ -226,7 +226,7 @@ export const FeatureListBlock = ({
                     className="relative z-10" 
                     style={{ 
                       paddingLeft: iconPosition === 'left' ? (iconWidth + spacing) : 0,
-                      textAlign: isTop ? 'center' : 'left'
+                      width: '100%'
                     }}
                   >
                     <EditableElement 
