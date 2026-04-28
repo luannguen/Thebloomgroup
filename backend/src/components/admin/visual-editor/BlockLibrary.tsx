@@ -8,7 +8,7 @@ export const BLOCK_LIBRARY = [
         icon: '🎨',
         category: 'Basic',
         fields: [
-            { id: 'title', label: 'Tiêu đề', type: 'text' },
+            { id: 'title', label: 'Tiêu đề', type: 'textarea' },
             { id: 'description', label: 'Mô tả', type: 'textarea' },
             { id: 'backgroundImage', label: 'Ảnh nền', type: 'image' },
             { id: 'titleColor', label: 'Màu tiêu đề', type: 'color' },
@@ -18,7 +18,7 @@ export const BLOCK_LIBRARY = [
                 { label: 'Giữa', value: 'center' },
                 { label: 'Phải', value: 'right' }
             ]},
-            { id: 'buttonText', label: 'Chữ trên nút 1', type: 'text' },
+            { id: 'buttonText', label: 'Chữ trên nút 1', type: 'textarea' },
             { id: 'buttonLink', label: 'Liên kết nút 1', type: 'text' },
             { id: 'badge', label: 'Badge/Tagline', type: 'text' }
         ]
@@ -30,8 +30,8 @@ export const BLOCK_LIBRARY = [
         category: 'Basic',
         fields: [
             { id: 'url', label: 'Đường dẫn ảnh', type: 'image' },
-            { id: 'alt', label: 'Mô tả ảnh (Alt)', type: 'text' },
-            { id: 'caption', label: 'Chú thích', type: 'text' },
+            { id: 'alt', label: 'Mô tả ảnh (Alt)', type: 'textarea' },
+            { id: 'caption', label: 'Chú thích', type: 'textarea' },
             { id: 'width', label: 'Độ rộng (%)', type: 'number' }
         ]
     },
@@ -65,9 +65,19 @@ export const BLOCK_LIBRARY = [
         icon: '🎴',
         category: 'Basic',
         fields: [
-            { id: 'title', label: 'Tiêu đề lưới card', type: 'text' },
+            { id: 'title', label: 'Tiêu đề lưới card', type: 'textarea' },
             { id: 'image_url', label: 'Ảnh mặc định', type: 'image' },
-            { id: 'columns', label: 'Số cột hiển thị', type: 'number' }
+            { id: 'columns', label: 'Số cột hiển thị', type: 'number' },
+            { 
+                id: 'items', 
+                label: 'Danh sách thẻ (Cards)', 
+                type: 'list', 
+                itemSchema: [ 
+                    { id: 'image', label: 'Ảnh/Icon', type: 'image' }, 
+                    { id: 'title', label: 'Tiêu đề', type: 'textarea' }, 
+                    { id: 'description', label: 'Mô tả', type: 'textarea' } 
+                ] 
+            }
         ]
     },
     { 
@@ -76,9 +86,10 @@ export const BLOCK_LIBRARY = [
         icon: '✨',
         category: 'Basic',
         fields: [
-            { id: 'title', label: 'Tiêu đề chính', type: 'text' },
+            { id: 'title', label: 'Tiêu đề chính', type: 'textarea' },
             { id: 'subtitle', label: 'Tiêu đề phụ', type: 'textarea' },
-            { id: 'icon_image', label: 'Icon/Ảnh minh họa', type: 'image' }
+            { id: 'icon_image', label: 'Icon/Ảnh minh họa', type: 'image' },
+            { id: 'items', label: 'Danh sách tính năng', type: 'list', itemSchema: [ { id: 'icon', label: 'Icon', type: 'image' }, { id: 'title', label: 'Tiêu đề', type: 'textarea' }, { id: 'description', label: 'Mô tả', type: 'textarea' } ] }
         ]
     },
     {
@@ -87,7 +98,7 @@ export const BLOCK_LIBRARY = [
         icon: '🖼️',
         category: 'Basic',
         fields: [
-            { id: 'title', label: 'Tiêu đề', type: 'text' },
+            { id: 'title', label: 'Tiêu đề', type: 'textarea' },
             { id: 'layout', label: 'Bố cục', type: 'select', options: [
                 { label: 'Ảnh bên Trái', value: 'image-left' },
                 { label: 'Ảnh bên Phải', value: 'image-right' },
@@ -105,15 +116,15 @@ export const BLOCK_LIBRARY = [
         icon: '❄️',
         category: 'Industry & Tech',
         fields: [
-            { id: 'title', label: 'Tiêu đề', type: 'text' },
+            { id: 'title', label: 'Tiêu đề', type: 'textarea' },
             { id: 'description', label: 'Mô tả', type: 'textarea' },
             { id: 'image', label: 'Hình ảnh', type: 'image' },
-            { id: 'feature1_title', label: 'Tính năng 1: Tiêu đề', type: 'text' },
-            { id: 'feature1_desc', label: 'Tính năng 1: Mô tả', type: 'text' },
-            { id: 'feature2_title', label: 'Tính năng 2: Tiêu đề', type: 'text' },
-            { id: 'feature2_desc', label: 'Tính năng 2: Mô tả', type: 'text' },
-            { id: 'feature3_title', label: 'Tính năng 3: Tiêu đề', type: 'text' },
-            { id: 'feature3_desc', label: 'Tính năng 3: Mô tả', type: 'text' }
+            { id: 'feature1_title', label: 'Tính năng 1: Tiêu đề', type: 'textarea' },
+            { id: 'feature1_desc', label: 'Tính năng 1: Mô tả', type: 'textarea' },
+            { id: 'feature2_title', label: 'Tính năng 2: Tiêu đề', type: 'textarea' },
+            { id: 'feature2_desc', label: 'Tính năng 2: Mô tả', type: 'textarea' },
+            { id: 'feature3_title', label: 'Tính năng 3: Tiêu đề', type: 'textarea' },
+            { id: 'feature3_desc', label: 'Tính năng 3: Mô tả', type: 'textarea' }
         ]
     },
     {
@@ -122,7 +133,7 @@ export const BLOCK_LIBRARY = [
         icon: '🛠️',
         category: 'Industry & Tech',
         fields: [
-            { id: 'title', label: 'Tiêu đề', type: 'text' },
+            { id: 'title', label: 'Tiêu đề', type: 'textarea' },
             { id: 'description', label: 'Mô tả', type: 'textarea' },
             { id: 'primaryButtonLabel', label: 'Nút chính', type: 'text' },
             { id: 'primaryButtonLink', label: 'Link nút chính', type: 'text' },
@@ -138,19 +149,19 @@ export const BLOCK_LIBRARY = [
         icon: '🏢',
         category: 'Industry & Tech',
         fields: [
-            { id: 'title', label: 'Tiêu đề lưới', type: 'text' },
+            { id: 'title', label: 'Tiêu đề lưới', type: 'textarea' },
             { id: 'subtitle', label: 'Mô tả lưới', type: 'textarea' },
-            { id: 'item1_name', label: 'Loại 1: Tên', type: 'text' },
+            { id: 'item1_name', label: 'Loại 1: Tên', type: 'textarea' },
             { id: 'item1_range', label: 'Loại 1: Dải nhiệt', type: 'text' },
-            { id: 'item2_name', label: 'Loại 2: Tên', type: 'text' },
+            { id: 'item2_name', label: 'Loại 2: Tên', type: 'textarea' },
             { id: 'item2_range', label: 'Loại 2: Dải nhiệt', type: 'text' },
-            { id: 'item3_name', label: 'Loại 3: Tên', type: 'text' },
+            { id: 'item3_name', label: 'Loại 3: Tên', type: 'textarea' },
             { id: 'item3_range', label: 'Loại 3: Dải nhiệt', type: 'text' },
-            { id: 'item4_name', label: 'Loại 4: Tên', type: 'text' },
+            { id: 'item4_name', label: 'Loại 4: Tên', type: 'textarea' },
             { id: 'item4_range', label: 'Loại 4: Dải nhiệt', type: 'text' },
-            { id: 'item5_name', label: 'Loại 5: Tên', type: 'text' },
+            { id: 'item5_name', label: 'Loại 5: Tên', type: 'textarea' },
             { id: 'item5_range', label: 'Loại 5: Dải nhiệt', type: 'text' },
-            { id: 'item6_name', label: 'Loại 6: Tên', type: 'text' },
+            { id: 'item6_name', label: 'Loại 6: Tên', type: 'textarea' },
             { id: 'item6_range', label: 'Loại 6: Dải nhiệt', type: 'text' }
         ]
     },
@@ -160,19 +171,19 @@ export const BLOCK_LIBRARY = [
         icon: '👷',
         category: 'Industry & Tech',
         fields: [
-            { id: 'diff_title', label: 'Khác biệt: Tiêu đề', type: 'text' },
+            { id: 'diff_title', label: 'Khác biệt: Tiêu đề', type: 'textarea' },
             { id: 'diff_desc', label: 'Khác biệt: Mô tả', type: 'textarea' },
-            { id: 'diff_feat1_title', label: 'K.Biệt 1: Tiêu đề', type: 'text' },
-            { id: 'diff_feat1_desc', label: 'K.Biệt 1: Mô tả', type: 'text' },
-            { id: 'diff_feat2_title', label: 'K.Biệt 2: Tiêu đề', type: 'text' },
-            { id: 'diff_feat2_desc', label: 'K.Biệt 2: Mô tả', type: 'text' },
-            { id: 'diff_feat3_title', label: 'K.Biệt 3: Tiêu đề', type: 'text' },
-            { id: 'diff_feat3_desc', label: 'K.Biệt 3: Mô tả', type: 'text' },
-            { id: 'refrig_title', label: 'Môi chất: Tiêu đề', type: 'text' },
-            { id: 'refrig1_title', label: 'Môi chất 1: Tiêu đề', type: 'text' },
-            { id: 'refrig1_desc', label: 'Môi chất 1: Mô tả', type: 'text' },
-            { id: 'refrig2_title', label: 'Môi chất 2: Tiêu đề', type: 'text' },
-            { id: 'refrig2_desc', label: 'Môi chất 2: Mô tả', type: 'text' }
+            { id: 'diff_feat1_title', label: 'K.Biệt 1: Tiêu đề', type: 'textarea' },
+            { id: 'diff_feat1_desc', label: 'K.Biệt 1: Mô tả', type: 'textarea' },
+            { id: 'diff_feat2_title', label: 'K.Biệt 2: Tiêu đề', type: 'textarea' },
+            { id: 'diff_feat2_desc', label: 'K.Biệt 2: Mô tả', type: 'textarea' },
+            { id: 'diff_feat3_title', label: 'K.Biệt 3: Tiêu đề', type: 'textarea' },
+            { id: 'diff_feat3_desc', label: 'K.Biệt 3: Mô tả', type: 'textarea' },
+            { id: 'refrig_title', label: 'Môi chất: Tiêu đề', type: 'textarea' },
+            { id: 'refrig1_title', label: 'Môi chất 1: Tiêu đề', type: 'textarea' },
+            { id: 'refrig1_desc', label: 'Môi chất 1: Mô tả', type: 'textarea' },
+            { id: 'refrig2_title', label: 'Môi chất 2: Tiêu đề', type: 'textarea' },
+            { id: 'refrig2_desc', label: 'Môi chất 2: Mô tả', type: 'textarea' }
         ]
     },
     {
@@ -181,16 +192,16 @@ export const BLOCK_LIBRARY = [
         icon: '🚀',
         category: 'Industry & Tech',
         fields: [
-            { id: 'title', label: 'Tiêu đề', type: 'text' },
+            { id: 'title', label: 'Tiêu đề', type: 'textarea' },
             { id: 'subtitle', label: 'Mô tả phụ', type: 'textarea' },
             { id: 'badge', label: 'Nhãn (Badge)', type: 'text' },
-            { id: 'item1_title', label: 'CN 1: Tiêu đề', type: 'text' },
+            { id: 'item1_title', label: 'CN 1: Tiêu đề', type: 'textarea' },
             { id: 'item1_desc', label: 'CN 1: Mô tả', type: 'textarea' },
-            { id: 'item2_title', label: 'CN 2: Tiêu đề', type: 'text' },
+            { id: 'item2_title', label: 'CN 2: Tiêu đề', type: 'textarea' },
             { id: 'item2_desc', label: 'CN 2: Mô tả', type: 'textarea' },
-            { id: 'item3_title', label: 'CN 3: Tiêu đề', type: 'text' },
+            { id: 'item3_title', label: 'CN 3: Tiêu đề', type: 'textarea' },
             { id: 'item3_desc', label: 'CN 3: Mô tả', type: 'textarea' },
-            { id: 'item4_title', label: 'CN 4: Tiêu đề', type: 'text' },
+            { id: 'item4_title', label: 'CN 4: Tiêu đề', type: 'textarea' },
             { id: 'item4_desc', label: 'CN 4: Mô tả', type: 'textarea' }
         ]
     },
@@ -200,13 +211,13 @@ export const BLOCK_LIBRARY = [
         icon: '🔬',
         category: 'Industry & Tech',
         fields: [
-            { id: 'title', label: 'Tiêu đề trang', type: 'text' },
+            { id: 'title', label: 'Tiêu đề trang', type: 'textarea' },
             { id: 'description', label: 'Mô tả chi tiết', type: 'textarea' },
             { id: 'image', label: 'Hình ảnh chính', type: 'image' },
-            { id: 'feature1', label: 'Điểm nhấn 1', type: 'text' },
-            { id: 'feature2', label: 'Điểm nhấn 2', type: 'text' },
-            { id: 'feature3', label: 'Điểm nhấn 3', type: 'text' },
-            { id: 'feature4', label: 'Điểm nhấn 4', type: 'text' }
+            { id: 'feature1', label: 'Điểm nhấn 1', type: 'textarea' },
+            { id: 'feature2', label: 'Điểm nhấn 2', type: 'textarea' },
+            { id: 'feature3', label: 'Điểm nhấn 3', type: 'textarea' },
+            { id: 'feature4', label: 'Điểm nhấn 4', type: 'textarea' }
         ]
     },
     {
@@ -215,26 +226,26 @@ export const BLOCK_LIBRARY = [
         icon: '⚡',
         category: 'Industry & Tech',
         fields: [
-            { id: 'title', label: 'Tiêu đề', type: 'text' },
+            { id: 'title', label: 'Tiêu đề', type: 'textarea' },
             { id: 'description', label: 'Mô tả', type: 'textarea' },
             { id: 'image', label: 'Hình ảnh banner', type: 'image' },
-            { id: 'cat1_label', label: 'HT 1: Tên', type: 'text' },
-            { id: 'cat1_sub', label: 'HT 1: Mô tả', type: 'text' },
+            { id: 'cat1_label', label: 'HT 1: Tên', type: 'textarea' },
+            { id: 'cat1_sub', label: 'HT 1: Mô tả', type: 'textarea' },
             { id: 'cat1_link', label: 'HT 1: Link', type: 'text' },
-            { id: 'cat2_label', label: 'HT 2: Tên', type: 'text' },
-            { id: 'cat2_sub', label: 'HT 2: Mô tả', type: 'text' },
+            { id: 'cat2_label', label: 'HT 2: Tên', type: 'textarea' },
+            { id: 'cat2_sub', label: 'HT 2: Mô tả', type: 'textarea' },
             { id: 'cat2_link', label: 'HT 2: Link', type: 'text' },
-            { id: 'cat3_label', label: 'HT 3: Tên', type: 'text' },
-            { id: 'cat3_sub', label: 'HT 3: Mô tả', type: 'text' },
+            { id: 'cat3_label', label: 'HT 3: Tên', type: 'textarea' },
+            { id: 'cat3_sub', label: 'HT 3: Mô tả', type: 'textarea' },
             { id: 'cat3_link', label: 'HT 3: Link', type: 'text' },
-            { id: 'cat4_label', label: 'HT 4: Tên', type: 'text' },
-            { id: 'cat4_sub', label: 'HT 4: Mô tả', type: 'text' },
+            { id: 'cat4_label', label: 'HT 4: Tên', type: 'textarea' },
+            { id: 'cat4_sub', label: 'HT 4: Mô tả', type: 'textarea' },
             { id: 'cat4_link', label: 'HT 4: Link', type: 'text' },
-            { id: 'cat5_label', label: 'HT 5: Tên', type: 'text' },
-            { id: 'cat5_sub', label: 'HT 5: Mô tả', type: 'text' },
+            { id: 'cat5_label', label: 'HT 5: Tên', type: 'textarea' },
+            { id: 'cat5_sub', label: 'HT 5: Mô tả', type: 'textarea' },
             { id: 'cat5_link', label: 'HT 5: Link', type: 'text' },
-            { id: 'cat6_label', label: 'HT 6: Tên', type: 'text' },
-            { id: 'cat6_sub', label: 'HT 6: Mô tả', type: 'text' },
+            { id: 'cat6_label', label: 'HT 6: Tên', type: 'textarea' },
+            { id: 'cat6_sub', label: 'HT 6: Mô tả', type: 'textarea' },
             { id: 'cat6_link', label: 'HT 6: Link', type: 'text' }
         ]
     },
@@ -244,13 +255,13 @@ export const BLOCK_LIBRARY = [
         icon: '🖥️',
         category: 'Industry & Tech',
         fields: [
-            { id: 'title', label: 'Tiêu đề', type: 'text' },
+            { id: 'title', label: 'Tiêu đề', type: 'textarea' },
             { id: 'description', label: 'Mô tả', type: 'textarea' },
             { id: 'image', label: 'Hình ảnh', type: 'image' },
-            { id: 'dc_feat1_title', label: 'DC 1: Tiêu đề', type: 'text' },
-            { id: 'dc_feat1_desc', label: 'DC 1: Mô tả', type: 'text' },
-            { id: 'dc_feat2_title', label: 'DC 2: Tiêu đề', type: 'text' },
-            { id: 'dc_feat2_desc', label: 'DC 2: Mô tả', type: 'text' }
+            { id: 'dc_feat1_title', label: 'DC 1: Tiêu đề', type: 'textarea' },
+            { id: 'dc_feat1_desc', label: 'DC 1: Mô tả', type: 'textarea' },
+            { id: 'dc_feat2_title', label: 'DC 2: Tiêu đề', type: 'textarea' },
+            { id: 'dc_feat2_desc', label: 'DC 2: Mô tả', type: 'textarea' }
         ]
     },
     {
@@ -259,16 +270,16 @@ export const BLOCK_LIBRARY = [
         icon: '🔄',
         category: 'Industry & Tech',
         fields: [
-            { id: 'title', label: 'Tiêu đề', type: 'text' },
+            { id: 'title', label: 'Tiêu đề', type: 'textarea' },
             { id: 'description', label: 'Mô tả', type: 'textarea' },
-            { id: 'step1_title', label: 'Bước 1: Tiêu đề', type: 'text' },
-            { id: 'step1_desc', label: 'Bước 1: Mô tả', type: 'text' },
-            { id: 'step2_title', label: 'Bước 2: Tiêu đề', type: 'text' },
-            { id: 'step2_desc', label: 'Bước 2: Mô tả', type: 'text' },
-            { id: 'step3_title', label: 'Bước 3: Tiêu đề', type: 'text' },
-            { id: 'step3_desc', label: 'Bước 3: Mô tả', type: 'text' },
-            { id: 'step4_title', label: 'Bước 4: Tiêu đề', type: 'text' },
-            { id: 'step4_desc', label: 'Bước 4: Mô tả', type: 'text' }
+            { id: 'step1_title', label: 'Bước 1: Tiêu đề', type: 'textarea' },
+            { id: 'step1_desc', label: 'Bước 1: Mô tả', type: 'textarea' },
+            { id: 'step2_title', label: 'Bước 2: Tiêu đề', type: 'textarea' },
+            { id: 'step2_desc', label: 'Bước 2: Mô tả', type: 'textarea' },
+            { id: 'step3_title', label: 'Bước 3: Tiêu đề', type: 'textarea' },
+            { id: 'step3_desc', label: 'Bước 3: Mô tả', type: 'textarea' },
+            { id: 'step4_title', label: 'Bước 4: Tiêu đề', type: 'textarea' },
+            { id: 'step4_desc', label: 'Bước 4: Mô tả', type: 'textarea' }
         ]
     },
     {
@@ -278,7 +289,7 @@ export const BLOCK_LIBRARY = [
         category: 'About Us',
         defaultProps: { title: 'Giới thiệu', description: 'Tổng công ty Kỹ thuật lạnh Việt Nam (VVC)...' },
         fields: [
-            { id: 'title', label: 'Tiêu đề', type: 'text' },
+            { id: 'title', label: 'Tiêu đề', type: 'textarea' },
             { id: 'description', label: 'Mô tả', type: 'textarea' },
             { id: 'titleColor', label: 'Màu tiêu đề', type: 'color' },
             { id: 'descriptionColor', label: 'Màu mô tả', type: 'color' }
@@ -298,12 +309,12 @@ export const BLOCK_LIBRARY = [
             expText: 'Năm kinh nghiệm'
         },
         fields: [
-            { id: 'title', label: 'Tiêu đề', type: 'text' },
+            { id: 'title', label: 'Tiêu đề', type: 'textarea' },
             { id: 'p1', label: 'Đoạn văn 1', type: 'textarea' },
             { id: 'p2', label: 'Đoạn văn 2', type: 'textarea' },
             { id: 'image', label: 'Hình ảnh', type: 'image' },
             { id: 'expYears', label: 'Số năm KN', type: 'text' },
-            { id: 'expText', label: 'Text kinh nghiệm', type: 'text' }
+            { id: 'expText', label: 'Text kinh nghiệm', type: 'textarea' }
         ]
     },
     {
@@ -316,8 +327,8 @@ export const BLOCK_LIBRARY = [
             missionTitle: 'Sứ mệnh'
         },
         fields: [
-            { id: 'visionTitle', label: 'Tiêu đề Tầm nhìn', type: 'text' },
-            { id: 'missionTitle', label: 'Tiêu đề Sứ mệnh', type: 'text' }
+            { id: 'visionTitle', label: 'Tiêu đề Tầm nhìn', type: 'textarea' },
+            { id: 'missionTitle', label: 'Tiêu đề Sứ mệnh', type: 'textarea' }
         ]
     },
     {
@@ -326,7 +337,7 @@ export const BLOCK_LIBRARY = [
         icon: '🛡️',
         category: 'About Us',
         defaultProps: { title: 'Giá trị cốt lõi' },
-        fields: [{ id: 'title', label: 'Tiêu đề', type: 'text' }]
+        fields: [{ id: 'title', label: 'Tiêu đề', type: 'textarea' }]
     },
     {
         type: 'about_partners',
@@ -335,7 +346,7 @@ export const BLOCK_LIBRARY = [
         category: 'About Us',
         defaultProps: { title: 'Đối tác & Khách hàng' },
         fields: [
-            { id: 'title', label: 'Tiêu đề', type: 'text' },
+            { id: 'title', label: 'Tiêu đề', type: 'textarea' },
             { 
                 id: 'mgmt_info', 
                 label: 'Quản lý Logo', 
@@ -355,7 +366,7 @@ export const BLOCK_LIBRARY = [
         category: 'Corporate',
         defaultProps: { title: 'Đội ngũ', subtitle: 'Chúng tôi là một tập thể...' },
         fields: [
-            { id: 'title', label: 'Tiêu đề', type: 'text' },
+            { id: 'title', label: 'Tiêu đề', type: 'textarea' },
             { id: 'subtitle', label: 'Mô tả', type: 'textarea' },
             { id: 'titleColor', label: 'Màu tiêu đề', type: 'color' },
             { id: 'descriptionColor', label: 'Màu mô tả', type: 'color' }
@@ -368,7 +379,7 @@ export const BLOCK_LIBRARY = [
         category: 'Corporate',
         defaultProps: { title: 'Đội ngũ nhân sự', description: 'Gặp gỡ những chuyên gia của chúng tôi' },
         fields: [
-            { id: 'title', label: 'Tiêu đề lưới', type: 'text' },
+            { id: 'title', label: 'Tiêu đề lưới', type: 'textarea' },
             { id: 'description', label: 'Mô tả lưới', type: 'textarea' }
         ]
     },
@@ -378,9 +389,9 @@ export const BLOCK_LIBRARY = [
         icon: '📄',
         category: 'Corporate',
         fields: [
-            { id: 'title', label: 'Tiêu đề', type: 'text' },
+            { id: 'title', label: 'Tiêu đề', type: 'textarea' },
             { id: 'description', label: 'Mô tả', type: 'textarea' },
-            { id: 'pdfUrl', label: 'Link file PDF', type: 'text' }
+            { id: 'pdfUrl', label: 'Link file PDF', type: 'textarea' }
         ]
     },
     {
@@ -389,7 +400,7 @@ export const BLOCK_LIBRARY = [
         icon: '💼',
         category: 'Corporate',
         fields: [
-            { id: 'title', label: 'Tiêu đề', type: 'text' },
+            { id: 'title', label: 'Tiêu đề', type: 'textarea' },
             { id: 'subtitle', label: 'Mô tả phụ', type: 'textarea' }
         ]
     },
@@ -407,7 +418,7 @@ export const BLOCK_LIBRARY = [
         category: 'About Us V2',
         defaultProps: { title: 'About Us', backgroundImage: '/assets/about-v2/banner.jpg' },
         fields: [
-            { id: 'title', label: 'Tiêu đề', type: 'text' },
+            { id: 'title', label: 'Tiêu đề', type: 'textarea' },
             { id: 'backgroundImage', label: 'Ảnh banner', type: 'image' },
             { id: 'titleColor', label: 'Màu tiêu đề', type: 'color' }
         ]
@@ -424,11 +435,11 @@ export const BLOCK_LIBRARY = [
             backgroundImage: '/assets/about-v2/intro-bg.jpg'
         },
         fields: [
-            { id: 'title', label: 'Tiêu đề chính', type: 'text' },
+            { id: 'title', label: 'Tiêu đề chính', type: 'textarea' },
             { id: 'description', label: 'Mô tả', type: 'textarea' },
             { id: 'image', label: 'Logo Mockup (phải)', type: 'image' },
             { id: 'backgroundImage', label: 'Ảnh nền Industrial', type: 'image' },
-            { id: 'memberText', label: 'Text Thành viên (ví dụ: TTT is a member of)', type: 'text' },
+            { id: 'memberText', label: 'Text Thành viên (ví dụ: TTT is a member of)', type: 'textarea' },
             { id: 'memberLogo', label: 'Logo Thành viên', type: 'image' }
         ]
     },
@@ -447,11 +458,11 @@ export const BLOCK_LIBRARY = [
             sideIcon: '/assets/about-v2/team-work-svg.svg'
         },
         fields: [
-            { id: 'vTitle', label: 'Tiêu đề Tầm nhìn', type: 'text' },
+            { id: 'vTitle', label: 'Tiêu đề Tầm nhìn', type: 'textarea' },
             { id: 'vContent', label: 'Nội dung Tầm nhìn', type: 'textarea' },
-            { id: 'mTitle', label: 'Tiêu đề Sứ mệnh', type: 'text' },
+            { id: 'mTitle', label: 'Tiêu đề Sứ mệnh', type: 'textarea' },
             { id: 'mContent', label: 'Nội dung Sứ mệnh', type: 'textarea' },
-            { id: 'cTitle', label: 'Tiêu đề Giá trị', type: 'text' },
+            { id: 'cTitle', label: 'Tiêu đề Giá trị', type: 'textarea' },
             { id: 'cContent', label: 'Nội dung Giá trị (HTML)', type: 'textarea' },
             { id: 'sideIcon', label: 'Icon minh họa (trái)', type: 'image' }
         ]
@@ -468,14 +479,14 @@ export const BLOCK_LIBRARY = [
             ]
         },
         fields: [
-            { id: 'title', label: 'Tiêu đề chính', type: 'text' },
+            { id: 'title', label: 'Tiêu đề chính', type: 'textarea' },
             { 
                 id: 'milestones', 
                 label: 'Cột mốc thời gian', 
                 type: 'list',
                 itemSchema: [
                     { id: 'year', label: 'Năm', type: 'text' },
-                    { id: 'title', label: 'Tiêu đề', type: 'text' },
+                    { id: 'title', label: 'Tiêu đề', type: 'textarea' },
                     { id: 'desc', label: 'Mô tả', type: 'textarea' },
                     { id: 'logo', label: 'Logo tùy chỉnh (để trống nếu dùng mặc định)', type: 'image' }
                 ]
@@ -492,14 +503,14 @@ export const BLOCK_LIBRARY = [
             locations: []
         },
         fields: [
-            { id: 'title', label: 'Tiêu đề chính', type: 'text' },
+            { id: 'title', label: 'Tiêu đề chính', type: 'textarea' },
             { 
                 id: 'locations', 
                 label: 'Danh sách địa điểm', 
                 type: 'list',
                 itemSchema: [
-                    { id: 'subTitle', label: 'Nhãn (ví dụ: THUONG THIEN)', type: 'text' },
-                    { id: 'city', label: 'Tiêu đề (ví dụ: HEAD OFFICE)', type: 'text' },
+                    { id: 'subTitle', label: 'Nhãn (ví dụ: THUONG THIEN)', type: 'textarea' },
+                    { id: 'city', label: 'Tiêu đề (ví dụ: HEAD OFFICE)', type: 'textarea' },
                     { id: 'address', label: 'Địa chỉ', type: 'text' },
                     { id: 'phone', label: 'Số điện thoại', type: 'text' },
                     { id: 'email', label: 'Email', type: 'text' }
@@ -521,15 +532,15 @@ export const BLOCK_LIBRARY = [
         icon: '🤝',
         category: 'Homepage',
         fields: [
-            { id: 'title', label: 'Tiêu đề', type: 'text', default: 'Đối Tác Chiến Lược Của Solar Turbines' },
-            { id: 'subtitle', label: 'Tiêu đề phụ', type: 'text', default: 'Thuong Thien Technologies (TTT)' },
+            { id: 'title', label: 'Tiêu đề', type: 'textarea', default: 'Đối Tác Chiến Lược Của Solar Turbines' },
+            { id: 'subtitle', label: 'Tiêu đề phụ', type: 'textarea', default: 'Thuong Thien Technologies (TTT)' },
             { id: 'description', label: 'Mô tả', type: 'textarea', default: 'Chúng tôi tự hào là đại diện chính thức và đối tác chiến lược của Solar Turbines tại Việt Nam, cung cấp các giải pháp năng lượng và hệ thống nén khí tiên tiến nhất.' },
             { id: 'partnerImage', label: 'Hình ảnh chính', type: 'image', default: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=800' },
             { id: 'logo1', label: 'Logo đối tác 1', type: 'image', default: 'https://www.solar-turbines.com/etc.clientlibs/solar-turbines/clientlibs/clientlib-site/resources/images/cat-logo.png' },
             { id: 'logo2', label: 'Logo đối tác 2', type: 'image', default: 'https://www.solar-turbines.com/etc.clientlibs/solar-turbines/clientlibs/clientlib-site/resources/images/solar-logo.png' },
             { id: 'logo3', label: 'Logo đối tác 3', type: 'image', default: '/assets/partners/ttt-logo.svg' },
-            { id: 'exp_value', label: 'Số năm kinh nghiệm', type: 'text', default: '20+' },
-            { id: 'exp_text', label: 'Văn bản kinh nghiệm', type: 'text', default: 'Năm kinh nghiệm trong ngành công nghiệp nặng' }
+            { id: 'exp_value', label: 'Số năm kinh nghiệm', type: 'textarea', default: '20+' },
+            { id: 'exp_text', label: 'Văn bản kinh nghiệm', type: 'textarea', default: 'Năm kinh nghiệm trong ngành công nghiệp nặng' }
         ]
     },
     {
@@ -538,8 +549,8 @@ export const BLOCK_LIBRARY = [
         icon: '🏗️',
         category: 'Homepage',
         fields: [
-            { id: 'title', label: 'Tiêu đề', type: 'text' },
-            { id: 'subtitle', label: 'Mô tả phụ', type: 'text' }
+            { id: 'title', label: 'Tiêu đề', type: 'textarea' },
+            { id: 'subtitle', label: 'Mô tả phụ', type: 'textarea' }
         ]
     },
     {
@@ -548,8 +559,8 @@ export const BLOCK_LIBRARY = [
         icon: '💡',
         category: 'Homepage',
         fields: [
-            { id: 'title', label: 'Tiêu đề', type: 'text' },
-            { id: 'subtitle', label: 'Mô tả phụ', type: 'text' }
+            { id: 'title', label: 'Tiêu đề', type: 'textarea' },
+            { id: 'subtitle', label: 'Mô tả phụ', type: 'textarea' }
         ]
     },
     {
@@ -558,7 +569,7 @@ export const BLOCK_LIBRARY = [
         icon: '📊',
         category: 'Homepage',
         fields: [
-            { id: 'title', label: 'Tiêu đề chính', type: 'text' }
+            { id: 'title', label: 'Tiêu đề chính', type: 'textarea' }
         ]
     },
     {
@@ -567,8 +578,8 @@ export const BLOCK_LIBRARY = [
         icon: '🏗️',
         category: 'Homepage',
         fields: [
-            { id: 'title', label: 'Tiêu đề', type: 'text' },
-            { id: 'subtitle', label: 'Mô tả phụ', type: 'text' }
+            { id: 'title', label: 'Tiêu đề', type: 'textarea' },
+            { id: 'subtitle', label: 'Mô tả phụ', type: 'textarea' }
         ]
     },
     {
@@ -577,8 +588,8 @@ export const BLOCK_LIBRARY = [
         icon: '📰',
         category: 'Homepage',
         fields: [
-            { id: 'title', label: 'Tiêu đề', type: 'text' },
-            { id: 'subtitle', label: 'Mô tả phụ', type: 'text' }
+            { id: 'title', label: 'Tiêu đề', type: 'textarea' },
+            { id: 'subtitle', label: 'Mô tả phụ', type: 'textarea' }
         ]
     },
     {
@@ -587,8 +598,8 @@ export const BLOCK_LIBRARY = [
         icon: '📦',
         category: 'Homepage',
         fields: [
-            { id: 'title', label: 'Tiêu đề', type: 'text' },
-            { id: 'subtitle', label: 'Mô tả phụ', type: 'text' }
+            { id: 'title', label: 'Tiêu đề', type: 'textarea' },
+            { id: 'subtitle', label: 'Mô tả phụ', type: 'textarea' }
         ]
     }
 ];
