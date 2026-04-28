@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import { Maximize2, Minimize2, Pin, PinOff, RotateCcw } from 'lucide-react';
+import { Maximize2, Minimize2, Pin, PinOff, RotateCcw, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface RichTextEditorWidgetProps {
@@ -20,6 +20,7 @@ export const RichTextEditorWidget: React.FC<RichTextEditorWidgetProps> = ({
     const [originalValue] = useState(value);
     const [isFullscreen, setIsFullscreen] = useState(false);
     const [isPinned, setIsPinned] = useState(false);
+    const [isActive, setIsActive] = useState(false);
 
     const modules = {
         toolbar: [
@@ -44,6 +45,42 @@ export const RichTextEditorWidget: React.FC<RichTextEditorWidgetProps> = ({
         setIsPinned(!isPinned);
         if (!isPinned) setIsFullscreen(true); // Force floating when pinned
     };
+
+    const handleClose = () => {
+        setIsActive(false);
+        setIsFullscreen(false);
+        setIsPinned(false);
+    };
+
+    if (!isActive && !isFullscreen && !isPinned) {
+        return (
+            <div className="space-y-1">
+                <div className="flex justify-between items-center px-1">
+                    <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">{label || 'Văn bản'}</span>
+                    <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        className="h-6 text-[10px] text-blue-600 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 px-2 rounded-md"
+                        onClick={() => setIsActive(true)}
+                    >
+                        Mở soạn thảo
+                    </Button>
+                </div>
+                <div 
+                    className="border border-slate-200 rounded-md bg-white p-2.5 min-h-[42px] max-h-[100px] overflow-hidden cursor-text hover:border-blue-400 hover:shadow-sm transition-all relative group"
+                    onClick={() => setIsActive(true)}
+                >
+                    <div 
+                        className="text-xs text-slate-700 line-clamp-3 prose prose-sm max-w-none" 
+                        dangerouslySetInnerHTML={{ __html: value || '<span class="text-slate-400 italic">Nhập nội dung...</span>' }} 
+                    />
+                    {value && value.length > 50 && (
+                        <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-white via-white/80 to-transparent" />
+                    )}
+                </div>
+            </div>
+        );
+    }
 
     const editorContent = (
         <div className={`bg-white flex flex-col h-full border border-slate-200 ${isFullscreen || isPinned ? 'rounded-xl overflow-hidden' : 'rounded-md'}`}>
@@ -101,6 +138,15 @@ export const RichTextEditorWidget: React.FC<RichTextEditorWidgetProps> = ({
                         title={isFullscreen ? "Thu nhỏ" : "Phóng to toàn màn hình"}
                     >
                         {isFullscreen ? <Minimize2 className="h-3.5 w-3.5" /> : <Maximize2 className="h-3.5 w-3.5" />}
+                    </Button>
+                    <Button 
+                        variant="ghost" 
+                        size="icon" 
+                        className="h-6 w-6 ml-1 text-slate-400 hover:text-red-600 hover:bg-red-50" 
+                        onClick={handleClose}
+                        title="Đóng trình soạn thảo"
+                    >
+                        <X className="h-4 w-4" />
                     </Button>
                 </div>
             </div>
