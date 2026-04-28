@@ -3,6 +3,16 @@ import { useVisualEditor } from '../../context/VisualEditorContext';
 import { useTranslation } from 'react-i18next';
 import { getNestedValue } from '../../utils/objectUtils';
 
+const escapeHtml = (unsafe: any) => {
+  if (typeof unsafe !== 'string') return '';
+  return unsafe
+       .replace(/&/g, "&amp;")
+       .replace(/</g, "&lt;")
+       .replace(/>/g, "&gt;")
+       .replace(/"/g, "&quot;")
+       .replace(/'/g, "&#039;");
+};
+
 interface EditableElementProps {
   fieldKey: string;
   defaultContent: string;
@@ -90,6 +100,9 @@ export const EditableElement = ({
   } else if (isValid(baseValue)) {
     currentContent = baseValue;
   }
+
+  // Use initial content to prevent React from re-rendering the text node and losing cursor position
+  const [initialContent] = React.useState(currentContent);
 
   // Handle data updates
   const handleContentUpdate = (value: string) => {
@@ -295,9 +308,8 @@ export const EditableElement = ({
         }}
         className={`${className} outline-none focus:ring-2 focus:ring-primary/50 focus:bg-primary/5 transition-all min-w-[20px] min-h-[1em]`}
         style={style}
-      >
-        {currentContent}
-      </Tag>
+        dangerouslySetInnerHTML={{ __html: type === 'rich-text' ? initialContent : escapeHtml(initialContent) }}
+      />
     );
   }
 
