@@ -301,6 +301,13 @@ export const EditableElement = ({
           e.stopPropagation();
           if (effectiveSectionId) {
             selectSection(effectiveSectionId);
+            
+            // Highlight and scroll to field in the Property Inspector
+            window.parent.postMessage({
+              type: 'VISUAL_EDIT_FIELD_FOCUSED',
+              sectionId: effectiveSectionId,
+              fieldKey: effectiveFieldKey
+            }, '*');
           }
         }}
         onFocus={() => {

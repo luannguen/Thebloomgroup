@@ -37,6 +37,39 @@ export const PropertyInspector: React.FC<PropertyInspectorProps> = ({
     const section = sections?.find(s => s.id === selectedSectionId);
     const blockDef = BLOCK_LIBRARY.find(b => b.type === section?.type);
 
+    const [focusedFieldKey, setFocusedFieldKey] = React.useState<string | null>(null);
+
+    React.useEffect(() => {
+        const handleMessage = (event: MessageEvent) => {
+            const data = event.data?.data || event.data;
+            if (data?.type === 'VISUAL_EDIT_FIELD_FOCUSED') {
+                // If it's a different section, selectedSectionId will update soon. 
+                // We set the focused field key and let the other effect handle scrolling once rendered.
+                setFocusedFieldKey(data.fieldKey);
+            }
+        };
+        window.addEventListener('message', handleMessage);
+        return () => window.removeEventListener('message', handleMessage);
+    }, []);
+
+    React.useEffect(() => {
+        if (focusedFieldKey && section) {
+            // Need a slight delay to ensure DOM is updated and rendered
+            const timer = setTimeout(() => {
+                const element = document.getElementById(`property-field-${focusedFieldKey}`);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    element.classList.add('ring-2', 'ring-blue-500', 'bg-blue-50/50', 'rounded-md', 'p-2', '-m-2', 'transition-all');
+                    setTimeout(() => {
+                        element.classList.remove('ring-2', 'ring-blue-500', 'bg-blue-50/50', 'rounded-md', 'p-2', '-m-2');
+                    }, 2000);
+                }
+                setFocusedFieldKey(null);
+            }, 100);
+            return () => clearTimeout(timer);
+        }
+    }, [focusedFieldKey, section]);
+
     const renderField = (field: any, props: any, onChange: (value: any) => void, path: string = '') => {
         const value = props?.[field.id] !== undefined ? props[field.id] : field.default;
 
@@ -105,8 +138,10 @@ export const PropertyInspector: React.FC<PropertyInspectorProps> = ({
                                                             </Button>
                                                         </div>
                                                         <div className="p-3 space-y-4">
-                                                            {field.itemSchema?.map((subField: any) => (
-                                                                <div key={subField.id} className="space-y-1.5">
+                                                            {field.itemSchema?.map((subField: any) => {
+                                                                const fullPath = `${path ? path + '.' : ''}${field.id}.${index}.${subField.id}`;
+                                                                return (
+                                                                <div key={subField.id} className="space-y-1.5" id={`property-field-${fullPath}`}>
                                                                     <Label className="text-[9px] font-bold text-slate-400 uppercase tracking-tighter">
                                                                         {subField.label}
                                                                     </Label>
@@ -117,7 +152,8 @@ export const PropertyInspector: React.FC<PropertyInspectorProps> = ({
                                                                         `${path ? path + '.' : ''}${field.id}.${index}`
                                                                     )}
                                                                 </div>
-                                                            ))}
+                                                                );
+                                                            })}
                                                         </div>
                                                     </div>
                                                 )}
@@ -303,7 +339,7 @@ export const PropertyInspector: React.FC<PropertyInspectorProps> = ({
 
             <div className="flex-grow overflow-y-auto p-5 space-y-6">
                 {blockDef?.fields?.map((field: any) => (
-                    <div key={field.id} className="space-y-2.5">
+                    <div key={field.id} className="space-y-2.5" id={`property-field-${field.id}`}>
                         <Label className="text-[11px] font-bold text-slate-500 uppercase tracking-tighter">
                             {field.label}
                         </Label>
