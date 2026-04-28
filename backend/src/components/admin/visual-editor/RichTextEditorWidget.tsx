@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import ReactQuill, { Quill } from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { Maximize2, Minimize2, Pin, PinOff, RotateCcw, X } from 'lucide-react';
@@ -7,19 +7,26 @@ import { Button } from '@/components/ui/button';
 // Cấu hình Quill Alignment dùng inline style
 // Thực hiện một lần duy nhất
 let alignRegistered = false;
-const registerAlign = () => {
+const registerQuillStyles = () => {
     if (alignRegistered) return;
     try {
         const AlignStyle = Quill.import('attributors/style/align') as any;
         AlignStyle.whitelist = ['left', 'center', 'right', 'justify'];
         Quill.register(AlignStyle, true);
+
+        const ColorStyle = Quill.import('attributors/style/color') as any;
+        Quill.register(ColorStyle, true);
+
+        const BackgroundStyle = Quill.import('attributors/style/background') as any;
+        Quill.register(BackgroundStyle, true);
+
         alignRegistered = true;
     } catch (e) {
-        console.error('Failed to register Quill AlignStyle:', e);
+        console.error('Failed to register Quill styles:', e);
     }
 };
 
-const QUILL_FORMATS = ['bold', 'italic', 'underline', 'strike', 'list', 'bullet', 'align', 'link'];
+const QUILL_FORMATS = ['bold', 'italic', 'underline', 'strike', 'list', 'bullet', 'align', 'link', 'color', 'background'];
 
 interface RichTextEditorWidgetProps {
     value: string;
@@ -34,8 +41,8 @@ export const RichTextEditorWidget: React.FC<RichTextEditorWidgetProps> = ({
     label,
     placeholder
 }) => {
-    // Register align style when component is first used
-    registerAlign();
+    // Register style-based attributors when component is first used
+    registerQuillStyles();
 
     const [originalValue] = useState(value);
     const [isFullscreen, setIsFullscreen] = useState(false);
@@ -46,6 +53,7 @@ export const RichTextEditorWidget: React.FC<RichTextEditorWidgetProps> = ({
         toolbar: {
             container: [
                 ['bold', 'italic', 'underline', 'strike'],
+                [{ 'color': [] }, { 'background': [] }],
                 [{ 'list': 'ordered'}, { 'list': 'bullet' }],
                 [{ 'align': ['', 'center', 'right', 'justify'] }],
                 ['link', 'clean']
