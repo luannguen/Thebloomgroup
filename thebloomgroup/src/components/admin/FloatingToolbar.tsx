@@ -10,6 +10,8 @@ interface FloatingToolbarProps {
   iconSpacing?: number;
   onIconSpacingChange?: (spacing: number) => void;
   className?: string;
+  maxSize?: number;
+  minSize?: number;
 }
 
 export const FloatingToolbar: React.FC<FloatingToolbarProps> = ({
@@ -19,21 +21,23 @@ export const FloatingToolbar: React.FC<FloatingToolbarProps> = ({
   onIconPositionChange,
   iconSpacing,
   onIconSpacingChange,
-  className = ""
+  className = "",
+  maxSize = 1200,
+  minSize = 20
 }) => {
   return (
-    <div className={`absolute -top-12 left-1/2 -translate-x-1/2 bg-white/90 backdrop-blur-md border border-slate-200 shadow-2xl rounded-full px-4 py-1.5 flex items-center gap-3 z-[100] opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-auto scale-90 group-hover:scale-100 ${className}`}>
+    <div className={`absolute -top-12 left-1/2 -translate-x-1/2 bg-white/90 backdrop-blur-md border border-slate-200 shadow-2xl rounded-full px-4 py-1.5 flex items-center gap-3 z-[10001] opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-auto scale-90 group-hover:scale-100 ${className}`}>
       <div className="flex items-center gap-1 border-r border-slate-100 pr-3">
         <span className="text-[10px] font-bold text-slate-400 uppercase tracking-tighter">Size</span>
         <button 
-          onClick={(e) => { e.stopPropagation(); onIconSizeChange(Math.max(20, iconSize - 10)); }}
+          onClick={(e) => { e.stopPropagation(); onIconSizeChange(Math.max(minSize, iconSize - 10)); }}
           className="p-1 hover:bg-slate-100 rounded-full transition-colors text-slate-600"
         >
           <Minus size={14} />
         </button>
         <span className="text-xs font-bold text-primary min-w-[24px] text-center">{iconSize}</span>
         <button 
-          onClick={(e) => { e.stopPropagation(); onIconSizeChange(Math.min(300, iconSize + 10)); }}
+          onClick={(e) => { e.stopPropagation(); onIconSizeChange(Math.min(maxSize, iconSize + 10)); }}
           className="p-1 hover:bg-slate-100 rounded-full transition-colors text-slate-600"
         >
           <Plus size={14} />

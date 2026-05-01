@@ -64,7 +64,7 @@ export const MediaSectionBlock = ({
               <FloatingToolbar 
                 iconSize={iconSize || 400}
                 onIconSizeChange={(s) => updateSectionProps(sectionId!, { iconSize: s })}
-                className="top-4 left-1/2 -translate-x-1/2"
+                className="-top-16 left-1/2 -translate-x-1/2"
               />
             )}
             <EditableElement
@@ -72,9 +72,13 @@ export const MediaSectionBlock = ({
               fieldKey="image"
               sectionId={sectionId}
               defaultContent={image}
-              className="shadow-xl overflow-hidden w-full h-full min-h-[300px]"
+              className="shadow-xl overflow-hidden mx-auto"
+              style={{ 
+                width: isVertical ? '100%' : (iconSize ? `${iconSize}px` : '100%'),
+                maxWidth: '100%'
+              }}
             >
-              <img src={image} className="w-full h-full object-cover" alt={title} style={{ width: isVertical ? '100%' : iconSize }} />
+              <img src={image} className="w-full h-auto object-cover" alt={title} />
             </EditableElement>
           </div>
 
