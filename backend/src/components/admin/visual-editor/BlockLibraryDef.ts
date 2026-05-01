@@ -570,9 +570,36 @@ export const BLOCK_LIBRARY = [
         name: 'Home V2: Lĩnh vực',
         icon: '🏗️',
         category: 'Homepage',
+        defaultProps: {
+            title: 'Lĩnh Vực Hoạt Động',
+            subtitle: 'Chúng tôi cung cấp giải pháp chuyên biệt cho các ngành công nghiệp trọng điểm.',
+            items: [
+                { title: "Dịch Vụ Kỹ Thuật", desc: "Bảo trì, sửa chữa và vận hành.", bg: "https://images.unsplash.com/photo-1581092921461-7d1598637f9d?auto=format&fit=crop&q=80&w=600", link: "/services" },
+                { title: "Máy Gia Công", desc: "Các giải pháp máy móc công nghiệp hiện đại.", bg: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=600", link: "/products" },
+                { title: "Sản Xuất Đồ Gia Dụng", desc: "Dây chuyền sản xuất thiết bị gia đình.", bg: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&q=80&w=600", link: "/products" },
+                { title: "Thiết Bị Giặt Là Công Nghiệp", desc: "Giải pháp giặt là quy mô lớn.", bg: "https://images.unsplash.com/photo-1565608438257-fac3c27beb36?auto=format&fit=crop&q=80&w=600", link: "/products" }
+            ]
+        },
         fields: [
             { id: 'title', label: 'Tiêu đề chính', type: 'textarea' },
-            { id: 'subtitle', label: 'Mô tả phụ', type: 'textarea' }
+            { id: 'subtitle', label: 'Mô tả phụ', type: 'textarea' },
+            { 
+                id: 'items', 
+                label: 'Danh sách Lĩnh vực', 
+                type: 'list', 
+                default: [
+                    { title: "Dịch Vụ Kỹ Thuật", desc: "Bảo trì, sửa chữa và vận hành.", bg: "https://images.unsplash.com/photo-1581092921461-7d1598637f9d?auto=format&fit=crop&q=80&w=600", link: "/services" },
+                    { title: "Máy Gia Công", desc: "Các giải pháp máy móc công nghiệp hiện đại.", bg: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=600", link: "/products" },
+                    { title: "Sản Xuất Đồ Gia Dụng", desc: "Dây chuyền sản xuất thiết bị gia đình.", bg: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&q=80&w=600", link: "/products" },
+                    { title: "Thiết Bị Giặt Là Công Nghiệp", desc: "Giải pháp giặt là quy mô lớn.", bg: "https://images.unsplash.com/photo-1565608438257-fac3c27beb36?auto=format&fit=crop&q=80&w=600", link: "/products" }
+                ],
+                itemSchema: [ 
+                    { id: 'bg', label: 'Ảnh nền', type: 'image' }, 
+                    { id: 'title', label: 'Tiêu đề', type: 'textarea' }, 
+                    { id: 'desc', label: 'Mô tả', type: 'textarea' },
+                    { id: 'link', label: 'Link (Xem chi tiết)', type: 'text' }
+                ] 
+            }
         ]
     },
     {

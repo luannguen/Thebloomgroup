@@ -198,6 +198,7 @@ export const HomeV2PartnershipBlock = ({
 export const HomeV2SectorsBlock = ({
   title,
   subtitle,
+  items,
   sectionId
 }: any) => {
   const { t } = useTranslation();
@@ -205,15 +206,23 @@ export const HomeV2SectorsBlock = ({
   const displayTitle = title || t('home_v2_sectors_title', "Lĩnh Vực Hoạt Động");
   const displaySubtitle = subtitle || t('home_v2_sectors_subtitle', "Chúng tôi cung cấp giải pháp chuyên biệt cho các ngành công nghiệp trọng điểm.");
 
-  const sectors = [
-    { id: 'oil-gas', title: "Dầu Khí", desc: "Khai thác, vận chuyển và chế biến dầu khí.", icon: Zap, bg: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=600" },
-    { id: 'power', title: "Sản Xuất Điện", desc: "Giải pháp tuabin khí cho nhà máy điện.", icon: Globe, bg: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&q=80&w=600" },
-    { id: 'industrial', title: "Sản Xuất Công Nghiệp", desc: "Năng lượng cho các khu công nghiệp.", icon: Settings, bg: "https://images.unsplash.com/photo-1565608438257-fac3c27beb36?auto=format&fit=crop&q=80&w=600" },
-    { id: 'service', title: "Dịch Vụ Kỹ Thuật", desc: "Bảo trì, sửa chữa và vận hành.", icon: Award, bg: "https://images.unsplash.com/photo-1581092921461-7d1598637f9d?auto=format&fit=crop&q=80&w=600" }
+  const defaultSectors = [
+    { title: "Dịch Vụ Kỹ Thuật", desc: "Bảo trì, sửa chữa và vận hành.", icon: Award, bg: "https://images.unsplash.com/photo-1581092921461-7d1598637f9d?auto=format&fit=crop&q=80&w=600", link: "/services" },
+    { title: "Máy Gia Công", desc: "Các giải pháp máy móc công nghiệp hiện đại.", icon: Zap, bg: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=600", link: "/products" },
+    { title: "Sản Xuất Đồ Gia Dụng", desc: "Dây chuyền sản xuất thiết bị gia đình.", icon: Globe, bg: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&q=80&w=600", link: "/products" },
+    { title: "Thiết Bị Giặt Là Công Nghiệp", desc: "Giải pháp giặt là quy mô lớn.", icon: Settings, bg: "https://images.unsplash.com/photo-1565608438257-fac3c27beb36?auto=format&fit=crop&q=80&w=600", link: "/products" }
   ];
 
+  const displaySectors = items && items.length > 0 ? items : defaultSectors;
+
+  // Map icon based on index for variety
+  const getIcon = (index: number) => {
+    const icons = [Award, Zap, Globe, Settings];
+    return icons[index % icons.length];
+  };
+
   return (
-    <section className="py-24 bg-slate-50">
+    <section className="py-24 bg-slate-50" data-section-id={sectionId}>
       <div className="container-custom">
         <div className="max-w-3xl mx-auto mb-20">
           <EditableElement tagName="h2" fieldKey="title" sectionId={sectionId} defaultContent={displayTitle} className="text-4xl font-black mb-6 text-slate-900 block" />
@@ -221,28 +230,60 @@ export const HomeV2SectorsBlock = ({
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {sectors.map((sector, i) => (
-            <motion.div
-              key={sector.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="group relative overflow-hidden rounded-3xl aspect-[3/4] bg-slate-900"
-            >
-              <img src={sector.bg} alt={sector.title} className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-110 transition-transform duration-700" />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent p-8 flex flex-col justify-end">
-                <div className="w-12 h-12 rounded-2xl bg-primary/20 backdrop-blur-md flex items-center justify-center mb-6 text-primary group-hover:bg-primary group-hover:text-white transition-all">
-                  <sector.icon className="w-6 h-6" />
+          {displaySectors.map((sector: any, i: number) => {
+            const IconComponent = getIcon(i);
+            return (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="group relative overflow-hidden rounded-3xl aspect-[3/4] bg-slate-900"
+              >
+                <EditableElement
+                  type="image"
+                  fieldKey={`items.${i}.bg`}
+                  sectionId={sectionId}
+                  defaultContent={sector.bg}
+                  className="absolute inset-0 w-full h-full"
+                >
+                  <img src={sector.bg} alt={sector.title} className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-110 transition-transform duration-700" />
+                </EditableElement>
+                
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent p-8 flex flex-col justify-end pointer-events-none">
+                  <div className="w-12 h-12 rounded-2xl bg-primary/20 backdrop-blur-md flex items-center justify-center mb-6 text-primary group-hover:bg-primary group-hover:text-white transition-all pointer-events-auto">
+                    <IconComponent className="w-6 h-6" />
+                  </div>
+                  
+                  <div className="pointer-events-auto">
+                    <EditableElement 
+                      tagName="h3" 
+                      fieldKey={`items.${i}.title`} 
+                      sectionId={sectionId} 
+                      defaultContent={sector.title} 
+                      className="text-2xl font-bold text-white mb-3 block" 
+                    />
+                    
+                    <EditableElement 
+                      tagName="p" 
+                      fieldKey={`items.${i}.desc`} 
+                      sectionId={sectionId} 
+                      defaultContent={sector.desc} 
+                      className="text-slate-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 block" 
+                    />
+                  </div>
+
+                  <Link 
+                    to={sector.link || "/products"} 
+                    className="mt-6 flex items-center text-primary text-xs font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all transform translate-x-[-10px] group-hover:translate-x-0 pointer-events-auto"
+                  >
+                    {t('view_detail', 'Xem chi tiết')} <ArrowRight className="ml-2 w-4 h-4" />
+                  </Link>
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-3">{sector.title}</h3>
-                <p className="text-slate-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500">{sector.desc}</p>
-                <div className="mt-6 flex items-center text-primary text-xs font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all transform translate-x-[-10px] group-hover:translate-x-0">
-                  {t('view_detail', 'Xem chi tiết')} <ArrowRight className="ml-2 w-4 h-4" />
-                </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
