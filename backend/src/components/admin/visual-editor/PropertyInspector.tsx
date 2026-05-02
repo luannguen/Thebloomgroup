@@ -225,18 +225,22 @@ export const PropertyInspector: React.FC<PropertyInspectorProps> = ({
             case 'select':
                 return (
                     <Select 
-                        value={value || ''}
+                        value={value || 'default'}
                         onValueChange={onChange}
                     >
                         <SelectTrigger className="h-10 border-slate-200 focus-visible:ring-primary shadow-sm bg-white">
                             <SelectValue placeholder="Chọn giá trị..." />
                         </SelectTrigger>
                         <SelectContent>
-                            {field.options?.map((opt: any) => (
-                                <SelectItem key={opt.value} value={opt.value}>
-                                    {opt.label}
-                                </SelectItem>
-                            ))}
+                            {field.options?.map((opt: any) => {
+                                // Radix UI Select.Item MUST have a non-empty string value
+                                const safeValue = opt.value || 'default';
+                                return (
+                                    <SelectItem key={safeValue} value={safeValue}>
+                                        {opt.label}
+                                    </SelectItem>
+                                );
+                            })}
                         </SelectContent>
                     </Select>
                 );

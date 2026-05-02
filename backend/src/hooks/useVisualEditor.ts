@@ -233,9 +233,15 @@ export function useVisualEditor(iframeRef: React.RefObject<HTMLIFrameElement>) {
         if (data.type === 'VISUAL_EDIT_UPDATE' || data.type === 'VISUAL_EDIT_UPDATE_DATA_FROM_IFRAME') {
             const sectionsData = data.sections || data.data?.sections;
             if (sectionsData && Array.isArray(sectionsData)) {
-                console.log('[VisualEditor Parent] Syncing sections from iframe:', sectionsData.length);
-                setSections(sectionsData);
-                setHasPendingChanges(true);
+                // Only update if data actually changed to avoid re-render loops
+                const currentSectionsStr = JSON.stringify(sections);
+                const newSectionsStr = JSON.stringify(sectionsData);
+                
+                if (currentSectionsStr !== newSectionsStr) {
+                    console.log('[VisualEditor Parent] Syncing sections from iframe:', sectionsData.length);
+                    setSections(sectionsData);
+                    setHasPendingChanges(true);
+                }
             }
         } else if (data.type === 'VISUAL_EDIT_SECTION_SELECTED') {
             console.log('[VisualEditor Parent] Section selected in iframe:', data.sectionId);

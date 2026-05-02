@@ -18,6 +18,8 @@ export const VisualPageRenderer = ({ customSections }: { customSections?: any[] 
         ? contentData.sections 
         : (customSections || []);
 
+    const hasSyncedToParent = React.useRef(false);
+
     // Listen for messages from Admin (e.g., Select Section)
     useEffect(() => {
         // Hydrate context with initial sections if they are missing or provided as a fallback
@@ -27,12 +29,13 @@ export const VisualPageRenderer = ({ customSections }: { customSections?: any[] 
 
         // Signal to parent that we are ready and provide current sections
         // ONLY if not loading, in editMode, and we truly have sections to sync
-        if (editMode && !isLoading && sections && sections.length > 0) {
+        if (editMode && !isLoading && sections && sections.length > 0 && !hasSyncedToParent.current) {
             window.parent.postMessage({ 
                 type: 'VISUAL_EDIT_SYNC_SECTIONS', 
                 sections,
                 slug
             }, '*');
+            hasSyncedToParent.current = true;
         }
 
         const handleMessage = (event: MessageEvent) => {

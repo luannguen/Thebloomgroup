@@ -137,6 +137,13 @@ export const registerAllBlocks = () => {
         { label: 'Đổ bóng', value: 'elevated' },
         { label: 'Viền', value: 'bordered' },
         { label: 'Phẳng', value: 'flat' }
+      ]},
+      { id: 'layout', label: 'Bố cục ảnh', type: 'select', options: [
+        { label: 'Ảnh bên Trái', value: 'image-left' },
+        { label: 'Ảnh bên Phải', value: 'image-right' },
+        { label: 'Ảnh trên Đầu', value: 'image-top' },
+        { label: 'Ảnh dưới Cùng', value: 'image-bottom' },
+        { label: 'Ảnh giữa Tiêu đề & Mô tả', value: 'image-middle' }
       ]}
     ]
   });

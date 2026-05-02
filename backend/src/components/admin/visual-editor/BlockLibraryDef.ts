@@ -66,6 +66,13 @@ export const BLOCK_LIBRARY = [
             { id: 'title', label: 'Tiêu đề lưới card', type: 'textarea' },
             { id: 'image_url', label: 'Ảnh mặc định', type: 'image' },
             { id: 'columns', label: 'Số cột hiển thị', type: 'number' },
+            { id: 'layout', label: 'Bố cục ảnh', type: 'select', options: [
+                { label: 'Ảnh bên Trái', value: 'image-left' },
+                { label: 'Ảnh bên Phải', value: 'image-right' },
+                { label: 'Ảnh trên Đầu', value: 'image-top' },
+                { label: 'Ảnh dưới Cùng', value: 'image-bottom' },
+                { label: 'Ảnh giữa Tiêu đề & Mô tả', value: 'image-middle' }
+            ]},
             { id: 'iconSize', label: 'Kích thước Icon/Ảnh (px)', type: 'number' },
             { id: 'iconSpacing', label: 'Khoảng cách nội dung (px)', type: 'number' },
             { id: 'items', 
@@ -74,7 +81,15 @@ export const BLOCK_LIBRARY = [
                 itemSchema: [ 
                     { id: 'image', label: 'Ảnh/Icon', type: 'image' }, 
                     { id: 'title', label: 'Tiêu đề', type: 'textarea' }, 
-                    { id: 'description', label: 'Mô tả', type: 'textarea' } 
+                    { id: 'description', label: 'Mô tả', type: 'textarea' },
+                    { id: 'layout', label: 'Vị trí ảnh', type: 'select', options: [
+                        { label: 'Mặc định (Theo block)', value: 'default' },
+                        { label: 'Ảnh bên Trái', value: 'image-left' },
+                        { label: 'Ảnh bên Phải', value: 'image-right' },
+                        { label: 'Ảnh trên Đầu', value: 'image-top' },
+                        { label: 'Ảnh dưới Cùng', value: 'image-bottom' },
+                        { label: 'Ảnh giữa Tiêu đề & Mô tả', value: 'image-middle' }
+                    ]}
                 ] 
             }
         ]

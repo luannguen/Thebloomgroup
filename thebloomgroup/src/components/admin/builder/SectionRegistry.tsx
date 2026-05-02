@@ -22,6 +22,7 @@ export interface SectionField {
   placeholder?: string;
   helperText?: string;
   itemSchema?: SectionField[]; // For list types
+  default?: any;
 }
 
 export interface BlockDefinition {
