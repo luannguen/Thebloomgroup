@@ -113,9 +113,18 @@ export const BLOCK_LIBRARY = [
                 { label: 'Ảnh bên Trái', value: 'image-left' },
                 { label: 'Ảnh bên Phải', value: 'image-right' },
                 { label: 'Ảnh trên Đầu', value: 'image-top' },
-                { label: 'Ảnh dưới Cùng', value: 'image-bottom' }
+                { label: 'Ảnh dưới Cùng', value: 'image-bottom' },
+                { label: 'Ảnh giữa Tiêu đề & Mô tả', value: 'image-middle' }
             ]},
-            { id: 'image', label: 'Hình ảnh', type: 'image' },
+            { id: 'image', label: 'Hình ảnh (Chính)', type: 'image' },
+            { 
+                id: 'images', 
+                label: 'Danh sách hình ảnh (Tối đa 4)', 
+                type: 'list', 
+                itemSchema: [
+                    { id: 'url', label: 'Hình ảnh', type: 'image' }
+                ]
+            },
             { id: 'imageWidth', label: 'Độ rộng ảnh (%)', type: 'number' },
             { id: 'iconSize', label: 'Kích thước ảnh thực tế (px)', type: 'number' },
             { id: 'description', label: 'Mô tả', type: 'textarea' }

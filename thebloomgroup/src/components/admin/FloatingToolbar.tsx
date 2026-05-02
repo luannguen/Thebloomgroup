@@ -67,11 +67,21 @@ export const FloatingToolbar: React.FC<FloatingToolbarProps> = ({
         <div className="flex items-center gap-1">
           <span className="text-[10px] font-bold text-slate-400 uppercase tracking-tighter">Pos</span>
           <button 
-            onClick={(e) => { e.stopPropagation(); onIconPositionChange(iconPosition === 'top' ? 'left' : 'top'); }}
-            className={`p-1.5 rounded-lg transition-all ${iconPosition === 'top' ? 'bg-primary text-white shadow-md' : 'hover:bg-slate-100 text-slate-600'}`}
-            title="Chuyển vị trí Icon"
+            onClick={(e) => { 
+              e.stopPropagation(); 
+              const isMediaLayout = iconPosition?.startsWith('image-');
+              const positions = isMediaLayout 
+                ? ['image-left', 'image-right', 'image-top', 'image-bottom', 'image-middle']
+                : ['top', 'left'];
+              
+              const currentIndex = positions.indexOf(iconPosition || (isMediaLayout ? 'image-left' : 'top'));
+              const nextIndex = (currentIndex + 1) % positions.length;
+              onIconPositionChange(positions[nextIndex]);
+            }}
+            className="p-1.5 rounded-lg transition-all bg-primary text-white shadow-md hover:bg-primary/90"
+            title="Chuyển đổi bố cục"
           >
-            {iconPosition === 'top' ? <ArrowUp size={14} /> : <ArrowLeft size={14} />}
+            <Layout size={14} />
           </button>
         </div>
       )}
