@@ -94,21 +94,21 @@ export const HomeV2PartnershipBlock = ({
   };
 
   return (
-    <section className="py-24 bg-white relative overflow-hidden" data-section-id={sectionId}>
+    <section className="py-16 lg:py-24 bg-white relative overflow-hidden" data-section-id={sectionId}>
       <div className="container mx-auto px-4">
         <div 
-          className={`flex gap-16 items-start ${isVertical ? "flex-col" : "lg:flex-row"} ${!isVertical && isImageLeft ? "lg:flex-row-reverse" : ""}`}
+          className={`flex flex-col gap-12 lg:gap-16 items-start ${isVertical ? "" : "lg:flex-row"} ${!isVertical && isImageLeft ? "lg:flex-row-reverse" : ""}`}
         >
           {/* Nội dung bên trái */}
           <motion.div
-            initial={{ opacity: 0, x: isImageLeft ? 30 : -30 }}
+            initial={{ opacity: 0, x: isVertical ? 0 : (isImageLeft ? 30 : -30) }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="z-10"
-            style={contentStyle}
+            className="z-10 w-full"
+            style={typeof window !== 'undefined' && window.innerWidth >= 1024 ? contentStyle : { width: '100%' }}
           >
-            <div className="relative z-20 space-y-8 md:space-y-12 pr-0 md:pr-12">
+            <div className="relative z-20 space-y-8 md:space-y-12 lg:pr-12">
               <div className="space-y-4">
                 <EditableElement
                   fieldKey="subtitle"
@@ -125,7 +125,7 @@ export const HomeV2PartnershipBlock = ({
                     fieldKey="title"
                     sectionId={sectionId}
                     defaultContent={dTitle}
-                    className="text-4xl md:text-5xl font-black text-slate-900 leading-tight inline-block"
+                    className="text-3xl md:text-4xl lg:text-5xl font-black text-slate-900 leading-tight inline-block"
                   />
                 </div>
 
@@ -210,23 +210,23 @@ export const HomeV2PartnershipBlock = ({
               whileInView={{ opacity: 1, x: 0, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className={`${isVertical ? 'w-full' : 'lg:sticky lg:top-32'} relative z-20 ${layout === 'image-top' ? 'order-first mb-12' : (layout === 'image-bottom' ? 'order-last mt-12' : '')}`}
-              style={imageColStyle}
+              className={`${isVertical ? 'w-full' : 'lg:sticky lg:top-32'} relative z-20 w-full ${layout === 'image-top' ? 'order-first mb-8 lg:mb-12' : (layout === 'image-bottom' ? 'order-last mt-8 lg:mt-12' : '')}`}
+              style={typeof window !== 'undefined' && window.innerWidth >= 1024 ? imageColStyle : { width: '100%' }}
             >
               {/* Main Image Container - Sharp Corners & Heavy Shadow */}
-              <div className={`relative ${displayImages.length > 1 ? 'aspect-auto' : 'aspect-[4/3]'} rounded-none overflow-hidden shadow-[30px_30px_60px_-15px_rgba(0,0,0,0.4)] border-b-[12px] border-primary group`}>
+              <div className={`relative ${displayImages.length > 1 ? 'aspect-auto' : 'aspect-[4/3]'} rounded-none overflow-hidden shadow-[20px_20px_40px_-10px_rgba(0,0,0,0.3)] lg:shadow-[30px_30px_60px_-15px_rgba(0,0,0,0.4)] border-b-[8px] lg:border-b-[12px] border-primary group`}>
                 {renderMediaGrid()}
               </div>
-
-              {/* Stats Badge - High Contrast & Elevated */}
-              <div className="absolute -bottom-10 -left-6 md:-left-12 p-8 md:p-10 bg-white shadow-[0_40px_100px_rgba(0,0,0,0.35)] border-l-[10px] border-primary max-w-[320px] z-[60] transform hover:-translate-y-2 transition-all duration-500">
+              
+              {/* Stats Badge - Optimized for Mobile */}
+              <div className="absolute -bottom-6 -left-2 md:-bottom-10 md:-left-12 p-6 md:p-10 bg-white shadow-[0_20px_50px_rgba(0,0,0,0.2)] lg:shadow-[0_40px_100px_rgba(0,0,0,0.35)] border-l-[6px] lg:border-l-[10px] border-primary max-w-[240px] md:max-w-[320px] z-[60] transform hover:-translate-y-2 transition-all duration-500">
                 <div className="relative mb-3">
                   <EditableElement
                     type="text"
                     fieldKey="exp_value"
                     sectionId={sectionId}
                     defaultContent={dExpValue}
-                    className="text-6xl font-black text-primary block"
+                    className="text-4xl md:text-6xl font-black text-primary block"
                   >
                     {dExpValue}
                   </EditableElement>
@@ -310,34 +310,48 @@ export const HomeV2SectorsBlock = ({
                 </EditableElement>
                 
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent p-8 flex flex-col justify-end pointer-events-none">
-                  <div className="w-12 h-12 rounded-2xl bg-primary/20 backdrop-blur-md flex items-center justify-center mb-6 text-primary group-hover:bg-primary group-hover:text-white transition-all pointer-events-auto">
-                    <IconComponent className="w-6 h-6" />
-                  </div>
-                  
-                  <div className="pointer-events-auto">
-                    <EditableElement 
-                      tagName="h3" 
-                      fieldKey={`items.${i}.title`} 
-                      sectionId={sectionId} 
-                      defaultContent={sector.title} 
-                      className="text-2xl font-bold text-white mb-3 block" 
-                    />
+                  <div className="flex flex-col items-start w-full">
+                    {/* Icon Container with fixed height and alignment */}
+                    <div className="h-12 mb-6">
+                      <div className="w-12 h-12 rounded-2xl bg-primary/20 backdrop-blur-md flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all pointer-events-auto">
+                        <IconComponent className="w-6 h-6" />
+                      </div>
+                    </div>
                     
-                    <EditableElement 
-                      tagName="p" 
-                      fieldKey={`items.${i}.desc`} 
-                      sectionId={sectionId} 
-                      defaultContent={sector.desc} 
-                      className="text-slate-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 block" 
-                    />
-                  </div>
+                    <div className="pointer-events-auto w-full">
+                      {/* Title Container with fixed height and bottom alignment */}
+                      <div className="h-20 flex items-end mb-3">
+                        <EditableElement 
+                          tagName="h3" 
+                          fieldKey={`items.${i}.title`} 
+                          sectionId={sectionId} 
+                          defaultContent={sector.title} 
+                          className="text-2xl font-bold text-white block leading-tight" 
+                        />
+                      </div>
+                      
+                      {/* Description Container with fixed height */}
+                      <div className="h-12 overflow-hidden">
+                        <EditableElement 
+                          tagName="p" 
+                          fieldKey={`items.${i}.desc`} 
+                          sectionId={sectionId} 
+                          defaultContent={sector.desc} 
+                          className="text-slate-300 text-xs md:text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 block leading-relaxed" 
+                        />
+                      </div>
+                    </div>
 
-                  <Link 
-                    to={sector.link || "/products"} 
-                    className="mt-6 flex items-center text-primary text-xs font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all transform translate-x-[-10px] group-hover:translate-x-0 pointer-events-auto"
-                  >
-                    {t('view_detail', 'Xem chi tiết')} <ArrowRight className="ml-2 w-4 h-4" />
-                  </Link>
+                    {/* Link Container with fixed height to prevent pushing */}
+                    <div className="h-8 mt-4">
+                      <Link 
+                        to={sector.link || "/products"} 
+                        className="flex items-center text-primary text-xs font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all transform translate-x-[-10px] group-hover:translate-x-0 pointer-events-auto"
+                      >
+                        {t('view_detail', 'Xem chi tiết')} <ArrowRight className="ml-2 w-4 h-4" />
+                      </Link>
+                    </div>
+                  </div>
                 </div>
               </motion.div>
             );
