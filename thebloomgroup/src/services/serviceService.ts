@@ -13,10 +13,12 @@ export interface Service {
     id: string;
     slug: string;
     title: string;
-    description: string;
-    content: string;
-    icon: string;
+    description?: string;
+    content?: string;
+    icon?: string;
     image_url?: string;
+    image_width?: number;
+    image_position?: string;
     category_id?: string;
     is_active: boolean;
     created_at: string;

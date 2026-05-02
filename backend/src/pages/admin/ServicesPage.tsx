@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Plus, Pencil, Trash2, Search, MoreHorizontal } from "lucide-react";
+import { Plus, Pencil, Trash2, Search, MoreHorizontal, Pin, Maximize2, Minimize2, Monitor } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -37,6 +37,8 @@ export default function ServicesPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingService, setEditingService] = useState<Service | null>(null);
+  const [modalSize, setModalSize] = useState<'normal' | 'large' | 'full'>('normal');
+  const [isPinned, setIsPinned] = useState(false);
   const { toast } = useToast();
 
   const fetchServices = async () => {
@@ -89,6 +91,17 @@ export default function ServicesPage() {
     fetchServices();
   };
 
+  const getModalClassName = () => {
+    switch (modalSize) {
+      case 'full': 
+        return "max-w-none w-screen h-screen m-0 p-0 rounded-none top-0 left-0 translate-x-0 translate-y-0 border-none z-[100] overflow-y-auto";
+      case 'large': 
+        return "max-w-7xl w-[95vw] max-h-[95vh] overflow-y-auto transition-all duration-300 shadow-2xl border-slate-200 sm:max-w-7xl";
+      default: 
+        return "max-w-4xl w-[90vw] max-h-[90vh] overflow-y-auto transition-all duration-300 shadow-xl border-slate-200 sm:max-w-4xl";
+    }
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -98,24 +111,77 @@ export default function ServicesPage() {
             Thêm, sửa, xóa các dịch vụ hiển thị trên website.
           </p>
         </div>
-        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <Dialog open={isDialogOpen} onOpenChange={(open) => {
+          if (!open && isPinned) return;
+          setIsDialogOpen(open);
+        }}>
           <DialogTrigger asChild>
             <Button onClick={handleCreate}>
               <Plus className="mr-2 h-4 w-4" /> Thêm dịch vụ
             </Button>
           </DialogTrigger>
-          <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
-            <DialogHeader>
-              <DialogTitle>{editingService ? "Chỉnh sửa dịch vụ" : "Thêm dịch vụ mới"}</DialogTitle>
+          <DialogContent 
+            className={getModalClassName()}
+            onPointerDownOutside={(e) => {
+              if (isPinned) e.preventDefault();
+            }}
+            onEscapeKeyDown={(e) => {
+              if (isPinned) e.preventDefault();
+            }}
+          >
+            <DialogHeader className="relative pr-24">
+              <DialogTitle className="flex items-center gap-2">
+                {editingService ? (
+                  <Pencil className="h-5 w-5 text-primary" />
+                ) : (
+                  <Plus className="h-5 w-5 text-primary" />
+                )}
+                {editingService ? "Chỉnh sửa dịch vụ" : "Thêm dịch vụ mới"}
+              </DialogTitle>
               <DialogDescription>
-                Nhập thông tin chi tiết cho dịch vụ.
+                Nhập thông tin chi tiết cho dịch vụ của bạn.
               </DialogDescription>
+              
+              {/* Modal Controls */}
+              <div className="absolute right-8 top-0 flex items-center gap-1 bg-slate-100/50 p-1 rounded-lg border border-slate-200">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className={`h-8 w-8 rounded-md transition-colors ${isPinned ? 'bg-primary text-white hover:bg-primary/90' : 'hover:bg-slate-200'}`}
+                  onClick={() => setIsPinned(!isPinned)}
+                  title={isPinned ? "Bỏ ghim cửa sổ" : "Ghim cửa sổ (Không đóng khi click ngoài)"}
+                >
+                  <Pin className={`h-4 w-4 ${isPinned ? 'fill-current' : ''}`} />
+                </Button>
+                <div className="w-[1px] h-4 bg-slate-300 mx-1" />
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-8 w-8 rounded-md hover:bg-slate-200"
+                  onClick={() => setModalSize(modalSize === 'normal' ? 'large' : 'normal')}
+                  disabled={modalSize === 'full'}
+                  title="Phóng to / Thu nhỏ"
+                >
+                  <Maximize2 className="h-4 w-4" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className={`h-8 w-8 rounded-md transition-colors ${modalSize === 'full' ? 'bg-orange-500 text-white hover:bg-orange-600' : 'hover:bg-slate-200'}`}
+                  onClick={() => setModalSize(modalSize === 'full' ? 'normal' : 'full')}
+                  title="Toàn màn hình"
+                >
+                  {modalSize === 'full' ? <Minimize2 className="h-4 w-4" /> : <Monitor className="h-4 w-4" />}
+                </Button>
+              </div>
             </DialogHeader>
-            <ServiceForm
-              initialData={editingService}
-              onSuccess={handleSuccess}
-              onCancel={() => setIsDialogOpen(false)}
-            />
+            <div className={`mt-4 ${modalSize === 'full' ? 'px-8 pb-12' : ''}`}>
+              <ServiceForm
+                initialData={editingService}
+                onSuccess={handleSuccess}
+                onCancel={() => setIsDialogOpen(false)}
+              />
+            </div>
           </DialogContent>
         </Dialog>
       </div>
@@ -137,6 +203,7 @@ export default function ServicesPage() {
           <TableHeader>
             <TableRow>
               <TableHead>Tiêu đề</TableHead>
+              <TableHead>Danh mục</TableHead>
               <TableHead>Slug</TableHead>
               <TableHead>Trạng thái</TableHead>
               <TableHead>Ngày tạo</TableHead>
@@ -160,6 +227,11 @@ export default function ServicesPage() {
               filteredServices.map((service) => (
                 <TableRow key={service.id}>
                   <TableCell className="font-medium">{service.title}</TableCell>
+                  <TableCell>
+                    <Badge variant="outline" className="font-normal">
+                      {service.service_categories?.name || "Không có"}
+                    </Badge>
+                  </TableCell>
                   <TableCell>{service.slug}</TableCell>
                   <TableCell>
                     {service.is_active ? (

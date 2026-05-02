@@ -123,8 +123,20 @@ export const ServiceGridBlock = ({
                 <Card key={service.id} className="group transition-all hover:shadow-xl hover:-translate-y-1 flex flex-col border-none shadow-sm overflow-hidden">
                   <div className="h-2 w-0 bg-primary group-hover:w-full transition-all duration-300" />
                   <CardHeader className="pb-4">
-                    <div className="bg-primary/5 w-14 h-14 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
-                      <Icon className="h-7 w-7" />
+                    <div 
+                      className="bg-primary/5 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-primary group-hover:text-white transition-colors duration-300"
+                      style={{ 
+                        width: service.icon_size ? `${service.icon_size + 16}px` : '56px',
+                        height: service.icon_size ? `${service.icon_size + 16}px` : '56px'
+                      }}
+                    >
+                      <Icon 
+                        className="h-7 w-7" 
+                        style={{ 
+                          width: service.icon_size ? `${service.icon_size}px` : '28px',
+                          height: service.icon_size ? `${service.icon_size}px` : '28px'
+                        }}
+                      />
                     </div>
                     <CardTitle className="text-xl group-hover:text-primary transition-colors">{service.title}</CardTitle>
                   </CardHeader>

@@ -20,6 +20,9 @@ export interface Service {
     content?: string;
     icon?: string;
     image_url?: string;
+    image_width?: number;
+    icon_size?: number;
+    image_position?: string;
     category_id?: string;
     is_active: boolean;
     created_at: string;
@@ -53,7 +56,7 @@ export const serviceService = {
         try {
             const { data, error } = await supabase
                 .from('services')
-                .select('*, service_categories(name)')
+                .select('*, service_categories(id, name)')
                 .order('created_at', { ascending: false });
 
             if (error) return failure(error.message, ErrorCodes.DB_ERROR);
@@ -67,7 +70,7 @@ export const serviceService = {
         try {
             const { data, error } = await supabase
                 .from('services')
-                .select('*, service_categories(name)')
+                .select('*, service_categories(id, name)')
                 .eq('id', id)
                 .single();
 

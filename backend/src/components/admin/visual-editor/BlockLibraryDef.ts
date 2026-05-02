@@ -181,6 +181,31 @@ export const BLOCK_LIBRARY = [
         ]
     },
     {
+        type: 'service_grid',
+        name: 'Dịch vụ: Danh sách & Lọc',
+        icon: '🔍',
+        category: 'Industry & Tech',
+        fields: [
+            { id: 'title', label: 'Tiêu đề', type: 'textarea' },
+            { id: 'description', label: 'Mô tả', type: 'textarea' }
+        ]
+    },
+    {
+        type: 'cta_section',
+        name: 'Chung: CTA Section',
+        icon: '📣',
+        category: 'Basic',
+        fields: [
+            { id: 'title', label: 'Tiêu đề', type: 'textarea' },
+            { id: 'description', label: 'Mô tả', type: 'textarea' },
+            { id: 'badge', label: 'Badge (Nhãn)', type: 'text' },
+            { id: 'primaryButtonLabel', label: 'Nút chính', type: 'text' },
+            { id: 'primaryButtonLink', label: 'Link nút chính', type: 'text' },
+            { id: 'secondaryButtonLabel', label: 'Nút phụ', type: 'text' },
+            { id: 'secondaryButtonLink', label: 'Link nút phụ', type: 'text' }
+        ]
+    },
+    {
         type: 'cold_storage_catalog',
         name: 'Phân loại kho lạnh',
         icon: '🏢',
@@ -580,6 +605,14 @@ export const BLOCK_LIBRARY = [
             { id: 'subtitle', label: 'Tiêu đề phụ', type: 'textarea', default: 'Thuong Thien Technologies (TTT)' },
             { id: 'description', label: 'Mô tả', type: 'textarea', default: 'Chúng tôi tự hào là đại diện chính thức và đối tác chiến lược của Solar Turbines tại Việt Nam, cung cấp các giải pháp năng lượng và hệ thống nén khí tiên tiến nhất.' },
             { id: 'partnerImage', label: 'Hình ảnh chính', type: 'image', default: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=800' },
+            { 
+                id: 'images', 
+                label: 'Danh sách hình ảnh (Tối đa 4)', 
+                type: 'list', 
+                itemSchema: [
+                    { id: 'url', label: 'Hình ảnh', type: 'image' }
+                ]
+            },
             { id: 'logo1', label: 'Logo đối tác 1', type: 'image', default: 'https://www.solar-turbines.com/etc.clientlibs/solar-turbines/clientlibs/clientlib-site/resources/images/cat-logo.png' },
             { id: 'logo2', label: 'Logo đối tác 2', type: 'image', default: 'https://www.solar-turbines.com/etc.clientlibs/solar-turbines/clientlibs/clientlib-site/resources/images/solar-logo.png' },
             { id: 'logo3', label: 'Logo đối tác 3', type: 'image', default: '/assets/partners/ttt-logo.svg' },

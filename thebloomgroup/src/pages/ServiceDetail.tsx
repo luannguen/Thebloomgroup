@@ -73,7 +73,11 @@ export default function ServiceDetail() {
                 <img
                     src={service.image_url || "/assets/images/service-overview.jpg"}
                     alt={service.title}
-                    className="w-full h-full object-cover opacity-60"
+                    className="h-full object-cover opacity-60 mx-auto transition-all duration-700"
+                    style={{ 
+                        width: service.image_width ? `${service.image_width}%` : '100%',
+                        objectPosition: service.image_position || 'center'
+                    }}
                     onError={(e) => {
                         e.currentTarget.src = "/assets/images/service-overview.jpg";
                     }}
