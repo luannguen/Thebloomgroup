@@ -32,17 +32,18 @@ import { RichTextEditorWidget } from "../visual-editor/RichTextEditorWidget";
 import { ImagePickerModal } from "../visual-editor/ImagePickerModal";
 
 // Định nghĩa Schema rõ ràng và nhất quán
+// Định nghĩa Schema nới lỏng hơn để tránh lỗi validation ẩn
 const serviceSchema = z.object({
-    title: z.string().min(3, "Tiêu đề quá ngắn"),
-    slug: z.string().min(3, "Slug quá ngắn"),
-    description: z.string().default(""),
-    content: z.string().default(""),
-    icon: z.string().default(""),
-    image_url: z.string().default(""),
-    image_width: z.number().default(100),
-    icon_size: z.number().default(48),
-    image_position: z.string().default("center"),
-    category_id: z.string().default(""),
+    title: z.string().min(2, "Tiêu đề quá ngắn"),
+    slug: z.string().min(2, "Slug quá ngắn"),
+    description: z.string().optional().or(z.literal("")),
+    content: z.string().optional().or(z.literal("")),
+    icon: z.string().optional().or(z.literal("")),
+    image_url: z.string().optional().or(z.literal("")),
+    image_width: z.coerce.number().int().default(100),
+    icon_size: z.coerce.number().int().default(48),
+    image_position: z.string().optional().default("center"),
+    category_id: z.string().optional().nullable().or(z.literal("")),
     is_active: z.boolean().default(true),
 });
 
@@ -59,7 +60,6 @@ export default function ServiceForm({ initialData, onSuccess, onCancel }: Servic
     const [loading, setLoading] = useState(false);
     const [isImagePickerOpen, setIsImagePickerOpen] = useState(false);
 
-    // Bỏ Generic <ServiceFormValues> để tránh lỗi so khớp kiểu của Resolver
     const form = useForm({
         resolver: zodResolver(serviceSchema),
         defaultValues: {
@@ -69,9 +69,9 @@ export default function ServiceForm({ initialData, onSuccess, onCancel }: Servic
             content: initialData?.content || "",
             icon: initialData?.icon || "",
             image_url: initialData?.image_url || "",
-            image_width: (initialData as any)?.image_width || 100,
-            icon_size: (initialData as any)?.icon_size || 48,
-            image_position: (initialData as any)?.image_position || "center",
+            image_width: Number(initialData?.image_width || 100),
+            icon_size: Number(initialData?.icon_size || 48),
+            image_position: initialData?.image_position || "center",
             category_id: initialData?.category_id ? String(initialData.category_id) : "",
             is_active: initialData?.is_active ?? true,
         },
@@ -87,9 +87,9 @@ export default function ServiceForm({ initialData, onSuccess, onCancel }: Servic
                 content: initialData.content || "",
                 icon: initialData.icon || "",
                 image_url: initialData.image_url || "",
-                image_width: (initialData as any).image_width || 100,
-                icon_size: (initialData as any).icon_size || 48,
-                image_position: (initialData as any).image_position || "center",
+                image_width: Number(initialData.image_width || 100),
+                icon_size: Number(initialData.icon_size || 48),
+                image_position: initialData.image_position || "center",
                 category_id: initialData.category_id ? String(initialData.category_id) : "",
                 is_active: initialData.is_active ?? true,
             });
@@ -106,36 +106,71 @@ export default function ServiceForm({ initialData, onSuccess, onCancel }: Servic
         fetchCategories();
     }, []);
 
-    // Sử dụng z.infer trực tiếp để đồng bộ kiểu dữ liệu
-    const onSubmit = async (values: z.infer<typeof serviceSchema>) => {
+    const onSubmit = async (data: z.infer<typeof serviceSchema>) => {
+        console.log("🚀 Submit Start - Raw Data:", data);
         setLoading(true);
         try {
+            // Chỉ gửi những trường mà Database chắc chắn có
+            // Tạm thời bỏ: image_width, icon_size, image_position vì DB chưa có cột này
+            const payload: any = {
+                title: data.title,
+                slug: data.slug,
+                description: data.description || null,
+                content: data.content || null,
+                icon: data.icon || "FileCheck",
+                image_url: data.image_url || null,
+                is_active: !!data.is_active,
+            };
+            
+            // Xử lý category_id
+            if (!data.category_id || data.category_id === "" || data.category_id === "no_category" || data.category_id === "undefined") {
+                payload.category_id = null;
+            } else {
+                payload.category_id = data.category_id;
+            }
+
+            console.log("📤 Sending SAFE Payload to Supabase:", payload);
+
             const result = initialData
-                ? await serviceService.updateService(initialData.id, values as any)
-                : await serviceService.createService(values as any);
+                ? await serviceService.updateService(initialData.id, payload)
+                : await serviceService.createService(payload);
 
             if (result.success) {
+                console.log("✅ Save Success:", result.data);
                 toast({
-                    title: initialData ? t('common.updated_success', 'Cập nhật thành công') : t('common.created_success', 'Tạo mới thành công'),
+                    title: initialData ? "Đã cập nhật dịch vụ" : "Đã tạo dịch vụ mới",
+                    description: "Dữ liệu đã được lưu thành công vào hệ thống.",
                     variant: "default",
                 });
                 onSuccess();
             } else {
+                console.error("❌ API Error:", result.error);
                 toast({
-                    title: t('common.error', 'Lỗi'),
-                    description: result.error,
+                    title: "Lỗi lưu dữ liệu",
+                    description: String(result.error),
                     variant: "destructive",
                 });
             }
         } catch (error: any) {
+            console.error("💥 Crash Error:", error);
             toast({
-                title: t('common.error', 'Lỗi'),
+                title: "Lỗi hệ thống",
                 description: error.message,
                 variant: "destructive",
             });
         } finally {
             setLoading(false);
         }
+    };
+
+    const onValidationError = (errors: any) => {
+        console.error("❌ Validation Errors:", errors);
+        const errorFields = Object.keys(errors);
+        toast({
+            title: "Dữ liệu chưa hợp lệ",
+            description: `Vui lòng kiểm tra các trường: ${errorFields.join(", ")}`,
+            variant: "destructive",
+        });
     };
 
     const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -148,7 +183,10 @@ export default function ServiceForm({ initialData, onSuccess, onCancel }: Servic
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 w-full overflow-x-hidden p-1">
+            <form 
+                onSubmit={form.handleSubmit(onSubmit, onValidationError)} 
+                className="space-y-6 w-full overflow-x-hidden p-1"
+            >
                 <Tabs defaultValue="general" className="w-full">
                     <TabsList className="grid w-full grid-cols-3 mb-6 bg-slate-100 p-1 rounded-xl sticky top-0 z-10 shadow-sm">
                         <TabsTrigger value="general" className="rounded-lg data-[state=active]:bg-white data-[state=active]:shadow-sm py-2">
@@ -213,7 +251,7 @@ export default function ServiceForm({ initialData, onSuccess, onCancel }: Servic
                                     <FormLabel className="text-xs font-bold uppercase tracking-wider text-slate-500">Danh mục dịch vụ</FormLabel>
                                     <Select 
                                         onValueChange={field.onChange} 
-                                        value={field.value}
+                                        value={field.value || ""}
                                     >
                                         <FormControl>
                                             <SelectTrigger className="h-11 rounded-xl border-slate-200 shadow-sm w-full">
@@ -359,14 +397,14 @@ export default function ServiceForm({ initialData, onSuccess, onCancel }: Servic
                                         <FormItem className="space-y-4">
                                             <div className="flex justify-between">
                                                 <FormLabel className="text-xs font-medium text-slate-600">Độ rộng ảnh (%)</FormLabel>
-                                                <span className="text-xs font-bold text-primary">{field.value}%</span>
+                                                <span className="text-xs font-bold text-primary">{Number(field.value)}%</span>
                                             </div>
                                             <FormControl>
                                                 <Slider 
                                                     min={10} 
                                                     max={100} 
                                                     step={1} 
-                                                    value={[field.value || 100]} 
+                                                    value={[Number(field.value) || 100]} 
                                                     onValueChange={(vals) => field.onChange(vals[0])}
                                                     className="py-4"
                                                 />
@@ -382,14 +420,14 @@ export default function ServiceForm({ initialData, onSuccess, onCancel }: Servic
                                         <FormItem className="space-y-4">
                                             <div className="flex justify-between">
                                                 <FormLabel className="text-xs font-medium text-slate-600">Kích thước Icon (px)</FormLabel>
-                                                <span className="text-xs font-bold text-primary">{field.value}px</span>
+                                                <span className="text-xs font-bold text-primary">{Number(field.value)}px</span>
                                             </div>
                                             <FormControl>
                                                 <Slider 
                                                     min={16} 
                                                     max={120} 
                                                     step={2} 
-                                                    value={[field.value || 48]} 
+                                                    value={[Number(field.value) || 48]} 
                                                     onValueChange={(vals) => field.onChange(vals[0])}
                                                     className="py-4"
                                                 />

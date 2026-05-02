@@ -18,6 +18,7 @@ export interface Service {
     icon?: string;
     image_url?: string;
     image_width?: number;
+    icon_size?: number;
     image_position?: string;
     category_id?: string;
     is_active: boolean;

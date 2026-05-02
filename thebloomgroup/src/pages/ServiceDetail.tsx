@@ -90,7 +90,10 @@ export default function ServiceDetail() {
                             Tất cả dịch vụ
                         </Link>
                         <h1 className="text-3xl md:text-5xl font-bold mb-4">{service.title}</h1>
-                        <p className="text-lg md:text-xl text-slate-200 line-clamp-2 max-w-2xl">{service.description}</p>
+                        <div 
+                            className="text-lg md:text-xl text-slate-200 max-w-2xl prose prose-invert prose-p:leading-relaxed"
+                            dangerouslySetInnerHTML={{ __html: service.description || "" }}
+                        />
                     </div>
                 </div>
             </div>

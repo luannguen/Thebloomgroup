@@ -68,6 +68,12 @@ export const ServiceGridBlock = ({
   const title = propTitle || t('service_cat_title');
   const description = propDescription || t('service_cat_desc', "Chúng tôi cung cấp đầy đủ các dịch vụ điện lạnh công nghiệp và dân dụng, từ tư vấn thiết kế đến lắp đặt, bảo trì và sửa chữa.");
 
+  // Hàm hỗ trợ loại bỏ thẻ HTML để hiển thị văn bản thuần túy
+  const stripHtml = (html: string) => {
+    if (!html) return "";
+    return html.replace(/<[^>]*>?/gm, '');
+  };
+
   return (
     <section className="py-20 bg-muted/30">
       <div className="container-custom">
@@ -119,6 +125,8 @@ export const ServiceGridBlock = ({
           ) : filteredServices.length > 0 ? (
             filteredServices.map((service) => {
               const Icon = getIcon(service.icon);
+              const cleanDescription = stripHtml(service.description || "");
+              
               return (
                 <Card key={service.id} className="group transition-all hover:shadow-xl hover:-translate-y-1 flex flex-col border-none shadow-sm overflow-hidden">
                   <div className="h-2 w-0 bg-primary group-hover:w-full transition-all duration-300" />
@@ -126,23 +134,23 @@ export const ServiceGridBlock = ({
                     <div 
                       className="bg-primary/5 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-primary group-hover:text-white transition-colors duration-300"
                       style={{ 
-                        width: service.icon_size ? `${service.icon_size + 16}px` : '56px',
-                        height: service.icon_size ? `${service.icon_size + 16}px` : '56px'
+                        width: service.icon_size ? `${Number(service.icon_size) + 16}px` : '56px',
+                        height: service.icon_size ? `${Number(service.icon_size) + 16}px` : '56px'
                       }}
                     >
                       <Icon 
                         className="h-7 w-7" 
                         style={{ 
-                          width: service.icon_size ? `${service.icon_size}px` : '28px',
-                          height: service.icon_size ? `${service.icon_size}px` : '28px'
+                          width: service.icon_size ? `${Number(service.icon_size)}px` : '28px',
+                          height: service.icon_size ? `${Number(service.icon_size)}px` : '28px'
                         }}
                       />
                     </div>
                     <CardTitle className="text-xl group-hover:text-primary transition-colors">{service.title}</CardTitle>
                   </CardHeader>
                   <CardContent className="flex-grow pt-0">
-                    <p className="text-muted-foreground leading-relaxed">
-                      {service.description || "Xem chi tiết để biết thêm thông tin."}
+                    <p className="text-muted-foreground leading-relaxed line-clamp-3">
+                      {cleanDescription || "Xem chi tiết để biết thêm thông tin."}
                     </p>
                   </CardContent>
                   <CardFooter className="pt-0 border-t border-gray-50 flex justify-between items-center bg-gray-50/30">
