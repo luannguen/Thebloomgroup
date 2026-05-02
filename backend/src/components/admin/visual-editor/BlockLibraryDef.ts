@@ -583,8 +583,15 @@ export const BLOCK_LIBRARY = [
             { id: 'logo1', label: 'Logo đối tác 1', type: 'image', default: 'https://www.solar-turbines.com/etc.clientlibs/solar-turbines/clientlibs/clientlib-site/resources/images/cat-logo.png' },
             { id: 'logo2', label: 'Logo đối tác 2', type: 'image', default: 'https://www.solar-turbines.com/etc.clientlibs/solar-turbines/clientlibs/clientlib-site/resources/images/solar-logo.png' },
             { id: 'logo3', label: 'Logo đối tác 3', type: 'image', default: '/assets/partners/ttt-logo.svg' },
-            { id: 'iconSize', label: 'Kích thước Logo (px)', type: 'number' },
-            { id: 'partnerImageWidth', label: 'Độ rộng ảnh chính (px)', type: 'number' },
+            { id: 'layout', label: 'Bố cục', type: 'select', options: [
+                { label: 'Ảnh bên Trái', value: 'image-left' },
+                { label: 'Ảnh bên Phải', value: 'image-right' },
+                { label: 'Ảnh trên Đầu', value: 'image-top' },
+                { label: 'Ảnh dưới Cùng', value: 'image-bottom' },
+                { label: 'Ảnh giữa Tiêu đề & Mô tả', value: 'image-middle' }
+            ]},
+            { id: 'imageWidth', label: 'Tỉ lệ ảnh (%)', type: 'number', default: 50 },
+            { id: 'iconSize', label: 'Kích thước Logo (px)', type: 'number', default: 40 },
             { id: 'exp_value', label: 'Số năm kinh nghiệm', type: 'textarea', default: '20+' },
             { id: 'exp_text', label: 'Văn bản kinh nghiệm', type: 'textarea', default: 'Năm kinh nghiệm trong ngành công nghiệp nặng' }
         ]

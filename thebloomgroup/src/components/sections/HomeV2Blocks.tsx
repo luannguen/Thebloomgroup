@@ -15,6 +15,9 @@ export const HomeV2PartnershipBlock = ({
   subtitle,
   description,
   partnerImage,
+  images = [],
+  layout = 'image-right',
+  imageWidth = 50,
   logo1,
   logo2,
   logo3,
@@ -32,23 +35,78 @@ export const HomeV2PartnershipBlock = ({
   const dSubtitle = subtitle || t('home_v2_partnership_subtitle', "Thuong Thien Technologies (TTT)");
   const dDesc = description || t('home_v2_partnership_desc', "Chúng tôi tự hào là đại diện chính thức và đối tác chiến lược của Solar Turbines tại Việt Nam, cung cấp các giải pháp năng lượng và hệ thống nén khí tiên tiến nhất.");
   const dPartnerImage = partnerImage || "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=800";
+  const displayImages = images && images.length > 0 ? images : [{ url: dPartnerImage }];
   const dLogo1 = logo1 || 'https://images.unsplash.com/photo-1560179707-f14e90ef3623?auto=format&fit=crop&q=80&w=200&h=80';
   const dLogo2 = logo2 || 'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?auto=format&fit=crop&q=80&w=200&h=80';
   const dLogo3 = logo3 || 'https://images.unsplash.com/photo-1542744094-24638eff58bb?auto=format&fit=crop&q=80&w=200&h=80';
   const dExpValue = exp_value || "20+";
   const dExpText = exp_text || "Năm kinh nghiệm trong ngành công nghiệp nặng";
 
+  const isVertical = layout === "image-top" || layout === "image-bottom" || layout === "image-middle";
+  const isImageRight = layout === 'image-right';
+  const isImageLeft = layout === 'image-left';
+
+  const contentStyle = !isVertical ? { flex: `0 0 ${100 - imageWidth}%` } : { width: '100%' };
+  const imageColStyle = !isVertical ? { flex: `0 0 ${imageWidth}%` } : { width: '100%' };
+
+  const renderMediaGrid = () => {
+    const gridCols = {
+      1: "grid-cols-1",
+      2: "grid-cols-2",
+      3: "grid-cols-2",
+      4: "grid-cols-2"
+    }[displayImages.length] || "grid-cols-1";
+
+    return (
+      <div className={`grid ${gridCols} gap-4 w-full h-full`}>
+        {displayImages.slice(0, 4).map((img: any, idx: number) => (
+          <div key={idx} className={`relative group ${displayImages.length === 3 && idx === 0 ? 'row-span-2' : ''}`}>
+            {editMode && (
+              <FloatingToolbar 
+                iconSize={imageWidth}
+                onIconSizeChange={(s) => updateSectionProps(sectionId, { imageWidth: s })}
+                iconPosition={layout}
+                onIconPositionChange={(pos) => updateSectionProps(sectionId, { layout: pos })}
+                className="top-4 left-1/2 -translate-x-1/2 scale-75 z-50"
+              />
+            )}
+            <EditableElement
+              type="image"
+              fieldKey={images && images.length > 0 ? `images.${idx}.url` : "partnerImage"}
+              sectionId={sectionId}
+              defaultContent={img.url || dPartnerImage}
+              className="w-full h-full z-30 relative overflow-hidden"
+            >
+              <img 
+                src={img.url || dPartnerImage} 
+                alt={`Industrial ${idx + 1}`} 
+                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" 
+              />
+            </EditableElement>
+            
+            {/* Professional Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-slate-900/60 via-slate-900/20 to-transparent mix-blend-multiply pointer-events-none z-20" />
+            <div className="absolute inset-0 ring-1 ring-inset ring-white/10 pointer-events-none z-20" />
+          </div>
+        ))}
+      </div>
+    );
+  };
+
   return (
-    <section className="py-24 bg-white relative" data-section-id={sectionId}>
+    <section className="py-24 bg-white relative overflow-hidden" data-section-id={sectionId}>
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div 
+          className={`flex gap-16 items-start ${isVertical ? "flex-col" : "lg:flex-row"} ${!isVertical && isImageLeft ? "lg:flex-row-reverse" : ""}`}
+        >
           {/* Nội dung bên trái */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: isImageLeft ? 30 : -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
             className="z-10"
+            style={contentStyle}
           >
             <div className="relative z-20 space-y-8 md:space-y-12 pr-0 md:pr-12">
               <div className="space-y-4">
@@ -71,6 +129,14 @@ export const HomeV2PartnershipBlock = ({
                   />
                 </div>
 
+                {layout === 'image-middle' && (
+                  <div className="mb-10">
+                    <div className={`relative ${displayImages.length > 1 ? 'aspect-auto' : 'aspect-[4/3]'} rounded-none overflow-hidden shadow-[20px_20px_40px_-10px_rgba(0,0,0,0.3)] border-b-[8px] border-primary group`}>
+                      {renderMediaGrid()}
+                    </div>
+                  </div>
+                )}
+
                 <div className="mb-10">
                   <EditableElement
                     tagName="div"
@@ -83,13 +149,13 @@ export const HomeV2PartnershipBlock = ({
                 </div>
               </div>
 
-              <div className="flex flex-wrap items-center gap-8 md:gap-12 pt-8 border-t border-slate-100 relative z-30">
-                <div className="relative group">
+              <div className="flex flex-wrap items-center gap-6 pt-8 border-t border-slate-100 relative z-30">
+                <div className="relative group flex items-center">
                   {editMode && (
                     <FloatingToolbar 
                       iconSize={iconSize}
                       onIconSizeChange={(s) => updateSectionProps(sectionId, { iconSize: s })}
-                      className="-top-10 left-0 translate-x-0 scale-75"
+                      className="-top-12 left-0 translate-x-0 scale-75"
                     />
                   )}
                   <EditableElement
@@ -97,97 +163,89 @@ export const HomeV2PartnershipBlock = ({
                     fieldKey="logo1"
                     sectionId={sectionId}
                     defaultContent={dLogo1}
-                    className="grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300 pointer-events-auto"
+                    className="grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300 pointer-events-auto shrink-0"
                     style={{ height: iconSize }}
                   >
-                    <img src={dLogo1} alt="Logo 1" className="h-full w-auto" style={{ height: iconSize }} />
+                    <img src={dLogo1} alt="Logo 1" className="max-w-none" style={{ height: iconSize, maxWidth: '120px' }} />
                   </EditableElement>
                 </div>
 
-                <EditableElement
-                  type="image"
-                  fieldKey="logo2"
-                  sectionId={sectionId}
-                  defaultContent={dLogo2}
-                  className="grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300 pointer-events-auto"
-                  style={{ height: iconSize }}
-                >
-                  <img src={dLogo2} alt="Logo 2" className="h-full w-auto" style={{ height: iconSize }} />
-                </EditableElement>
+                <div className="flex items-center">
+                  <EditableElement
+                    type="image"
+                    fieldKey="logo2"
+                    sectionId={sectionId}
+                    defaultContent={dLogo2}
+                    className="grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300 pointer-events-auto shrink-0"
+                    style={{ height: iconSize }}
+                  >
+                    <img src={dLogo2} alt="Logo 2" className="max-w-none" style={{ height: iconSize, maxWidth: '120px' }} />
+                  </EditableElement>
+                </div>
 
-                <EditableElement
-                  type="image"
-                  fieldKey="logo3"
-                  sectionId={sectionId}
-                  defaultContent={dLogo3}
-                  className="grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300 pointer-events-auto"
-                  style={{ height: iconSize }}
-                >
-                  <img src={dLogo3} alt="Logo 3" className="h-full w-auto" style={{ height: iconSize }} />
-                </EditableElement>
+                <div className="flex items-center">
+                  <EditableElement
+                    type="image"
+                    fieldKey="logo3"
+                    sectionId={sectionId}
+                    defaultContent={dLogo3}
+                    className="grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300 pointer-events-auto shrink-0"
+                    style={{ height: iconSize }}
+                  >
+                    <img src={dLogo3} alt="Logo 3" className="max-w-none" style={{ height: iconSize, maxWidth: '120px' }} />
+                  </EditableElement>
+                </div>
               </div>
             </div>
           </motion.div>
 
-          {/* Hình ảnh bên phải */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="relative z-20"
-          >
-            {/* Main Image Container - Sharp Corners & Heavy Shadow */}
-            <div className="relative aspect-[4/3] rounded-none overflow-hidden shadow-[30px_30px_60px_-15px_rgba(0,0,0,0.4)] border-b-[12px] border-primary group">
-              {editMode && (
-                <FloatingToolbar 
-                  iconSize={partnerImageWidth}
-                  onIconSizeChange={(s) => updateSectionProps(sectionId, { partnerImageWidth: s })}
-                  className="top-4 left-1/2 -translate-x-1/2"
-                />
-              )}
-              <EditableElement
-                type="image"
-                fieldKey="partnerImage"
-                sectionId={sectionId}
-                defaultContent={dPartnerImage}
-                className="w-full h-full z-30 relative"
-              >
-                <img src={dPartnerImage} alt="Industrial" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" style={{ width: partnerImageWidth }} />
-              </EditableElement>
-
-              {/* Professional Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-slate-900/60 via-slate-900/20 to-transparent mix-blend-multiply pointer-events-none z-20" />
-              <div className="absolute inset-0 ring-1 ring-inset ring-white/10 pointer-events-none z-20" />
-            </div>
-
-            {/* Stats Badge - High Contrast & Elevated */}
-            <div className="absolute -bottom-10 -left-6 md:-left-12 p-8 md:p-10 bg-white shadow-[0_40px_100px_rgba(0,0,0,0.35)] border-l-[10px] border-primary max-w-[320px] z-[60] transform hover:-translate-y-2 transition-all duration-500">
-              <div className="relative mb-3">
-                <EditableElement
-                  type="text"
-                  fieldKey="exp_value"
-                  sectionId={sectionId}
-                  defaultContent={dExpValue}
-                  className="text-6xl font-black text-primary block"
-                >
-                  {dExpValue}
-                </EditableElement>
+          {/* Hình ảnh bên ngoài (nếu không phải layout middle) */}
+          {layout !== 'image-middle' && (
+            <motion.div
+              initial={{ 
+                opacity: 0, 
+                x: isVertical ? 0 : (isImageLeft ? -30 : 30),
+                y: isVertical ? (layout === 'image-top' ? -30 : 30) : 0
+              }}
+              whileInView={{ opacity: 1, x: 0, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className={`${isVertical ? 'w-full' : 'lg:sticky lg:top-32'} relative z-20 ${layout === 'image-top' ? 'order-first mb-12' : (layout === 'image-bottom' ? 'order-last mt-12' : '')}`}
+              style={imageColStyle}
+            >
+              {/* Main Image Container - Sharp Corners & Heavy Shadow */}
+              <div className={`relative ${displayImages.length > 1 ? 'aspect-auto' : 'aspect-[4/3]'} rounded-none overflow-hidden shadow-[30px_30px_60px_-15px_rgba(0,0,0,0.4)] border-b-[12px] border-primary group`}>
+                {renderMediaGrid()}
               </div>
-              <div className="relative">
-                <EditableElement
-                  type="text"
-                  fieldKey="exp_text"
-                  sectionId={sectionId}
-                  defaultContent={dExpText}
-                  className="text-slate-800 font-extrabold uppercase tracking-[0.2em] text-[10px] md:text-xs leading-relaxed block"
-                >
-                  {dExpText}
-                </EditableElement>
-                <div className="w-12 h-1 bg-primary mt-2" />
+
+              {/* Stats Badge - High Contrast & Elevated */}
+              <div className="absolute -bottom-10 -left-6 md:-left-12 p-8 md:p-10 bg-white shadow-[0_40px_100px_rgba(0,0,0,0.35)] border-l-[10px] border-primary max-w-[320px] z-[60] transform hover:-translate-y-2 transition-all duration-500">
+                <div className="relative mb-3">
+                  <EditableElement
+                    type="text"
+                    fieldKey="exp_value"
+                    sectionId={sectionId}
+                    defaultContent={dExpValue}
+                    className="text-6xl font-black text-primary block"
+                  >
+                    {dExpValue}
+                  </EditableElement>
+                </div>
+                <div className="relative">
+                  <EditableElement
+                    type="text"
+                    fieldKey="exp_text"
+                    sectionId={sectionId}
+                    defaultContent={dExpText}
+                    className="text-slate-800 font-extrabold uppercase tracking-[0.2em] text-[10px] md:text-xs leading-relaxed block"
+                  >
+                    {dExpText}
+                  </EditableElement>
+                  <div className="w-12 h-1 bg-primary mt-2" />
+                </div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          )}
         </div>
       </div>
     </section>
