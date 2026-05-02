@@ -58,7 +58,7 @@
     <meta property="twitter:image" content="/assets/svg/logo.svg" />
 
     <!-- Use absolute path for favicon -->
-    <link rel="icon" id="dynamic-favicon" href="/src/assets/images/logo-ttt.svg" />
+    <link rel="icon" id="dynamic-favicon" href="/assets/svg/logo.svg" />
     
     <style>
       #root:empty {
@@ -178,23 +178,7 @@
     
     <!-- External module script -->
     
-    <!-- Main application script with error handling -->
-    <script type="module">
-      try {
-        import('/src/main.tsx')
-          .catch(error => {
-            console.error('Failed to load main module:', error);
-            const rootElement = document.getElementById('root');
-            rootElement.innerHTML = 
-              '<div style="padding: 20px; text-align: center;">' +
-              '<h1>Loading Error</h1>' +
-              '<p>Failed to load the application. Please check browser console for details.</p>' +
-              '<p style="color: red; font-family: monospace;">' + error.message + '</p>' +
-              '</div>';
-          });
-      } catch (error) {
-        console.error('Initial import error:', error);
-      }
-    </script>
+    <!-- Main application script -->
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
