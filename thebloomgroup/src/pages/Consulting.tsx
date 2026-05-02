@@ -6,7 +6,7 @@ const Consulting = () => {
   return (
     <>
         {/* Hero Section */}
-        <section className="bg-primary py-12 text-white">
+        <section className="bg-primary py-20 text-white">
           <div className="container-custom">
             <div className="flex flex-col md:flex-row gap-10 items-center">
               <div className="md:w-1/2">
@@ -21,7 +21,7 @@ const Consulting = () => {
                 </div>
               </div>
               <div className="md:w-1/2 flex justify-center">
-                <div className="bg-white/10 rounded-full p-10 backdrop-blur-sm">
+                <div className="bg-white/10 p-10 backdrop-blur-sm border border-white/20">
                   <FileCheck size={120} className="text-white" />
                 </div>
               </div>
@@ -30,13 +30,13 @@ const Consulting = () => {
         </section>
 
         {/* Services Section */}
-        <section className="py-12 bg-white">
+        <section className="py-20 bg-white">
           <div className="container-custom">
             <h2 className="mb-8">Dịch vụ tư vấn thiết kế</h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <Card>
+              <Card className="rounded-none border-primary/10">
                 <CardContent className="pt-6">
-                  <div className="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mb-4">
+                  <div className="bg-primary/5 w-16 h-16 flex items-center justify-center mb-6">
                     <Lightbulb size={32} className="text-primary" />
                   </div>
                   <h3 className="text-lg font-semibold mb-2">Tư vấn khả thi</h3>
@@ -46,9 +46,9 @@ const Consulting = () => {
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="rounded-none border-primary/10">
                 <CardContent className="pt-6">
-                  <div className="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mb-4">
+                  <div className="bg-primary/5 w-16 h-16 flex items-center justify-center mb-6">
                     <PenTool size={32} className="text-primary" />
                   </div>
                   <h3 className="text-lg font-semibold mb-2">Thiết kế kỹ thuật</h3>
@@ -58,9 +58,9 @@ const Consulting = () => {
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="rounded-none border-primary/10">
                 <CardContent className="pt-6">
-                  <div className="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mb-4">
+                  <div className="bg-primary/5 w-16 h-16 flex items-center justify-center mb-6">
                     <BarChart3 size={32} className="text-primary" />
                   </div>
                   <h3 className="text-lg font-semibold mb-2">Phân tích hiệu quả</h3>
@@ -74,11 +74,11 @@ const Consulting = () => {
         </section>
 
         {/* Expertise Areas */}
-        <section className="py-12 bg-muted">
+        <section className="py-20 bg-muted/30">
           <div className="container-custom">
             <h2 className="mb-8">Lĩnh vực chuyên môn</h2>
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="bg-white p-6 rounded-lg flex gap-4">
+            <div className="grid md:grid-cols-2 gap-8">
+              <div className="bg-white p-8 border-l-4 border-primary flex gap-6">
                 <div className="shrink-0">
                   <Factory size={32} className="text-primary" />
                 </div>
@@ -105,7 +105,7 @@ const Consulting = () => {
                 </div>
               </div>
 
-              <div className="bg-white p-6 rounded-lg flex gap-4">
+              <div className="bg-white p-8 border-l-4 border-primary flex gap-6">
                 <div className="shrink-0">
                   <Factory size={32} className="text-primary" />
                 </div>
@@ -140,45 +140,45 @@ const Consulting = () => {
           <div className="container-custom">
             <h2 className="mb-8">Quy trình tư vấn thiết kế</h2>
             <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-              <div className="relative">
-                <div className="bg-primary/10 w-12 h-12 rounded-full flex items-center justify-center mb-4 z-10 relative">
-                  <span className="font-bold text-primary">1</span>
+              <div className="relative group">
+                <div className="bg-primary w-12 h-12 flex items-center justify-center mb-6 z-10 relative text-white font-bold">
+                  <span>1</span>
                 </div>
                 <div className="hidden md:block absolute top-6 left-12 w-full h-0.5 bg-primary/20"></div>
                 <h3 className="text-lg font-semibold mb-2">Khảo sát hiện trạng</h3>
                 <p className="text-muted-foreground">Đánh giá điều kiện công trình và nhu cầu sử dụng</p>
               </div>
 
-              <div className="relative">
-                <div className="bg-primary/10 w-12 h-12 rounded-full flex items-center justify-center mb-4 z-10 relative">
-                  <span className="font-bold text-primary">2</span>
+              <div className="relative group">
+                <div className="bg-primary w-12 h-12 flex items-center justify-center mb-6 z-10 relative text-white font-bold">
+                  <span>2</span>
                 </div>
                 <div className="hidden md:block absolute top-6 left-12 w-full h-0.5 bg-primary/20"></div>
                 <h3 className="text-lg font-semibold mb-2">Lập kế hoạch</h3>
                 <p className="text-muted-foreground">Xây dựng các phương án và lên kế hoạch chi tiết</p>
               </div>
 
-              <div className="relative">
-                <div className="bg-primary/10 w-12 h-12 rounded-full flex items-center justify-center mb-4 z-10 relative">
-                  <span className="font-bold text-primary">3</span>
+              <div className="relative group">
+                <div className="bg-primary w-12 h-12 flex items-center justify-center mb-6 z-10 relative text-white font-bold">
+                  <span>3</span>
                 </div>
                 <div className="hidden md:block absolute top-6 left-12 w-full h-0.5 bg-primary/20"></div>
                 <h3 className="text-lg font-semibold mb-2">Thiết kế kỹ thuật</h3>
                 <p className="text-muted-foreground">Thiết kế chi tiết hệ thống theo tiêu chuẩn</p>
               </div>
 
-              <div className="relative">
-                <div className="bg-primary/10 w-12 h-12 rounded-full flex items-center justify-center mb-4 z-10 relative">
-                  <span className="font-bold text-primary">4</span>
+              <div className="relative group">
+                <div className="bg-primary w-12 h-12 flex items-center justify-center mb-6 z-10 relative text-white font-bold">
+                  <span>4</span>
                 </div>
                 <div className="hidden md:block absolute top-6 left-12 w-full h-0.5 bg-primary/20"></div>
                 <h3 className="text-lg font-semibold mb-2">Phân tích hiệu quả</h3>
                 <p className="text-muted-foreground">Tính toán hiệu suất và phân tích chi phí</p>
               </div>
 
-              <div className="relative">
-                <div className="bg-primary/10 w-12 h-12 rounded-full flex items-center justify-center mb-4">
-                  <span className="font-bold text-primary">5</span>
+              <div className="relative group">
+                <div className="bg-primary w-12 h-12 flex items-center justify-center mb-6 z-10 relative text-white font-bold">
+                  <span>5</span>
                 </div>
                 <h3 className="text-lg font-semibold mb-2">Trình bày phương án</h3>
                 <p className="text-muted-foreground">Báo cáo đề xuất và hướng dẫn triển khai</p>
@@ -188,11 +188,11 @@ const Consulting = () => {
         </section>
 
         {/* Benefits */}
-        <section className="py-12 bg-muted">
+        <section className="py-20 bg-white">
           <div className="container-custom">
-            <h2 className="mb-8">Lợi ích khi sử dụng dịch vụ</h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <div className="bg-white p-6 rounded-lg">
+            <h2 className="mb-12 text-center">Lợi ích khi sử dụng dịch vụ</h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="bg-muted/30 p-8 border-t-2 border-primary/20">
                 <CheckCircle2 size={32} className="text-primary mb-4" />
                 <h3 className="text-lg font-semibold mb-2">Tối ưu hiệu suất</h3>
                 <p className="text-muted-foreground">Thiết kế hệ thống hoạt động hiệu quả, giảm thiểu tổn thất năng lượng.</p>
@@ -232,19 +232,19 @@ const Consulting = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-16 bg-accent/10">
+        <section className="py-24 bg-primary text-white">
           <div className="container-custom text-center">
-            <div className="max-w-2xl mx-auto">
-              <Lightbulb size={48} className="text-accent mx-auto mb-4" />
-              <h2 className="mb-6">Bắt đầu với dự án của bạn ngay hôm nay</h2>
-              <p className="text-muted-foreground mb-8">
+            <div className="max-w-3xl mx-auto">
+              <Lightbulb size={64} className="text-amber-500 mx-auto mb-8" />
+              <h2 className="text-white mb-6 text-3xl md:text-5xl">Bắt đầu với dự án của bạn ngay hôm nay</h2>
+              <p className="text-white/80 text-lg mb-10">
                 Hãy liên hệ với đội ngũ tư vấn thiết kế của chúng tôi để được tư vấn miễn phí và đề xuất giải pháp tối ưu cho dự án của bạn.
               </p>
-              <div className="flex gap-4 justify-center">
-                <Link to="/contact" className="btn-primary">
-                  Yêu cầu tư vấn
+              <div className="flex gap-6 justify-center">
+                <Link to="/contact" className="btn-accent">
+                  Yêu cầu tư vấn ngay
                 </Link>
-                <Link to="/services" className="btn-outline">
+                <Link to="/services" className="px-8 py-4 border border-white/30 hover:bg-white/10 transition-colors font-bold">
                   Xem thêm dịch vụ
                 </Link>
               </div>
