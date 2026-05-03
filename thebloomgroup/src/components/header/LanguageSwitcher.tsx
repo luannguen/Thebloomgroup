@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { ChevronDown, Check } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { useSettings } from '../../hooks/useSettings';
 
 interface LanguageOption {
   code: string;
@@ -31,9 +32,27 @@ interface LanguageSwitcherProps {
 const LanguageSwitcher = ({ isMobile = false, onItemClick, isScrolled = false }: LanguageSwitcherProps) => {
   const { i18n, t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
+  const { getSetting } = useSettings();
   
   // Ensure we use the short code (e.g., 'en', 'vi')
   const activeLanguage = i18n.language ? i18n.language.split('-')[0] : 'vi';
+
+  // Lấy danh sách ngôn ngữ được bật từ settings
+  const filteredOptions = useMemo(() => {
+    const enabledRaw = getSetting('enabled_languages', '');
+    if (!enabledRaw) return languageOptions;
+    
+    try {
+      const enabledCodes = JSON.parse(enabledRaw);
+      if (!Array.isArray(enabledCodes) || enabledCodes.length === 0) return languageOptions;
+      
+      return languageOptions.filter(lang => 
+        enabledCodes.includes(lang.code) || lang.code === 'vi'
+      );
+    } catch (e) {
+      return languageOptions;
+    }
+  }, [getSetting]);
 
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
@@ -72,7 +91,7 @@ const LanguageSwitcher = ({ isMobile = false, onItemClick, isScrolled = false }:
         {isOpen && (
           <div className="absolute bottom-full left-0 right-0 mb-2 bg-white rounded-xl shadow-2xl border border-gray-100 py-2 z-50 animate-in fade-in slide-in-from-bottom-2 origin-bottom">
             <div className="grid grid-cols-1 gap-1 max-h-[300px] overflow-y-auto px-2">
-              {languageOptions.map(lang => (
+              {filteredOptions.map(lang => (
                 <button
                   key={lang.code}
                   onClick={() => changeLanguage(lang.code)}
@@ -115,7 +134,7 @@ const LanguageSwitcher = ({ isMobile = false, onItemClick, isScrolled = false }:
       </button>
       <div className="absolute hidden group-hover:block bg-white shadow-xl p-2 rounded-lg min-w-[160px] right-0 top-full z-50 animate-in fade-in slide-in-from-top-2">
         <div className="flex flex-col gap-1">
-          {languageOptions.map(lang => (
+          {filteredOptions.map(lang => (
             <button
               key={lang.code}
               onClick={() => changeLanguage(lang.code)}

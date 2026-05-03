@@ -13,8 +13,44 @@ interface ConfigSettingsProps {
     branches: any[];
 }
 
+const SUPPORTED_LANGUAGES = [
+    { code: 'vi', name: 'Tiếng Việt', flag: '🇻🇳' },
+    { code: 'en', name: 'English', flag: '🇺🇸' },
+    { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
+    { code: 'fr', name: 'Français', flag: '🇫🇷' },
+    { code: 'ru', name: 'Русский', flag: '🇷🇺' },
+    { code: 'ja', name: '日本語', flag: '🇯🇵' },
+    { code: 'ko', name: '한국어', flag: '🇰🇷' },
+    { code: 'zh', name: '中文', flag: '🇨🇳' },
+    { code: 'hr', name: 'Hrvatski', flag: '🇭🇷' },
+    { code: 'sl', name: 'Slovenščina', flag: '🇸🇮' },
+    { code: 'sr', name: 'Српски', flag: '🇷🇸' },
+];
+
 const ConfigSettings: React.FC<ConfigSettingsProps> = ({ settings, handleChange, branches }) => {
     const { t } = useTranslation();
+
+    const enabledLanguages = React.useMemo(() => {
+        try {
+            const val = settings['enabled_languages'];
+            if (!val) return SUPPORTED_LANGUAGES.map(l => l.code);
+            const parsed = JSON.parse(val);
+            return Array.isArray(parsed) ? parsed : SUPPORTED_LANGUAGES.map(l => l.code);
+        } catch (e) {
+            return SUPPORTED_LANGUAGES.map(l => l.code);
+        }
+    }, [settings['enabled_languages']]);
+
+    const handleLanguageToggle = (code: string, checked: boolean) => {
+        let newEnabled = [...enabledLanguages];
+        if (checked) {
+            if (!newEnabled.includes(code)) newEnabled.push(code);
+        } else {
+            if (code === 'vi') return; // Không cho phép tắt tiếng Việt
+            newEnabled = newEnabled.filter(c => c !== code);
+        }
+        handleChange('enabled_languages', JSON.stringify(newEnabled));
+    };
 
     return (
         <div className="space-y-6">
@@ -120,6 +156,42 @@ const ConfigSettings: React.FC<ConfigSettingsProps> = ({ settings, handleChange,
                     </CardContent>
                 </Card>
             </div>
+
+            {/* Language Settings */}
+            <Card>
+                <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                        <Globe className="h-5 w-5 text-primary" />
+                        Cấu hình Đa ngôn ngữ
+                    </CardTitle>
+                    <CardDescription>Bật hoặc tắt các ngôn ngữ hiển thị trên Website Client.</CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                        {SUPPORTED_LANGUAGES.map((lang) => (
+                            <div key={lang.code} className="flex items-center justify-between p-3 border rounded-lg hover:bg-muted/10 transition-colors">
+                                <div className="flex items-center gap-3">
+                                    <span className="text-xl">{lang.flag}</span>
+                                    <div className="flex flex-col">
+                                        <Label className="cursor-pointer">{lang.name}</Label>
+                                        <span className="text-[10px] text-muted-foreground uppercase">{lang.code}</span>
+                                    </div>
+                                </div>
+                                <Switch
+                                    checked={enabledLanguages.includes(lang.code)}
+                                    onCheckedChange={(checked) => handleLanguageToggle(lang.code, checked)}
+                                    disabled={lang.code === 'vi'}
+                                />
+                            </div>
+                        ))}
+                    </div>
+                    <div className="mt-4 p-3 bg-primary/5 rounded-lg border border-primary/10">
+                        <p className="text-xs text-muted-foreground">
+                            <strong className="text-primary">Lưu ý:</strong> Ngôn ngữ Tiếng Việt là mặc định và không thể tắt. Việc tắt một ngôn ngữ sẽ ẩn nó khỏi menu chọn ngôn ngữ ở trang chủ.
+                        </p>
+                    </div>
+                </CardContent>
+            </Card>
 
             {/* Google Map */}
             <Card>
