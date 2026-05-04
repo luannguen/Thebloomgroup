@@ -80,6 +80,22 @@ export const pageService = {
         return true;
     },
 
+    async getPageBySlug(slug: string) {
+        try {
+            const { data, error } = await supabase
+                .from('static_pages')
+                .select('*')
+                .eq('slug', slug)
+                .maybeSingle();
+
+            if (error) throw error;
+            return { success: true, data: data as StaticPage | null };
+        } catch (error: any) {
+            console.error('Error fetching page by slug:', error);
+            return { success: false, error: error.message };
+        }
+    },
+
     async uploadImage(file: File) {
         const result = await mediaService.uploadImage(file, 'pages');
         return result?.url || "";

@@ -138,25 +138,12 @@ export function useVisualEditor(iframeRef: React.RefObject<HTMLIFrameElement>) {
                     return;
                 }
 
-                const pages = await pageService.getPages();
-                const page = pages.find(p => p.slug === urlSlug);
+                // Fetch specific page by slug directly for accuracy
+                const pageResult = await pageService.getPageBySlug(urlSlug);
+                const page = pageResult.success ? pageResult.data : null;
                 
                 if (!page) {
-                    if (urlSlug === 'home' || urlSlug === 'home_v2') {
-                        // Cho phép Trang chủ hoặc Home V2 hoạt động ở chế độ khởi tạo nếu chưa có trong DB
-                        const isV2 = urlSlug === 'home_v2';
-                        setSlug(urlSlug);
-                        setPageMetadata({
-                            title: isV2 ? 'Trang chủ V2' : 'Trang chủ',
-                            slug: urlSlug,
-                            excerpt: isV2 ? 'Trang chủ phiên bản mới' : 'Trang chủ mặc định của website',
-                            image_url: '',
-                            is_active: true
-                        });
-                        setLoading(false);
-                        return;
-                    }
-                    setError('Không tìm thấy trang này');
+                    setError('Không tìm thấy trang này trong hệ thống. Vui lòng kiểm tra lại đường dẫn (slug).');
                     return;
                 }
 
@@ -233,6 +220,12 @@ export function useVisualEditor(iframeRef: React.RefObject<HTMLIFrameElement>) {
         if (data.type === 'VISUAL_EDIT_UPDATE' || data.type === 'VISUAL_EDIT_UPDATE_DATA_FROM_IFRAME') {
             const sectionsData = data.sections || data.data?.sections;
             if (sectionsData && Array.isArray(sectionsData)) {
+                // SECURITY/SYNC: Only accept updates from child if parent is empty OR it's a new page
+                // This prevents race conditions where child default content overwrites DB content
+                if (sections.length > 0 && !isNewPage && !data.is_user_interaction) {
+                    console.warn('[VisualEditor Parent] Ignoring update from iframe to prevent data overwrite.');
+                    return;
+                }
                 // Only update if data actually changed to avoid re-render loops
                 const currentSectionsStr = JSON.stringify(sections);
                 const newSectionsStr = JSON.stringify(sectionsData);
