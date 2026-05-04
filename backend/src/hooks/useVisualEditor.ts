@@ -287,7 +287,7 @@ export function useVisualEditor(iframeRef: React.RefObject<HTMLIFrameElement>) {
             sendToIframe('VISUAL_EDIT_UPDATE_DATA', { sections });
             hasInitialSyncHappened.current = true;
         }
-    }, [sections, sendToIframe]);
+    }, [sections, sendToIframe, loading]);
 
     useEffect(() => {
         window.addEventListener('message', handleMessage);

@@ -91,7 +91,17 @@ export default function PagesPage() {
 
     const handleToggleActive = async (page: StaticPage) => {
         try {
-            await pageService.updatePage(page.id, { is_active: !page.is_active });
+            if (page.id.includes('-virtual')) {
+                // If it's a virtual page, we need to create it in the DB first
+                const { id, created_at, updated_at, ...pageData } = page;
+                await pageService.createPage({
+                    ...pageData,
+                    is_active: !page.is_active
+                });
+            } else {
+                await pageService.updatePage(page.id, { is_active: !page.is_active });
+            }
+            
             toast({
                 title: "Thành công",
                 description: `Đã ${!page.is_active ? "hiện" : "ẩn"} trang thành công`,
@@ -123,17 +133,18 @@ export default function PagesPage() {
                 slug: formData.slug.replace(/^\/+|\/+$/g, '')
             };
 
-            if (currentPage) {
+            if (currentPage && !currentPage.id.includes('-virtual')) {
                 await pageService.updatePage(currentPage.id, dataToSubmit);
                 toast({
                     title: "Thành công",
                     description: "Đã cập nhật trang thành công",
                 });
             } else {
+                // If no currentPage OR if it's a virtual page, we create it
                 await pageService.createPage(dataToSubmit);
                 toast({
                     title: "Thành công",
-                    description: "Đã tạo trang mới thành công",
+                    description: currentPage ? "Đã khởi tạo trang hệ thống thành công" : "Đã tạo trang mới thành công",
                 });
             }
 
