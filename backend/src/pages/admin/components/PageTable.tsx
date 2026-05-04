@@ -203,7 +203,8 @@ export function PageTable({
                                         <Pencil className="h-4 w-4" />
                                     </Button>
                                     
-                                    {page.slug !== 'home' && page.slug !== 'home_v2' && (
+                                    {/* Allow deleting all pages to give users full control, but keep it available in usePages for recovery */}
+                                    {true && (
                                         <AlertDialog>
                                             <AlertDialogTrigger asChild>
                                                 <Button

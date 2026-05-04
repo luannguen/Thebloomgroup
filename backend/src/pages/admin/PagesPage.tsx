@@ -73,11 +73,19 @@ export default function PagesPage() {
 
     const handleDelete = async (id: string) => {
         try {
-            await pageService.deletePage(id);
-            toast({
-                title: "Thành công",
-                description: "Đã xóa trang thành công",
-            });
+            if (id.includes('-virtual')) {
+                // Virtual pages don't exist in DB, so we just show success and refresh
+                toast({
+                    title: "Thông báo",
+                    description: "Đây là trang hệ thống mặc định. Để ẩn trang này, hãy tạo một trang mới với cùng đường dẫn (slug).",
+                });
+            } else {
+                await pageService.deletePage(id);
+                toast({
+                    title: "Thành công",
+                    description: "Đã xóa trang thành công",
+                });
+            }
             fetchPages();
         } catch (error) {
             console.error(error);

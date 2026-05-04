@@ -24,17 +24,15 @@ export function usePages() {
             setLoading(true);
             const data = await pageService.getPages();
             
-            // Ensure Home and Home V2 are always present
-            const hasHome = data.some(p => p.slug === 'home');
-            const hasHomeV2 = data.some(p => p.slug === 'home_v2');
-            
             let finalPages = [...data];
-
-            if (!hasHome) {
+            
+            // Only provide virtual/default pages if the database is empty (Initial Setup)
+            if (data.length === 0) {
+                console.log('[usePages] Database is empty, providing default system pages.');
                 finalPages.push({
                     id: 'home-virtual',
                     slug: 'home',
-                    title: 'Trang chủ (Mặc định)',
+                    title: 'Trang chủ (Bản gốc)',
                     content: JSON.stringify({
                         sections: [
                             { id: 'banner', type: 'home_banner_slider', props: {} },
@@ -54,13 +52,11 @@ export function usePages() {
                     created_at: new Date().toISOString(),
                     updated_at: new Date().toISOString()
                 });
-            }
 
-            if (!hasHomeV2) {
                 finalPages.push({
                     id: 'home-v2-virtual',
                     slug: 'home_v2',
-                    title: 'Trang chủ V2 (Hệ thống mới)',
+                    title: 'Trang chủ V2 (Bản chuẩn)',
                     content: JSON.stringify({
                         sections: [
                             { id: 'banner', type: 'home_banner_slider', props: {} },
