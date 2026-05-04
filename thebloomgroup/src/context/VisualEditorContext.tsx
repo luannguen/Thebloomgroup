@@ -73,7 +73,7 @@ export const VisualEditorProvider = ({ children, slug = '' }: VisualEditorProvid
 
   const isSyncingFromParent = React.useRef(false);
 
-  const syncWithParent = React.useCallback((newData: any) => {
+  const syncWithParent = React.useCallback((newData: any, isUserInteraction = false) => {
     if (!editMode || isSyncingFromParent.current) return;
     
     window.parent.postMessage(
@@ -81,6 +81,7 @@ export const VisualEditorProvider = ({ children, slug = '' }: VisualEditorProvid
         type: 'VISUAL_EDIT_UPDATE',
         slug,
         data: newData,
+        is_user_interaction: isUserInteraction
       },
       '*'
     );
@@ -92,7 +93,7 @@ export const VisualEditorProvider = ({ children, slug = '' }: VisualEditorProvid
     console.log('[VisualEditorContext] updateField:', { fieldKey, value, skipSync });
     setContentData((prev: any) => {
       const newData = setNestedValue(prev, fieldKey, value);
-      if (!skipSync) syncWithParent(newData);
+      if (!skipSync) syncWithParent(newData, true);
       return newData;
     });
   }, [editMode, syncWithParent]);
@@ -117,7 +118,7 @@ export const VisualEditorProvider = ({ children, slug = '' }: VisualEditorProvid
         sections.push(newSection);
       }
       const newData = { ...prev, sections };
-      syncWithParent(newData);
+      syncWithParent(newData, true);
       return newData;
     });
   }, [editMode, syncWithParent]);
@@ -127,7 +128,7 @@ export const VisualEditorProvider = ({ children, slug = '' }: VisualEditorProvid
     setContentData((prev: any) => {
       const sections = (prev.sections || []).filter((s: any) => s.id !== id);
       const newData = { ...prev, sections };
-      syncWithParent(newData);
+      syncWithParent(newData, true);
       return newData;
     });
   }, [editMode, syncWithParent]);
@@ -136,7 +137,7 @@ export const VisualEditorProvider = ({ children, slug = '' }: VisualEditorProvid
     if (!editMode) return;
     setContentData((prev: any) => {
       const newData = { ...prev, sections: newSections };
-      syncWithParent(newData);
+      syncWithParent(newData, true);
       return newData;
     });
   }, [editMode, syncWithParent]);
@@ -155,7 +156,7 @@ export const VisualEditorProvider = ({ children, slug = '' }: VisualEditorProvid
       [sections[index], sections[newIndex]] = [sections[newIndex], sections[index]];
 
       const newData = { ...prev, sections };
-      syncWithParent(newData);
+      syncWithParent(newData, true);
       return newData;
     });
   }, [editMode, syncWithParent]);
@@ -171,7 +172,7 @@ export const VisualEditorProvider = ({ children, slug = '' }: VisualEditorProvid
         console.log('[VisualEditorContext] Hydrating context with sections:', sectionsWithIds.length);
         const newData = { ...prev, sections: sectionsWithIds };
         // We must sync back to parent so it knows the generated IDs
-        syncWithParent(newData);
+        syncWithParent(newData, false); // This is NOT a user interaction, it's hydration
         return newData;
       }
       return prev;
@@ -195,7 +196,7 @@ export const VisualEditorProvider = ({ children, slug = '' }: VisualEditorProvid
         return section;
       });
       const newData = { ...prev, sections };
-      if (!skipSync) syncWithParent(newData);
+      if (!skipSync) syncWithParent(newData, true);
       return newData;
     });
   }, [editMode, syncWithParent]);

@@ -36,6 +36,7 @@ const StaticPage: React.FC<StaticPageProps> = ({ slug: propSlug }) => {
             try {
                 setLoading(true);
                 const data = await pageService.getPageBySlug(slug);
+                console.log(`[StaticPage] Fetching slug "${slug}":`, data ? 'Found' : 'Not Found');
                 if (data) {
                     setPage(data);
                     if (data.content && data.content.startsWith('{')) {
@@ -46,6 +47,7 @@ const StaticPage: React.FC<StaticPageProps> = ({ slug: propSlug }) => {
                         }
                     }
                 } else {
+                    console.warn(`[StaticPage] Page with slug "${slug}" not found in database.`);
                     setError(true);
                 }
             } catch (err) {

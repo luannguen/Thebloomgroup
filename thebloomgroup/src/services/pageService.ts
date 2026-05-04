@@ -22,7 +22,10 @@ export const pageService = {
             .eq('is_active', true)
             .maybeSingle();
 
-        if (error) throw error;
+        if (error) {
+            console.error(`[pageService] Error fetching slug "${slug}":`, error);
+            throw error;
+        }
         return data as StaticPage;
     },
 
