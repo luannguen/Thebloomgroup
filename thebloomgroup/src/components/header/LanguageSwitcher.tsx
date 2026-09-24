@@ -121,15 +121,13 @@ const LanguageSwitcher = ({ isMobile = false, onItemClick, isScrolled = false }:
 
   return (
     <div className="relative group">
-      <button className={`navbar-link flex items-center uppercase py-1 transition-colors ${
-        isScrolled ? 'text-slate-900' : 'text-white hover:text-white/80'
-      }`}>
+      <button className="navbar-link flex items-center uppercase py-1 text-slate-700 hover:text-primary transition-colors">
         <img
           src={getActiveLanguageDetails().flagIcon}
           alt={getActiveLanguageDetails().name}
           className="w-5 h-5 mr-1.5 shadow-sm rounded-sm"
         />
-        <span className="font-medium text-sm">{activeLanguage}</span>
+        <span className="font-semibold text-sm">{activeLanguage}</span>
         <ChevronDown size={14} className="ml-1 opacity-60" />
       </button>
       <div className="absolute hidden group-hover:block bg-white shadow-xl p-2 rounded-lg min-w-[160px] right-0 top-full z-50 animate-in fade-in slide-in-from-top-2">

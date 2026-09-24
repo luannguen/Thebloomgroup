@@ -192,11 +192,10 @@ const SearchComponent = ({ isMobile = false, isScrolled = false }: SearchCompone
   };
 
   const tags = [
-    { label: t('tag_cold_storage'), value: 'Kho lạnh' },
-    { label: t('tag_air_conditioner'), value: 'Điều hòa' },
-    { label: t('tag_maintenance'), value: 'Bảo trì' },
-    { label: t('tag_energy_saving'), value: 'Tiết kiệm năng lượng' },
-    { label: t('tag_chiller'), value: 'Chiller' }
+    { label: 'Thiết bị giặt là', value: 'giặt là' },
+    { label: 'May gia công & Thời trang', value: 'may mặc' },
+    { label: 'Đồ gia dụng', value: 'gia dụng' },
+    { label: 'Dịch vụ kỹ thuật', value: 'dịch vụ' }
   ];
 
   const hasSuggestions = suggestions.length > 0;
@@ -205,10 +204,10 @@ const SearchComponent = ({ isMobile = false, isScrolled = false }: SearchCompone
   return (
     <div className="relative" ref={searchContainerRef}>
       <button
-        className={`navbar-link relative z-50 transition-colors ${
+        className={`navbar-link relative z-50 p-1.5 rounded-full transition-colors ${
           isOpen 
-            ? 'text-accent' 
-            : (isScrolled ? 'text-slate-900' : 'text-white hover:text-white/80')
+            ? 'text-primary' 
+            : 'text-slate-700 hover:text-primary'
         }`}
         onClick={toggleSearch}
         aria-label={t('search_button')}

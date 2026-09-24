@@ -68,7 +68,7 @@ export const HomeBannerSlider = ({ sectionId }: HomeBannerSliderProps) => {
                 <CarouselContent className="-ml-0">
                     {banners.map((banner) => (
                         <CarouselItem key={banner.id} className="pl-0">
-                            <div className="relative h-[75vh] md:h-[85vh] w-full overflow-hidden flex items-center">
+                            <div className="relative h-[75vh] md:h-[85vh] w-full overflow-hidden flex items-center pt-16 md:pt-20">
                                 {/* Background Image with Zoom effect */}
                                 <div className="absolute inset-0 z-0 scale-105 animate-in zoom-in duration-[10000ms]">
                                     <img 

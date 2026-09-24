@@ -58,7 +58,7 @@ export const BloomHeroSplit: React.FC<{ sectionId?: string }> = ({ sectionId }) 
   ];
 
   return (
-    <section className="relative w-full pt-20 md:pt-24 pb-8 bg-[#f8f9fa] overflow-hidden select-none" data-section-id={sectionId}>
+    <section className="relative w-full pt-10 md:pt-14 pb-12 bg-slate-50 border-b border-slate-200/60 overflow-hidden select-none" data-section-id={sectionId}>
       {/* Watermark Banner Text across the top */}
       <div className="w-full text-center py-4 md:py-6 overflow-hidden">
         <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-black text-[#1e293b] tracking-[0.15em] md:tracking-[0.22em] uppercase font-sans drop-shadow-sm opacity-90 transition-all duration-300">

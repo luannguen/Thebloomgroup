@@ -147,10 +147,10 @@ const MainNavigation = ({ isMobile = false, onItemClick, isScrolled = false }: M
             <Link
               to={normalizePath(item.path)}
               onClick={onItemClick}
-              className={`navbar-link text-lg block py-1 transition-all ${
+              className={`navbar-link text-lg block py-1.5 transition-all ${
                 isActive(item) 
-                  ? 'text-secondary font-bold border-b-2 border-secondary' 
-                  : (isScrolled ? 'text-slate-900 font-medium' : 'text-white font-medium')
+                  ? 'text-primary font-bold border-b-2 border-primary' 
+                  : 'text-slate-800 hover:text-primary font-medium'
               }`}
             >
               {getTranslatedLabel(item)}
@@ -165,7 +165,7 @@ const MainNavigation = ({ isMobile = false, onItemClick, isScrolled = false }: M
                     className={`hover:text-primary block text-base py-0.5 transition-colors ${
                       isActive(child) 
                         ? 'text-primary font-semibold' 
-                        : 'text-gray-600'
+                        : 'text-slate-600'
                     }`}
                   >
                     {getTranslatedLabel(child)}
@@ -180,32 +180,32 @@ const MainNavigation = ({ isMobile = false, onItemClick, isScrolled = false }: M
   }
 
   return (
-    <nav className="hidden lg:flex items-center justify-center flex-1 gap-x-4 xl:gap-x-8 px-4">
+    <nav className="hidden lg:flex items-center justify-center flex-1 gap-x-5 xl:gap-x-8 px-4">
       {navItems.map((item) => (
         <div key={item.id} className="relative group">
           {item.children && item.children.length > 0 ? (
             <>
               <button
-                className={`navbar-link text-base font-medium flex items-center relative pb-1 transition-colors ${
+                className={`navbar-link text-[15px] font-semibold flex items-center relative py-2 transition-colors ${
                   isActive(item) 
-                    ? 'text-secondary' 
-                    : (isScrolled ? 'text-slate-900' : 'text-white hover:text-white/80')
+                    ? 'text-primary font-bold' 
+                    : 'text-slate-800 hover:text-primary'
                 }`}
               >
                 <span>{getTranslatedLabel(item)}</span>
-                <ChevronDown size={16} className="ml-1" />
+                <ChevronDown size={15} className="ml-1 opacity-70 group-hover:opacity-100" />
                 {isActive(item) && (
-                  <span className="absolute bottom-0 left-0 w-full h-[2px] bg-secondary rounded-none" />
+                  <span className="absolute bottom-0 left-0 w-full h-[2.5px] bg-primary rounded-full" />
                 )}
               </button>
-              <div className="absolute hidden group-hover:block bg-white/95 backdrop-blur-sm shadow-lg p-4 rounded min-w-48 right-0 top-full z-50 animate-in fade-in slide-in-from-top-2">
-                <div className="flex flex-col space-y-2">
+              <div className="absolute hidden group-hover:block bg-white shadow-xl border border-slate-100 p-3 rounded-xl min-w-52 right-0 top-full z-50 animate-in fade-in slide-in-from-top-2">
+                <div className="flex flex-col space-y-1">
                   {item.children.map((child) => (
                     <Link
                       key={child.id}
                       to={normalizePath(child.path)}
-                      className={`hover:text-primary transition-colors text-sm font-medium py-1 ${
-                        isActive(child) ? 'text-primary font-bold' : 'text-gray-600'
+                      className={`hover:text-primary hover:bg-slate-50 rounded-lg px-3 py-2 transition-colors text-sm font-medium ${
+                        isActive(child) ? 'text-primary font-bold bg-primary/5' : 'text-slate-700'
                       }`}
                     >
                       {getTranslatedLabel(child)}
@@ -217,15 +217,15 @@ const MainNavigation = ({ isMobile = false, onItemClick, isScrolled = false }: M
           ) : (
             <Link
               to={normalizePath(item.path)}
-              className={`navbar-link text-base font-medium relative pb-1 transition-colors ${
+              className={`navbar-link text-[15px] font-semibold relative py-2 transition-colors ${
                 isActive(item) 
-                  ? 'text-secondary' 
-                  : (isScrolled ? 'text-slate-900' : 'text-white')
+                  ? 'text-primary font-bold' 
+                  : 'text-slate-800 hover:text-primary'
               }`}
             >
               {getTranslatedLabel(item)}
               {isActive(item) && (
-                <span className="absolute bottom-0 left-0 w-full h-[2px] bg-secondary rounded-none" />
+                <span className="absolute bottom-0 left-0 w-full h-[2.5px] bg-primary rounded-full" />
               )}
             </Link>
           )}

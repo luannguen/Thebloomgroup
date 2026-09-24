@@ -25,13 +25,9 @@ const Header = () => {
     <>
       {/* Main header */}
       <header
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-          isScrolled 
-            ? 'bg-white/95 backdrop-blur-md shadow-md' 
-            : 'bg-transparent'
-        }`}
+        className="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-100"
       >
-        {/* TopContact - only show in transparent mode or integrate into scroll */}
+        {/* TopContact - collapses on scroll */}
         <div className={`transition-all duration-300 overflow-hidden ${
           isScrolled ? 'max-h-0 opacity-0' : 'max-h-10 opacity-100'
         }`}>
@@ -55,13 +51,11 @@ const Header = () => {
             </div>
 
             {/* Mobile menu button */}
-            <div className="md:hidden flex items-center space-x-4">
+            <div className="md:hidden flex items-center space-x-3">
               <SearchComponent isMobile={true} isScrolled={isScrolled} />
               <button 
                 onClick={toggleMenu} 
-                className={`p-1.5 transition-colors ${
-                  isScrolled ? 'text-slate-900 hover:bg-gray-100' : 'text-white hover:bg-white/20'
-                }`}
+                className="p-1.5 rounded-lg text-slate-800 hover:bg-slate-100 transition-colors"
                 aria-label="Toggle menu"
               >
                 {isMenuOpen ? <X size={26} /> : <Menu size={26} />}

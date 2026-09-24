@@ -52,6 +52,7 @@ import {
   HomeV2SolutionsBlock, 
   HomeV2StatsBlock 
 } from './HomeV2Blocks';
+import { BloomHeroSplit } from './BloomHeroSplit';
 
 
 
@@ -552,6 +553,14 @@ export const registerAllBlocks = () => {
     fields: [
       { id: 'info', label: 'Thông tin', type: 'text' }
     ]
+  });
+
+  registerBlock({
+    type: 'bloom_hero_split',
+    name: 'TheBloom: 3 Cột Trọng Tâm',
+    component: BloomHeroSplit,
+    defaultProps: {},
+    fields: []
   });
 
   registerBlock({

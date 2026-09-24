@@ -372,8 +372,8 @@ export const HomeV2SolutionsBlock = ({
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const displayTitle = title || t('home_v2_solutions_title', "Sản Phẩm & Giải Pháp Tiêu Biểu");
-  const displaySubtitle = subtitle || t('home_v2_solutions_subtitle', "Hệ thống sản phẩm công nghiệp và tiêu dùng chất lượng cao của TheBloom Group.");
+  const displayTitle = title || t('home_v2_solutions_title', "Sản Phẩm & Năng Lực Sản Xuất Tiêu Biểu");
+  const displaySubtitle = subtitle || t('home_v2_solutions_subtitle', "Các dòng thiết bị công nghiệp, xưởng may gia công và sản phẩm gia dụng chất lượng cao của TheBloom Group.");
 
   useEffect(() => {
     const fetchProducts = async () => {
