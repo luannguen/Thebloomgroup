@@ -155,7 +155,7 @@ INSERT INTO static_pages (slug, title, content, excerpt) VALUES
 (
     'ho-so-nang-luc', 
     'Hồ sơ năng lực', 
-    '{"sections":[{"id":"cap-prof-hero","type":"capability_profile","props":{"title":"Hồ sơ năng lực Thebloomgroup","description":"Khám phá năng lực thiết kế, thi công và vận hành hệ thống điện lạnh hàng đầu của Thebloomgroup. Cam kết chất lượng, tiến độ và giải pháp tối ưu bảo vệ môi trường.","previewImage":"https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80","pdfUrl":"https://rfzuevsyegqbdlttmloa.supabase.co/storage/v1/object/public/documents/Thebloomgroup_Capability_Profile_2024.pdf","downloadText":"Tải xuống Hồ sơ năng lực (PDF)"}},{"id":"cap-prof-contact","type":"contact_form","props":{}}]}', 
+    '{"sections":[{"id":"cap-prof-hero","type":"capability_profile","props":{"title":"Hồ sơ năng lực Thebloomgroup","description":"Khám phá năng lực thiết kế, thi công và vận hành hệ thống điện lạnh hàng đầu của Thebloomgroup. Cam kết chất lượng, tiến độ và giải pháp tối ưu bảo vệ môi trường.","previewImage":"https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80","pdfUrl":"https://okccyedrnmzzprqotilz.supabase.co/storage/v1/object/public/documents/Thebloomgroup_Capability_Profile_2024.pdf","downloadText":"Tải xuống Hồ sơ năng lực (PDF)"}},{"id":"cap-prof-contact","type":"contact_form","props":{}}]}', 
     'Tài liệu chi tiết về năng lực và kinh nghiệm triển khai dự án điện lạnh của Thebloomgroup.'
 )
 ON CONFLICT (slug) DO UPDATE SET title = EXCLUDED.title, content = EXCLUDED.content, excerpt = EXCLUDED.excerpt;

@@ -50,7 +50,7 @@ export const useNavigation = (position: 'header' | 'footer' = 'header') => {
           
           // Identify the primary home item for redirect logic
           const homePaths = ['/', '/home', '/home-v2', '/home_v2'];
-          const primaryHome = roots.find(r => homePaths.includes(r.path || '')) || (roots.length > 0 ? roots[0] : null);
+          const primaryHome = roots.find(r => homePaths.includes(r.path || '')) || null;
           
           const visibleRoots = roots.filter(item => item.show_in_menu !== false);
           

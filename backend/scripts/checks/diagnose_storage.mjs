@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 dotenv.config({ path: path.join(__dirname, '../../.env') });
 
-const supabaseUrl = process.env.VITE_SUPABASE_URL || 'https://akryfqelpljvrydxftxc.supabase.co';
+const supabaseUrl = process.env.VITE_SUPABASE_URL || 'https://okccyedrnmzzprqotilz.supabase.co';
 const supabaseKey = process.env.VITE_SUPABASE_ANON_KEY;
 
 const supabase = createClient(supabaseUrl, supabaseKey);

@@ -58,6 +58,10 @@ const MainNavigation = ({ isMobile = false, onItemClick, isScrolled = false }: M
       '#': 'explore',
       '/he-thong-tich-hop': 'integrated_systems',
       '/ho-so-nang-luc': 'capability_experience',
+      '/thiet-bi-giat-la': 'laundry_equipment',
+      '/thoi-trang-may-mac': 'garment_fashion',
+      '/khong-gian-song': 'living_space',
+      '/giai-phap-dich-vu': 'service_solutions',
     };
 
     // 4. Map common semantic labels to keys (backup fallback)

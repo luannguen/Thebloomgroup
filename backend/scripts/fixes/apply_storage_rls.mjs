@@ -135,7 +135,7 @@ async function runSQL() {
         writeFileSync(sqlFilePath, sql, 'utf-8');
         console.log(`✅ SQL file saved to: ${sqlFilePath}`);
         console.log('\n🔗 Please run this SQL in your Supabase Dashboard:');
-        console.log(`   https://supabase.com/dashboard/project/akryfqelpljvrydxftxc/sql/new\n`);
+        console.log(`   https://supabase.com/dashboard/project/okccyedrnmzzprqotilz/sql/new\n`);
         console.log('   Or paste the SQL below:\n');
         console.log('─'.repeat(60));
         console.log(sql);

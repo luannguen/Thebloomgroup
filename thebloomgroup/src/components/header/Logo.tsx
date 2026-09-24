@@ -33,11 +33,11 @@ const Logo = ({ isScrolled = false, className = "", variant = 'header' }: LogoPr
   const displayLogo = variant === 'footer' ? footerLogo : headerLogo;
   const siteName = settings?.company_name || settings?.site_name || t('logo_alt_text');
 
-  // Use the configured home path from navigation
-  const destination = homePath || '/';
+  // Logo always routes directly to home
+  const destination = '/';
 
   return (
-    <Link to={destination} className={`flex items-center gap-2 flex-shrink-0 relative z-10 transition-transform active:scale-95 ${className}`}>
+    <Link to="/" className={`flex items-center gap-2 flex-shrink-0 relative z-10 transition-transform active:scale-95 ${className}`}>
       <img
         src={displayLogo}
         alt={siteName}

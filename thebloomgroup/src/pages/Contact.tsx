@@ -46,7 +46,7 @@ const Contact = () => {
 
   const address = getDisplayAddress(rawAddress);
   const phone = getSetting('contact_phone', '+84 (28) 1234 5678');
-  const email = getSetting('contact_email', 'info@Thebloomgrouporp.vn');
+  const email = getSetting('contact_email', 'info@thebloomgroup.vn');
   const hotline = getSetting('contact_hotline', '1800 1234');
   const workingHours = getSetting('contact_working_hours', '8:00 - 17:30, Thứ 2 - Thứ 6');
   // Helper to extract src from iframe fallback or raw URL

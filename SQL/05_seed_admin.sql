@@ -26,6 +26,15 @@ BEGIN
     email_confirmed_at, 
     raw_app_meta_data, 
     raw_user_meta_data, 
+    confirmation_token,
+    recovery_token,
+    email_change_token_new,
+    email_change,
+    phone_change,
+    phone_change_token,
+    email_change_token_current,
+    reauthentication_token,
+    is_super_admin,
     created_at, 
     updated_at
   ) VALUES (
@@ -38,6 +47,15 @@ BEGIN
     now(), 
     '{"provider":"email","providers":["email"]}', 
     '{"full_name":"Quản trị viên", "role":"admin"}', 
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    false,
     now(), 
     now()
   );

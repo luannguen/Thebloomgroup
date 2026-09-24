@@ -56,6 +56,7 @@ const ProductDetail = lazy(() => import("./pages/ProductDetail"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const SearchResults = lazy(() => import("./pages/SearchResults"));
 const JobDetail = lazy(() => import("./pages/JobDetail"));
+const SectorShowcasePage = lazy(() => import("./pages/SectorShowcasePage"));
 
 // Legal pages
 const Privacy = lazy(() => import("./pages/legal/Privacy"));
@@ -119,6 +120,11 @@ const App = () => {
                 <Route path="gioi-thieu" element={<Navigate to="/about-us" replace />} />
                 <Route path="about-us" element={<About />} />
                 <Route path="about-us-v2" element={<AboutUsV2 />} />
+                {/* TheBloom Group Core Sector Routes */}
+                <Route path="thiet-bi-giat-la" element={<SectorShowcasePage explicitSlug="thiet-bi-giat-la" />} />
+                <Route path="thoi-trang-may-mac" element={<SectorShowcasePage explicitSlug="thoi-trang-may-mac" />} />
+                <Route path="khong-gian-song" element={<SectorShowcasePage explicitSlug="khong-gian-song" />} />
+                <Route path="giai-phap-dich-vu" element={<SectorShowcasePage explicitSlug="giai-phap-dich-vu" />} />
                 <Route path="about-vvc" element={<Navigate to="/about-us" replace />} />
                 <Route path="intro" element={<StaticPage slug="intro" />} />
                 <Route path="page/:slug" element={<StaticPage />} />
@@ -128,13 +134,18 @@ const App = () => {
                 <Route path="products/residential" element={<ResidentialProducts />} />
                 <Route path="products/cold-storage" element={<ColdStorageProducts />} />
                 <Route path="products/auxiliary" element={<AuxiliaryProducts />} />
+                <Route path="products/chiller" element={<Navigate to="/products/vvc-chiller-water-cooled" replace />} />
                 <Route path="products/:slug" element={<ProductDetail />} />
-                <Route path="projects" element={<StaticPage slug="projects" />} />
+                <Route path="projects" element={<Projects />} />
                 <Route path="projects/category/:slug" element={<ProjectCategory />} /> {/* Dynamic Category Route */}
                 <Route path="projects/industrial" element={<IndustrialProjects />} />
                 <Route path="projects/commercial" element={<CommercialProjects />} />
                 <Route path="projects/specialized" element={<SpecializedProjects />} />
                 <Route path="services" element={<Services />} />
+                <Route path="services/consulting" element={<Consulting />} />
+                <Route path="services/maintenance" element={<Maintenance />} />
+                <Route path="services/installation" element={<Installation />} />
+                <Route path="services/repair" element={<Repair />} />
                 <Route path="services/:slug" element={<ServiceDetail />} /> {/* Dynamic Service Detail */}
                 <Route path="installation" element={<Installation />} />
                 <Route path="maintenance" element={<Maintenance />} />
@@ -157,8 +168,10 @@ const App = () => {
                 <Route path="publications/heat-recovery-solutions" element={<HeatRecoverySolutions />} />
                 <Route path="publications/green-building-standards" element={<GreenBuildingStandards />} />
                 <Route path="publications/energy-efficiency-report" element={<EnergyEfficiencyReport />} />
-                <Route path="contact" element={<StaticPage slug="contact" />} />
-                <Route path="team" element={<StaticPage slug="team" />} />
+                <Route path="contact" element={<Contact />} />
+                <Route path="team" element={<TeamPage />} />
+                <Route path="careers" element={<StaticPage slug="careers" />} />
+                <Route path="recruitment" element={<Navigate to="/careers" replace />} />
                 <Route path="recruitment/:slug" element={<JobDetail />} />
                 <Route path="legal/privacy" element={<Privacy />} />
                 <Route path="legal/terms" element={<Terms />} />
@@ -166,6 +179,7 @@ const App = () => {
                 <Route path="legal/sitemap" element={<Sitemap />} />
 
                 {/* Dynamic Data Resources Routes */}
+                <Route path="data" element={<Navigate to="/data/statistics" replace />} />
                 <Route path="data/statistics" element={<Statistics />} />
                 <Route path="data/tools" element={<Tools />} />
                 <Route path="data/:slug" element={<ResourceCategory />} />
@@ -175,6 +189,7 @@ const App = () => {
                 <Route path=":slug" element={<StaticPage />} />
 
                 {/* <Route path="login" element={<Login />} /> */}
+                <Route path="404" element={<NotFound />} />
                 <Route path="*" element={<NotFound />} />
               </Route>
             </Routes>

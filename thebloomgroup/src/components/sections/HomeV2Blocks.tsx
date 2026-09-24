@@ -30,17 +30,17 @@ export const HomeV2PartnershipBlock = ({
   const { t } = useTranslation();
   const { editMode, updateSectionProps } = useVisualEditor();
 
-  // Dữ liệu mặc định an toàn
-  const dTitle = title || t('home_v2_partnership_title', "Đối Tác Chiến Lược Của Solar Turbines");
-  const dSubtitle = subtitle || t('home_v2_partnership_subtitle', "Thuong Thien Technologies (TTT)");
-  const dDesc = description || t('home_v2_partnership_desc', "Chúng tôi tự hào là đại diện chính thức và đối tác chiến lược của Solar Turbines tại Việt Nam, cung cấp các giải pháp năng lượng và hệ thống nén khí tiên tiến nhất.");
-  const dPartnerImage = partnerImage || "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=800";
+  // Dữ liệu mặc định an toàn cho TheBloom Group
+  const dTitle = title || t('home_v2_partnership_title', "Đối Tác Chiến Lược Sản Xuất Toàn Diện");
+  const dSubtitle = subtitle || t('home_v2_partnership_subtitle', "THEBLOOM GROUP");
+  const dDesc = description || t('home_v2_partnership_desc', "TheBloom Group là doanh nghiệp hoạt động đa lĩnh vực trong sản xuất và cung ứng giải pháp công nghiệp – tiêu dùng, với trọng tâm gồm: Thiết bị giặt là công nghiệp, May gia công & thời trang, Sản xuất đồ gia dụng & giải pháp không gian sống.");
+  const dPartnerImage = partnerImage || "/images/bloom/thiet-bi-giat-la.jpg";
   const displayImages = images && images.length > 0 ? images : [{ url: dPartnerImage }];
   const dLogo1 = logo1 || 'https://images.unsplash.com/photo-1560179707-f14e90ef3623?auto=format&fit=crop&q=80&w=200&h=80';
   const dLogo2 = logo2 || 'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?auto=format&fit=crop&q=80&w=200&h=80';
   const dLogo3 = logo3 || 'https://images.unsplash.com/photo-1542744094-24638eff58bb?auto=format&fit=crop&q=80&w=200&h=80';
-  const dExpValue = exp_value || "20+";
-  const dExpText = exp_text || "Năm kinh nghiệm trong ngành công nghiệp nặng";
+  const dExpValue = exp_value || "10+";
+  const dExpText = exp_text || "Năm kinh nghiệm sản xuất & cung ứng";
 
   const isVertical = layout === "image-top" || layout === "image-bottom" || layout === "image-middle";
   const isImageRight = layout === 'image-right';
@@ -265,10 +265,10 @@ export const HomeV2SectorsBlock = ({
   const displaySubtitle = subtitle || t('home_v2_sectors_subtitle', "Chúng tôi cung cấp giải pháp chuyên biệt cho các ngành công nghiệp trọng điểm.");
 
   const defaultSectors = [
-    { title: "Dịch Vụ Kỹ Thuật", desc: "Bảo trì, sửa chữa và vận hành.", icon: Award, bg: "https://images.unsplash.com/photo-1581092921461-7d1598637f9d?auto=format&fit=crop&q=80&w=600", link: "/services" },
-    { title: "Máy Gia Công", desc: "Các giải pháp máy móc công nghiệp hiện đại.", icon: Zap, bg: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=600", link: "/products" },
-    { title: "Sản Xuất Đồ Gia Dụng", desc: "Dây chuyền sản xuất thiết bị gia đình.", icon: Globe, bg: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&q=80&w=600", link: "/products" },
-    { title: "Thiết Bị Giặt Là Công Nghiệp", desc: "Giải pháp giặt là quy mô lớn.", icon: Settings, bg: "https://images.unsplash.com/photo-1565608438257-fac3c27beb36?auto=format&fit=crop&q=80&w=600", link: "/products" }
+    { title: "Thiết Bị Giặt Là Công Nghiệp", desc: "Giải pháp toàn diện cho hệ thống giặt là công nghiệp tiêu chuẩn quốc tế.", icon: Settings, bg: "/images/bloom/thiet-bi-giat-la.jpg", link: "/thiet-bi-giat-la" },
+    { title: "May Gia Công & Thời Trang", desc: "Giải pháp may gia công toàn diện cho thương hiệu trong và ngoài nước (FOB, CMT).", icon: Zap, bg: "/images/bloom/thoi-trang-may-mac.jpg", link: "/thoi-trang-may-mac" },
+    { title: "Sản Xuất Đồ Gia Dụng", desc: "Sản phẩm gia dụng chất lượng cao, tối ưu công năng và không gian sống.", icon: Globe, bg: "/images/bloom/do-gia-dung.jpg", link: "/khong-gian-song" },
+    { title: "Giải Pháp Dịch Vụ Kỹ Thuật", desc: "Bảo trì định kỳ, sửa chữa chuyên nghiệp, nâng cấp và hỗ trợ kỹ thuật 24/7.", icon: Award, bg: "/images/bloom/dich-vu-ky-thuat.jpg", link: "/giai-phap-dich-vu" }
   ];
 
   const displaySectors = items && items.length > 0 ? items : defaultSectors;
@@ -372,15 +372,14 @@ export const HomeV2SolutionsBlock = ({
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const displayTitle = title || t('home_v2_solutions_title', "Giải Pháp Năng Lượng & Hệ Thống Nén");
-  const displaySubtitle = subtitle || t('home_v2_solutions_subtitle', "Các dòng sản phẩm tuabin khí và máy nén khí hàng đầu thế giới.");
+  const displayTitle = title || t('home_v2_solutions_title', "Sản Phẩm & Giải Pháp Tiêu Biểu");
+  const displaySubtitle = subtitle || t('home_v2_solutions_subtitle', "Hệ thống sản phẩm công nghiệp và tiêu dùng chất lượng cao của TheBloom Group.");
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         const result = await productService.getProducts();
-        if (result.success) {
-          // Lấy tối đa 3 sản phẩm mới nhất hoặc nổi bật
+        if (result.success && result.data && result.data.length > 0) {
           setProducts(result.data.slice(0, 3));
         }
       } catch (error) {
@@ -394,9 +393,9 @@ export const HomeV2SolutionsBlock = ({
 
   // Fallback nếu chưa có sản phẩm trong DB
   const fallbackSolutions = [
-    { id: 'f1', name: "Gas Turbine Packages", description: "Công suất từ 1MW đến 22MW, hiệu suất vượt trội.", image_url: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1280", slug: "gas-turbine-packages" },
-    { id: 'f2', name: "Gas Compressors", description: "Thiết kế ly tâm hiện đại cho vận chuyển khí.", image_url: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=1280", slug: "gas-compressors" },
-    { id: 'f3', name: "Customer Support", description: "Dịch vụ sau bán hàng toàn diện, linh kiện chính hãng.", image_url: "https://images.unsplash.com/photo-1521737706045-3205363958c2?auto=format&fit=crop&q=80&w=1280", slug: "customer-support" }
+    { id: 'f1', name: "Thiết Bị Giặt Là Công Nghiệp", description: "Máy giặt vắt, máy sấy, máy là ép công nghiệp hiệu suất cao.", image_url: "/images/bloom/thiet-bi-giat-la.jpg", slug: "thiet-bi-giat-la" },
+    { id: 'f2', name: "May Gia Công & Thời Trang", description: "Dây chuyền xưởng may chuẩn quốc tế, đáp ứng đơn hàng xuất khẩu.", image_url: "/images/bloom/thoi-trang-may-mac.jpg", slug: "thoi-trang-may-mac" },
+    { id: 'f3', name: "Sản Xuất Đồ Gia Dụng", description: "Thiết kế hiện đại, vật liệu chọn lọc, tối ưu tiện nghi cuộc sống.", image_url: "/images/bloom/do-gia-dung.jpg", slug: "khong-gian-song" }
   ];
 
   const displayProducts = products.length > 0 ? products : fallbackSolutions;

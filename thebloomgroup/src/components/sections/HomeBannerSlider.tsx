@@ -13,6 +13,7 @@ import { ArrowRight, Loader2 } from "lucide-react";
 import { Link } from 'react-router-dom';
 import { EditableElement } from '../admin/EditableElement';
 import Autoplay from "embla-carousel-autoplay";
+import { BloomHeroSplit } from './BloomHeroSplit';
 
 interface HomeBannerSliderProps {
     sectionId?: string;
@@ -48,38 +49,9 @@ export const HomeBannerSlider = ({ sectionId }: HomeBannerSliderProps) => {
         );
     }
 
-    // Fallback if no banners are present
+    // Fallback if no banners are present: Render the exact TheBloom Group 3-column Hero
     if (banners.length === 0) {
-        return (
-            <div className="relative h-[80vh] flex items-center overflow-hidden bg-slate-900 text-white">
-                <div className="absolute inset-0 z-0">
-                    <img 
-                        src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=2000" 
-                        className="w-full h-full object-cover opacity-50" 
-                        alt="Default Hero" 
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-r from-black/80 to-transparent" />
-                </div>
-                <div className="container-custom relative z-10">
-                    <div className="max-w-3xl">
-                        <h1 className="text-4xl md:text-6xl font-extrabold mb-6 tracking-tight leading-tight">
-                            {t('fallback_banner_title', 'TỔNG CÔNG TY KỸ THUẬT LẠNH VIỆT NAM')}
-                        </h1>
-                        <p className="text-lg md:text-xl mb-8 opacity-90 max-w-2xl leading-relaxed">
-                            {t('fallback_banner_desc', 'Chuyên gia hàng đầu trong lĩnh vực Hệ thống lạnh, Cơ điện và Hạ tầng Trung tâm dữ liệu.')}
-                        </p>
-                        <div className="flex gap-4">
-                            <Button size="lg" asChild>
-                                <Link to="/products">{t('explore_products', 'Khám phá sản phẩm')}</Link>
-                            </Button>
-                            <Button size="lg" variant="outline" className="bg-white/10" asChild>
-                                <Link to="/contact">{t('contact_consultancy', 'Liên hệ tư vấn')}</Link>
-                            </Button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        );
+        return <BloomHeroSplit sectionId={sectionId} />;
     }
 
     return (
@@ -150,7 +122,7 @@ export const HomeBannerSlider = ({ sectionId }: HomeBannerSliderProps) => {
                                 {/* Decorative element */}
                                 <div className="absolute bottom-0 right-0 p-12 hidden lg:block opacity-20 pointer-events-none">
                                     <h3 className="text-9xl font-black text-white/10 tracking-tighter select-none">
-                                        VIETVINH
+                                        THEBLOOM GROUP
                                     </h3>
                                 </div>
                             </div>
