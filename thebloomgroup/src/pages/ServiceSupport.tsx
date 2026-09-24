@@ -14,7 +14,7 @@ const ServiceSupport = () => {
   return (
     <>
         {/* Hero Section */}
-        <section className="bg-primary py-12 text-white">
+        <section className="bg-gradient-to-br from-slate-950 via-primary to-slate-900 pt-32 pb-16 md:pt-40 md:pb-24 text-white">
           <div className="container-custom">
             <h1 className="text-white mb-6">Dịch vụ kỹ thuật</h1>
             <p className="text-xl md:text-2xl max-w-3xl mb-6">

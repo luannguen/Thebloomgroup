@@ -151,7 +151,7 @@ export default function JobDetail() {
   return (
     <main className="pb-24">
       {/* Header */}
-      <div className="bg-primary text-white py-16 md:py-24">
+      <div className="bg-gradient-to-br from-slate-950 via-primary to-slate-900 text-white pt-32 pb-16 md:pt-40 md:pb-24">
         <div className="container-custom">
           <Link to="/recruitment" className="inline-flex items-center text-white/70 hover:text-white mb-8 transition-colors">
             <ArrowLeft className="mr-2 h-4 w-4" /> Quay lại danh sách tuyển dụng

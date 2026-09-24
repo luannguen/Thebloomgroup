@@ -65,7 +65,7 @@ const ProjectDetail = () => {
     }
 
     return (
-        <div className="pt-24 pb-16">
+        <div className="pt-32 md:pt-36 pb-16">
             {/* Breadcrumb / Navigation */}
             <div className="container-custom mb-8">
                 <Link to="/projects" className="inline-flex items-center text-muted-foreground hover:text-primary transition-colors">

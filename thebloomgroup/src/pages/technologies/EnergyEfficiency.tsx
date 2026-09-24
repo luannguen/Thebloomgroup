@@ -7,7 +7,7 @@ const EnergyEfficiency = () => {
   return (
     <>
       {/* Banner */}
-      <div className="bg-gradient-to-b from-green-600 to-green-500 text-white py-12 md:py-16">
+      <div className="bg-gradient-to-br from-slate-950 via-green-800 to-slate-900 text-white pt-32 pb-16 md:pt-40 md:pb-24">
         <div className="container mx-auto px-4">
           <div className="flex items-center text-sm mb-4">
             <Link to="/" className="hover:underline text-white/80">Trang chủ</Link>

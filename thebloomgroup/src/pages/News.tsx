@@ -78,7 +78,7 @@ const NewsContent = () => {
         />
       ) : (
         /* Tiêu đề trang Fallback */
-        <div className="bg-gradient-to-b from-primary/10 to-transparent py-8 md:py-12">
+        <div className="bg-gradient-to-b from-primary/10 to-transparent pt-32 pb-12 md:pt-40 md:pb-16 border-b border-slate-100">
           <div className="container-custom">
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary">{t('news_events')}</h1>
             <p className="mt-4 text-lg text-muted-foreground max-w-3xl">

@@ -49,7 +49,7 @@ export default function ProductDetail() {
 
     if (loading) {
         return (
-            <div className="container mx-auto px-4 py-16">
+            <div className="container mx-auto px-4 pt-32 pb-16 md:pt-40 md:pb-24">
                 <Skeleton className="h-10 w-2/3 mb-6" />
                 <Skeleton className="h-[400px] w-full mb-8 rounded-2xl" />
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -68,7 +68,7 @@ export default function ProductDetail() {
 
     if (error || !product) {
         return (
-            <div className="container mx-auto px-4 py-24 text-center">
+            <div className="container mx-auto px-4 pt-32 pb-24 md:pt-40 md:pb-32 text-center">
                 <div className="max-w-md mx-auto">
                     <div className="bg-slate-50 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 text-slate-400">
                         <Package size={40} />

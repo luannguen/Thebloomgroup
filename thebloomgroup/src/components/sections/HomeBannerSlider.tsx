@@ -68,7 +68,7 @@ export const HomeBannerSlider = ({ sectionId }: HomeBannerSliderProps) => {
                 <CarouselContent className="-ml-0">
                     {banners.map((banner) => (
                         <CarouselItem key={banner.id} className="pl-0">
-                            <div className="relative h-[75vh] md:h-[85vh] w-full overflow-hidden flex items-center pt-16 md:pt-20">
+                            <div className="relative h-[75vh] md:h-[85vh] w-full overflow-hidden flex items-center pt-28 md:pt-32">
                                 {/* Background Image with Zoom effect */}
                                 <div className="absolute inset-0 z-0 scale-105 animate-in zoom-in duration-[10000ms]">
                                     <img 
@@ -105,14 +105,14 @@ export const HomeBannerSlider = ({ sectionId }: HomeBannerSliderProps) => {
 
                                         <div className="flex flex-wrap gap-4 pt-4 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-500">
                                             {banner.link && (
-                                                <Button size="lg" className="rounded-full px-8 bg-secondary hover:bg-secondary/90 text-white shadow-xl group/btn transition-all active:scale-95" asChild>
+                                                <Button size="lg" variant="accent" className="rounded-full px-8 shadow-xl group/btn transition-all active:scale-95" asChild>
                                                     <Link to={banner.link}>
                                                         {t('view_details', 'Xem chi tiết')}
                                                         <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover/btn:translate-x-1" />
                                                     </Link>
                                                 </Button>
                                             )}
-                                            <Button size="lg" variant="outline" className="rounded-full px-8 bg-white/5 backdrop-blur-md border-white/20 hover:bg-white/10 text-white active:scale-95" asChild>
+                                            <Button size="lg" variant="outline-light" className="rounded-full px-8" asChild>
                                                 <Link to="/contact">{t('get_consultancy', 'Nhận tư vấn')}</Link>
                                             </Button>
                                         </div>

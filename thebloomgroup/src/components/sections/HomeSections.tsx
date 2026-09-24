@@ -235,7 +235,7 @@ export const ProductsBlock = ({
               <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white">{t('bulk_quote_request', 'Bạn cần báo giá thiết bị số lượng lớn?')}</h3>
               <p className="text-white/70">{t('bulk_quote_request_desc', 'Liên hệ ngay với bộ phận dự án để nhận chính sách giá ưu đãi và hỗ trợ kỹ thuật chuyên sâu từ các chuyên gia của Thebloomgroup.')}</p>
             </div>
-            <Link to="/contact" className="px-8 py-4 bg-secondary text-white font-bold rounded-xl hover:scale-105 transition-transform shadow-xl shrink-0">
+            <Link to="/contact" className="btn-accent px-8 py-4 text-base rounded-2xl hover:scale-105 transition-transform shadow-xl shrink-0">
               {t('get_quote_now', 'Nhận báo giá ngay')}
             </Link>
           </div>

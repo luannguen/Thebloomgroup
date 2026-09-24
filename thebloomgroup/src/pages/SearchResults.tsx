@@ -74,7 +74,7 @@ const SearchResults = () => {
 
     return (
         <main className="flex-grow">
-            <div className="bg-gray-50 py-12">
+            <div className="bg-gray-50 pt-32 pb-12 md:pt-40 md:pb-16 border-b border-slate-100">
                 <div className="container-custom">
                     <h1 className="text-3xl font-bold mb-4">{t('search_results_title')}: "{query}"</h1>
                     {!hasResults && (

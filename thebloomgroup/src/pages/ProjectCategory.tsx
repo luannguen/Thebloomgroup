@@ -62,9 +62,9 @@ const ProjectCategory = () => {
     }
 
     return (
-        <main className="flex-grow pt-20">
+        <main className="flex-grow">
             {/* Header */}
-            <section className="bg-primary/90 py-16 text-white">
+            <section className="bg-gradient-to-br from-slate-950 via-primary to-slate-900 pt-32 pb-16 md:pt-40 md:pb-24 text-white">
                 <div className="container-custom">
                     <div className="max-w-3xl">
                         <Link to="/projects" className="text-white/80 hover:text-white mb-4 inline-block">

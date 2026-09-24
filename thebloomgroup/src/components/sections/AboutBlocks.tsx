@@ -4,11 +4,12 @@ import { EditableElement } from '../admin/EditableElement';
 import { partnerService, Partner } from '@/services/partnerService';
 import { useVisualEditor } from '../../context/VisualEditorContext';
 import { Edit, ImagePlus, Plus, Pencil, Trash2 } from 'lucide-react';
+import PageBanner from '@/components/common/PageBanner';
 
 // --- About Hero Block ---
 interface AboutHeroBlockProps {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   sectionId?: string;
   titleColor?: string;
   descriptionColor?: string;
@@ -18,33 +19,22 @@ export const AboutHeroBlock = ({
   title, 
   description,
   sectionId,
-  titleColor = 'var(--primary)',
-  descriptionColor = 'var(--muted-foreground)'
 }: AboutHeroBlockProps) => {
   const { t } = useTranslation();
-  const defaultTitle = t('about_hero_title', "Giới thiệu");
-  const defaultDescription = t('about_hero_desc', "Thebloomgroup - Đơn vị tiên phong trong giải pháp nhiệt lạnh công nghiệp.");
+  const defaultTitle = t('about_hero_title', "GIỚI THIỆU VỀ THEBLOOM GROUP");
+  const defaultDescription = t('about_hero_desc', "TheBloom Group là doanh nghiệp hoạt động đa lĩnh vực trong sản xuất và cung ứng giải pháp công nghiệp – tiêu dùng: Thiết bị giặt là công nghiệp, May gia công & thời trang, Sản xuất đồ gia dụng & giải pháp không gian sống.");
 
   return (
-    <div className="bg-gradient-to-b from-primary/10 to-transparent py-12 md:py-20">
-      <div className="container-custom">
-        <EditableElement 
-          tagName="h1" 
-          fieldKey="title" 
-          sectionId={sectionId}
-          defaultContent={title || defaultTitle} 
-          className="text-3xl md:text-5xl font-bold text-primary mb-6" 
-          style={{ color: titleColor }}
-        />
-        <EditableElement 
-          tagName="p" 
-          fieldKey="description" 
-          sectionId={sectionId}
-          defaultContent={description || defaultDescription} 
-          className="text-lg text-muted-foreground max-w-3xl" 
-          style={{ color: descriptionColor }}
-        />
-      </div>
+    <div data-section-id={sectionId}>
+      <PageBanner
+        title={title || defaultTitle}
+        subtitle={description || defaultDescription}
+        badge="Về Chúng Tôi"
+        backgroundImage="/images/bloom/thiet-bi-giat-la.jpg"
+        breadcrumbs={[
+          { label: 'Giới thiệu' }
+        ]}
+      />
     </div>
   );
 };
@@ -55,47 +45,58 @@ export const HistoryBlock = ({
   p1,
   p2,
   p3,
-  image = "/lovable-uploads/0bd3c048-8e37-4775-a6bc-0b54ec07edbe.png",
-  expYears = "20+",
+  image = "/images/bloom/hero-do-gia-dung.jpg",
+  expYears = "10+",
   expText,
   sectionId
 }: any) => {
   const { t } = useTranslation();
-  const defaultTitle = t('history_title', "Lịch sử phát triển");
-  const defaultP1 = t('history_p1', "Được thành lập vào năm 2003, Thebloomgroup bắt đầu hành trình với khát vọng chinh phục đỉnh cao công nghệ lạnh.");
-  const defaultP2 = t('history_p2', "Từ một đơn vị chuyên về lắp đặt, chúng tôi đã mở rộng sang tư vấn thiết kế và sản xuất cấu kiện cơ khí lạnh chính xác.");
-  const defaultP3 = t('history_p3', "Ngày nay, Thebloomgroup tự hào là đối tác chiến lược của nhiều tập đoàn đa quốc gia và các dự án hạ tầng trọng điểm.");
-  const defaultExpText = t('years_experience', "Năm kinh nghiệm");
+  const defaultTitle = t('history_title', "Năng Lực & Tầm Vóc Doanh Nghiệp");
+  const defaultP1 = t('history_p1', "TheBloom Group phát triển dựa trên nền tảng sản xuất công nghiệp vững chắc, dây chuyền máy móc hiện đại và đội ngũ chuyên gia giàu kinh nghiệm.");
+  const defaultP2 = t('history_p2', "Chúng tôi cam kết chất lượng chuẩn quốc tế, đồng hành bền vững cùng các đối tác, khách hàng trong và ngoài nước trên hành trình kiến tạo giá trị thịnh vượng.");
+  const defaultP3 = t('history_p3', "TheBloom Group tự hào là đối tác tin cậy hàng đầu trong các lĩnh vực Thiết bị giặt là, May gia công thời trang, Đồ gia dụng và Dịch vụ kỹ thuật.");
+  const defaultExpText = t('years_experience', "Năm kinh nghiệm sản xuất");
+
+  const displayImage = (!image || image.includes('lovable-uploads') || image.includes('VRC')) 
+    ? "/images/bloom/hero-do-gia-dung.jpg" 
+    : image;
 
   return (
-    <section className="py-12 md:py-16">
+    <section className="py-16 md:py-24 bg-white" data-section-id={sectionId}>
       <div className="container-custom">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <div>
+            <span className="inline-block px-4 py-1.5 bg-amber-500/10 text-amber-600 text-xs font-bold uppercase tracking-widest rounded-full mb-4 border border-amber-500/20">
+              Năng Lực Cốt Lõi
+            </span>
             <EditableElement 
               tagName="h2" 
               fieldKey="title" 
-              sectionId={sectionId}
+              sectionId={sectionId} 
               defaultContent={title || defaultTitle} 
-              className="text-2xl md:text-3xl font-bold text-primary mb-4" 
+              className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-6 leading-tight" 
             />
-            <EditableElement tagName="p" fieldKey="p1" sectionId={sectionId} defaultContent={p1 || defaultP1} className="mb-4" />
-            <EditableElement tagName="p" fieldKey="p2" sectionId={sectionId} defaultContent={p2 || defaultP2} className="mb-4" />
-            <EditableElement tagName="p" fieldKey="p3" sectionId={sectionId} defaultContent={p3 || defaultP3} />
+            <div className="space-y-4 text-base md:text-lg text-slate-600 leading-relaxed">
+              <EditableElement tagName="p" fieldKey="p1" sectionId={sectionId} defaultContent={p1 || defaultP1} />
+              <EditableElement tagName="p" fieldKey="p2" sectionId={sectionId} defaultContent={p2 || defaultP2} />
+              <EditableElement tagName="p" fieldKey="p3" sectionId={sectionId} defaultContent={p3 || defaultP3} />
+            </div>
           </div>
           <div className="relative">
-            <EditableElement
-              type="image"
-              fieldKey="image"
-              sectionId={sectionId}
-              defaultContent={image}
-              className="w-full h-auto"
-            >
-              <img alt={title || defaultTitle} src={image} className="w-full h-auto" />
-            </EditableElement>
-            <div className="absolute -bottom-6 -left-6 bg-secondary p-4 shadow-lg">
-              <EditableElement tagName="p" fieldKey="expYears" sectionId={sectionId} defaultContent={expYears} className="text-xl font-bold" />
-              <EditableElement tagName="p" fieldKey="expText" sectionId={sectionId} defaultContent={expText || defaultExpText} className="text-sm" />
+            <div className="rounded-3xl overflow-hidden shadow-2xl border border-slate-100 aspect-[4/3]">
+              <EditableElement
+                type="image"
+                fieldKey="image"
+                sectionId={sectionId}
+                defaultContent={displayImage}
+                className="w-full h-full"
+              >
+                <img alt={title || defaultTitle} src={displayImage} className="w-full h-full object-cover" />
+              </EditableElement>
+            </div>
+            <div className="absolute -bottom-6 -left-6 bg-slate-900 text-white p-6 rounded-2xl shadow-xl border border-slate-800">
+              <EditableElement tagName="p" fieldKey="expYears" sectionId={sectionId} defaultContent={expYears} className="text-3xl md:text-4xl font-black text-amber-400" />
+              <EditableElement tagName="p" fieldKey="expText" sectionId={sectionId} defaultContent={expText || defaultExpText} className="text-xs uppercase tracking-wider text-slate-300 font-semibold mt-1" />
             </div>
           </div>
         </div>

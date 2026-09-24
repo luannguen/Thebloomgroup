@@ -59,18 +59,18 @@ const Projects = () => {
   return (
     <main className="flex-grow">
       {/* Hero Section */}
-      <section className="bg-primary/90 py-16 text-white">
+      <section className="bg-gradient-to-br from-slate-950 via-primary to-slate-900 pt-32 pb-16 md:pt-40 md:pb-24 text-white">
         <div className="container-custom">
           <div className="max-w-3xl">
             <h1 className="text-white mb-6">{t('featured_projects_title')}</h1>
-            <p className="text-xl md:text-2xl mb-8">
+            <p className="text-xl md:text-2xl mb-8 text-slate-200">
               {t('featured_projects_desc')}
             </p>
             <div className="flex flex-wrap gap-4">
               <Link to="/contact" className="btn-accent">
                 {t('service_consulting')}
               </Link>
-              <Link to="/services" className="btn-white">
+              <Link to="/services" className="btn-outline-light">
                 {t('view_services', 'Xem dịch vụ')}
               </Link>
             </div>

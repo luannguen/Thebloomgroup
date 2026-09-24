@@ -23,7 +23,7 @@ export const AboutV2HeroBlock = ({
   const { editMode } = useVisualEditor();
 
   return (
-    <section className="relative h-[400px] flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-[380px] md:min-h-[440px] pt-32 pb-16 md:pt-40 md:pb-20 flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 z-0">
         <EditableElement 
           sectionId={sectionId} 
@@ -40,7 +40,7 @@ export const AboutV2HeroBlock = ({
         </EditableElement>
       </div>
       
-      <div className={`relative z-10 text-center px-4 -mt-12 ${editMode ? 'pointer-events-none' : ''}`}>
+      <div className={`relative z-10 text-center px-4 ${editMode ? 'pointer-events-none' : ''}`}>
         <h1 
           className={`inline-block mx-auto text-5xl md:text-7xl font-extrabold text-white mb-6 animate-fade-in uppercase tracking-[0.2em] ${editMode ? 'pointer-events-auto' : ''}`}
           style={{ color: titleColor }}

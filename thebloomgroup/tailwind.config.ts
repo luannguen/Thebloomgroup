@@ -59,13 +59,13 @@ export default {
 			},
 			borderRadius: {
 				none: '0px',
-				sm: '0px',
-				md: '0px',
-				lg: '0px',
-				xl: '0px',
-				'2xl': '0px',
-				'3xl': '0px',
-				full: '0px',
+				sm: '0.25rem',
+				md: '0.375rem',
+				lg: '0.5rem',
+				xl: '0.75rem',
+				'2xl': '1rem',
+				'3xl': '1.5rem',
+				full: '9999px',
 			},
 			keyframes: {
 				'accordion-down': {

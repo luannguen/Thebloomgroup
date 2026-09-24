@@ -8,7 +8,7 @@ const CommercialProducts = () => {
   return (
     <>
       {/* Banner */}
-      <div className="bg-gradient-to-b from-primary to-primary/80 text-white py-12 md:py-16">
+      <div className="bg-gradient-to-br from-slate-950 via-primary to-slate-900 text-white pt-32 pb-16 md:pt-40 md:pb-24">
         <div className="container mx-auto px-4">
           <div className="flex items-center text-sm mb-4">
             <Link to="/" className="hover:underline">Trang chủ</Link>

@@ -15,13 +15,13 @@ interface TeamHeroBlockProps {
 }
 
 export const TeamHeroBlock = ({ 
-  title = "ĐỘI NGŨ CHUYÊN GIA THEBLOOMGROUP", 
+  title = "ĐỘI NGŨ CHUYÊN GIA THEBLOOM GROUP", 
   description = "Hội tụ những tinh hoa trong ngành kỹ thuật lạnh...",
   sectionId,
   titleColor = 'var(--primary)',
   descriptionColor = 'var(--muted-foreground)'
 }: TeamHeroBlockProps) => (
-  <div className="bg-gradient-to-b from-primary/10 to-transparent py-12 md:py-20">
+  <div className="bg-gradient-to-b from-primary/10 to-transparent pt-32 pb-16 md:pt-40 md:pb-24">
     <div className="container mx-auto px-4 text-center">
       <EditableElement 
         tagName="h1" 

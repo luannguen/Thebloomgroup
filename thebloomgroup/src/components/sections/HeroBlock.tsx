@@ -36,7 +36,7 @@ export const HeroBlock = ({
   const { editMode, updateSectionProps } = useVisualEditor();
 
   return (
-    <div className={`relative py-20 md:py-32 overflow-hidden ${backgroundImage ? 'text-white' : ''}`}>
+    <div className={`relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden ${backgroundImage ? 'text-white' : ''}`}>
       <div className="absolute inset-0 z-0">
         <EditableElement 
           type="image" 
@@ -92,7 +92,7 @@ export const HeroBlock = ({
                   fieldKey="buttonText" 
                   sectionId={sectionId} 
                   defaultContent={buttonText}
-                  className="px-6 py-3 rounded-lg bg-secondary text-white font-bold hover:bg-secondary/90 transition-all shadow-lg hover:shadow-xl active:scale-95 cursor-pointer"
+                  className="btn-accent"
                 />
               </div>
             )}
@@ -104,7 +104,7 @@ export const HeroBlock = ({
                   fieldKey="button2Text" 
                   sectionId={sectionId} 
                   defaultContent={button2Text}
-                  className="px-6 py-3 rounded-lg bg-white/10 text-white font-bold hover:bg-white/20 transition-all border border-white/20 active:scale-95 cursor-pointer"
+                  className="btn-outline-light"
                 />
               </div>
             )}

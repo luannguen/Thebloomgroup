@@ -48,6 +48,11 @@
     --ring: 226 49% 42%;
 
     --radius: 0px;
+
+    /* Header height tokens for synchronization */
+    --header-height: 104px;
+    --header-height-mobile: 96px;
+    --header-height-scrolled: 68px;
   }
 
   * {
@@ -77,15 +82,23 @@
 
 @layer components {
   .btn-primary {
-    @apply bg-primary text-white px-4 py-2 rounded-none hover:bg-primary/90 transition-colors;
+    @apply inline-flex items-center justify-center font-bold px-6 py-2.5 rounded-full bg-primary text-white hover:bg-primary/90 transition-all shadow-sm active:scale-95 text-sm md:text-base;
   }
   
   .btn-secondary {
-    @apply bg-secondary text-secondary-foreground px-4 py-2 rounded-none hover:bg-secondary/80 transition-colors;
+    @apply inline-flex items-center justify-center font-semibold px-6 py-2.5 rounded-full bg-slate-100 text-slate-900 hover:bg-slate-200 border border-slate-200/80 transition-all shadow-sm active:scale-95 text-sm md:text-base;
   }
   
   .btn-accent {
-    @apply bg-amber-500 text-white px-6 py-3 font-bold rounded-none hover:bg-amber-600 transition-all shadow-sm hover:shadow-md active:scale-95;
+    @apply inline-flex items-center justify-center font-bold px-6 py-2.5 rounded-full bg-amber-500 text-slate-950 hover:bg-amber-600 transition-all shadow-md active:scale-95 text-sm md:text-base;
+  }
+
+  .btn-outline-light {
+    @apply inline-flex items-center justify-center font-semibold px-6 py-2.5 rounded-full border-2 border-white/60 bg-transparent text-white hover:bg-white hover:text-slate-950 transition-all active:scale-95 backdrop-blur-sm text-sm md:text-base;
+  }
+
+  .btn-outline-dark {
+    @apply inline-flex items-center justify-center font-semibold px-6 py-2.5 rounded-full border border-slate-300 bg-transparent text-slate-800 hover:bg-slate-100 hover:text-slate-950 transition-all active:scale-95 text-sm md:text-base;
   }
   
   .container-custom {
@@ -93,11 +106,54 @@
   }
   
   .navbar-link {
-    @apply text-primary hover:text-secondary transition-colors;
+    @apply text-slate-800 hover:text-primary transition-colors font-medium;
   }
   
   .footer-link {
     @apply text-gray-200 hover:text-white transition-colors;
+  }
+
+  /* Typography Design Tokens */
+  .heading-hero {
+    @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-tight text-white;
+  }
+
+  .heading-section {
+    @apply text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight leading-tight text-slate-900;
+  }
+
+  .heading-card {
+    @apply text-lg sm:text-xl font-bold tracking-tight text-slate-900;
+  }
+
+  .text-body-lead {
+    @apply text-base sm:text-lg text-slate-600 leading-relaxed;
+  }
+
+  .text-body-regular {
+    @apply text-sm sm:text-base text-slate-600 leading-relaxed;
+  }
+
+  .badge-token {
+    @apply inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest;
+  }
+
+  /* Synchronized Page Spacing Tokens (Never covered by fixed header) */
+  .pt-header-safe {
+    padding-top: calc(var(--header-height-mobile) + 1rem);
+  }
+  @media (min-width: 768px) {
+    .pt-header-safe {
+      padding-top: calc(var(--header-height) + 1.5rem);
+    }
+  }
+
+  .page-banner-spacing {
+    @apply pt-32 pb-16 md:pt-40 md:pb-24;
+  }
+
+  .page-shell-spacing {
+    @apply pt-28 pb-16 md:pt-36 md:pb-20;
   }
 }
 

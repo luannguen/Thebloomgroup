@@ -6,7 +6,7 @@ const Installation = () => {
   return (
     <>
         {/* Hero Section */}
-        <section className="bg-primary py-12 text-white">
+        <section className="bg-gradient-to-br from-slate-950 via-primary to-slate-900 pt-32 pb-16 md:pt-40 md:pb-24 text-white">
           <div className="container-custom">
             <div className="flex flex-col md:flex-row gap-10 items-center">
               <div className="md:w-1/2">

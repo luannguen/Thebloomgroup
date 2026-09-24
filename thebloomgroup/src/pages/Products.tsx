@@ -103,7 +103,7 @@ const ProductsContent = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="relative bg-gradient-to-br from-primary via-primary/90 to-blue-600 py-16 md:py-24 text-white overflow-hidden"
+            className="relative bg-gradient-to-br from-slate-900 via-primary to-slate-900 pt-32 pb-20 md:pt-40 md:pb-24 text-white overflow-hidden"
         >
             <div className="container mx-auto px-4 relative z-10 text-center">
             <motion.h1
@@ -373,7 +373,7 @@ const ProductsContent = () => {
             <p className="text-blue-100 text-lg">
               {t('cta_solution_desc', 'Đội ngũ kỹ sư của Thebloomgroup sẵn sàng khảo sát và tư vấn giải pháp tối ưu nhất cho công trình của bạn.')}
             </p>
-            <Button size="lg" variant="secondary" className="font-bold px-8 shadow-xl hover:shadow-2xl transition-all hover:scale-105" asChild>
+            <Button size="lg" variant="accent" className="font-bold px-8 shadow-xl hover:shadow-2xl transition-all hover:scale-105" asChild>
               <AppLink routeKey="CONTACT">{t('service_consulting')}</AppLink>
             </Button>
           </div>

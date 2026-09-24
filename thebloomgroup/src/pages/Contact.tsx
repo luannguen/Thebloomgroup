@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 import ContactForm from "@/components/ContactForm";
 import { useSettings } from "@/hooks/useSettings";
 import { Loader2 } from "lucide-react";
+import PageBanner from "@/components/common/PageBanner";
 
 const Contact = () => {
   const { t, i18n } = useTranslation();
@@ -26,9 +27,9 @@ const Contact = () => {
     return settings[key] || defaultVal;
   };
 
-  const companyName = getSetting('company_name', 'Tổng công ty Kỹ thuật lạnh Việt Nam (Thebloomgroup)');
-  const slogan = getSetting('company_slogan', 'Tiên phong trong lĩnh vực kỹ thuật lạnh tại Việt Nam');
-  const rawAddress = getSetting('contact_address', '123 Nguyễn Văn Linh, Quận 7, TP. Hồ Chí Minh');
+  const companyName = getSetting('company_name', 'TheBloom Group');
+  const slogan = getSetting('company_slogan', 'Kết Nối - Sản Xuất - Nâng Tầm Giá Trị');
+  const rawAddress = getSetting('contact_address', 'Việt Nam');
   
   // Helper to parse JSON address and get the primary one
   const getDisplayAddress = (val: string) => {
@@ -45,9 +46,9 @@ const Contact = () => {
   };
 
   const address = getDisplayAddress(rawAddress);
-  const phone = getSetting('contact_phone', '+84 (28) 1234 5678');
-  const email = getSetting('contact_email', 'info@thebloomgroup.vn');
-  const hotline = getSetting('contact_hotline', '1800 1234');
+  const phone = getSetting('contact_phone', '+84 963 415 369');
+  const email = getSetting('contact_email', 'contact@thebloomgroup.vn');
+  const hotline = getSetting('contact_hotline', '+84 963 415 369');
   const workingHours = getSetting('contact_working_hours', '8:00 - 17:30, Thứ 2 - Thứ 6');
   // Helper to extract src from iframe fallback or raw URL
   const extractSrcFromHtml = (input: string) => {
@@ -85,8 +86,18 @@ const Contact = () => {
 
   return (
     <main className="flex-grow">
-      <div className="container-custom py-8 md:py-12">
-        <h1 className="text-3xl md:text-4xl font-bold text-primary mb-4">{t('contact')}</h1>
+      {/* Reusable Standardized PageBanner */}
+      <PageBanner
+        title="Liên Hệ Với Chúng Tôi"
+        subtitle="TheBloom Group luôn sẵn sàng đồng hành, tư vấn chuyên sâu và giải đáp mọi yêu cầu của Quý khách hàng & Đối tác."
+        badge="Kết Nối & Hợp Tác"
+        backgroundImage="/images/bloom/dich-vu-ky-thuat.jpg"
+        breadcrumbs={[
+          { label: 'Liên hệ' }
+        ]}
+      />
+
+      <div className="container-custom py-12 md:py-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           <div className="lg:col-span-5">
             <div className="bg-white shadow-md rounded-lg p-6">

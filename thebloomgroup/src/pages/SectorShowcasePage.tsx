@@ -434,10 +434,10 @@ export const SectorShowcasePage: React.FC<{ explicitSlug?: string }> = ({ explic
             Liên hệ với đội ngũ chuyên gia của chúng tôi để nhận tư vấn kỹ thuật chuyên sâu và giải pháp phù hợp nhất với mô hình của bạn.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <Button size="lg" className="rounded-full px-8 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold" asChild>
+            <Button size="lg" variant="accent" className="rounded-full px-8" asChild>
               <Link to="/contact">Liên hệ tư vấn ngay</Link>
             </Button>
-            <Button size="lg" variant="outline" className="rounded-full px-8 border-slate-700 hover:bg-slate-800 text-white" asChild>
+            <Button size="lg" variant="outline-light" className="rounded-full px-8" asChild>
               <Link to="/about-us">Tìm hiểu về TheBloom Group</Link>
             </Button>
           </div>
